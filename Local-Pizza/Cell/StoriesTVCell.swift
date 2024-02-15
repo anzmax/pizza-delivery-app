@@ -82,7 +82,7 @@ class StoryCVCell: UICollectionViewCell {
     
     //MARK: - Update
     func update(with story: Story) {
-        storyImageView.image = (UIImage(named: story.image))
+        storyImageView.image = UIImage(named: story.image)
     }
 }
 
