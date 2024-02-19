@@ -52,10 +52,16 @@ class ProductCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+        contentView.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func handleTap(_ sender: UITapGestureRecognizer) {
+        
     }
     
     // MARK: - Update
@@ -85,8 +91,8 @@ extension ProductCell {
         NSLayoutConstraint.activate([
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             productImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            productImageView.widthAnchor.constraint(equalToConstant: 100),
-            productImageView.heightAnchor.constraint(equalToConstant: 100),
+            productImageView.widthAnchor.constraint(equalToConstant: 110),
+            productImageView.heightAnchor.constraint(equalToConstant: 110),
             
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 10),

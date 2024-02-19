@@ -91,11 +91,24 @@ class MenuVC: UIViewController {
         tableView.register(ProductCell.self, forCellReuseIdentifier: ProductCell.id)
         return tableView
     }()
+    
+    private lazy var accountButton: UIButton = {
+        let button = UIButton()
+        //button.setTitle("Аккаунт", for: .normal)
+        button.setImage(UIImage(systemName: "person.fill"), for: .normal)
+        button.tintColor = .darkGray
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
+        button.backgroundColor = .systemGray6
+        button.layer.cornerRadius = 8
+        //button.backgroundColor = .white
+        return button
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        accountButton.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
     }
 }
 
@@ -169,6 +182,13 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableView.automaticDimension
     }
+    
+    //MARK: - Action
+    
+    @objc func accountButtonTapped() {
+        let vc = AccountVC()
+        present(vc, animated: true)
+    }
 }
 
 //MARK: - Layout
@@ -176,15 +196,22 @@ extension MenuVC {
     func setupViews() {
         view.applyGradient(colors: [UIColor.lightGray.cgColor, UIColor.white.cgColor])
         view.addSubview(tableView)
+        view.addSubview(accountButton)
     }
     
     func setupConstraints() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
+        accountButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            
+            accountButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
+            accountButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 10),
+            accountButton.widthAnchor.constraint(equalToConstant: 70),
+            accountButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }

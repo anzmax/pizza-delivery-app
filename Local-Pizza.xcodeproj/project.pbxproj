@@ -21,6 +21,9 @@
 		F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458A62B7A643A00C36880 /* UIViewColors.swift */; };
 		F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458A82B7A671200C36880 /* StoriesTVCell.swift */; };
 		F40458AC2B7A6CB500C36880 /* Story.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458AB2B7A6CB500C36880 /* Story.swift */; };
+		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
+		F43D65732B836F73008C9811 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AccountVC.swift */; };
+		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
 		F44B4D392B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D382B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift */; };
 		F44B4D3B2B7BDB6900744632 /* SpecialsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D3A2B7BDB6900744632 /* SpecialsTVCell.swift */; };
 		F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D3C2B7BDE7800744632 /* Special.swift */; };
@@ -47,6 +50,9 @@
 		F40458A62B7A643A00C36880 /* UIViewColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewColors.swift; sourceTree = "<group>"; };
 		F40458A82B7A671200C36880 /* StoriesTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesTVCell.swift; sourceTree = "<group>"; };
 		F40458AB2B7A6CB500C36880 /* Story.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Story.swift; sourceTree = "<group>"; };
+		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
+		F43D65722B836F73008C9811 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
+		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
 		F44B4D382B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterZoomCollectionViewLayout.swift; sourceTree = "<group>"; };
 		F44B4D3A2B7BDB6900744632 /* SpecialsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialsTVCell.swift; sourceTree = "<group>"; };
 		F44B4D3C2B7BDE7800744632 /* Special.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Special.swift; sourceTree = "<group>"; };
@@ -124,6 +130,9 @@
 				F40458862B7A487300C36880 /* MenuVC.swift */,
 				F404589E2B7A4D5400C36880 /* ContactsVC.swift */,
 				F40458A02B7A4D8900C36880 /* CartVC.swift */,
+				F43D65702B836B8F008C9811 /* ProductDetailVC.swift */,
+				F43D65722B836F73008C9811 /* AccountVC.swift */,
+				F43D65742B8372D6008C9811 /* AccountDetailVC.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -252,6 +261,7 @@
 				F40458A42B7A537600C36880 /* DeliveryCell.swift in Sources */,
 				F44B4D392B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift in Sources */,
 				F404589D2B7A4D2500C36880 /* MainTabBarVC.swift in Sources */,
+				F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */,
 				F44B4D472B7D2C3200744632 /* Product.swift in Sources */,
 				F40458832B7A487300C36880 /* AppDelegate.swift in Sources */,
 				F44B4D492B7D2C6F00744632 /* ProductCell.swift in Sources */,
@@ -260,8 +270,10 @@
 				F40458852B7A487300C36880 /* SceneDelegate.swift in Sources */,
 				F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */,
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
+				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
 				F44B4D3F2B7D0FB000744632 /* Category.swift in Sources */,
+				F43D65732B836F73008C9811 /* AccountVC.swift in Sources */,
 				F404589B2B7A4C8300C36880 /* TabBar.swift in Sources */,
 				F40458AC2B7A6CB500C36880 /* Story.swift in Sources */,
 				F44B4D3B2B7BDB6900744632 /* SpecialsTVCell.swift in Sources */,
