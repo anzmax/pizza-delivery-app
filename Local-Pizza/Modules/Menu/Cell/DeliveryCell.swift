@@ -7,17 +7,25 @@
 
 import UIKit
 
+enum DeliveryType: Int, CaseIterable {
+    case address = 0
+    case takeAway
+}
+
 class DeliveryCell: UITableViewCell {
     
     static let id = "DeliveryCell"
     
+    var onAddressSegmentChanged: ((DeliveryType)->())?
+    
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Доставка", "В пиццерии"]
         let control = UISegmentedControl(items: items)
-        control.selectedSegmentIndex = 1
+        control.selectedSegmentIndex = 0
         control.selectedSegmentTintColor = .white
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
+        control.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         return control
     }()
     
@@ -48,6 +56,14 @@ class DeliveryCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        
+        if let deliveryType = DeliveryType(rawValue: sender.selectedSegmentIndex) {
+            onAddressSegmentChanged?(deliveryType)
+            
+        }
+    }
 }
 
 //MARK: - Layout
@@ -67,5 +83,14 @@ extension DeliveryCell {
             vStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 32),
             vStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -32),
         ])
+    }
+}
+
+extension DeliveryCell {
+    func update(_ addressText: String) {
+        
+        if !addressText.isEmpty {
+            addressButton.setTitle(addressText, for: .normal)
+        }
     }
 }

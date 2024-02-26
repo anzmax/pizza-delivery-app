@@ -16,6 +16,12 @@ enum MenuSection: Int, CaseIterable {
 }
 
 class MenuVC: UIViewController {
+    
+    var addressText: String = "" {
+        didSet {
+            tableView.reloadData()
+        }
+    }
 
     var stories = [
         Story(image: "pizzaoffer"),
@@ -81,7 +87,6 @@ class MenuVC: UIViewController {
         tableView.backgroundColor = .white
         tableView.layer.cornerRadius = 16
         tableView.separatorStyle = .none
-        //tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(DeliveryCell.self, forCellReuseIdentifier: DeliveryCell.id)
@@ -153,6 +158,29 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
             case .delivery:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryCell.id, for: indexPath) as! DeliveryCell
                 cell.selectionStyle = .none
+                
+                cell.update(addressText)
+                
+                cell.onAddressSegmentChanged = { deliveryType in
+                    
+                    switch deliveryType {
+                    case .takeAway:
+                        
+                        
+                        let pizzaMapVC = PizzaMapVC()
+                        
+                        pizzaMapVC.onAddressChanged = { addressText in
+                            
+                        }
+                        
+                        self.present(pizzaMapVC, animated: true)
+
+                    case .address:
+                        let deliveryMapVC = DeliveryMapVC()
+                        self.present(deliveryMapVC, animated: true)
+                    }
+                }
+                
                 return cell
             case .stories:
                 let cell = tableView.dequeueReusableCell(withIdentifier: StoriesTVCell.id, for: indexPath) as! StoriesTVCell
