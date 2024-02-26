@@ -30,7 +30,7 @@ class ProductCell: UITableViewCell {
     
     private let descriptionLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 13)
         label.textColor = .darkGray
         label.numberOfLines = 0
         return label
@@ -52,8 +52,6 @@ class ProductCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
         setupConstraints()
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        contentView.addGestureRecognizer(tapGesture)
     }
     
     required init?(coder: NSCoder) {

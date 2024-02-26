@@ -48,15 +48,15 @@ class MenuVC: UIViewController {
         Product(image: "sandwich4", title: "Донер", description: "Лепёшка, фалафель, салат, помидоры, огурцы, красный лук, капуста, соус тахини", price: "375 р"),
         Product(image: "br1", title: "Скрэмбл", description: "Яйца, молоко, соль, перец, масло, зелень, моцарелла", price: "375 р"),
         Product(image: "pizza1", title: "Пепперони", description: "Пикантная пепперони, увеличенная порция моцареллы, томаты, фирменный томатный соус", price: "от 625 р"),
-        Product(image: "pizza2", title: "Итальянская", description: "Моцарелла, томаты, свежий базилик, оливковое масло, чеснок, перец чили (опционально), фирменный томатный соус", price: "от 456 р"),
-        Product(image: "pizza3", title: "Грибы и колбаски", description: "Колбаски, грибы, моцарелла, томатный соус, оливковое масло, кинза", price: "от 512 р"),
-        Product(image: "pizza4", title: "Вегетарианская", description: "Томаты, лук, перец, оливки, маслины, моцарелла, пармезан, томатный соус", price: "от 732 р"),
-        Product(image: "pizza5", title: "Мясная", description: "Ветчина, пепперони, салями, бекон, шпинат, лук, моцарелла, сливочный или томатный соус", price: "от 756 р"),
-        Product(image: "pizza6", title: "Маргарита", description: "Моцарелла, томаты, базилик, оливковое масло, фирменный томатный соус", price: "от 345 р"),
-        Product(image: "pizza7", title: "Сырная", description: "Моцарелла, пармезан, гауда, чеддер, горгонзола, сливочный сыр, маслины, томатный соус", price: "от 415 р"),
-        Product(image: "pizza8", title: "Маслины и грибы", description: "Шампиньоны, лисички, оливки, моцарелла, сливочный соус, чеснок, лук", price: "от 571 р"),
-        Product(image: "pizza9", title: "Венецианская", description: "Перец, моцарелла, шампиньоны, куриная грудка, томаты, фирменный томатный соус, маслины", price: "от 645 р"),
-        Product(image: "pizza10", title: "Греческая", description: "Фета, оливки, помидоры, лук, оливковое масло, томатный соус, орегано", price: "от 719 р"),
+        Product(image: "pizza2", title: "Итальянская", description: "Моцарелла, томаты, свежий базилик, оливковое масло, чеснок, перец чили (опционально), фирменный томатный соус", price: "456 р"),
+        Product(image: "pizza3", title: "Грибы и колбаски", description: "Колбаски, грибы, моцарелла, томатный соус, оливковое масло, кинза", price: "512 р"),
+        Product(image: "pizza4", title: "Вегетарианская", description: "Томаты, лук, перец, оливки, маслины, моцарелла, пармезан, томатный соус", price: "732 р"),
+        Product(image: "pizza5", title: "Мясная", description: "Ветчина, пепперони, салями, бекон, шпинат, лук, моцарелла, сливочный или томатный соус", price: "756 р"),
+        Product(image: "pizza6", title: "Маргарита", description: "Моцарелла, томаты, базилик, оливковое масло, фирменный томатный соус", price: "345 р"),
+        Product(image: "pizza7", title: "Сырная", description: "Моцарелла, пармезан, гауда, чеддер, горгонзола, сливочный сыр, маслины, томатный соус", price: "415 р"),
+        Product(image: "pizza8", title: "Маслины и грибы", description: "Шампиньоны, лисички, оливки, моцарелла, сливочный соус, чеснок, лук", price: "571 р"),
+        Product(image: "pizza9", title: "Венецианская", description: "Перец, моцарелла, шампиньоны, куриная грудка, томаты, фирменный томатный соус, маслины", price: "645 р"),
+        Product(image: "pizza10", title: "Греческая", description: "Фета, оливки, помидоры, лук, оливковое масло, томатный соус, орегано", price: "719 р"),
         Product(image: "snack1", title: "Картофель фри", description: "Запеченная картошечка с пряными специями", price: "270 р"),
         Product(image: "snack2", title: "Креветки в кляре", description: "Кляр изумительно хрустящий, креветки сочные и ароматные.", price: "420 р"),
         Product(image: "snack3", title: "Наггетсы", description: "Хрустящие кусочки куриного мяса, обжаренные до золотистой корочки", price: "382 р"),
@@ -81,7 +81,7 @@ class MenuVC: UIViewController {
         tableView.backgroundColor = .white
         tableView.layer.cornerRadius = 16
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        //tableView.allowsSelection = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(DeliveryCell.self, forCellReuseIdentifier: DeliveryCell.id)
@@ -110,10 +110,20 @@ class MenuVC: UIViewController {
         setupConstraints()
         accountButton.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
     }
+    
+    //MARK: - Action
+    
+    @objc func accountButtonTapped() {
+        let vc = AccountVC()
+        present(vc, animated: true)
+    }
 }
 
 //MARK: - Delagate
 extension MenuVC: UITableViewDelegate, UITableViewDataSource {
+    
+    
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         MenuSection.allCases.count
     }
@@ -142,22 +152,27 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
             switch sectionType {
             case .delivery:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DeliveryCell.id, for: indexPath) as! DeliveryCell
+                cell.selectionStyle = .none
                 return cell
             case .stories:
                 let cell = tableView.dequeueReusableCell(withIdentifier: StoriesTVCell.id, for: indexPath) as! StoriesTVCell
+                cell.selectionStyle = .none
                 cell.update(with: stories)
                 return cell
             case .specials:
                 let cell = tableView.dequeueReusableCell(withIdentifier: SpecialsTVCell.id, for: indexPath) as! SpecialsTVCell
+                cell.selectionStyle = .none
                 cell.update(with: specials)
                 return cell
             case .categories:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTVCell.id, for: indexPath) as! CategoriesTVCell
+                cell.selectionStyle = .none
                 cell.update(with: categories)
                 return cell
             case .products:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.id, for: indexPath) as! ProductCell
                 let product = products[indexPath.row]
+                cell.selectionStyle = .none
                 cell.update(with: product)
                 return cell
             }
@@ -183,10 +198,11 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         return UITableView.automaticDimension
     }
     
-    //MARK: - Action
-    
-    @objc func accountButtonTapped() {
-        let vc = AccountVC()
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let product = products[indexPath.row]
+        let vc = ProductDetailVC()
+        vc.update(with: product)
         present(vc, animated: true)
     }
 }
