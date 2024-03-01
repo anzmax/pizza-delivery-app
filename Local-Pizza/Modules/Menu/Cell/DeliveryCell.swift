@@ -88,7 +88,6 @@ extension DeliveryCell {
 
 extension DeliveryCell {
     func update(_ addressText: String) {
-        
         if !addressText.isEmpty {
             addressButton.setTitle(addressText, for: .normal)
         }

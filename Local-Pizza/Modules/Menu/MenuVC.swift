@@ -164,19 +164,19 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 cell.onAddressSegmentChanged = { deliveryType in
                     
                     switch deliveryType {
+                        
                     case .takeAway:
-                        
-                        
                         let pizzaMapVC = PizzaMapVC()
-                        
                         pizzaMapVC.onAddressChanged = { addressText in
                             
                         }
-                        
                         self.present(pizzaMapVC, animated: true)
 
                     case .address:
                         let deliveryMapVC = DeliveryMapVC()
+                        deliveryMapVC.onSaveAddress = { [weak self] address in
+                            self?.addressText = address
+                        }
                         self.present(deliveryMapVC, animated: true)
                     }
                 }

@@ -10,6 +10,8 @@ import MapKit
 
 class DeliveryMapVC: UIViewController {
     
+    var onSaveAddress: ((String) -> Void)?
+    
     var customView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -51,6 +53,7 @@ class DeliveryMapVC: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .systemGray5
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(saveButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -66,6 +69,20 @@ class DeliveryMapVC: UIViewController {
         setupConstraints()
         setupMap()
     }
+    
+    @objc private func saveButtonTapped() {
+        if let address = addressTextField.text, !address.isEmpty {
+            onSaveAddress?(address)
+            self.dismiss(animated: true)
+        }
+    }
+}
+
+extension DeliveryMapVC: MKMapViewDelegate {
+
+}
+
+extension DeliveryMapVC {
     
     func setupViews() {
         view.addSubview(mapView)
@@ -109,8 +126,4 @@ class DeliveryMapVC: UIViewController {
             saveButton.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
-}
-
-extension DeliveryMapVC: MKMapViewDelegate {
-
 }
