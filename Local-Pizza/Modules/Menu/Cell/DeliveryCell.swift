@@ -61,7 +61,6 @@ class DeliveryCell: UITableViewCell {
         
         if let deliveryType = DeliveryType(rawValue: sender.selectedSegmentIndex) {
             onAddressSegmentChanged?(deliveryType)
-            
         }
     }
 }
