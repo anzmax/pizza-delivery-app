@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "sadpizza.jpg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
