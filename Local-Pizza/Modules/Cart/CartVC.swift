@@ -318,8 +318,12 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         return 100
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return indexPath.section == 0
+    }
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+        if editingStyle == .delete && indexPath.section == 0 {
             
             tableView.beginUpdates()
             
@@ -332,5 +336,4 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             updateCartUI()
         }
     }
-
 }
