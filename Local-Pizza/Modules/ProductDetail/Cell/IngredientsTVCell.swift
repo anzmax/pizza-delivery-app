@@ -38,6 +38,7 @@ class IngredientsTVCell: UITableViewCell {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .white
         collection.showsVerticalScrollIndicator = false
+        collection.contentInset = UIEdgeInsets(top: 5, left: 20, bottom: 10, right: 20)
         collection.delegate = self
         collection.dataSource = self
         collection.register(IngredientCVCell.self, forCellWithReuseIdentifier: IngredientCVCell.id)
@@ -68,8 +69,8 @@ class IngredientsTVCell: UITableViewCell {
             descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -350),
             
             collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
         ])
     }

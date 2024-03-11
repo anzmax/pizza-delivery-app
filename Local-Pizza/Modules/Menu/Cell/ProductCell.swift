@@ -11,6 +11,10 @@ class ProductCell: UITableViewCell {
     
     static let id = "ProductCell"
     
+    var onPriceButtonTapped: ((Product)->())?
+    
+    var product: Product?
+    
     // MARK: - UI Elements
     
     private let productImageView: UIImageView = {
@@ -43,6 +47,7 @@ class ProductCell: UITableViewCell {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 5
+        button.addTarget(self, action: #selector(priceButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -58,12 +63,9 @@ class ProductCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    @objc func handleTap(_ sender: UITapGestureRecognizer) {
-        
-    }
-    
     // MARK: - Update
     func update(with product: Product) {
+        self.product = product
         productImageView.image = UIImage(named: product.image)
         titleLabel.text = product.title
         descriptionLabel.text = product.description
@@ -105,5 +107,19 @@ extension ProductCell {
             priceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             priceButton.widthAnchor.constraint(equalToConstant: 75)
         ])
+    }
+    
+    @objc func priceButtonTapped(_ button: UIButton) {
+        
+        let originalColor = button.backgroundColor
+        button.backgroundColor = .systemGray3
+
+        UIView.animate(withDuration: 1, animations: {
+            button.backgroundColor = originalColor
+        })
+        
+        if let product = product {
+            onPriceButtonTapped?(product)
+        }
     }
 }

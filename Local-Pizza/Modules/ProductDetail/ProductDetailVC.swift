@@ -6,7 +6,7 @@
 //
 
 enum DetailSection: Int, CaseIterable {
-    case image
+    case image = 0
     case description
     case size
     case dough
@@ -30,6 +30,7 @@ class ProductDetailVC: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -38,7 +39,7 @@ class ProductDetailVC: UIViewController {
         tableView.backgroundColor = .clear
         tableView.layer.cornerRadius = 16
         tableView.separatorStyle = .none
-        tableView.allowsSelection = false
+        tableView.allowsSelection = true
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(ProductImageCell.self, forCellReuseIdentifier: ProductImageCell.id)
@@ -79,6 +80,10 @@ class ProductDetailVC: UIViewController {
     
     func update(with product: Product) {
         self.product = product
+    }
+    
+    @objc func cartButtonTapped() {
+        
     }
 }
 
@@ -136,6 +141,24 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 4 {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.layer.borderColor = UIColor.red.cgColor
+                cell.layer.borderWidth = 2
+            }
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.section == 4 {
+            if let cell = tableView.cellForRow(at: indexPath) {
+                cell.layer.borderColor = nil
+                cell.layer.borderWidth = 0
+            }
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if let section = DetailSection(rawValue: indexPath.section) {
             switch section {
@@ -148,7 +171,8 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
             case .dough:
                 return UITableView.automaticDimension
             case .ingredients:
-                return UITableView.automaticDimension            }
+                return 350
+            }
         }
         return UITableView.automaticDimension
     }
