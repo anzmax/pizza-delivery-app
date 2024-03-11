@@ -27,6 +27,10 @@
 		F409E14F2B8CBB6B00A88D2C /* DoughCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E14E2B8CBB6B00A88D2C /* DoughCell.swift */; };
 		F409E1512B8CBB8000A88D2C /* IngredientsTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E1502B8CBB8000A88D2C /* IngredientsTVCell.swift */; };
 		F409E1562B8CBBE400A88D2C /* Ingredient.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E1552B8CBBE400A88D2C /* Ingredient.swift */; };
+		F409E15B2B8CE21300A88D2C /* PizzaMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E15A2B8CE21300A88D2C /* PizzaMapVC.swift */; };
+		F409E15D2B8CE8C800A88D2C /* DeliveryMapVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E15C2B8CE8C800A88D2C /* DeliveryMapVC.swift */; };
+		F409E1602B90BE7400A88D2C /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E15F2B90BE7400A88D2C /* LocationService.swift */; };
+		F409E1622B90BEB500A88D2C /* GeocodeService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F409E1612B90BEB500A88D2C /* GeocodeService.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AccountVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -62,6 +66,10 @@
 		F409E14E2B8CBB6B00A88D2C /* DoughCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoughCell.swift; sourceTree = "<group>"; };
 		F409E1502B8CBB8000A88D2C /* IngredientsTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsTVCell.swift; sourceTree = "<group>"; };
 		F409E1552B8CBBE400A88D2C /* Ingredient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ingredient.swift; sourceTree = "<group>"; };
+		F409E15A2B8CE21300A88D2C /* PizzaMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaMapVC.swift; sourceTree = "<group>"; };
+		F409E15C2B8CE8C800A88D2C /* DeliveryMapVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMapVC.swift; sourceTree = "<group>"; };
+		F409E15F2B90BE7400A88D2C /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		F409E1612B90BEB500A88D2C /* GeocodeService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeocodeService.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AccountVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -108,6 +116,7 @@
 				F40458992B7A4C6400C36880 /* TabBar */,
 				F409E1432B8CBA6900A88D2C /* Modules */,
 				F40458AA2B7A6C9800C36880 /* Model */,
+				F409E15E2B90BE4800A88D2C /* Services */,
 				F40458A52B7A640A00C36880 /* Extensions */,
 				F44B4D372B7BDA9F00744632 /* Custom */,
 				F40458972B7A48A700C36880 /* Resources */,
@@ -180,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				F40458862B7A487300C36880 /* MenuVC.swift */,
+				F409E15A2B8CE21300A88D2C /* PizzaMapVC.swift */,
+				F409E15C2B8CE8C800A88D2C /* DeliveryMapVC.swift */,
 				F409E1452B8CBAA800A88D2C /* Cell */,
 			);
 			path = Menu;
@@ -241,6 +252,15 @@
 				F43D65742B8372D6008C9811 /* AccountDetailVC.swift */,
 			);
 			path = Account;
+			sourceTree = "<group>";
+		};
+		F409E15E2B90BE4800A88D2C /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				F409E15F2B90BE7400A88D2C /* LocationService.swift */,
+				F409E1612B90BEB500A88D2C /* GeocodeService.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
@@ -323,6 +343,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40458872B7A487300C36880 /* MenuVC.swift in Sources */,
+				F409E15D2B8CE8C800A88D2C /* DeliveryMapVC.swift in Sources */,
 				F44B4D412B7D10C300744632 /* CategoriesTVCell.swift in Sources */,
 				F409E1562B8CBBE400A88D2C /* Ingredient.swift in Sources */,
 				F40458A42B7A537600C36880 /* DeliveryCell.swift in Sources */,
@@ -343,7 +364,10 @@
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
 				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
+				F409E1602B90BE7400A88D2C /* LocationService.swift in Sources */,
+				F409E15B2B8CE21300A88D2C /* PizzaMapVC.swift in Sources */,
 				F44B4D3F2B7D0FB000744632 /* Category.swift in Sources */,
+				F409E1622B90BEB500A88D2C /* GeocodeService.swift in Sources */,
 				F43D65732B836F73008C9811 /* AccountVC.swift in Sources */,
 				F404589B2B7A4C8300C36880 /* TabBar.swift in Sources */,
 				F40458AC2B7A6CB500C36880 /* Story.swift in Sources */,

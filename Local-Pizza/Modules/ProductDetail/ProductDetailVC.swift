@@ -147,7 +147,6 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return UITableView.automaticDimension
             case .dough:
                 return UITableView.automaticDimension
-
             case .ingredients:
                 return UITableView.automaticDimension            }
         }
