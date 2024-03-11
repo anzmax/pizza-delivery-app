@@ -19,17 +19,17 @@ class CartVC: UIViewController {
     var itemsInCart: [Product] = [] {
         didSet {
             tableView.reloadData()
-            calculateTotalAmountForProducts()
+            paymentButton.setTitle("Оплатить на сумму \(calculateTotalAmountForProducts()) рублей", for: .normal)
         }
     }
+    
+    var dessertsAndDrinks = [Product]()
+    
+    //MARK: - Services
     let archiver = ProductsArchiver()
+    let productService = ProductService()
     
-    var extras = [
-        Extras(title: "Coca Cola", price: "128 р"),
-        Extras(title: "Чизкейк", price: "238 р"),
-        Extras(title: "Крылышки 12 шт", price: "312 р"),
-    ]
-    
+    //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Корзина"
@@ -53,13 +53,12 @@ class CartVC: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .systemGray6
         tableView.separatorStyle = .singleLine
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(CartProductCell.self, forCellReuseIdentifier: CartProductCell.id)
-        //tableView.register(CartExtrasCell.self, forCellReuseIdentifier: CartExtrasCell.id)
         tableView.register(ExtrasTVCell.self, forCellReuseIdentifier: ExtrasTVCell.id)
         tableView.register(PromoCodeCell.self, forCellReuseIdentifier: PromoCodeCell.id)
-        tableView.register(CartExtrasCell.self, forCellReuseIdentifier: CartExtrasCell.id)
         tableView.register(TotalCell.self, forCellReuseIdentifier: TotalCell.id)
         return tableView
     }()
@@ -89,91 +88,33 @@ class CartVC: UIViewController {
         return button
     }()
 
+    //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
         updateCartUI()
-        //fetchProducts()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchProducts()
+        fetchDessertsAndDrinks()
     }
     
-    func setupViews() {
-        view.backgroundColor = .white
-        view.addSubview(pizzaImageView)
-        view.addSubview(descriptionLabel)
-        view.addSubview(menuButton)
-        view.addSubview(titleLabel)
-        view.addSubview(tableView)
-        view.addSubview(paymentButton)
-    }
-
-    func setupConstraints() {
-        pizzaImageView.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        menuButton.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        paymentButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pizzaImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
-            pizzaImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            pizzaImageView.widthAnchor.constraint(equalToConstant: 300),
-            pizzaImageView.heightAnchor.constraint(equalToConstant: 300),
-            
-            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            descriptionLabel.topAnchor.constraint(equalTo: pizzaImageView.bottomAnchor, constant: 16),
-            
-            menuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            menuButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
-            menuButton.heightAnchor.constraint(equalToConstant: 50),
-            menuButton.widthAnchor.constraint(equalToConstant: 200),
-            
-            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
-            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            
-            paymentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            paymentButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            paymentButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -110),
-            
-            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: paymentButton.topAnchor, constant: -20)
-        ])
-    }
-    
-    func updateCartUI() {
-        
-        if itemsInCart.isEmpty {
-            pizzaImageView.isHidden = false
-            descriptionLabel.isHidden = false
-            menuButton.isHidden = false
-            tableView.isHidden = true
-            paymentButton.isHidden = true
-        } else {
-            pizzaImageView.isHidden = true
-            descriptionLabel.isHidden = true
-            menuButton.isHidden = true
-            tableView.isHidden = false
-            paymentButton.isHidden = false
-        }
-    }
-    
+    //MARK: - Action
     func calculateTotalAmountForProducts() -> Int {
-        return itemsInCart.reduce(0) { sum, item in
-            sum + (Int(item.price.replacingOccurrences(of: " р", with: "")) ?? 0)
+        var sum = 0
+        for item in itemsInCart {
+             
+            let price = Int(item.price.replacingOccurrences(of: " р", with: "")) ?? 0
+            sum += price * item.count
         }
+        return sum
     }
-
 
     @objc func menuButtonTapped() {
-        let menuVC = MenuVC()
-        self.present(menuVC, animated: true)
+        self.tabBarController?.selectedIndex = 0
     }
     
     func fetchProducts() {
@@ -182,8 +123,13 @@ class CartVC: UIViewController {
         updateCartUI()
         tableView.reloadData()
     }
+    
+    func fetchDessertsAndDrinks() {
+        self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
+    }
 }
 
+//MARK: - Delegate
 extension CartVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -196,7 +142,6 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             case .products:
                 return itemsInCart.count
             case .extras:
-                //return extras.count
                 return 1
             case .promo:
                 return 1
@@ -212,15 +157,39 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             switch section {
             case .products:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CartProductCell.id, for: indexPath) as! CartProductCell
+                
+                
+                cell.onProductCountChanged = { changedProduct in
+                    
+                    if let index = self.itemsInCart.firstIndex(where: { $0.title == changedProduct.title}) {
+                        
+                        if changedProduct.count == 0 {
+                            self.itemsInCart.remove(at: index)
+                        } else {
+                            self.itemsInCart[index] = changedProduct
+                        }
+                        
+                        self.archiver.save(self.itemsInCart)
+                        self.fetchProducts()
+                        tableView.reloadData()
+                    }
+                }
+                
                 cell.selectionStyle = .none
                 let product = itemsInCart[indexPath.row]
                 cell.update(with: product)
                 return cell
             case .extras:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ExtrasTVCell.id, for: indexPath) as! ExtrasTVCell
-                let dessertsAndDrinks = itemsInCart.filter { product in
-                    product.image.contains("dessert") || product.image.contains("drink")
+                
+                cell.onPriceButtonTapped = { product in
+                    
+                    self.archiver.append(product)
+                    self.fetchProducts()
+                    tableView.reloadData()
                 }
+                
+                print(dessertsAndDrinks)
                 cell.update(with: dessertsAndDrinks)
                 cell.selectionStyle = .none
                 return cell
@@ -230,6 +199,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             case .total:
                 let cell = tableView.dequeueReusableCell(withIdentifier: TotalCell.id, for: indexPath) as! TotalCell
+                cell.update(items: itemsInCart)
                 cell.selectionStyle = .none
                 return cell
             }
@@ -283,7 +253,6 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return nil
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -335,5 +304,61 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             tableView.endUpdates()
             updateCartUI()
         }
+    }
+}
+
+//MARK: Layout
+extension CartVC {
+    func updateCartUI() {
+        if itemsInCart.isEmpty {
+            pizzaImageView.isHidden = false
+            descriptionLabel.isHidden = false
+            menuButton.isHidden = false
+            tableView.isHidden = true
+            paymentButton.isHidden = true
+        } else {
+            pizzaImageView.isHidden = true
+            descriptionLabel.isHidden = true
+            menuButton.isHidden = true
+            tableView.isHidden = false
+            paymentButton.isHidden = false
+        }
+    }
+    
+    func setupViews() {
+        view.backgroundColor = .white
+        [pizzaImageView, descriptionLabel, menuButton, titleLabel, tableView, paymentButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            pizzaImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
+            pizzaImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            pizzaImageView.widthAnchor.constraint(equalToConstant: 300),
+            pizzaImageView.heightAnchor.constraint(equalToConstant: 300),
+            
+            descriptionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            descriptionLabel.topAnchor.constraint(equalTo: pizzaImageView.bottomAnchor, constant: 16),
+            
+            menuButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            menuButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 16),
+            menuButton.heightAnchor.constraint(equalToConstant: 50),
+            menuButton.widthAnchor.constraint(equalToConstant: 200),
+            
+            titleLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            
+            paymentButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            paymentButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            paymentButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -110),
+            
+            tableView.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: paymentButton.topAnchor, constant: -20)
+        ])
     }
 }

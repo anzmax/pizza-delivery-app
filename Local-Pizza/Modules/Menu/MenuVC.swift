@@ -70,7 +70,7 @@ class MenuVC: UIViewController {
         Product(image: "snack3", title: "Наггетсы", description: "Хрустящие кусочки куриного мяса, обжаренные до золотистой корочки", price: "382 р"),
         Product(image: "snack4", title: "Сырные палочки", description: "Нежный сыр моцарелла, обволакивающийся хрустящей корочкой", price: "234 р"),
         Product(image: "drink1", title: "Американо", description: "Классический напиток с простым, но насыщенным вкусом", price: "98 р"),
-        Product(image: "drink2", title: "Горячий шоколад", description: "Согревающий в холодные дни и поднимающее настроение", price: "130 р"),
+        Product(image: "drink2", title: "Какао", description: "Согревающий в холодные дни и поднимающее настроение", price: "130 р"),
         Product(image: "drink3", title: "Каппучино", description: "Идеальное сочетание крепкого эспрессо и нежной молочной пенки", price: "250 р"),
         Product(image: "drink4", title: "Чай черный", description: "Насыщенный и ароматный напиток придающий энергию ", price: "99 р"),
         Product(image: "drink5", title: "Чай зеленый", description: "Освежающий напиток наполненный антиоксидантами", price: "99 р"),

@@ -13,16 +13,12 @@ class ExtrasTVCell: UITableViewCell {
     
     var allProducts: [Product] = []
     
-    var filteredProducts: [Product] {
-        return allProducts.filter { product in
-            product.image.contains("dessert") || product.image.contains("drink")
-        }
-    }
+    var onPriceButtonTapped: ((Product)->())?
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: 110, height: 190)
+        layout.itemSize = CGSize(width: 110, height: 170)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 20
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -44,7 +40,45 @@ class ExtrasTVCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - Update TV Cell
+extension ExtrasTVCell {
+    func update(with products: [Product]) {
+        self.allProducts = products
+        collectionView.reloadData()
+    }
+}
+
+//MARK: - Delegate
+extension ExtrasTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(allProducts.count)
+        return allProducts.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExtrasCVCell.id, for: indexPath) as! ExtrasCVCell
+        let product = allProducts[indexPath.item]
+        cell.update(with: product)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let product = allProducts[indexPath.row]
+        
+        onPriceButtonTapped?(product)
+    }
+}
+
+//MARK: - Layout TC Cell
+extension ExtrasTVCell {
     func setupViews() {
         contentView.backgroundColor = .white
         contentView.addSubview(collectionView)
@@ -59,35 +93,19 @@ class ExtrasTVCell: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
-    
-    func update(with products: [Product]) {
-        self.allProducts = products
-        collectionView.reloadData()
-    }
-}
-
-extension ExtrasTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredProducts.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExtrasCVCell.id, for: indexPath) as! ExtrasCVCell
-        let product = filteredProducts[indexPath.row]
-        cell.update(with: product)
-        return cell
-    }
 }
 
 class ExtrasCVCell: UICollectionViewCell {
     
     static let id = "ExtrasCVCell"
     
+    //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Название"
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.textAlignment = .center
         return label
     }()
     
@@ -98,13 +116,14 @@ class ExtrasCVCell: UICollectionViewCell {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 5
+        button.isUserInteractionEnabled = false
         return button
     }()
     
     lazy var imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pizzaSpecial")
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         return imageView
     }()
     
@@ -118,11 +137,25 @@ class ExtrasCVCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+//MARK: - Update CV Cell
+extension ExtrasCVCell {
+    func update(with product: Product) {
+        titleLabel.text = product.title
+        priceButton.setTitle(product.price, for: .normal)
+        imageView.image = UIImage(named: product.image)
+    }
+}
+
+//MARK: - Layout CV Cell
+extension ExtrasCVCell {
     
     func setupViews() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(priceButton)
-        contentView.addSubview(imageView)
+        [titleLabel, priceButton, imageView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupContentView() {
@@ -136,31 +169,23 @@ class ExtrasCVCell: UICollectionViewCell {
         contentView.layer.shadowRadius = 4
     }
     
-    func update(with product: Product) {
-        titleLabel.text = product.title
-        priceButton.setTitle(product.price, for: .normal)
-        imageView.image = UIImage(named: product.image)
-    }
-    
+
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceButton.translatesAutoresizingMaskIntoConstraints = false
-        imageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: 100),
-            imageView.widthAnchor.constraint(equalToConstant: 100),
+            imageView.heightAnchor.constraint(equalToConstant: 80),
+            imageView.widthAnchor.constraint(equalToConstant: 80),
             imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -190),
             
-            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 16),
-            titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10),
+            titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
-            priceButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 16),
+            priceButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 10),
             priceButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
-            priceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            priceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             priceButton.widthAnchor.constraint(equalToConstant: 60),
-            priceButton.heightAnchor.constraint(equalToConstant: 40)
+            priceButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
 }

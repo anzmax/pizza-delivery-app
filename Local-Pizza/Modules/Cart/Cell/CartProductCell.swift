@@ -11,7 +11,12 @@ class CartProductCell: UITableViewCell {
     
     static let id = "CartProductCell"
     
+    var onProductCountChanged: ((Product) -> Void)?
+    
     var basePrice: Int = 0
+    var product: Product?
+    
+    var archiver = ProductsArchiver()
     
     var count = 0 {
         didSet {
@@ -26,6 +31,7 @@ class CartProductCell: UITableViewCell {
         }
     }
     
+    //MARK: - UI Elements
     lazy var itemImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "pizza2")
@@ -77,6 +83,7 @@ class CartProductCell: UITableViewCell {
     
     lazy var priceLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         label.text = "Цена"
         return label
     }()
@@ -90,26 +97,66 @@ class CartProductCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+}
+
+extension CartProductCell {
     
+    //MARK: - Update
+    func update(with product: Product) {
+        self.product = product
+        itemImageView.image = UIImage(named: product.image)
+        titleLabel.text = product.title
+        
+        let priceString = product.price.replacingOccurrences(of: " р", with: "")
+        basePrice = Int(priceString) ?? 0
+        
+        count = product.count
+        updatePriceLabel()
+    }
+    
+    func updatePriceLabel() {
+        let totalPrice = basePrice * Int(count)
+        priceLabel.text = "\(totalPrice) р"
+    }
+    
+    //MARK: - Actions
+    @objc func plusButtonTapped(button: UIButton) {
+        count += 1
+        updatePriceLabel()
+        
+        product?.count = count
+        if let product = product {
+            onProductCountChanged?(product)
+        }
+    }
+    
+    @objc func minusButtonTapped(button: UIButton) {
+        count -= 1
+        updatePriceLabel()
+        product?.count = count
+        if let product = product {
+            onProductCountChanged?(product)
+        }
+    }
+}
+
+//MARK: - Layout
+extension CartProductCell {
     func setupViews() {
         contentView.backgroundColor = .white
         contentView.layer.cornerRadius = 12
-        contentView.addSubview(itemImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(priceLabel)
-        contentView.addSubview(horizontalStackView)
         
-        horizontalStackView.addArrangedSubview(minusButton)
-        horizontalStackView.addArrangedSubview(countLabel)
-        horizontalStackView.addArrangedSubview(plusButton)
+        [itemImageView, titleLabel, priceLabel, horizontalStackView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [minusButton, countLabel, plusButton].forEach {
+            horizontalStackView.addArrangedSubview($0)
+        }
     }
     
     func setupConstraints() {
-        itemImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
-        horizontalStackView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             itemImageView.widthAnchor.constraint(equalToConstant: 100),
             itemImageView.heightAnchor.constraint(equalToConstant: 100),
@@ -129,38 +176,5 @@ class CartProductCell: UITableViewCell {
             horizontalStackView.heightAnchor.constraint(equalToConstant: 30),
             horizontalStackView.widthAnchor.constraint(equalToConstant: 100)
         ])
-    }
-}
-
-extension CartProductCell {
-    
-    func update(with product: Product) {
-        itemImageView.image = UIImage(named: product.image)
-        titleLabel.text = product.title
-        
-        let priceString = product.price.replacingOccurrences(of: " р", with: "")
-        basePrice = Int(priceString) ?? 0
-        
-        count = 1
-        updatePriceLabel()
-    }
-    
-    func updatePriceLabel() {
-        let totalPrice = basePrice * Int(count)
-        priceLabel.text = "\(totalPrice) р"
-    }
-    
-    
-    //MARK: - Actions
-    @objc func plusButtonTapped(button: UIButton) {
-        count += 1
-        updatePriceLabel()
-    }
-    
-    @objc func minusButtonTapped(button: UIButton) {
-        if count > 1 {
-            count -= 1
-            updatePriceLabel()
-        }
     }
 }

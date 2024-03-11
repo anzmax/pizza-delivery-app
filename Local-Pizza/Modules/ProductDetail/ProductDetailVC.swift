@@ -30,6 +30,7 @@ class ProductDetailVC: UIViewController {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         button.layer.cornerRadius = 12
+        button.addTarget(self, action: #selector(cartButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -79,6 +80,10 @@ class ProductDetailVC: UIViewController {
     
     func update(with product: Product) {
         self.product = product
+    }
+    
+    @objc func cartButtonTapped() {
+        
     }
 }
 

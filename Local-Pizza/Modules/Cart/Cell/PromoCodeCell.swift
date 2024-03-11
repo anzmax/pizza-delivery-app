@@ -11,8 +11,7 @@ class PromoCodeCell: UITableViewCell {
     
     static let id = "PromoCodeCell"
     
-    //let accessoryTextField = UITextField()
-    
+    //MARK: - UI Elements
     lazy var promoButton: UIButton = {
         let button = UIButton()
         button.setTitle("Применить промокод", for: .normal)
@@ -50,38 +49,27 @@ class PromoCodeCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Action
     @objc func promoButtonTapped() {
         hiddenTextField.becomeFirstResponder()
     }
-    
-    //    @objc func applyPromoCode() {
-    //        if let promoCode = hiddenTextField.text {
-    //
-    //            if promoCode == "Hello" {
-    //                errorLabel.isHidden = true
-    //
-    //                hiddenTextField.resignFirstResponder()
-    //            } else {
-    //                errorLabel.isHidden = false
-    //                errorLabel.text = "Такого промокода не существует"
-    //            }
-    //        }
-    //    }
-    
+
     @objc func applyPromoCode() {
         hiddenTextField.resignFirstResponder()
     }
 }
 
+//MARK: - Layout
 extension PromoCodeCell {
     
     func setupViews() {
-        contentView.addSubview(promoButton)
-        contentView.addSubview(hiddenTextField)
+        [promoButton, hiddenTextField].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        promoButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             promoButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             promoButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
@@ -130,7 +118,6 @@ extension PromoCodeCell {
             errorLabel.trailingAnchor.constraint(equalTo: accessoryView.trailingAnchor, constant: -8)
         ])
         
-        //hiddenTextField = accessoryTextField
         hiddenTextField.inputAccessoryView = accessoryView
     }
 }

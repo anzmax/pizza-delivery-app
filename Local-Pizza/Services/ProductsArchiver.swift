@@ -40,11 +40,14 @@ final class ProductsArchiver {
     func append(_ product: Product) {
         
         var products = fetch()
-        if products.contains(product) {
-            print("")
+        
+        if let index = products.firstIndex(where: { $0.title == product.title }) {
+            
+            products[index].count += 1
         } else {
             products.append(product)
         }
+    
         save(products)
     }
     

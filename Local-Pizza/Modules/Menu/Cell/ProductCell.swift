@@ -10,6 +10,7 @@ import UIKit
 class ProductCell: UITableViewCell {
     
     static let id = "ProductCell"
+    
     var onPriceButtonTapped: ((Product)->())?
     
     var product: Product?
@@ -108,7 +109,14 @@ extension ProductCell {
         ])
     }
     
-    @objc func priceButtonTapped() {
+    @objc func priceButtonTapped(_ button: UIButton) {
+        
+        let originalColor = button.backgroundColor
+        button.backgroundColor = .systemGray3
+
+        UIView.animate(withDuration: 1, animations: {
+            button.backgroundColor = originalColor
+        })
         
         if let product = product {
             onPriceButtonTapped?(product)
