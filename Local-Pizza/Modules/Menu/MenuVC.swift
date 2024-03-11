@@ -15,8 +15,8 @@ enum MenuSection: Int, CaseIterable {
     case products = 4
 }
 
-class MenuVC: UIViewController {
-    
+class MenuVC: UIViewController, StoriesTVCellDelegate {
+
     var archiver = ProductsArchiver()
     
     var addressText: String = "" {
@@ -82,7 +82,6 @@ class MenuVC: UIViewController {
         Product(image: "sauce2", title: "Чесночный соус", description: "Интенсивный вкус с нотками ароматного чеснока", price: "69 р"),
         Product(image: "sauce3", title: "Горчичный соус", description: "Жгучий и ароматный, придающий остроты вашему блюду.", price: "69 р")
     ]
-
     
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
@@ -101,13 +100,12 @@ class MenuVC: UIViewController {
     
     private lazy var accountButton: UIButton = {
         let button = UIButton()
-        //button.setTitle("Аккаунт", for: .normal)
         button.setImage(UIImage(systemName: "person.fill"), for: .normal)
         button.tintColor = .darkGray
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 8
-        //button.backgroundColor = .white
+        button.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
         return button
     }()
 
@@ -115,21 +113,25 @@ class MenuVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        accountButton.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
+       // accountButton.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - Action
-    
     @objc func accountButtonTapped() {
         let vc = AccountVC()
         present(vc, animated: true)
+    }
+    
+    func didSelectStoryImage(_ image: UIImage?) {
+        guard let image = image else { return }
+        let storyDetailVC = StoryDetailVC()
+        storyDetailVC.image = image
+        present(storyDetailVC, animated: true)
     }
 }
 
 //MARK: - Delagate
 extension MenuVC: UITableViewDelegate, UITableViewDataSource {
-    
-    
     
     func numberOfSections(in tableView: UITableView) -> Int {
         MenuSection.allCases.count
@@ -188,6 +190,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: StoriesTVCell.id, for: indexPath) as! StoriesTVCell
                 cell.selectionStyle = .none
                 cell.update(with: stories)
+                cell.delegate = self
                 return cell
             case .specials:
                 let cell = tableView.dequeueReusableCell(withIdentifier: SpecialsTVCell.id, for: indexPath) as! SpecialsTVCell

@@ -7,10 +7,16 @@
 
 import UIKit
 
+protocol StoriesTVCellDelegate: AnyObject {
+    func didSelectStoryImage(_ image: UIImage?)
+}
+
 class StoriesTVCell: UITableViewCell {
 
     static let id = "StoriesCell"
     
+    weak var delegate: StoriesTVCellDelegate?
+
     var stories = [
         Story(image: "pizzaoffer"),
         Story(image: "nuggetsoffer"),
@@ -20,7 +26,7 @@ class StoriesTVCell: UITableViewCell {
         Story(image: "colaoffer")
     ]
 
-    lazy var collectionView: UICollectionView = {
+    private lazy var collectionView: UICollectionView = {
         let layout = CenterZoomCollectionViewLayout()
         layout.itemSize = CGSize(width: 85, height: 110)
         layout.scrollDirection = .horizontal
@@ -44,30 +50,61 @@ class StoriesTVCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Update
+    private func setupViews() {
+        contentView.backgroundColor = .white
+        contentView.addSubview(collectionView)
+        contentView.layer.cornerRadius = 16
+        contentView.clipsToBounds = true
+    }
+    
+    private func setupConstraints() {
+        collectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
+        ])
+    }
+
     func update(with stories: [Story]) {
         self.stories = stories
         collectionView.reloadData()
     }
 }
 
-class StoryCVCell: UICollectionViewCell {
+// MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
+extension StoriesTVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return stories.count
+    }
     
-    var stories = [
-        Story(image: "pizzaoffer"),
-        Story(image: "nuggetsoffer"),
-        Story(image: "drinksoffer"),
-        Story(image: "dessertoffer"),
-        Story(image: "combooffer"),
-        Story(image: "colaoffer")
-    ]
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryCVCell.id, for: indexPath) as! StoryCVCell
+        let story = stories[indexPath.row]
+        cell.update(with: story)
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let story = stories[indexPath.row]
+        delegate?.didSelectStoryImage(UIImage(named: story.image))
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+    }
+}
+
+class StoryCVCell: UICollectionViewCell {
     
     static let id = "StoryCVCell"
     
-    var storyImageView: UIImageView = {
-        let storyImage = UIImageView()
-        storyImage.image = UIImage(named: "colaoffer")
-        return storyImage
+    private var storyImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        return imageView
     }()
     
     override init(frame: CGRect) {
@@ -80,65 +117,24 @@ class StoryCVCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Update
-    func update(with story: Story) {
-        storyImageView.image = UIImage(named: story.image)
-    }
-}
-
-//MARK: - Delegate
-extension StoriesTVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        stories.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: StoryCVCell.id, for: indexPath) as! StoryCVCell
-        let story = stories[indexPath.item]
-        cell.update(with: story)
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
-    }
-}
-
-//MARK: - Layout
-extension StoriesTVCell {
-    func setupViews() {
+    private func setupViews() {
         contentView.backgroundColor = .white
-        contentView.addSubview(collectionView)
-        contentView.layer.cornerRadius = 16
+        contentView.layer.cornerRadius = 12
         contentView.clipsToBounds = true
-    }
-    
-    func setupConstraints() {
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            collectionView.topAnchor.constraint(equalTo: contentView.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
-        ])
-    }
-}
-
-extension StoryCVCell {
-    func setupViews() {
-        contentView.backgroundColor = .white
-        layer.cornerRadius = 12
-        layer.masksToBounds = true
         contentView.addSubview(storyImageView)
     }
     
-    func setupConstraints() {
+    private func setupConstraints() {
         storyImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             storyImageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             storyImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             storyImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            storyImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            storyImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
+    }
+    
+    func update(with story: Story) {
+        storyImageView.image = UIImage(named: story.image)
     }
 }
