@@ -54,6 +54,7 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
         }
     }
 
+    //MARK: - UI Components
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
@@ -88,7 +89,6 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
         fetchSpecials()
         fetchStories()
         fetchCategories()
-       // accountButton.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
     }
     
     //MARK: - Action
@@ -203,6 +203,14 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                         }
                         self.present(deliveryMapVC, animated: true)
                     }
+                }
+                
+                cell.onAddressButtonTapped = {
+                    let deliveryMapVC = DeliveryMapVC()
+                    deliveryMapVC.onSaveAddress = { [weak self] address in
+                        self?.addressText = address
+                    }
+                    self.present(deliveryMapVC, animated: true)
                 }
                 
                 return cell
