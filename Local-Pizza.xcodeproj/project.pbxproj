@@ -64,6 +64,12 @@
 		F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731A72BA4878100393E83 /* CategoriesNetworkService.swift */; };
 		F4C731AC2BA8740800393E83 /* ProductModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4C731AA2BA8740800393E83 /* ProductModel.xcdatamodeld */; };
 		F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731AD2BA8752700393E83 /* CoreDataService.swift */; };
+		F4C731B02BA8BA3300393E83 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731AF2BA8BA3300393E83 /* Connection.swift */; };
+		F4C731B22BA8BA9700393E83 /* ConnectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731B12BA8BA9700393E83 /* ConnectionCell.swift */; };
+		F4C731B42BA8E1A600393E83 /* OffersTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731B32BA8E1A600393E83 /* OffersTVCell.swift */; };
+		F4C731B62BA8E1B400393E83 /* HistoryTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731B52BA8E1B400393E83 /* HistoryTVCell.swift */; };
+		F4C731B82BA8E1C500393E83 /* ChallengeTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731B72BA8E1C500393E83 /* ChallengeTVCell.swift */; };
+		F4C731BA2BA8E42C00393E83 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731B92BA8E42C00393E83 /* Offer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -125,6 +131,12 @@
 		F4C731A72BA4878100393E83 /* CategoriesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNetworkService.swift; sourceTree = "<group>"; };
 		F4C731AB2BA8740800393E83 /* ProductModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductModel.xcdatamodel; sourceTree = "<group>"; };
 		F4C731AD2BA8752700393E83 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		F4C731AF2BA8BA3300393E83 /* Connection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		F4C731B12BA8BA9700393E83 /* ConnectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionCell.swift; sourceTree = "<group>"; };
+		F4C731B32BA8E1A600393E83 /* OffersTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersTVCell.swift; sourceTree = "<group>"; };
+		F4C731B52BA8E1B400393E83 /* HistoryTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryTVCell.swift; sourceTree = "<group>"; };
+		F4C731B72BA8E1C500393E83 /* ChallengeTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChallengeTVCell.swift; sourceTree = "<group>"; };
+		F4C731B92BA8E42C00393E83 /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +232,8 @@
 				F409E1552B8CBBE400A88D2C /* Ingredient.swift */,
 				F409E1F12B921D9D00A88D2C /* PersonalInfo.swift */,
 				F409E1FE2B96354800A88D2C /* Extras.swift */,
+				F4C731AF2BA8BA3300393E83 /* Connection.swift */,
+				F4C731B92BA8E42C00393E83 /* Offer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -331,6 +345,10 @@
 				F409E1EB2B921D5500A88D2C /* NotificationsCell.swift */,
 				F409E1ED2B921D6B00A88D2C /* LogoutCell.swift */,
 				F409E1EF2B921D8100A88D2C /* DeleteCell.swift */,
+				F4C731B12BA8BA9700393E83 /* ConnectionCell.swift */,
+				F4C731B32BA8E1A600393E83 /* OffersTVCell.swift */,
+				F4C731B52BA8E1B400393E83 /* HistoryTVCell.swift */,
+				F4C731B72BA8E1C500393E83 /* ChallengeTVCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -443,9 +461,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				F40458872B7A487300C36880 /* MenuVC.swift in Sources */,
+				F4C731B22BA8BA9700393E83 /* ConnectionCell.swift in Sources */,
 				F409E15D2B8CE8C800A88D2C /* DeliveryMapVC.swift in Sources */,
 				F44B4D412B7D10C300744632 /* CategoriesTVCell.swift in Sources */,
 				F409E1562B8CBBE400A88D2C /* Ingredient.swift in Sources */,
+				F4C731B62BA8E1B400393E83 /* HistoryTVCell.swift in Sources */,
 				F40458A42B7A537600C36880 /* DeliveryCell.swift in Sources */,
 				F409E2012B97543600A88D2C /* ProductsArchiver.swift in Sources */,
 				F44B4D392B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift in Sources */,
@@ -479,10 +499,14 @@
 				F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */,
 				F409E2072B9F5C3F00A88D2C /* StoryDetailVC.swift in Sources */,
 				F409E1EE2B921D6B00A88D2C /* LogoutCell.swift in Sources */,
+				F4C731BA2BA8E42C00393E83 /* Offer.swift in Sources */,
 				F409E1EC2B921D5500A88D2C /* NotificationsCell.swift in Sources */,
 				F409E15B2B8CE21300A88D2C /* PizzaMapVC.swift in Sources */,
+				F4C731B02BA8BA3300393E83 /* Connection.swift in Sources */,
 				F4C731A22BA4823300393E83 /* NetworkErrors.swift in Sources */,
+				F4C731B42BA8E1A600393E83 /* OffersTVCell.swift in Sources */,
 				F44B4D3F2B7D0FB000744632 /* Category.swift in Sources */,
+				F4C731B82BA8E1C500393E83 /* ChallengeTVCell.swift in Sources */,
 				F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */,
 				F409E1E72B921D1700A88D2C /* VerificationVC.swift in Sources */,
 				F43D65732B836F73008C9811 /* AccountVC.swift in Sources */,

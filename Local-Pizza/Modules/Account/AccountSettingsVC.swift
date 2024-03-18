@@ -35,6 +35,7 @@ class AccountSettingsVC: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.layer.cornerRadius = 16
+        
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
         tableView.dataSource = self
@@ -70,8 +71,8 @@ class AccountSettingsVC: UIViewController {
             doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             
             tableView.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -133,7 +134,7 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
      
      func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
          let footerView = UIView()
-         footerView.backgroundColor = UIColor.clear
+         footerView.backgroundColor = .clear        
          return footerView
      }
      

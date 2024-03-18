@@ -44,6 +44,7 @@ class NotificationsCell: UITableViewCell {
     }
     
     func setupViews() {
+        contentView.layer.cornerRadius = 16
         contentView.addSubview(titleLabel)
         contentView.addSubview(subtitleLabel)
         contentView.addSubview(switchControl)

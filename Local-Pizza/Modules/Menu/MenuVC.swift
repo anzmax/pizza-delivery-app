@@ -94,7 +94,8 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
     
     //MARK: - Action
     @objc func accountButtonTapped() {
-        let vc = AccountVC()
+        //let vc = AccountVC()
+        let vc = AccountDetailVC()
         present(vc, animated: true)
     }
     
