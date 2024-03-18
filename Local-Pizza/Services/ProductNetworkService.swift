@@ -10,15 +10,15 @@ import UIKit
 class ProductNetworkService {
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-        
-        //https://run.mocky.io/v3/42ccdf25-e816-41fb-b369-5f625adc441d
+
+        //https://run.mocky.io/v3/e2b7287d-25ba-4350-a816-ca3e22a0e3ed
         
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "run.mocky.io"
-        urlComponents.path = "/v3/42ccdf25-e816-41fb-b369-5f625adc441d"
+        urlComponents.path = "/v3/e2b7287d-25ba-4350-a816-ca3e22a0e3ed"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

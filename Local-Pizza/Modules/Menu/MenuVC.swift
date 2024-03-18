@@ -16,7 +16,7 @@ enum MenuSection: Int, CaseIterable {
 }
 
 class MenuVC: UIViewController, StoriesTVCellDelegate {
-
+    
     //MARL: - Services
     var archiver = ProductsArchiver()
     var productsService = ProductNetworkService()
@@ -53,13 +53,14 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
             tableView.reloadData()
         }
     }
-
+    
     //MARK: - UI Components
     private lazy var tableView: UITableView = {
         let tableView = UITableView()
         tableView.backgroundColor = .white
         tableView.layer.cornerRadius = 16
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(DeliveryCell.self, forCellReuseIdentifier: DeliveryCell.id)
@@ -80,7 +81,7 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
         button.addTarget(self, action: #selector(accountButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -195,7 +196,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                             
                         }
                         self.present(pizzaMapVC, animated: true)
-
+                        
                     case .address:
                         let deliveryMapVC = DeliveryMapVC()
                         deliveryMapVC.onSaveAddress = { [weak self] address in
@@ -238,6 +239,22 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 cell.onPriceButtonTapped = { product in
                     self.archiver.append(product)
                 }
+                
+                cell.onFavouriteButtonTapped = { product in 
+                    CoreDataService.shared.addProductToFavourites(product: product)
+                    NotificationCenter.default.post(name: .favoritesDidUpdate, object: nil)
+                    
+                    if let tabBarController = self.tabBarController,
+                       let favouritesVC = tabBarController.viewControllers?[1] as? FavouritesVC {
+                        CoreDataService.shared.fetchFavouriteProducts { products in
+                            DispatchQueue.main.async {
+                                favouritesVC.favouriteProducts = products
+                                favouritesVC.tableView.reloadData()
+                            }
+                        }
+                    }
+                }
+                
                 return cell
             }
         }
@@ -268,6 +285,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
         let vc = ProductDetailVC()
         vc.update(with: product)
         present(vc, animated: true)
+        
     }
 }
 

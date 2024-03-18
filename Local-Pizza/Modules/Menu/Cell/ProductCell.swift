@@ -12,6 +12,7 @@ class ProductCell: UITableViewCell {
     static let id = "ProductCell"
     
     var onPriceButtonTapped: ((Product)->())?
+    var onFavouriteButtonTapped: ((Product) ->())?
     
     var product: Product?
     
@@ -51,6 +52,14 @@ class ProductCell: UITableViewCell {
         return button
     }()
     
+    lazy var favouriteButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "star"), for: .normal)
+        button.tintColor = .systemGray2
+        button.addTarget(self, action: #selector(favouriteButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     // MARK: - Initialization
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -71,23 +80,19 @@ class ProductCell: UITableViewCell {
         descriptionLabel.text = product.description
         priceButton.setTitle(product.price, for: .normal)
     }
+    
 }
 
 //MARK: - Layout
 extension ProductCell {
     private func setupViews() {
-        contentView.addSubview(productImageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(priceButton)
+        [productImageView, titleLabel, descriptionLabel, priceButton, favouriteButton].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     private func setupConstraints() {
-        productImageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceButton.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             productImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
@@ -105,10 +110,14 @@ extension ProductCell {
             priceButton.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 10),
             priceButton.leadingAnchor.constraint(equalTo: productImageView.trailingAnchor, constant: 10),
             priceButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            priceButton.widthAnchor.constraint(equalToConstant: 75)
+            priceButton.widthAnchor.constraint(equalToConstant: 75),
+            
+            favouriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            favouriteButton.centerYAnchor.constraint(equalTo: priceButton.centerYAnchor)
         ])
     }
     
+    //MARK: - Action
     @objc func priceButtonTapped(_ button: UIButton) {
         
         let originalColor = button.backgroundColor
@@ -122,4 +131,22 @@ extension ProductCell {
             onPriceButtonTapped?(product)
         }
     }
+    
+    @objc func favouriteButtonTapped(_ button: UIButton) {
+        if let product = product {
+            onFavouriteButtonTapped?(product)
+
+            let currentImage = button.image(for: .normal)
+            let starImage = UIImage(systemName: "star")
+            let starFillImage = UIImage(systemName: "star.fill")
+            
+            if currentImage == starImage {
+                button.setImage(starFillImage, for: .normal)
+            } else {
+                button.setImage(starImage, for: .normal)
+                button.tintColor = .systemGray2
+            }
+        }
+    }
 }
+

@@ -15,7 +15,7 @@
 		F404588F2B7A487400C36880 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F404588D2B7A487400C36880 /* LaunchScreen.storyboard */; };
 		F404589B2B7A4C8300C36880 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404589A2B7A4C8300C36880 /* TabBar.swift */; };
 		F404589D2B7A4D2500C36880 /* MainTabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404589C2B7A4D2500C36880 /* MainTabBarVC.swift */; };
-		F404589F2B7A4D5400C36880 /* ContactsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404589E2B7A4D5400C36880 /* ContactsVC.swift */; };
+		F404589F2B7A4D5400C36880 /* FavouritesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404589E2B7A4D5400C36880 /* FavouritesVC.swift */; };
 		F40458A12B7A4D8900C36880 /* CartVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458A02B7A4D8900C36880 /* CartVC.swift */; };
 		F40458A42B7A537600C36880 /* DeliveryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458A32B7A537600C36880 /* DeliveryCell.swift */; };
 		F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = F40458A62B7A643A00C36880 /* UIViewColors.swift */; };
@@ -62,6 +62,8 @@
 		F4C731A42BA484E000393E83 /* SpecialsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731A32BA484E000393E83 /* SpecialsNetworkService.swift */; };
 		F4C731A62BA4868D00393E83 /* StoriesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731A52BA4868D00393E83 /* StoriesNetworkService.swift */; };
 		F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731A72BA4878100393E83 /* CategoriesNetworkService.swift */; };
+		F4C731AC2BA8740800393E83 /* ProductModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F4C731AA2BA8740800393E83 /* ProductModel.xcdatamodeld */; };
+		F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731AD2BA8752700393E83 /* CoreDataService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,7 +77,7 @@
 		F40458902B7A487400C36880 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F404589A2B7A4C8300C36880 /* TabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBar.swift; sourceTree = "<group>"; };
 		F404589C2B7A4D2500C36880 /* MainTabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarVC.swift; sourceTree = "<group>"; };
-		F404589E2B7A4D5400C36880 /* ContactsVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsVC.swift; sourceTree = "<group>"; };
+		F404589E2B7A4D5400C36880 /* FavouritesVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVC.swift; sourceTree = "<group>"; };
 		F40458A02B7A4D8900C36880 /* CartVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVC.swift; sourceTree = "<group>"; };
 		F40458A32B7A537600C36880 /* DeliveryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryCell.swift; sourceTree = "<group>"; };
 		F40458A62B7A643A00C36880 /* UIViewColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewColors.swift; sourceTree = "<group>"; };
@@ -121,6 +123,8 @@
 		F4C731A32BA484E000393E83 /* SpecialsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpecialsNetworkService.swift; sourceTree = "<group>"; };
 		F4C731A52BA4868D00393E83 /* StoriesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoriesNetworkService.swift; sourceTree = "<group>"; };
 		F4C731A72BA4878100393E83 /* CategoriesNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesNetworkService.swift; sourceTree = "<group>"; };
+		F4C731AB2BA8740800393E83 /* ProductModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ProductModel.xcdatamodel; sourceTree = "<group>"; };
+		F4C731AD2BA8752700393E83 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,7 @@
 				F40458992B7A4C6400C36880 /* TabBar */,
 				F409E1432B8CBA6900A88D2C /* Modules */,
 				F40458AA2B7A6C9800C36880 /* Model */,
+				F4C731A92BA873E600393E83 /* CoreData */,
 				F409E15E2B90BE4800A88D2C /* Services */,
 				F40458A52B7A640A00C36880 /* Extensions */,
 				F44B4D372B7BDA9F00744632 /* Custom */,
@@ -226,7 +231,7 @@
 				F409E1462B8CBACC00A88D2C /* ProductDetail */,
 				F409E1542B8CBBB800A88D2C /* Account */,
 				F409E1532B8CBBAD00A88D2C /* Cart */,
-				F409E1522B8CBB9D00A88D2C /* Contacts */,
+				F409E1522B8CBB9D00A88D2C /* Favourites */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -276,12 +281,12 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		F409E1522B8CBB9D00A88D2C /* Contacts */ = {
+		F409E1522B8CBB9D00A88D2C /* Favourites */ = {
 			isa = PBXGroup;
 			children = (
-				F404589E2B7A4D5400C36880 /* ContactsVC.swift */,
+				F404589E2B7A4D5400C36880 /* FavouritesVC.swift */,
 			);
-			path = Contacts;
+			path = Favourites;
 			sourceTree = "<group>";
 		};
 		F409E1532B8CBBAD00A88D2C /* Cart */ = {
@@ -347,6 +352,15 @@
 				F44B4D382B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift */,
 			);
 			path = Custom;
+			sourceTree = "<group>";
+		};
+		F4C731A92BA873E600393E83 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				F4C731AA2BA8740800393E83 /* ProductModel.xcdatamodeld */,
+				F4C731AD2BA8752700393E83 /* CoreDataService.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,7 +463,7 @@
 				F409E14B2B8CBB3F00A88D2C /* DescriptionCell.swift in Sources */,
 				F40458832B7A487300C36880 /* AppDelegate.swift in Sources */,
 				F44B4D492B7D2C6F00744632 /* ProductCell.swift in Sources */,
-				F404589F2B7A4D5400C36880 /* ContactsVC.swift in Sources */,
+				F404589F2B7A4D5400C36880 /* FavouritesVC.swift in Sources */,
 				F40458A12B7A4D8900C36880 /* CartVC.swift in Sources */,
 				F409E2032B9B4E4900A88D2C /* ExtrasTVCell.swift in Sources */,
 				F409E1512B8CBB8000A88D2C /* IngredientsTVCell.swift in Sources */,
@@ -462,6 +476,7 @@
 				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
 				F409E1F72B96332800A88D2C /* CartProductCell.swift in Sources */,
+				F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */,
 				F409E2072B9F5C3F00A88D2C /* StoryDetailVC.swift in Sources */,
 				F409E1EE2B921D6B00A88D2C /* LogoutCell.swift in Sources */,
 				F409E1EC2B921D5500A88D2C /* NotificationsCell.swift in Sources */,
@@ -471,6 +486,7 @@
 				F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */,
 				F409E1E72B921D1700A88D2C /* VerificationVC.swift in Sources */,
 				F43D65732B836F73008C9811 /* AccountVC.swift in Sources */,
+				F4C731AC2BA8740800393E83 /* ProductModel.xcdatamodeld in Sources */,
 				F404589B2B7A4C8300C36880 /* TabBar.swift in Sources */,
 				F409E1FF2B96354800A88D2C /* Extras.swift in Sources */,
 				F40458AC2B7A6CB500C36880 /* Story.swift in Sources */,
@@ -730,6 +746,20 @@
 			productName = FirebaseAuth;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		F4C731AA2BA8740800393E83 /* ProductModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F4C731AB2BA8740800393E83 /* ProductModel.xcdatamodel */,
+			);
+			currentVersion = F4C731AB2BA8740800393E83 /* ProductModel.xcdatamodel */;
+			name = ProductModel.xcdatamodeld;
+			path = "/Users/malina/Desktop/Pizza-Delivery-App/Local-Pizza/CoreData/ProductModel.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F40458772B7A487300C36880 /* Project object */;
 }
