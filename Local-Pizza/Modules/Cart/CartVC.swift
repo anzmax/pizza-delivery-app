@@ -23,11 +23,16 @@ class CartVC: UIViewController {
         }
     }
     
-    var dessertsAndDrinks = [Product]()
+    var dessertsAndDrinks: [Product] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     //MARK: - Services
     let archiver = ProductsArchiver()
-    let productService = ProductService()
+    //let productService = ProductService()
+    let extrasService = ExtrasNetworkService()
     
     //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
@@ -125,7 +130,15 @@ class CartVC: UIViewController {
     }
     
     func fetchDessertsAndDrinks() {
-        self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
+        //self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
+        extrasService.fetchProducts { result in
+            switch result {
+            case .success(let products):
+                self.dessertsAndDrinks = products
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
