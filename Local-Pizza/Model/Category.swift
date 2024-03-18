@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Category {
+struct Category: Codable {
     var title: String
 }
 
