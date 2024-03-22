@@ -12,7 +12,7 @@ class OffersTVCell: UITableViewCell {
     static let id = "OffersTVCell"
     
     var offers: [Offer] = [
-        Offer(title: "Скидка 25% при заказе в пиццерии от 799 р",
+        Offer(title: "Скидка 25% в пиццерии от 799 р",
               subtitle: "до 16 июня"),
         Offer(title: "Скидка 20% при заказе от 1049 р", 
               subtitle: "до 18 августа"),
@@ -20,15 +20,15 @@ class OffersTVCell: UITableViewCell {
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 22, height: 120)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width - 30, height: 120)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
-        collection.isPagingEnabled = true
+        collection.isPagingEnabled = false
         collection.layer.cornerRadius = 12
-        collection.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        collection.contentInset = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         collection.delegate = self
         collection.dataSource = self
         collection.register(OffersCVCell.self, forCellWithReuseIdentifier: OffersCVCell.id)
@@ -58,7 +58,7 @@ class OffersTVCell: UITableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 140)
+            collectionView.heightAnchor.constraint(equalToConstant: 130)
             
         ])
     }
@@ -140,10 +140,11 @@ class OffersCVCell: UICollectionViewCell {
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
 
         contentView.layer.insertSublayer(gradientLayer, at: 0)
-        contentView.layer.shadowColor = UIColor.black.cgColor
-        contentView.layer.shadowOpacity = 0.2
-        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-        contentView.layer.shadowRadius = 4
+        contentView.applyShadow(color: .darkGray)
+//        contentView.layer.shadowColor = UIColor.black.cgColor
+//        contentView.layer.shadowOpacity = 0.2
+//        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
+//        contentView.layer.shadowRadius = 4
     }
     
     func setupConstraints() {

@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 extension UIView {
     func applyGradient(colors: [CGColor], locations: [NSNumber]? = nil) {
         let gradientLayer = CAGradientLayer()
@@ -22,6 +20,14 @@ extension UIView {
         self.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
 
         self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func applyShadow(color: UIColor, opacity: Float = 0.5, offset: CGSize = CGSize(width: 0, height: 2), radius: CGFloat = 4) {
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = offset
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.masksToBounds = false
     }
 }
 

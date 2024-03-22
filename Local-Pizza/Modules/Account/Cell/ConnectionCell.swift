@@ -26,8 +26,9 @@ class ConnectionCell: UITableViewCell {
     
     lazy var customView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white.withAlphaComponent(0.8)
+        view.backgroundColor = .clear
         view.layer.cornerRadius = 12
+        view.applyShadow(color: .lightGray)
         view.layer.masksToBounds = true
         return view
     }()
@@ -42,6 +43,16 @@ class ConnectionCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Update
+    func update(with connection: Connection) {
+        connectionLabel.text = connection.title
+        customImageView.image = connection.image
+    }
+    
+}
+
+//MARK: - Layout
+extension ConnectionCell {
     func setupViews() {
         self.backgroundColor = .clear
         contentView.addSubview(customView)
@@ -54,26 +65,20 @@ class ConnectionCell: UITableViewCell {
     func setupConstraints() {
         customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            
             customView.topAnchor.constraint(equalTo: contentView.topAnchor),
             customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
+            customImageView.topAnchor.constraint(equalTo: customView.topAnchor, constant: 10),
+            customImageView.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 10),
+            customImageView.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -10),
             customImageView.widthAnchor.constraint(equalToConstant: 20),
             customImageView.heightAnchor.constraint(equalToConstant: 20),
 
-            connectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
+            connectionLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 10),
             connectionLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 10),
-            connectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
+            connectionLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -10)
         ])
     }
-    
-    func update(with connection: Connection) {
-        connectionLabel.text = connection.title
-        customImageView.image = connection.image
-    }
-    
 }

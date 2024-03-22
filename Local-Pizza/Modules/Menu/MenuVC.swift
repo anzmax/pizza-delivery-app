@@ -94,8 +94,9 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
     
     //MARK: - Action
     @objc func accountButtonTapped() {
-    //let vc = AuthorizationVC()
+        //let vc = AuthorizationVC()
         let vc = AccountDetailVC()
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     

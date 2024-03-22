@@ -39,6 +39,7 @@ class DeleteCell: UITableViewCell {
     
     func setupViews() {
         self.backgroundColor = .clear
+        contentView.applyShadow(color: .systemGray2)
         contentView.addSubview(customView)
         customView.addSubview(titleLabel)
     }
@@ -49,8 +50,8 @@ class DeleteCell: UITableViewCell {
         NSLayoutConstraint.activate([
             customView.topAnchor.constraint(equalTo: contentView.topAnchor),
             customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
             
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             titleLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),

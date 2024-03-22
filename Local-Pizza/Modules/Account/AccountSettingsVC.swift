@@ -18,6 +18,7 @@ class AccountSettingsVC: UIViewController {
         PersonalInfo(title: "Дата рождения"),
     ]
     
+    //MARK: - UI Elements
     lazy var settingsLabel: UILabel = {
         let label = UILabel()
         label.text = "Настройки"
@@ -55,31 +56,7 @@ class AccountSettingsVC: UIViewController {
         setupConstraints()
     }
     
-    func setupViews() {
-        view.applyGradient(colors: [UIColor.systemGray5.cgColor, UIColor.white.cgColor])
-        view.addSubview(settingsLabel)
-        view.addSubview(doneButton)
-        view.addSubview(tableView)
-    }
-    
-    func setupConstraints() {
-        settingsLabel.translatesAutoresizingMaskIntoConstraints = false
-        doneButton.translatesAutoresizingMaskIntoConstraints = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            settingsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            settingsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            
-            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            
-            tableView.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant: 24),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
-    }
-    
+    //MARK: - Action
     @objc func doneButtonTapped() {
         
         for rowIndex in 0...3 {
@@ -98,6 +75,7 @@ class AccountSettingsVC: UIViewController {
     }
 }
 
+//MARK: - Delegate
 extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -174,6 +152,30 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
             tableView.reloadData()
         }
     }
-    
 }
 
+//MARK: - Layout
+extension AccountSettingsVC {
+    func setupViews() {
+        view.applyGradient(colors: [UIColor.white.cgColor, UIColor.systemGray3.cgColor])
+        [settingsLabel, doneButton, tableView].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            settingsLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            settingsLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            doneButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            doneButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            
+            tableView.topAnchor.constraint(equalTo: settingsLabel.bottomAnchor, constant: 24),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
+}

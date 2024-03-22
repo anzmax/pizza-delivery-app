@@ -75,6 +75,7 @@
 		F4C731C12BA9C3D500393E83 /* AccountDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731C02BA9C3D500393E83 /* AccountDetails.swift */; };
 		F4C731C32BA9F0E700393E83 /* Entertainment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C731C22BA9F0E700393E83 /* Entertainment.swift */; };
 		F4C93E792BACB867005B9C37 /* EntertainmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C93E782BACB867005B9C37 /* EntertainmentVC.swift */; };
+		F4C93E7B2BADF2EB005B9C37 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -146,6 +147,7 @@
 		F4C731C02BA9C3D500393E83 /* AccountDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetails.swift; sourceTree = "<group>"; };
 		F4C731C22BA9F0E700393E83 /* Entertainment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Entertainment.swift; sourceTree = "<group>"; };
 		F4C93E782BACB867005B9C37 /* EntertainmentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntertainmentVC.swift; sourceTree = "<group>"; };
+		F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +350,7 @@
 				F4C7319D2BA47C1200393E83 /* ProductNetworkService.swift */,
 				F4C7319F2BA481B700393E83 /* ExtrasNetworkService.swift */,
 				F4C731BE2BA9BFD400393E83 /* AccountStorageService.swift */,
+				F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				F4C731BF2BA9BFD400393E83 /* AccountStorageService.swift in Sources */,
 				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
+				F4C93E7B2BADF2EB005B9C37 /* NotificationService.swift in Sources */,
 				F409E1F72B96332800A88D2C /* CartProductCell.swift in Sources */,
 				F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */,
 				F409E2072B9F5C3F00A88D2C /* StoryDetailVC.swift in Sources */,

@@ -16,7 +16,7 @@ enum AccountSectionType: Int, CaseIterable {
 class AccountDetailVC: UIViewController {
     
     var isExpanded = false
-    let maxTableHeight: CGFloat = 175
+    let maxTableHeight: CGFloat = 140
     var tableViewHeightConstraint: NSLayoutConstraint!
     
     var connections: [Connection] = [
@@ -26,7 +26,7 @@ class AccountDetailVC: UIViewController {
     ]
     
     var offers: [Offer] = [
-        Offer(title: "Скидка 25% при заказе в пиццерии от 799 р", subtitle: "до 16 июня"),
+        Offer(title: "Скидка 25% в пиццерии от 799 р", subtitle: "до 16 июня"),
         Offer(title: "Скидка 20% при заказе от 1049 р", subtitle: "до 16 августа"),
     ]
     
@@ -36,12 +36,22 @@ class AccountDetailVC: UIViewController {
         Entertainment(image: UIImage(named: "pizzarecipe"))
     ]
     
+    //MARK: - UI Elements
     lazy var settingsButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
-        button.tintColor = .black
-        button.contentMode = .scaleToFill
+        button.tintColor = .black.withAlphaComponent(0.7)
+        button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(settingsButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var closeButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "xmark.seal"), for: .normal)
+        button.tintColor = .black.withAlphaComponent(0.7)
+        button.contentMode = .scaleAspectFit
+        button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -54,7 +64,8 @@ class AccountDetailVC: UIViewController {
     
     lazy var connectionTableView: UITableView = {
         let tableView = UITableView()
-        tableView.backgroundColor = .clear
+        tableView.backgroundColor = .white.withAlphaComponent(0.8)
+        tableView.contentInset = .zero
         tableView.showsVerticalScrollIndicator = false
         tableView.layer.cornerRadius = 12
         tableView.separatorStyle = .singleLine
@@ -80,7 +91,8 @@ class AccountDetailVC: UIViewController {
     
     lazy var headerView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white.withAlphaComponent(0.8)
+        view.backgroundColor = .white.withAlphaComponent(0.7)
+        view.applyShadow(color: .systemGray2)
         view.layer.cornerRadius = 12
         return view
     }()
@@ -106,59 +118,17 @@ class AccountDetailVC: UIViewController {
         setupConstraints()
     }
 
-    func setupViews() {
-        view.applyGradient(colors: [UIColor.systemGray4.cgColor, UIColor.white.cgColor])
-        
-        [accountLabel, settingsButton, connectionTableView, headerView, accountTableView].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-        
-        [connectionLabel, chevronButton].forEach {
-            headerView.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-
-    func setupConstraints() {
-        tableViewHeightConstraint = connectionTableView.heightAnchor.constraint(equalToConstant: 0)
-        
-        NSLayoutConstraint.activate([
-        
-            settingsButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20),
-            settingsButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
-            settingsButton.heightAnchor.constraint(equalToConstant: 50),
-            settingsButton.widthAnchor.constraint(equalToConstant: 50),
-            
-            accountLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
-            accountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            
-            accountTableView.topAnchor.constraint(equalTo: accountLabel.bottomAnchor, constant: 10),
-            accountTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            accountTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            accountTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -250),
-            
-            
-            headerView.topAnchor.constraint(equalTo: accountTableView.bottomAnchor, constant: 10),
-            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            headerView.heightAnchor.constraint(equalToConstant: 55),
-            
-            connectionTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor),
-            connectionTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
-            connectionTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            tableViewHeightConstraint,
-            
-            connectionLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10),
-            connectionLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            
-            chevronButton.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
-            chevronButton.topAnchor.constraint(equalTo: connectionLabel.bottomAnchor, constant: 2)
-        ])
-    }
     
+    //MARK: - Action
     @objc func settingsButtonTapped() {
         let vc = AccountSettingsVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    @objc func closeButtonTapped() {
+        let vc = MenuVC()
+        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     
@@ -171,6 +141,7 @@ class AccountDetailVC: UIViewController {
      }
 }
 
+//MARK: - Delegate
 extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -206,6 +177,7 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
                     return cell
                 case .history:
                     let cell = tableView.dequeueReusableCell(withIdentifier: HistoryCell.id, for: indexPath) as! HistoryCell
+                    cell.selectionStyle = .none
                     return cell
                 case .entertainment:
                     let cell = tableView.dequeueReusableCell(withIdentifier: EntertainmentTVCell.id, for: indexPath) as! EntertainmentTVCell
@@ -288,10 +260,66 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == self.accountTableView {
-            return 30
+            return 32
         } else if tableView == self.connectionTableView {
             return 0
         }
         return 0
     }
+}
+
+//MARK: - Layout
+extension AccountDetailVC {
+    
+    func setupViews() {
+        
+        view.applyGradient(colors: [UIColor.white.cgColor, UIColor.systemGray3.cgColor])
+        
+        [accountLabel, settingsButton, connectionTableView, headerView, accountTableView, closeButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+        
+        [connectionLabel, chevronButton].forEach {
+            headerView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+
+    func setupConstraints() {
+        tableViewHeightConstraint = connectionTableView.heightAnchor.constraint(equalToConstant: 0)
+        
+        NSLayoutConstraint.activate([
+            settingsButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            settingsButton.trailingAnchor.constraint(equalTo: closeButton.leadingAnchor, constant: -16),
+            
+            closeButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            closeButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -16),
+            
+            accountLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 50),
+            accountLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            
+            accountTableView.topAnchor.constraint(equalTo: accountLabel.bottomAnchor, constant: 10),
+            accountTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            accountTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            accountTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -250),
+            
+            headerView.topAnchor.constraint(equalTo: accountTableView.bottomAnchor, constant: 10),
+            headerView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            headerView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            headerView.heightAnchor.constraint(equalToConstant: 55),
+            
+            connectionTableView.topAnchor.constraint(equalTo: headerView.bottomAnchor, constant: 10),
+            connectionTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            connectionTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            tableViewHeightConstraint,
+            
+            connectionLabel.topAnchor.constraint(equalTo: headerView.topAnchor, constant: 10),
+            connectionLabel.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            
+            chevronButton.centerXAnchor.constraint(equalTo: headerView.centerXAnchor),
+            chevronButton.topAnchor.constraint(equalTo: connectionLabel.bottomAnchor, constant: 2)
+        ])
+    }
+    
 }

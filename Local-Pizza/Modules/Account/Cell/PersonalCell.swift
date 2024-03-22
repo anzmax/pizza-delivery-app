@@ -47,9 +47,17 @@ class PersonalCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Update
+    func update(_ field: AccountField, _ value: String) {
+        titleLabel.text = field.getPlaceholder()
+        infoTextField.text = value
+    }
+}
+
+//MARK: - Layout
+extension PersonalCell {
     func setupViews() {
         self.backgroundColor = .clear
-        //contentView.addSubview(customView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(infoTextField)
     }
@@ -57,13 +65,7 @@ class PersonalCell: UITableViewCell {
     func setupConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         infoTextField.translatesAutoresizingMaskIntoConstraints = false
-        //customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-//            customView.topAnchor.constraint(equalTo: contentView.topAnchor),
-//            customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-//            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-//            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
@@ -73,14 +75,4 @@ class PersonalCell: UITableViewCell {
             infoTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
-    
-    func update(_ field: AccountField, _ value: String) {
-        titleLabel.text = field.getPlaceholder()
-        infoTextField.text = value
-    }
-    
-    @objc func infoTextFieldValueChanged() {
-        
-    }
 }
-

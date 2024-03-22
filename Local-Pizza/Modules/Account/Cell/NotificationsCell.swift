@@ -29,7 +29,8 @@ class NotificationsCell: UITableViewCell {
     
     lazy var switchControl: UISwitch = {
         let switchControl = UISwitch()
-        switchControl.onTintColor = .darkGray
+        switchControl.onTintColor = .gray
+        switchControl.addTarget(self, action: #selector(switchControllTapped), for: .valueChanged)
         return switchControl
     }()
     
@@ -51,13 +52,34 @@ class NotificationsCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
+    //MARK: - Action
+    @objc func switchControllTapped(_ switchControl: UISwitch) {
+        
+        UserDefaults.standard.set(switchControl.isOn, forKey: "notificationsSwitchIsOn")
+        
+        if switchControl.isOn {
+            NotificationService.shared.requestAuthorization()
+            NotificationService.shared.scheduleDailyNotification(at: 21, minute: 18)
+        } else {
+            NotificationService.shared.cancelDailyNotifications()
+        }
+    }
+}
+
+//MARK: - Layout
+extension NotificationsCell {
     func setupViews() {
         self.backgroundColor = .clear
         contentView.addSubview(customView)
+        contentView.applyShadow(color: .systemGray2)
         [titleLabel, subtitleLabel, switchControl].forEach {
             customView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
+        
+        let switchIsOn = UserDefaults.standard.bool(forKey: "notificationsSwitchIsOn")
+        switchControl.isOn = switchIsOn
     }
     
     func setupConstraints() {
@@ -65,8 +87,8 @@ class NotificationsCell: UITableViewCell {
         NSLayoutConstraint.activate([
             customView.topAnchor.constraint(equalTo: contentView.topAnchor),
             customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 1),
+            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -1),
             
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
@@ -81,4 +103,3 @@ class NotificationsCell: UITableViewCell {
         ])
     }
 }
-

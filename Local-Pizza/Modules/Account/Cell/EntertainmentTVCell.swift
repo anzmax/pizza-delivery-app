@@ -21,12 +21,11 @@ class EntertainmentTVCell: UITableViewCell {
 
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 190, height: 120)
+        layout.itemSize = CGSize(width: 190, height: 110)
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 10
-        layout.minimumInteritemSpacing = 10
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collection.backgroundColor = .white.withAlphaComponent(0.5)
+        collection.backgroundColor = .clear
         collection.showsHorizontalScrollIndicator = false
         collection.layer.cornerRadius = 12
         collection.delegate = self
@@ -47,6 +46,7 @@ class EntertainmentTVCell: UITableViewCell {
     
     func setupViews() {
         self.backgroundColor = .clear
+        contentView.backgroundColor = .clear
         contentView.layer.cornerRadius = 12
         contentView.clipsToBounds = true
         contentView.layer.masksToBounds = true
@@ -60,7 +60,7 @@ class EntertainmentTVCell: UITableViewCell {
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             collectionView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            collectionView.heightAnchor.constraint(equalToConstant: 100)
+            collectionView.heightAnchor.constraint(equalToConstant: 120)
             
         ])
     }
@@ -112,6 +112,7 @@ class EntertainmentCVCell: UICollectionViewCell {
     
     func setupViews() {
         self.backgroundColor = .clear
+        contentView.applyShadow(color: .gray)
         contentView.addSubview(imageView)
     }
     
@@ -121,9 +122,7 @@ class EntertainmentCVCell: UICollectionViewCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
-            imageView.widthAnchor.constraint(equalToConstant: 190),
-            imageView.heightAnchor.constraint(equalToConstant: 120)
+            imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
     
