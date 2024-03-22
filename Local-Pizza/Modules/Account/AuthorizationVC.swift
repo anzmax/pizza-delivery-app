@@ -8,7 +8,7 @@
 import UIKit
 import FirebaseAuth
 
-class AccountVC: UIViewController {
+class AuthorizationVC: UIViewController {
     
     lazy var backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -122,7 +122,7 @@ class AccountVC: UIViewController {
      }
 }
 
-extension AccountVC: UITextFieldDelegate {
+extension AuthorizationVC: UITextFieldDelegate {
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let allowedCharacters = CharacterSet.decimalDigits

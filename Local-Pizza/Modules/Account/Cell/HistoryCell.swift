@@ -1,30 +1,38 @@
 //
-//  LogoutCell.swift
+//  HistoryTVCell.swift
 //  Local-Pizza
 //
-//  Created by Lika Maksimovic on 01.03.2024.
+//  Created by Lika Maksimovic on 18.03.2024.
 //
 
 import UIKit
 
-class LogoutCell: UITableViewCell {
+class HistoryCell: UITableViewCell {
     
-    static let id = "LogoutCell"
+    static let id = "HistoryCell"
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Выйти из профиля"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        label.textColor = .black
+        label.text = "23.12.2024"
         return label
     }()
     
     lazy var customView: UIView = {
         let view = UIView()
-        view.backgroundColor = .white.withAlphaComponent(0.8)
+        view.backgroundColor = .white.withAlphaComponent(0.4)
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
         return view
+    }()
+    
+    lazy var orderButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Повторить", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+        button.backgroundColor = .systemGray5
+        button.layer.cornerRadius = 5
+        return button
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -40,23 +48,26 @@ class LogoutCell: UITableViewCell {
     func setupViews() {
         self.backgroundColor = .clear
         contentView.addSubview(customView)
-        customView.addSubview(titleLabel)
+        [orderButton, titleLabel].forEach {
+            customView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
         customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            
             customView.topAnchor.constraint(equalTo: contentView.topAnchor),
             customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
             customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
             
-            titleLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 16),
-            titleLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -16),
-            titleLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 16)
+            orderButton.trailingAnchor.constraint(equalTo: customView.trailingAnchor, constant: -10),
+            orderButton.centerYAnchor.constraint(equalTo: customView.centerYAnchor),
+            orderButton.widthAnchor.constraint(equalToConstant: 100),
+            
+            titleLabel.leadingAnchor.constraint(equalTo: customView.leadingAnchor, constant: 10),
+            titleLabel.centerYAnchor.constraint(equalTo: customView.centerYAnchor)
         ])
     }
 }
-

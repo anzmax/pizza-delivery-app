@@ -9,6 +9,8 @@ import UIKit
 
 class AccountSettingsVC: UIViewController {
     
+    private var accountStorageservice = AccountStorageService()
+    
     var personalInfo: [PersonalInfo] = [
         PersonalInfo(title: "Имя"),
         PersonalInfo(title: "Телефон"),
@@ -35,6 +37,7 @@ class AccountSettingsVC: UIViewController {
         let tableView = UITableView()
         tableView.backgroundColor = .clear
         tableView.layer.cornerRadius = 16
+        tableView.layer.masksToBounds = true
         
         tableView.separatorStyle = .singleLine
         tableView.delegate = self
@@ -53,7 +56,7 @@ class AccountSettingsVC: UIViewController {
     }
     
     func setupViews() {
-        view.applyGradient(colors: [UIColor.systemGray4.cgColor, UIColor.white.cgColor])
+        view.applyGradient(colors: [UIColor.systemGray5.cgColor, UIColor.white.cgColor])
         view.addSubview(settingsLabel)
         view.addSubview(doneButton)
         view.addSubview(tableView)
@@ -78,6 +81,19 @@ class AccountSettingsVC: UIViewController {
     }
     
     @objc func doneButtonTapped() {
+        
+        for rowIndex in 0...3 {
+            guard let cell = tableView.cellForRow(at: IndexPath(row: rowIndex, section: 0)) as? PersonalCell else { return }
+            
+            guard let field = AccountField(rawValue: rowIndex) else { return }
+            
+            guard let value = cell.infoTextField.text else { return }
+            
+            accountStorageservice.save(field: field, value: value)
+            
+        }
+        accountStorageservice.print()
+        
         self.dismiss(animated: true)
     }
 }
@@ -107,8 +123,13 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: PersonalCell.id, for: indexPath) as! PersonalCell
-            let info = personalInfo[indexPath.row]
-            cell.update(with: info)
+            
+            if let field = AccountField(rawValue: indexPath.row) {
+                let value = accountStorageservice.fetch(field: field)
+                
+                cell.update(field, value)
+            }
+
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -138,6 +159,21 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
          return footerView
      }
      
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        if indexPath.section == 2 {
+            print(indexPath.section)
+            accountStorageservice.deleteAll()
+            accountStorageservice.print()
+            self.dismiss(animated: true)
+            tableView.reloadData()
+        } else if indexPath.section == 3 {
+            accountStorageservice.deleteAll()
+            let vc = AuthorizationVC()
+            self.present(vc, animated: true)
+            tableView.reloadData()
+        }
+    }
     
 }
 

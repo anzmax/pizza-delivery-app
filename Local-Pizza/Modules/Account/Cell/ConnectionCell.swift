@@ -24,6 +24,14 @@ class ConnectionCell: UITableViewCell {
         return label
     }()
     
+    lazy var customView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.8)
+        view.layer.cornerRadius = 12
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -35,22 +43,31 @@ class ConnectionCell: UITableViewCell {
     }
     
     func setupViews() {
+        self.backgroundColor = .clear
+        contentView.addSubview(customView)
         [connectionLabel, customImageView].forEach {
-            contentView.addSubview($0)
+            customView.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
     
     func setupConstraints() {
+        customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            
+            customView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
+            customImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             customImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
             customImageView.widthAnchor.constraint(equalToConstant: 20),
             customImageView.heightAnchor.constraint(equalToConstant: 20),
 
-            connectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
+            connectionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             connectionLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 10),
-            connectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16)
+            connectionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
     

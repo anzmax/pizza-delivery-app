@@ -20,7 +20,7 @@ class ProductCell: UITableViewCell {
     
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFill
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         return imageView
     }()
@@ -95,7 +95,7 @@ extension ProductCell {
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             productImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 10),
-            productImageView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
+            productImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             productImageView.widthAnchor.constraint(equalToConstant: 110),
             productImageView.heightAnchor.constraint(equalToConstant: 110),
             

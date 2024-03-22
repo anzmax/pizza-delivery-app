@@ -16,11 +16,9 @@ extension UIView {
         gradientLayer.locations = locations
         gradientLayer.frame = self.bounds
 
-        // Настройка направления градиента
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0) // Верхний левый угол
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0) // Нижний правый угол
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
 
-        // Удаление предыдущих градиентных слоев, если они есть
         self.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
 
         self.layer.insertSublayer(gradientLayer, at: 0)

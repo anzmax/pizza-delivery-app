@@ -11,11 +11,19 @@ class PersonalCell: UITableViewCell {
 
     static let id = "PersonalCell"
     
+    lazy var customView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 12
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = .gray
+        label.textColor = .darkGray
         return label
     }()
     
@@ -40,6 +48,8 @@ class PersonalCell: UITableViewCell {
     }
     
     func setupViews() {
+        self.backgroundColor = .clear
+        //contentView.addSubview(customView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(infoTextField)
     }
@@ -47,7 +57,13 @@ class PersonalCell: UITableViewCell {
     func setupConstraints() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         infoTextField.translatesAutoresizingMaskIntoConstraints = false
+        //customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+//            customView.topAnchor.constraint(equalTo: contentView.topAnchor),
+//            customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+//            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+//            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             
@@ -58,8 +74,13 @@ class PersonalCell: UITableViewCell {
         ])
     }
     
-    func update(with info: PersonalInfo) {
-        titleLabel.text = info.title
+    func update(_ field: AccountField, _ value: String) {
+        titleLabel.text = field.getPlaceholder()
+        infoTextField.text = value
+    }
+    
+    @objc func infoTextFieldValueChanged() {
+        
     }
 }
 

@@ -33,6 +33,14 @@ class NotificationsCell: UITableViewCell {
         return switchControl
     }()
     
+    lazy var customView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white.withAlphaComponent(0.8)
+        view.layer.cornerRadius = 12
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -44,17 +52,22 @@ class NotificationsCell: UITableViewCell {
     }
     
     func setupViews() {
-        contentView.layer.cornerRadius = 16
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(subtitleLabel)
-        contentView.addSubview(switchControl)
+        self.backgroundColor = .clear
+        contentView.addSubview(customView)
+        [titleLabel, subtitleLabel, switchControl].forEach {
+            customView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
-        switchControl.translatesAutoresizingMaskIntoConstraints = false
+        customView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            customView.topAnchor.constraint(equalTo: contentView.topAnchor),
+            customView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor),
+            customView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            customView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
             

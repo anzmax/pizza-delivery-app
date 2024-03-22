@@ -94,7 +94,7 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
     
     //MARK: - Action
     @objc func accountButtonTapped() {
-        //let vc = AccountVC()
+    //let vc = AuthorizationVC()
         let vc = AccountDetailVC()
         present(vc, animated: true)
     }
@@ -293,7 +293,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
 //MARK: - Layout
 extension MenuVC {
     func setupViews() {
-        view.applyGradient(colors: [UIColor.lightGray.cgColor, UIColor.white.cgColor])
+        view.applyGradient(colors: [UIColor.systemGray3.cgColor, UIColor.white.cgColor])
         view.addSubview(tableView)
         view.addSubview(accountButton)
     }
