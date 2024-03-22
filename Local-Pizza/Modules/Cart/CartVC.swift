@@ -23,11 +23,16 @@ class CartVC: UIViewController {
         }
     }
     
-    var dessertsAndDrinks = [Product]()
+    var dessertsAndDrinks: [Product] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     //MARK: - Services
     let archiver = ProductsArchiver()
-    let productService = ProductService()
+    //let productService = ProductService()
+    let extrasService = ExtrasNetworkService()
     
     //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
@@ -125,7 +130,15 @@ class CartVC: UIViewController {
     }
     
     func fetchDessertsAndDrinks() {
-        self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
+        //self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
+        extrasService.fetchProducts { result in
+            switch result {
+            case .success(let products):
+                self.dessertsAndDrinks = products
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -291,20 +304,28 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         return indexPath.section == 0
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete && indexPath.section == 0 {
-            
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] action, view, completionHandler in
+            guard let self = self else { return }
+
             tableView.beginUpdates()
-            
+        
             let productToRemove = itemsInCart[indexPath.row]
             itemsInCart.remove(at: indexPath.row)
-            archiver.remove(productToRemove)
+            self.archiver.remove(productToRemove)
+
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             tableView.endUpdates()
             updateCartUI()
+            completionHandler(true)
         }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
     }
+
 }
 
 //MARK: Layout
