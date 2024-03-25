@@ -10,12 +10,14 @@ import FirebaseAuth
 
 class VerificationVC: UIViewController {
     
+    //MARK: - UI Elements
     lazy var sendButton: UIButton = {
         let button = UIButton()
         button.setTitle("Отправить", for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.backgroundColor = .gray
-        button.layer.cornerRadius = 12
+        button.backgroundColor = .systemGray3
+        button.layer.cornerRadius = 5
+        button.applyShadow(color: .darkGray)
         button.addTarget(self, action: #selector(sendButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -24,6 +26,7 @@ class VerificationVC: UIViewController {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
         textField.placeholder = "Введите код"
+        textField.applyShadow(color: .lightGray)
         textField.textAlignment = .center
         textField.keyboardType = .phonePad
         return textField
@@ -35,29 +38,7 @@ class VerificationVC: UIViewController {
         setupConstraints()
     }
     
-    func setupViews() {
-        view.applyGradient(colors: [UIColor.systemGray4.cgColor, UIColor.white.cgColor])
-        view.addSubview(verificationTextField)
-        view.addSubview(sendButton)
-    }
-    
-    func setupConstraints() {
-        verificationTextField.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
- 
-            verificationTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            verificationTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            verificationTextField.widthAnchor.constraint(equalToConstant: 280),
-            verificationTextField.heightAnchor.constraint(equalToConstant: 40),
-            
-            sendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            sendButton.topAnchor.constraint(equalTo: verificationTextField.bottomAnchor, constant: 16),
-            sendButton.widthAnchor.constraint(equalToConstant: 280),
-            sendButton.heightAnchor.constraint(equalToConstant: 40),
-        ])
-    }
-    
+    //MARK: - Action
     @objc func sendButtonTapped() {
         guard let verificationCode = verificationTextField.text, !verificationCode.isEmpty else {
             showAlert(withTitle: "Ошибка", message: "Введите код подтверждения")
@@ -79,6 +60,7 @@ class VerificationVC: UIViewController {
 
             DispatchQueue.main.async {
                 let vc = AccountDetailVC()
+                vc.modalPresentationStyle = .fullScreen
                 self.present(vc, animated: true)
             }
         }
@@ -92,3 +74,28 @@ class VerificationVC: UIViewController {
     }
 }
 
+//MARK: - Layout
+extension VerificationVC {
+    func setupViews() {
+        view.applyGradient(colors: [UIColor.white.cgColor, UIColor.systemGray3.cgColor])
+        view.addSubview(verificationTextField)
+        view.addSubview(sendButton)
+    }
+    
+    func setupConstraints() {
+        verificationTextField.translatesAutoresizingMaskIntoConstraints = false
+        sendButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+ 
+            verificationTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            verificationTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            verificationTextField.widthAnchor.constraint(equalToConstant: 280),
+            verificationTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            sendButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sendButton.topAnchor.constraint(equalTo: verificationTextField.bottomAnchor, constant: 16),
+            sendButton.widthAnchor.constraint(equalToConstant: 280),
+            sendButton.heightAnchor.constraint(equalToConstant: 40),
+        ])
+    }
+}

@@ -9,7 +9,7 @@ import UIKit
     
     enum TabBarPage {
         case menu
-        case contacts
+        case favourites
         case cart
 
         init?(index: Int) {
@@ -17,7 +17,7 @@ import UIKit
             case 0:
                 self = .menu
             case 1:
-                self = .contacts
+                self = .favourites
             case 2:
                 self = .cart
             default:
@@ -29,8 +29,8 @@ import UIKit
             switch self {
             case .menu:
                 return "Меню"
-            case .contacts:
-                return "Контакты"
+            case .favourites:
+                return "Избранное"
             case .cart:
                 return "Корзина"
             }
@@ -40,7 +40,7 @@ import UIKit
             switch self {
             case .menu:
                 return 0
-            case .contacts:
+            case .favourites:
                 return 1
             case .cart:
                 return 2
@@ -51,8 +51,8 @@ import UIKit
             switch self {
             case .menu:
                 return UIImage(systemName:  "list.bullet.circle")
-            case .contacts:
-                return UIImage(systemName: "map.circle")
+            case .favourites:
+                return UIImage(systemName: "star.circle")
             case .cart:
                 return UIImage(systemName: "cart.circle")
             }
@@ -62,8 +62,8 @@ import UIKit
             switch self {
             case .menu:
                 return  UIImage(systemName:  "list.bullet.circle.fill")
-            case .contacts:
-                return  UIImage(systemName: "map.circle.fill")
+            case .favourites:
+                return  UIImage(systemName: "star.circle.fill")
             case .cart:
                 return  UIImage(systemName: "cart.circle.fill")
             }
