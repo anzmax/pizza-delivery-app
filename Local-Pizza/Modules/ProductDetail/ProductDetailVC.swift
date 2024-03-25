@@ -23,11 +23,20 @@ class ProductDetailVC: UIViewController {
         }
     }
     
+    var ingredients: [Ingredient] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Services
     var archiver = ProductsArchiver()
+    var ingredientsService = IngredientsNetworkService()
     
     private var basePrice: Int?
     private var isPizza: Bool = false
     
+    //MARK: - UI Elements
     private lazy var cartButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray5
@@ -59,17 +68,18 @@ class ProductDetailVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        fetchIngredients()
     }
     
     func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(tableView)
-        view.addSubview(cartButton)
+        [tableView, cartButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        cartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -92,7 +102,19 @@ class ProductDetailVC: UIViewController {
         isPizza = product.image.lowercased().contains("pizza")
     }
     
-    //MARK: - ACtion
+    //MARK: - Fetch
+    func fetchIngredients() {
+        ingredientsService.fetchIngredients { result in
+            switch result {
+            case .success(let ingredients):
+                self.ingredients = ingredients
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    //MARK: - Action
     @objc func cartButtonTapped(_ button: UIButton) {
         let originalColor = button.backgroundColor
         button.backgroundColor = .systemGray3
@@ -113,6 +135,7 @@ class ProductDetailVC: UIViewController {
     }
 }
 
+//MARK: - Delegate
 extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -171,11 +194,12 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 
                 return cell
             case .dough:
-                let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath) as! DoughCell
                 return cell
             case .ingredients:
-                let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath) as! IngredientsTVCell
                 cell.selectionStyle = .none
+                cell.update(with: ingredients)
                 return cell
             }
         }

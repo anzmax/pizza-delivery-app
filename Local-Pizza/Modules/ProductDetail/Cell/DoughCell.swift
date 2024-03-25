@@ -41,7 +41,7 @@ class DoughCell: UITableViewCell {
             segmentedControl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             segmentedControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             segmentedControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
+            segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
             segmentedControl.widthAnchor.constraint(equalToConstant: 340)
         
         ])

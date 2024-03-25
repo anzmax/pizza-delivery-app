@@ -21,7 +21,6 @@ class SizeCell: UITableViewCell {
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
         control.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
-
         return control
     }()
     
@@ -51,6 +50,7 @@ class SizeCell: UITableViewCell {
         ])
     }
     
+    //MARK: - Action
     @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
         onSizeChanged?(sender.selectedSegmentIndex)
     }

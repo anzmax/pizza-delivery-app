@@ -349,3 +349,50 @@ Extras
     "count": 1
   }
 ]
+
+Ingredients
+
+[
+    {
+      "title": "Чеддер",
+      "price": "79 р",
+      "image": "cheddar"
+    },
+    {
+      "title": "Огурчики",
+      "price": "59 р",
+      "image": "cucumber"
+    },
+    {
+      "title": "Ветчина",
+      "price": "79 р",
+      "image": "ham"
+    },
+    {
+      "title": "Халапеньо",
+      "price": "69 р",
+      "image": "jalapeno"
+    },
+    {
+      "title": "Моцарелла",
+      "price": "79 р",
+      "image": "mozzarella"
+    },
+    {
+      "title": "Перчик",
+      "price": "59 р",
+      "image": "pepper"
+    },
+    {
+      "title": "Шампиньоны",
+      "price": "69 р",
+      "image": "mushrooms"
+    },
+    {
+      "title": "Ананас",
+      "price": "59 р",
+      "image": "pineapple"
+    }
+  ]
+
+

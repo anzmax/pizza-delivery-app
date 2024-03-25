@@ -41,13 +41,13 @@ class DescriptionCell: UITableViewCell {
     }
     
     func setupViews() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(descriptionLabel)
+        [titleLabel, descriptionLabel].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 26),
@@ -58,10 +58,12 @@ class DescriptionCell: UITableViewCell {
             descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
-    
+}
+
+//MARK: - Update
+extension DescriptionCell {
     func update(with product: Product?) {
         titleLabel.text = product?.title
         descriptionLabel.text = product?.description
     }
 }
-
