@@ -36,6 +36,8 @@ class IngredientsTVCell: UITableViewCell {
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .white
         collection.showsVerticalScrollIndicator = false
+        collection.allowsMultipleSelection = true
+
         collection.contentInset = UIEdgeInsets(top: 5, left: edgeInsets, bottom: 10, right: edgeInsets)
         collection.delegate = self
         collection.dataSource = self
@@ -97,6 +99,18 @@ extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSourc
         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? IngredientCVCell {
+            cell.layer.cornerRadius = 12
+            cell.applyShadow(color: .gray)
+        }
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let cell = collectionView.cellForItem(at: indexPath) as? IngredientCVCell {
+            cell.applyShadow(color: .clear)
+        }
+    }
 }
 
 class IngredientCVCell: UICollectionViewCell {

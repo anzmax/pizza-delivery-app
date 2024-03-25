@@ -195,6 +195,7 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             case .dough:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath) as! DoughCell
+                cell.selectionStyle = .none
                 return cell
             case .ingredients:
                 let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath) as! IngredientsTVCell
@@ -205,28 +206,6 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
         
         return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !isPizza && indexPath.section > 1 { return }
-        
-        if indexPath.section == 4 {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.layer.borderColor = UIColor.red.cgColor
-                cell.layer.borderWidth = 2
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if !isPizza && indexPath.section > 1 { return }
-        
-        if indexPath.section == 4 {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.layer.borderColor = nil
-                cell.layer.borderWidth = 0
-            }
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
