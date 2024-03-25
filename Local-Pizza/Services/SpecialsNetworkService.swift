@@ -11,14 +11,14 @@ class SpecialsNetworkService {
     
     func fetchSpecials(completion: @escaping (Result<[Special], NetworkError>) -> Void) {
         
-        //https://run.mocky.io/v3/944cd4a8-a854-4462-86b0-295ee7076b6d
+        //https://mocki.io/v1/0eb535a1-0b36-4096-901d-77347ee9ccc1
         
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
-        urlComponents.host = "run.mocky.io"
-        urlComponents.path = "/v3/944cd4a8-a854-4462-86b0-295ee7076b6d"
+        urlComponents.host = "mocki.io"
+        urlComponents.path = "/v1/0eb535a1-0b36-4096-901d-77347ee9ccc1"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

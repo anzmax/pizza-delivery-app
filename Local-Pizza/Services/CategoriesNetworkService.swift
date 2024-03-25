@@ -11,14 +11,14 @@ class CategoriesNetworkService {
     
     func fetchCategory(completion: @escaping (Result<[Category], NetworkError>) -> Void) {
         
-        //https://run.mocky.io/v3/f31812eb-cb7a-49a5-8166-0e2d200095cb
+        //https://mocki.io/v1/e2fc9381-2fdc-42af-be2a-c966a8a80e36
         
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
-        urlComponents.host = "run.mocky.io"
-        urlComponents.path = "/v3/f31812eb-cb7a-49a5-8166-0e2d200095cb"
+        urlComponents.host = "mocki.io"
+        urlComponents.path = "/v1/e2fc9381-2fdc-42af-be2a-c966a8a80e36"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

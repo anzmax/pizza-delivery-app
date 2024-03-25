@@ -11,14 +11,14 @@ class ProductNetworkService {
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
 
-        //https://run.mocky.io/v3/e2b7287d-25ba-4350-a816-ca3e22a0e3ed
+        //https://mocki.io/v1/68e7249a-9c08-460b-ad42-d0b1da651d0a
         
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
-        urlComponents.host = "run.mocky.io"
-        urlComponents.path = "/v3/e2b7287d-25ba-4350-a816-ca3e22a0e3ed"
+        urlComponents.host = "mocki.io"
+        urlComponents.path = "/v1/68e7249a-9c08-460b-ad42-d0b1da651d0a"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))
