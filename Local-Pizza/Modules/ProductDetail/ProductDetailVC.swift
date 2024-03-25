@@ -23,6 +23,11 @@ class ProductDetailVC: UIViewController {
         }
     }
     
+    var archiver = ProductsArchiver()
+    
+    private var basePrice: Int?
+    private var isPizza: Bool = false
+    
     private lazy var cartButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray5
@@ -69,7 +74,7 @@ class ProductDetailVC: UIViewController {
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor),
             
             cartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 26),
             cartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
@@ -78,19 +83,40 @@ class ProductDetailVC: UIViewController {
         ])
     }
     
+    //MARK: - Update
     func update(with product: Product) {
         self.product = product
+        self.basePrice = Int(product.price)
+        updateCartButtonTitle()
+        
+        isPizza = product.image.lowercased().contains("pizza")
     }
     
-    @objc func cartButtonTapped() {
+    //MARK: - ACtion
+    @objc func cartButtonTapped(_ button: UIButton) {
+        let originalColor = button.backgroundColor
+        button.backgroundColor = .systemGray3
+
+        UIView.animate(withDuration: 1, animations: {
+            button.backgroundColor = originalColor
+        })
         
+        if let product = product {
+            self.archiver.append(product)
+        }
+    }
+    
+    func updateCartButtonTitle(withAdditionalPrice additionalPrice: Int = 0) {
+        guard let basePrice = basePrice else { return }
+        let newPrice = basePrice + additionalPrice
+        cartButton.setTitle("В корзину за \(newPrice) р", for: .normal)
     }
 }
 
 extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return DetailSection.allCases.count
+        return isPizza ? DetailSection.allCases.count : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,6 +138,11 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if !isPizza && indexPath.section > 1 {
+            return UITableViewCell()
+        }
+        
         if let section = DetailSection(rawValue: indexPath.section) {
             switch section {
             case .image:
@@ -125,8 +156,19 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 cell.update(with: product)
                 return cell
             case .size:
-                let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath) as! SizeCell
                 cell.selectionStyle = .none
+                
+                cell.onSizeChanged = { [weak self] selectedIndex in
+                    let additionalPrice: Int
+                    switch selectedIndex {
+                    case 0: additionalPrice = 50
+                    case 1: additionalPrice = 100
+                    default: additionalPrice = 150
+                    }
+                    self?.updateCartButtonTitle(withAdditionalPrice: additionalPrice)
+                }
+                
                 return cell
             case .dough:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath)
@@ -142,6 +184,8 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if !isPizza && indexPath.section > 1 { return }
+        
         if indexPath.section == 4 {
             if let cell = tableView.cellForRow(at: indexPath) {
                 cell.layer.borderColor = UIColor.red.cgColor
@@ -151,6 +195,8 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if !isPizza && indexPath.section > 1 { return }
+        
         if indexPath.section == 4 {
             if let cell = tableView.cellForRow(at: indexPath) {
                 cell.layer.borderColor = nil

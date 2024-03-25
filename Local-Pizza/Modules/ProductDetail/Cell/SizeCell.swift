@@ -11,6 +11,8 @@ class SizeCell: UITableViewCell {
     
     static let id = "SizeCell"
     
+    var onSizeChanged: ((Int) -> Void)?
+    
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Маленькая", "Средняя", "Большая"]
         let control = UISegmentedControl(items: items)
@@ -18,6 +20,8 @@ class SizeCell: UITableViewCell {
         control.selectedSegmentTintColor = .white
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
+        control.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
+
         return control
     }()
     
@@ -45,6 +49,10 @@ class SizeCell: UITableViewCell {
             segmentedControl.widthAnchor.constraint(equalToConstant: 340)
         
         ])
+    }
+    
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        onSizeChanged?(sender.selectedSegmentIndex)
     }
 }
 

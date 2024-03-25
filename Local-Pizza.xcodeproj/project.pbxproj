@@ -258,8 +258,8 @@
 				F409E1442B8CBA7F00A88D2C /* Menu */,
 				F409E1462B8CBACC00A88D2C /* ProductDetail */,
 				F409E1542B8CBBB800A88D2C /* Account */,
-				F409E1532B8CBBAD00A88D2C /* Cart */,
 				F409E1522B8CBB9D00A88D2C /* Favourites */,
+				F409E1532B8CBBAD00A88D2C /* Cart */,
 			);
 			path = Modules;
 			sourceTree = "<group>";

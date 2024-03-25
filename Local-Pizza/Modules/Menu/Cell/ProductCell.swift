@@ -48,6 +48,7 @@ class ProductCell: UITableViewCell {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .regular)
         button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 5
+        button.applyShadow(color: .lightGray)
         button.addTarget(self, action: #selector(priceButtonTapped), for: .touchUpInside)
         return button
     }()

@@ -128,7 +128,6 @@ class AccountDetailVC: UIViewController {
     
     @objc func closeButtonTapped() {
         let vc = MenuVC()
-        vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
     

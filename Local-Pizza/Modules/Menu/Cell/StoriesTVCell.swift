@@ -17,14 +17,7 @@ class StoriesTVCell: UITableViewCell {
     
     weak var delegate: StoriesTVCellDelegate?
 
-    var stories = [
-        Story(image: "pizzaoffer"),
-        Story(image: "nuggetsoffer"),
-        Story(image: "drinksoffer"),
-        Story(image: "dessertoffer"),
-        Story(image: "combooffer"),
-        Story(image: "colaoffer")
-    ]
+    var stories: [Story] = []
 
     private lazy var collectionView: UICollectionView = {
         let layout = CenterZoomCollectionViewLayout()
@@ -67,6 +60,7 @@ class StoriesTVCell: UITableViewCell {
         ])
     }
 
+    //MARK: - Update
     func update(with stories: [Story]) {
         self.stories = stories
         collectionView.reloadData()
@@ -134,6 +128,7 @@ class StoryCVCell: UICollectionViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with story: Story) {
         storyImageView.image = UIImage(named: story.image)
     }

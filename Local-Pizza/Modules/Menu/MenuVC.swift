@@ -232,6 +232,50 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTVCell.id, for: indexPath) as! CategoriesTVCell
                 cell.selectionStyle = .none
                 cell.update(with: categories)
+                
+                cell.onCategorySelected = { [weak self] index in
+                    guard let self = self else { return }
+                    
+                    if index == 1 {
+                        if let pizzaIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("pizza") }) {
+                            let indexPath = IndexPath(row: pizzaIndex, section: 4)
+                            if pizzaIndex < self.tableView.numberOfRows(inSection: 4) {
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        }
+                    } else if index == 2 {
+                        if let snackIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("snack") }) {
+                            let indexPath = IndexPath(row: snackIndex, section: 4)
+                            if snackIndex < self.tableView.numberOfRows(inSection: 4) {
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        }
+                    } else if index == 3 {
+                        if let drinkIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("drink") }) {
+                            let indexPath = IndexPath(row: drinkIndex, section: 4)
+                            if drinkIndex < self.tableView.numberOfRows(inSection: 4) {
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        }
+                    } else if index == 4 {
+                        if let dessertIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("dessert") }) {
+                            let indexPath = IndexPath(row: dessertIndex, section: 4)
+                            if dessertIndex < self.tableView.numberOfRows(inSection: 4) {
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        }
+                    } else if index == 5 {
+                        if let sauceIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("sauce") }) {
+                            let indexPath = IndexPath(row: sauceIndex, section: 4)
+                            if sauceIndex < self.tableView.numberOfRows(inSection: 4) {
+                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+                            }
+                        }
+                    }
+
+                }
+                
+                
                 return cell
             case .products:
                 let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.id, for: indexPath) as! ProductCell
