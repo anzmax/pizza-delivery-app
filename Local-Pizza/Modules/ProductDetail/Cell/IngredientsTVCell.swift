@@ -12,6 +12,7 @@ class IngredientsTVCell: UITableViewCell {
     static let id = "IngredientsTVCell"
     
     var ingredients: [Ingredient] = []
+    var onSelectIngredientCell: ((Ingredient)->())?
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -100,16 +101,14 @@ extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? IngredientCVCell {
-            cell.layer.cornerRadius = 12
-            cell.applyShadow(color: .gray)
-        }
-    }
+        
+        let isSelected = ingredients[indexPath.item].isSelected ?? false
+        
+        ingredients[indexPath.item].isSelected = !isSelected
 
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? IngredientCVCell {
-            cell.applyShadow(color: .clear)
-        }
+        let ingredient = ingredients[indexPath.item]
+        
+        onSelectIngredientCell?(ingredient)
     }
 }
 
@@ -179,6 +178,15 @@ class IngredientCVCell: UICollectionViewCell {
     
     //MARK: - Update
     func update(with ingredient: Ingredient) {
+        
+        let isSelected = ingredient.isSelected ?? false
+        
+        if isSelected == true {
+            contentView.applyShadow(color: .black)
+        } else {
+            contentView.applyShadow(color: .lightGray)
+        }
+        
         imageView.image = UIImage(named: ingredient.image)
         titleLabel.text = ingredient.title
         priceLabel.text = ingredient.price

@@ -7,8 +7,17 @@
 
 import UIKit
 
-struct Ingredient: Codable {
+struct Ingredient: Codable, Equatable {
     var title: String
     var price: String
     var image: String
+    
+    var isSelected: Bool? = false
+    
+    func formatPrice() -> Int {
+        let replacedPrice = self.price.dropLast(2)
+        let price = Int(replacedPrice) ?? 0
+        
+        return price
+    }
 }

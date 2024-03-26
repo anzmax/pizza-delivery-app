@@ -111,8 +111,7 @@ class CartVC: UIViewController {
     func calculateTotalAmountForProducts() -> Int {
         var sum = 0
         for item in itemsInCart {
-             
-            let price = Int(item.price.replacingOccurrences(of: " р", with: "")) ?? 0
+            let price = item.totalPrice()
             sum += price * item.count
         }
         return sum

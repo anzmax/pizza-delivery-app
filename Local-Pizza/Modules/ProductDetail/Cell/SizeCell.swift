@@ -16,7 +16,7 @@ class SizeCell: UITableViewCell {
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Маленькая", "Средняя", "Большая"]
         let control = UISegmentedControl(items: items)
-        control.selectedSegmentIndex = 2
+        control.selectedSegmentIndex = 1
         control.selectedSegmentTintColor = .white
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
@@ -45,7 +45,7 @@ class SizeCell: UITableViewCell {
             segmentedControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             segmentedControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 340)
+            segmentedControl.widthAnchor.constraint(equalToConstant: 350)
         
         ])
     }

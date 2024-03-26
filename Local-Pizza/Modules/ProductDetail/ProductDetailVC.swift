@@ -20,6 +20,7 @@ class ProductDetailVC: UIViewController {
     private var product: Product? {
         didSet {
             tableView.reloadData()
+            updateCartButtonTitle()
         }
     }
     
@@ -97,7 +98,6 @@ class ProductDetailVC: UIViewController {
     func update(with product: Product) {
         self.product = product
         self.basePrice = Int(product.price)
-        updateCartButtonTitle()
         
         isPizza = product.image.lowercased().contains("pizza")
     }
@@ -126,13 +126,15 @@ class ProductDetailVC: UIViewController {
         if let product = product {
             self.archiver.append(product)
         }
+        self.dismiss(animated: true)
     }
     
-    func updateCartButtonTitle(withAdditionalPrice additionalPrice: Int = 0) {
-        guard let basePrice = basePrice else { return }
-        let newPrice = basePrice + additionalPrice
-        cartButton.setTitle("В корзину за \(newPrice) р", for: .normal)
+    func updateCartButtonTitle() {
+        
+        let totalPrice = product?.totalPrice() ?? 0
+        cartButton.setTitle("В корзину за \(totalPrice) р", for: .normal)
     }
+
 }
 
 //MARK: - Delegate
@@ -182,16 +184,6 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath) as! SizeCell
                 cell.selectionStyle = .none
                 
-                cell.onSizeChanged = { [weak self] selectedIndex in
-                    let additionalPrice: Int
-                    switch selectedIndex {
-                    case 0: additionalPrice = 50
-                    case 1: additionalPrice = 100
-                    default: additionalPrice = 150
-                    }
-                    self?.updateCartButtonTitle(withAdditionalPrice: additionalPrice)
-                }
-                
                 return cell
             case .dough:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath) as! DoughCell
@@ -199,6 +191,27 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 return cell
             case .ingredients:
                 let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath) as! IngredientsTVCell
+                
+                cell.onSelectIngredientCell = { changedIngredient in
+                    
+                    if self.product?.additions == nil {
+                        self.product?.additions = [Ingredient]()
+                    }
+                    
+                    let isSelected = changedIngredient.isSelected ?? false
+                    
+                    if isSelected == true {
+                        self.product?.additions?.append(changedIngredient)
+                    } else {
+                        self.product?.additions?.removeAll(where: { $0.title == changedIngredient.title })
+                    }
+                    
+                    if let index = self.ingredients.firstIndex(where: { $0.title == changedIngredient.title }) {
+                        self.ingredients[index] = changedIngredient
+                    }
+                    
+                }
+                
                 cell.selectionStyle = .none
                 cell.update(with: ingredients)
                 return cell

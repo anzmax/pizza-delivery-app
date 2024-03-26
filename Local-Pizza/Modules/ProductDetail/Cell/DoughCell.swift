@@ -14,7 +14,7 @@ class DoughCell: UITableViewCell {
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Традиционное", "Тонкое"]
         let control = UISegmentedControl(items: items)
-        control.selectedSegmentIndex = 1
+        control.selectedSegmentIndex = 0
         control.selectedSegmentTintColor = .white
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
@@ -42,8 +42,7 @@ class DoughCell: UITableViewCell {
             segmentedControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             segmentedControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 340)
-        
+            segmentedControl.widthAnchor.constraint(equalToConstant: 350)
         ])
     }
 }
