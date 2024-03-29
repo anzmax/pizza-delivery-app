@@ -107,8 +107,8 @@ extension CartProductCell {
         itemImageView.image = UIImage(named: product.image)
         titleLabel.text = product.title
         
-        let priceString = product.price.replacingOccurrences(of: " р", with: "")
-        basePrice = Int(priceString) ?? 0
+        //let priceString = product.price.replacingOccurrences(of: " р", with: "")
+        basePrice = product.totalPrice()
         
         count = product.count
         updatePriceLabel()

@@ -20,9 +20,24 @@ class ProductDetailVC: UIViewController {
     private var product: Product? {
         didSet {
             tableView.reloadData()
+            updateCartButtonTitle()
         }
     }
     
+    var ingredients: [Ingredient] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Services
+    var archiver = ProductsArchiver()
+    var ingredientsService = IngredientsNetworkService()
+    
+    private var basePrice: Int?
+    private var isPizza: Bool = false
+    
+    //MARK: - UI Elements
     private lazy var cartButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray5
@@ -54,22 +69,23 @@ class ProductDetailVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
+        fetchIngredients()
     }
     
     func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(tableView)
-        view.addSubview(cartButton)
+        [tableView, cartButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        cartButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor, constant: -10),
+            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor),
             
             cartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 26),
             cartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
@@ -78,19 +94,54 @@ class ProductDetailVC: UIViewController {
         ])
     }
     
+    //MARK: - Update
     func update(with product: Product) {
         self.product = product
+        self.basePrice = Int(product.price)
+        
+        isPizza = product.image.lowercased().contains("pizza")
     }
     
-    @objc func cartButtonTapped() {
-        
+    //MARK: - Fetch
+    func fetchIngredients() {
+        ingredientsService.fetchIngredients { result in
+            switch result {
+            case .success(let ingredients):
+                self.ingredients = ingredients
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
+    
+    //MARK: - Action
+    @objc func cartButtonTapped(_ button: UIButton) {
+        let originalColor = button.backgroundColor
+        button.backgroundColor = .systemGray3
+
+        UIView.animate(withDuration: 1, animations: {
+            button.backgroundColor = originalColor
+        })
+        
+        if let product = product {
+            self.archiver.append(product)
+        }
+        self.dismiss(animated: true)
+    }
+    
+    func updateCartButtonTitle() {
+        
+        let totalPrice = product?.totalPrice() ?? 0
+        cartButton.setTitle("В корзину за \(totalPrice) р", for: .normal)
+    }
+
 }
 
+//MARK: - Delegate
 extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return DetailSection.allCases.count
+        return isPizza ? DetailSection.allCases.count : 2
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,6 +163,11 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if !isPizza && indexPath.section > 1 {
+            return UITableViewCell()
+        }
+        
         if let section = DetailSection(rawValue: indexPath.section) {
             switch section {
             case .image:
@@ -125,38 +181,54 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 cell.update(with: product)
                 return cell
             case .size:
-                let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath) as! SizeCell
                 cell.selectionStyle = .none
+                
+                cell.onSizeChanged = { sizeIndex in
+                    self.product?.size = sizeIndex
+                    
+                }
+                
                 return cell
             case .dough:
-                let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath) as! DoughCell
+                cell.selectionStyle = .none
+                
+                cell.onDoughChanged = { doughIndex in
+                    self.product?.dough = doughIndex
+                }
+                
                 return cell
             case .ingredients:
-                let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath)
+                let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath) as! IngredientsTVCell
+                
+                cell.onSelectIngredientCell = { changedIngredient in
+                    
+                    if self.product?.additions == nil {
+                        self.product?.additions = [Ingredient]()
+                    }
+                    
+                    let isSelected = changedIngredient.isSelected ?? false
+                    
+                    if isSelected == true {
+                        self.product?.additions?.append(changedIngredient)
+                    } else {
+                        self.product?.additions?.removeAll(where: { $0.title == changedIngredient.title })
+                    }
+                    
+                    if let index = self.ingredients.firstIndex(where: { $0.title == changedIngredient.title }) {
+                        self.ingredients[index] = changedIngredient
+                    }
+                    
+                }
+                
                 cell.selectionStyle = .none
+                cell.update(with: ingredients)
                 return cell
             }
         }
         
         return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.layer.borderColor = UIColor.red.cgColor
-                cell.layer.borderWidth = 2
-            }
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if indexPath.section == 4 {
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.layer.borderColor = nil
-                cell.layer.borderWidth = 0
-            }
-        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
