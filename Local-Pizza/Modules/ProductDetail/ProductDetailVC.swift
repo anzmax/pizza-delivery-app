@@ -184,10 +184,20 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: SizeCell.id, for: indexPath) as! SizeCell
                 cell.selectionStyle = .none
                 
+                cell.onSizeChanged = { sizeIndex in
+                    self.product?.size = sizeIndex
+                    
+                }
+                
                 return cell
             case .dough:
                 let cell = tableView.dequeueReusableCell(withIdentifier: DoughCell.id, for: indexPath) as! DoughCell
                 cell.selectionStyle = .none
+                
+                cell.onDoughChanged = { doughIndex in
+                    self.product?.dough = doughIndex
+                }
+                
                 return cell
             case .ingredients:
                 let cell = tableView.dequeueReusableCell(withIdentifier: IngredientsTVCell.id, for: indexPath) as! IngredientsTVCell
