@@ -15,14 +15,29 @@ enum MenuSection: Int, CaseIterable {
     case products = 4
 }
 
-class MenuVC: UIViewController, StoriesTVCellDelegate {
+protocol MenuVCProtocol: AnyObject {
     
-    //MARL: - Services
-    var archiver = ProductsArchiver()
-    var productsService = ProductNetworkService()
-    var storiesService = StoriesNetworkService()
-    var specialsService = SpecialsNetworkService()
-    var categoriesService = CategoriesNetworkService()
+    //Connections
+    var presenter: MenuPresenterProtocol? { get set }
+    
+    //Update View
+    func showProducts(_ products: [Product])
+    func showSpecials(_ specials: [Special])
+    func showCategories(_ categories: [Category])
+    func showStories(_ stories: [Story])
+    func scrollTableViewToIndexPath(_ indexPath: IndexPath, _ productIndex: Int)
+    
+    //Navigation
+    func navigateToProductDetailScreen(_ product: Product)
+    func navigateToAuthorizationScreen()
+    func navigateToStoryDetailScreen(_ image: UIImage)
+    func navigateToPizzaMapScreen()
+    func navigateToDeliveryMapScreen()
+}
+
+class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
+    
+    var presenter: MenuPresenterProtocol?
     
     var addressText: String = "" {
         didSet {
@@ -86,70 +101,23 @@ class MenuVC: UIViewController, StoriesTVCellDelegate {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        fetchProducts()
-        fetchSpecials()
-        fetchStories()
-        fetchCategories()
-    }
-    
-    //MARK: - Action
-    @objc func accountButtonTapped() {
-        //let vc = AuthorizationVC()
-        let vc = AccountDetailVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        
+        presenter?.viewDidLoad()
     }
     
     func didSelectStoryImage(_ image: UIImage?) {
         guard let image = image else { return }
-        let storyDetailVC = StoryDetailVC()
-        storyDetailVC.image = image
-        present(storyDetailVC, animated: true)
+        
+        navigateToStoryDetailScreen(image)
     }
+}
+
+//MARK: - Event Pass
+extension MenuVC {
     
-    //MARK: - Fetch Requests
-    func fetchProducts() {
-        productsService.fetchProducts { result in
-            switch result {
-            case .success(let products):
-                self.products = products
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchSpecials() {
-        specialsService.fetchSpecials { result in
-            switch result {
-            case .success(let specials):
-                self.specials = specials
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchStories() {
-        storiesService.fetchStory { result in
-            switch result {
-            case .success(let stories):
-                self.stories = stories
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    func fetchCategories() {
-        categoriesService.fetchCategory { result in
-            switch result {
-            case .success(let categories):
-                self.categories = categories
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+    @objc func accountButtonTapped() {
+        
+        presenter?.accountButtonTapped()
     }
 }
 
@@ -190,30 +158,12 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.onAddressSegmentChanged = { deliveryType in
                     
-                    switch deliveryType {
-                        
-                    case .takeAway:
-                        let pizzaMapVC = PizzaMapVC()
-                        pizzaMapVC.onAddressChanged = { addressText in
-                            
-                        }
-                        self.present(pizzaMapVC, animated: true)
-                        
-                    case .address:
-                        let deliveryMapVC = DeliveryMapVC()
-                        deliveryMapVC.onSaveAddress = { [weak self] address in
-                            self?.addressText = address
-                        }
-                        self.present(deliveryMapVC, animated: true)
-                    }
+                    self.presenter?.addressSegmentChanged(deliveryType)
                 }
                 
                 cell.onAddressButtonTapped = {
-                    let deliveryMapVC = DeliveryMapVC()
-                    deliveryMapVC.onSaveAddress = { [weak self] address in
-                        self?.addressText = address
-                    }
-                    self.present(deliveryMapVC, animated: true)
+                    
+                    self.presenter?.addressButtonTapped()
                 }
                 
                 return cell
@@ -233,48 +183,12 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 cell.update(with: categories)
                 
-                cell.onCategorySelected = { [weak self] index in
-                    guard let self = self else { return }
-                    
-                    if index == 1 {
-                        if let pizzaIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("pizza") }) {
-                            let indexPath = IndexPath(row: pizzaIndex, section: 4)
-                            if pizzaIndex < self.tableView.numberOfRows(inSection: 4) {
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    } else if index == 2 {
-                        if let snackIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("snack") }) {
-                            let indexPath = IndexPath(row: snackIndex, section: 4)
-                            if snackIndex < self.tableView.numberOfRows(inSection: 4) {
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    } else if index == 3 {
-                        if let drinkIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("drink") }) {
-                            let indexPath = IndexPath(row: drinkIndex, section: 4)
-                            if drinkIndex < self.tableView.numberOfRows(inSection: 4) {
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    } else if index == 4 {
-                        if let dessertIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("dessert") }) {
-                            let indexPath = IndexPath(row: dessertIndex, section: 4)
-                            if dessertIndex < self.tableView.numberOfRows(inSection: 4) {
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    } else if index == 5 {
-                        if let sauceIndex = self.products.firstIndex(where: { $0.image.lowercased().contains("sauce") }) {
-                            let indexPath = IndexPath(row: sauceIndex, section: 4)
-                            if sauceIndex < self.tableView.numberOfRows(inSection: 4) {
-                                self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-                            }
-                        }
-                    }
-
-                }
+               
                 
+                cell.onCategorySelected = {  index in
+                    
+                    self.presenter?.categoryCellSelected(index, self.products)
+                }
                 
                 return cell
             case .products:
@@ -282,22 +196,18 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 let product = products[indexPath.row]
                 cell.selectionStyle = .none
                 cell.update(with: product)
+                
                 cell.onPriceButtonTapped = { product in
-                    self.archiver.append(product)
+                    self.presenter?.productPriceButtonTapped(product)
                 }
                 
-                cell.onFavouriteButtonTapped = { product in 
-                    CoreDataService.shared.addProductToFavourites(product: product)
-                    NotificationCenter.default.post(name: .favoritesDidUpdate, object: nil)
+                cell.onFavouriteButtonTapped = { product in
                     
                     if let tabBarController = self.tabBarController,
                        let favouritesVC = tabBarController.viewControllers?[1] as? FavouritesVC {
-                        CoreDataService.shared.fetchFavouriteProducts { products in
-                            DispatchQueue.main.async {
-                                favouritesVC.favouriteProducts = products
-                                favouritesVC.tableView.reloadData()
-                            }
-                        }
+                        
+                        self.presenter?.favouriteButtonTapped(favouritesVC, product)
+                        
                     }
                 }
                 
@@ -326,12 +236,83 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
+
         let product = products[indexPath.row]
+        presenter?.productCellSelected(product)
+    }
+}
+
+//MARK: - Update View
+
+extension MenuVC {
+    
+    func scrollTableViewToIndexPath(_ indexPath: IndexPath, _ productIndex: Int) {
+        if productIndex < self.tableView.numberOfRows(inSection: 4) {
+            self.tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        }
+    }
+    
+    func showProducts(_ products: [Product]) {
+        self.products = products
+    }
+    
+    func showCategories(_ categories: [Category]) {
+        self.categories = categories
+    }
+    
+    func showSpecials(_ specials: [Special]) {
+        self.specials = specials
+    }
+    
+    func showStories(_ stories: [Story]) {
+        self.stories = stories
+    }
+}
+
+//MARK: - Navigation
+extension MenuVC {
+    
+    func navigateToDeliveryMapScreen() {
+        let deliveryMapVC = DeliveryMapVC()
+        deliveryMapVC.onSaveAddress = { [weak self] address in
+            self?.addressText = address
+        }
+        self.present(deliveryMapVC, animated: true)
+    }
+    
+    func navigateToPizzaMapScreen() {
+        let pizzaMapVC = PizzaMapVC()
+        pizzaMapVC.onAddressChanged = { addressText in
+            self.addressText = addressText
+        }
+        self.present(pizzaMapVC, animated: true)
+    }
+    
+    func navigateToProductDetailScreen(_ product: Product) {
         let vc = ProductDetailVC()
         vc.update(with: product)
         present(vc, animated: true)
-        
+    }
+    
+    func navigateToAuthorizationScreen() {
+        let vc = AuthorizationVC()
+//        //let vc = AccountDetailVC()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    func navigateToStoryDetailScreen(_ image: UIImage) {
+        let storyDetailVC = StoryDetailVC()
+        storyDetailVC.image = image
+        present(storyDetailVC, animated: true)
+    }
+    
+    func navigateToDeliveryMap() {
+        let deliveryMapVC = DeliveryMapVC()
+        deliveryMapVC.onSaveAddress = { [weak self] address in
+            self?.addressText = address
+        }
+        self.present(deliveryMapVC, animated: true)
     }
 }
 
@@ -339,13 +320,13 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
 extension MenuVC {
     func setupViews() {
         view.applyGradient(colors: [UIColor.systemGray3.cgColor, UIColor.white.cgColor])
-        view.addSubview(tableView)
-        view.addSubview(accountButton)
+        [tableView, accountButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        accountButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 60),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
