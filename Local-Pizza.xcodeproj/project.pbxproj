@@ -47,6 +47,8 @@
 		F410DB762BB1E847000A7F98 /* IngredientsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB752BB1E847000A7F98 /* IngredientsNetworkService.swift */; };
 		F410DB7B2BB700B7000A7F98 /* MenuConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB7A2BB700B7000A7F98 /* MenuConfigurator.swift */; };
 		F410DB7E2BB700D7000A7F98 /* MenuPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB7D2BB700D7000A7F98 /* MenuPresenter.swift */; };
+		F410DB802BBC415F000A7F98 /* ProductDetailConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB7F2BBC415F000A7F98 /* ProductDetailConfigurator.swift */; };
+		F410DB822BBC4175000A7F98 /* ProductDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB812BBC4175000A7F98 /* ProductDetailPresenter.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -124,6 +126,8 @@
 		F410DB752BB1E847000A7F98 /* IngredientsNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IngredientsNetworkService.swift; sourceTree = "<group>"; };
 		F410DB7A2BB700B7000A7F98 /* MenuConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuConfigurator.swift; sourceTree = "<group>"; };
 		F410DB7D2BB700D7000A7F98 /* MenuPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenter.swift; sourceTree = "<group>"; };
+		F410DB7F2BBC415F000A7F98 /* ProductDetailConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailConfigurator.swift; sourceTree = "<group>"; };
+		F410DB812BBC4175000A7F98 /* ProductDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailPresenter.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -262,10 +266,10 @@
 			isa = PBXGroup;
 			children = (
 				F409E1442B8CBA7F00A88D2C /* Menu */,
+				F409E1462B8CBACC00A88D2C /* ProductDetail */,
 				F410DB772BB70024000A7F98 /* PizzaMap */,
 				F410DB782BB70039000A7F98 /* DeliveryMap */,
 				F410DB792BB7004F000A7F98 /* StoryDetail */,
-				F409E1462B8CBACC00A88D2C /* ProductDetail */,
 				F409E1542B8CBBB800A88D2C /* Account */,
 				F409E1522B8CBB9D00A88D2C /* Favourites */,
 				F409E1532B8CBBAD00A88D2C /* Cart */,
@@ -299,7 +303,9 @@
 		F409E1462B8CBACC00A88D2C /* ProductDetail */ = {
 			isa = PBXGroup;
 			children = (
+				F410DB7F2BBC415F000A7F98 /* ProductDetailConfigurator.swift */,
 				F43D65702B836B8F008C9811 /* ProductDetailVC.swift */,
+				F410DB812BBC4175000A7F98 /* ProductDetailPresenter.swift */,
 				F409E1472B8CBAFA00A88D2C /* Cell */,
 			);
 			path = ProductDetail;
@@ -543,6 +549,7 @@
 				F409E1512B8CBB8000A88D2C /* IngredientsTVCell.swift in Sources */,
 				F4C7319E2BA47C1200393E83 /* ProductNetworkService.swift in Sources */,
 				F40458852B7A487300C36880 /* SceneDelegate.swift in Sources */,
+				F410DB822BBC4175000A7F98 /* ProductDetailPresenter.swift in Sources */,
 				F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */,
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
 				F4C731A62BA4868D00393E83 /* StoriesNetworkService.swift in Sources */,
@@ -563,6 +570,7 @@
 				F4C731A22BA4823300393E83 /* NetworkErrors.swift in Sources */,
 				F4C731B42BA8E1A600393E83 /* OffersTVCell.swift in Sources */,
 				F44B4D3F2B7D0FB000744632 /* Category.swift in Sources */,
+				F410DB802BBC415F000A7F98 /* ProductDetailConfigurator.swift in Sources */,
 				F4C731B82BA8E1C500393E83 /* EntertainmentTVCell.swift in Sources */,
 				F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */,
 				F409E1E72B921D1700A88D2C /* VerificationVC.swift in Sources */,

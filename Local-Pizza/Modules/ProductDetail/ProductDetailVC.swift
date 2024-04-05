@@ -15,7 +15,24 @@ enum DetailSection: Int, CaseIterable {
 
 import UIKit
 
-class ProductDetailVC: UIViewController {
+protocol ProductDetailVCProtocol: AnyObject {
+    
+    //Connections
+    var presenter: ProductDetailPresenterProtocol? { get set }
+    
+    //Update View
+    func showIngredients(_ ingredients: [Ingredient])
+    func updateCartButtonTitle()
+    func showProductDough(_ index: Int)
+    func showProductSize(_ index: Int)
+    
+    //Navigation
+    func navigateToPreviousScreen() 
+}
+
+class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
+    
+    var presenter: ProductDetailPresenterProtocol?
     
     private var product: Product? {
         didSet {
@@ -32,7 +49,6 @@ class ProductDetailVC: UIViewController {
     
     //MARK: - Services
     var archiver = ProductsArchiver()
-    var ingredientsService = IngredientsNetworkService()
     
     private var basePrice: Int?
     private var isPizza: Bool = false
@@ -69,72 +85,15 @@ class ProductDetailVC: UIViewController {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
-        fetchIngredients()
-    }
-    
-    func setupViews() {
-        view.backgroundColor = .white
-        [tableView, cartButton].forEach {
-            view.addSubview($0)
-            $0.translatesAutoresizingMaskIntoConstraints = false
-        }
-    }
-    
-    func setupConstraints() {
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor),
-            
-            cartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 26),
-            cartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
-            cartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
-            cartButton.heightAnchor.constraint(equalToConstant: 50)
-        ])
-    }
-    
-    //MARK: - Update
-    func update(with product: Product) {
-        self.product = product
-        self.basePrice = Int(product.price)
-        
-        isPizza = product.image.lowercased().contains("pizza")
-    }
-    
-    //MARK: - Fetch
-    func fetchIngredients() {
-        ingredientsService.fetchIngredients { result in
-            switch result {
-            case .success(let ingredients):
-                self.ingredients = ingredients
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        presenter?.viewDidLoad()
     }
     
     //MARK: - Action
     @objc func cartButtonTapped(_ button: UIButton) {
-        let originalColor = button.backgroundColor
-        button.backgroundColor = .systemGray3
-
-        UIView.animate(withDuration: 1, animations: {
-            button.backgroundColor = originalColor
-        })
-        
         if let product = product {
-            self.archiver.append(product)
+            presenter?.cartButtonTapped(cartButton, product)
         }
-        self.dismiss(animated: true)
     }
-    
-    func updateCartButtonTitle() {
-        
-        let totalPrice = product?.totalPrice() ?? 0
-        cartButton.setTitle("В корзину за \(totalPrice) р", for: .normal)
-    }
-
 }
 
 //MARK: - Delegate
@@ -185,7 +144,8 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 
                 cell.onSizeChanged = { sizeIndex in
-                    self.product?.size = sizeIndex
+                    guard let product = self.product else { return }
+                    self.presenter?.sizeCellSelected(sizeIndex, product)
                     
                 }
                 
@@ -195,7 +155,8 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                 cell.selectionStyle = .none
                 
                 cell.onDoughChanged = { doughIndex in
-                    self.product?.dough = doughIndex
+                    guard let product = self.product else { return }
+                    self.presenter?.doughCellSelected(doughIndex, product)
                 }
                 
                 return cell
@@ -247,5 +208,67 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
             }
         }
         return UITableView.automaticDimension
+    }
+}
+
+//MARK: - Update View
+extension ProductDetailVC {
+    
+    func update(with product: Product) {
+        self.product = product
+        self.basePrice = Int(product.price)
+        
+        isPizza = product.image.lowercased().contains("pizza")
+    }
+    
+    func showIngredients(_ ingredients: [Ingredient]) {
+        self.ingredients = ingredients
+    }
+    
+    func updateCartButtonTitle() {
+        let totalPrice = product?.totalPrice() ?? 0
+        cartButton.setTitle("В корзину за \(totalPrice) р", for: .normal)
+    }
+    
+    func showProductDough(_ index: Int) {
+        product?.dough = index
+    }
+    
+    func showProductSize(_ index: Int) {
+        product?.size = index
+    }
+}
+
+
+//MARK: - Navigation
+extension ProductDetailVC {
+    
+    func navigateToPreviousScreen() {
+        self.dismiss(animated: true)
+    }
+}
+
+//MARK: - Layout
+extension ProductDetailVC {
+    func setupViews() {
+        view.backgroundColor = .white
+        [tableView, cartButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
+    func setupConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: cartButton.topAnchor),
+            
+            cartButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 26),
+            cartButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -26),
+            cartButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16),
+            cartButton.heightAnchor.constraint(equalToConstant: 50)
+        ])
     }
 }
