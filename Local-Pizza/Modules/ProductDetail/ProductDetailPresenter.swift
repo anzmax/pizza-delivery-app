@@ -17,6 +17,7 @@ protocol ProductDetailPresenterProtocol: AnyObject {
     func cartButtonTapped(_ button: UIButton, _ product: Product?)
     func doughCellSelected(_ index: Int, _ product: Product)
     func sizeCellSelected(_ index: Int, _ product: Product)
+    
     //Business Logic
     func fetchIngredients()
 }

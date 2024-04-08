@@ -10,7 +10,7 @@ import UIKit
 class MainTabVC: UITabBarController {
     
     private lazy var menuVC = MenuConfigurator().configure()
-    private var favouritesVC = FavouritesVC()
+    private var favouritesVC = FavouritesConfigurator().configure()
     private var cartVC = CartVC()
     
     override func viewDidLoad() {

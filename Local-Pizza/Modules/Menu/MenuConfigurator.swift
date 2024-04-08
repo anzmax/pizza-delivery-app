@@ -16,9 +16,7 @@ final class MenuConfigurator {
         
         menuVC.presenter = menuPresenter
         menuPresenter.view = menuVC
-        
-        
-        
+
         return menuVC
     }
 }

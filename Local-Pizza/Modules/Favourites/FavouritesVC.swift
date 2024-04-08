@@ -7,10 +7,21 @@
 
 import UIKit
 
-class FavouritesVC: UIViewController {
+protocol FavouritesVCProtocol: AnyObject {
     
-    var favouriteProducts = [Product]() 
-    var archiver = ProductsArchiver()
+    var presenter: FavouritesPresenterProtocol? { get set }
+    
+    //Update View
+    func showFavouriteProducts(_ products: [Product])
+    func updateFavouritesUI()
+    func deleteFavouriteInTable(_ indexPath: IndexPath, _ product: Product)
+}
+
+class FavouritesVC: UIViewController, FavouritesVCProtocol {
+   
+    var presenter: FavouritesPresenterProtocol?
+    
+    var favouriteProducts = [Product]()
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -48,37 +59,12 @@ class FavouritesVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadFavouritePosts()
-        updateFavouritesUI()
-    }
-    
-    func updateFavouritesUI() {
-        if favouriteProducts.isEmpty {
-            tableView.isHidden = true
-            emptyLabel.isHidden = false
-        } else {
-            tableView.isHidden = false
-            emptyLabel.isHidden = true
-        }
-    }
-    
-    func loadFavouritePosts() {
-        CoreDataService.shared.fetchFavouriteProducts { [weak self] products in
-            DispatchQueue.main.async {
-                self?.favouriteProducts = products
-                self?.tableView.reloadData()
-                self?.updateFavouritesUI()
-            }
-        }
+        self.presenter?.viewWillAppear()
     }
 
     @objc func updateFavorites() {
-        CoreDataService.shared.fetchFavouriteProducts { [weak self] products in
-            DispatchQueue.main.async {
-                self?.favouriteProducts = products
-                self?.tableView.reloadData()
-            }
-        }
+        
+        self.presenter?.updateFavoritesInDataBase()
     }
 
     
@@ -86,7 +72,51 @@ class FavouritesVC: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+}
+
+extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favouriteProducts.count
+    }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.id, for: indexPath) as! ProductCell
+        let product = favouriteProducts[indexPath.row]
+        cell.update(with: product)
+        cell.favouriteButton.isHidden = true
+        cell.selectionStyle = .none
+        
+        cell.onPriceButtonTapped = { product in
+            self.presenter?.cellPriceButtonTapped(product)
+        }
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+           
+           let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] (action, view, completionHandler) in
+               guard let self else { return }
+               
+               let productToDelete = favouriteProducts[indexPath.row]
+               
+               self.presenter?.productCellSwipeToDelete(indexPath, productToDelete)
+
+               completionHandler(true)
+           }
+           
+           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+           configuration.performsFirstActionWithFullSwipe = true
+           return configuration
+       }
+}
+
+extension Notification.Name {
+    static let favoritesDidUpdate = Notification.Name("favoritesDidUpdate")
+}
+
+//MARK: - Layout
+extension FavouritesVC {
     func setupViews() {
         view.backgroundColor = .white
         [titleLabel, tableView, emptyLabel].forEach {
@@ -109,54 +139,38 @@ class FavouritesVC: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -80)
         ])
     }
-
 }
 
-extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favouriteProducts.count
+//MARK: - Update View
+extension FavouritesVC {
+    
+    func deleteFavouriteInTable(_ indexPath: IndexPath, _ product: Product) {
+        
+        self.favouriteProducts.remove(at: indexPath.row)
+        tableView.deleteRows(at: [indexPath], with: .fade)
+        self.updateFavouritesUI()
+    }
+
+    func showFavouriteProducts(_ products: [Product]) {
+        self.favouriteProducts = products
+        self.tableView.reloadData()
+        self.updateFavouritesUI()
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: ProductCell.id, for: indexPath) as! ProductCell
-        let product = favouriteProducts[indexPath.row]
-        cell.update(with: product)
-        cell.favouriteButton.isHidden = true
-        cell.selectionStyle = .none
-        
-        cell.onPriceButtonTapped = { product in
-            self.archiver.append(product)
+    func updateFavouritesUI() {
+        if favouriteProducts.isEmpty {
+            tableView.isHidden = true
+            emptyLabel.isHidden = false
+        } else {
+            tableView.isHidden = false
+            emptyLabel.isHidden = true
         }
-        
-        return cell
     }
-    
-    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-           
-           let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] (action, view, completionHandler) in
-               guard let self else { return }
-               
-               let productToDelete = favouriteProducts[indexPath.row]
-               
-               CoreDataService.shared.persistentContainer.performBackgroundTask { backgroundContext in
-                   CoreDataService.shared.deleteFavouriteProduct(product: productToDelete, context: backgroundContext)
-                   
-                   DispatchQueue.main.async {
-                       self.favouriteProducts.remove(at: indexPath.row)
-                       tableView.deleteRows(at: [indexPath], with: .fade)
-                       self.updateFavouritesUI()
-                   }
-               }
-               
-               completionHandler(true)
-           }
-           
-           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-           configuration.performsFirstActionWithFullSwipe = true
-           return configuration
-       }
 }
 
-extension Notification.Name {
-    static let favoritesDidUpdate = Notification.Name("favoritesDidUpdate")
+
+//MARK: - Navigation
+extension FavouritesVC {
+    
+
 }
