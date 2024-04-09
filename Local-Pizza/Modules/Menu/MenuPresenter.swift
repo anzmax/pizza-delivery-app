@@ -30,6 +30,7 @@ protocol MenuPresenterProtocol: AnyObject {
     func fetchCategories()
     func addProductToFavorites(_ favouritesVC: FavouritesVC, _ product: Product)
     
+    
 }
 
 final class MenuPresenter: MenuPresenterProtocol {

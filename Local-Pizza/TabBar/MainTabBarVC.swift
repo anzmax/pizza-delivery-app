@@ -11,7 +11,7 @@ class MainTabVC: UITabBarController {
     
     private lazy var menuVC = MenuConfigurator().configure()
     private var favouritesVC = FavouritesConfigurator().configure()
-    private var cartVC = CartVC()
+    private var cartVC = CartConfigurator().configure()
     
     override func viewDidLoad() {
         super.viewDidLoad()

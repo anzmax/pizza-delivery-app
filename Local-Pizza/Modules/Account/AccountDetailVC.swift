@@ -118,7 +118,6 @@ class AccountDetailVC: UIViewController {
         setupConstraints()
     }
 
-    
     //MARK: - Action
     @objc func settingsButtonTapped() {
         let vc = AccountSettingsVC()
@@ -217,7 +216,7 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
             } else if indexPath.row == 1 {
-                let telegramUsername = "LilViolett"
+                let telegramUsername = "anzmax"
                 if let url = URL(string: "tg://resolve?domain=\(telegramUsername)"), UIApplication.shared.canOpenURL(url) {
                     UIApplication.shared.open(url, options: [:], completionHandler: nil)
                 }
