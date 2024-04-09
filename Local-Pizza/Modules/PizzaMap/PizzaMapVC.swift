@@ -8,7 +8,22 @@
 import UIKit
 import MapKit
 
-class PizzaMapVC: UIViewController {
+protocol PizzaMapVCProtocol: AnyObject {
+    //Connections
+    var presenter: PizzaMapPresenterProtocol? { get set }
+    
+    //Update View
+    func addAnnotationForAddress(_ address: String)
+    func addAnnotationsForPizzaAddresses()
+    
+    //Navigation
+    func navigateToPreviousScreen()
+    func passAnnotationAddressToMenu()
+}
+
+class PizzaMapVC: UIViewController, PizzaMapVCProtocol {
+    
+    var presenter: PizzaMapPresenterProtocol?
     
     let pizzaAddresses = [
         "11 Kingly St, Soho",
@@ -47,37 +62,14 @@ class PizzaMapVC: UIViewController {
         setupViews()
         setupConstraints()
         setupMap()
-        addAnnotationsForPizzaAddresses()
-    }
-    
-    func addAnnotationForAddress(_ address: String) {
         
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(address) { placemarks, error in
-            if let error = error {
-                print("Ошибка геокодирования: \(error.localizedDescription)")
-                return
-            }
-            
-            if let placemark = placemarks?.first {
-                let annotation = MKPointAnnotation()
-                annotation.coordinate = placemark.location!.coordinate
-                annotation.title = "Пиццерия"
-                annotation.subtitle = address
-                self.mapView.addAnnotation(annotation)
-            }
-        }
-    }
-    
-    func addAnnotationsForPizzaAddresses() {
-        for address in pizzaAddresses {
-            addAnnotationForAddress(address)
-        }
+        addAnnotationsForPizzaAddresses()
     }
 }
 
 //MARK: - Delegate
 extension PizzaMapVC: MKMapViewDelegate {
+    
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard view.annotation?.title != nil else { return }
 
@@ -106,18 +98,11 @@ extension PizzaMapVC: MKMapViewDelegate {
     
     //MARK: - Action
     @objc func orderButtonTapped() {
-        
-        dismiss(animated: true)
-        
-        if let mainTabVC = presentingViewController as? MainTabVC {
-            if let menuVC = mainTabVC.viewControllers?[0] as? MenuVC {
-                menuVC.addressText = currentAddress
-            }
-        }
+        presenter?.orderButtonTapped()
     }
     
     @objc func closeButtonTapped() {
-        self.dismiss(animated: true)
+        self.presenter?.closeButtonTapped()
     }
 }
 
@@ -150,5 +135,51 @@ extension PizzaMapVC {
             closeButton.widthAnchor.constraint(equalToConstant: 50),
             closeButton.heightAnchor.constraint(equalToConstant: 50)
         ])
+    }
+}
+
+//MARK: - Update View
+extension PizzaMapVC {
+    
+    func addAnnotationForAddress(_ address: String) {
+        
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(address) { placemarks, error in
+            if let error = error {
+                print("Ошибка геокодирования: \(error.localizedDescription)")
+                return
+            }
+            
+            if let placemark = placemarks?.first {
+                let annotation = MKPointAnnotation()
+                annotation.coordinate = placemark.location!.coordinate
+                annotation.title = "Пиццерия"
+                annotation.subtitle = address
+                self.mapView.addAnnotation(annotation)
+            }
+        }
+    }
+    
+    func addAnnotationsForPizzaAddresses() {
+        for address in pizzaAddresses {
+            addAnnotationForAddress(address)
+        }
+    }
+}
+
+//MARK: - Navigation
+extension PizzaMapVC {
+    
+    func navigateToPreviousScreen() {
+        self.dismiss(animated: true)
+    }
+    
+    func passAnnotationAddressToMenu() {
+        if let mainTabVC = presentingViewController as? MainTabVC {
+            if let menuVC = mainTabVC.viewControllers?[0] as? MenuVC {
+                menuVC.addressText = currentAddress
+                dismiss(animated: true)
+            }
+        }
     }
 }

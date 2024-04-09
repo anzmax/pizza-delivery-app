@@ -281,7 +281,7 @@ extension MenuVC {
     }
     
     func navigateToPizzaMapScreen() {
-        let pizzaMapVC = PizzaMapVC()
+        let pizzaMapVC = PizzaMapConfigurator().configure() //PizzaMapVC()
         pizzaMapVC.onAddressChanged = { addressText in
             self.addressText = addressText
         }
