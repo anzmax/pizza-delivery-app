@@ -273,7 +273,7 @@ extension MenuVC {
 extension MenuVC {
     
     func navigateToDeliveryMapScreen() {
-        let deliveryMapVC = DeliveryMapVC()
+        let deliveryMapVC = DeliveryMapConfigurator().configure()
         deliveryMapVC.onSaveAddress = { [weak self] address in
             self?.addressText = address
         }

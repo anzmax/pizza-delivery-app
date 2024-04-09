@@ -8,7 +8,17 @@
 import UIKit
 import MapKit
 
-class DeliveryMapVC: UIViewController {
+protocol DeliveryMapVCProtocol: AnyObject {
+    var presenter: DeliveryMapPresenterProtocol? { get set }
+
+    //Navigation
+    func navigateToPreviousScreen()
+    func passAddressToMenuScreen()
+}
+
+class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
+    
+    var presenter: DeliveryMapPresenterProtocol?
     
     var onSaveAddress: ((String) -> Void)?
     private var customViewBottomConstraint: NSLayoutConstraint?
@@ -81,36 +91,17 @@ class DeliveryMapVC: UIViewController {
         setupKeyboardNotifications()
     }
     
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     //MARK:- Action
     @objc private func saveButtonTapped() {
-        if let address = addressTextField.text, !address.isEmpty {
-            onSaveAddress?(address)
-            self.dismiss(animated: true)
-        }
+        presenter?.saveButtonTapped()
     }
     
     @objc func closeButtonTapped() {
-        self.dismiss(animated: true)
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
-        let keyboardHeight = keyboardSize.height
-        customViewBottomConstraint?.constant = -keyboardHeight + view.safeAreaInsets.bottom
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    @objc func keyboardWillHide(notification: NSNotification) {
-        customViewBottomConstraint?.constant = 0
-        UIView.animate(withDuration: 0.3) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
+        presenter?.closeButtonTapped()
     }
 }
 
@@ -194,5 +185,39 @@ extension DeliveryMapVC {
         ])
         customViewBottomConstraint = customView.bottomAnchor.constraint(equalTo: mapView.bottomAnchor)
         customViewBottomConstraint?.isActive = true
+    }
+}
+
+//MARK: - Keyboard Handler
+extension DeliveryMapVC {
+    @objc func keyboardWillShow(notification: NSNotification) {
+        guard let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue else { return }
+        let keyboardHeight = keyboardSize.height
+        customViewBottomConstraint?.constant = -keyboardHeight + view.safeAreaInsets.bottom
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    @objc func keyboardWillHide(notification: NSNotification) {
+        customViewBottomConstraint?.constant = 0
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+}
+
+//MARK: - Navigation
+extension DeliveryMapVC {
+    
+    func navigateToPreviousScreen() {
+        self.dismiss(animated: true)
+    }
+    
+    func passAddressToMenuScreen() {
+        if let address = addressTextField.text, !address.isEmpty {
+            onSaveAddress?(address)
+            self.dismiss(animated: true)
+        }
     }
 }

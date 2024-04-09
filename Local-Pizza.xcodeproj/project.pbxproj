@@ -53,6 +53,8 @@
 		F410DB862BC03141000A7F98 /* FavouritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB852BC03141000A7F98 /* FavouritesPresenter.swift */; };
 		F410DB882BC41FEB000A7F98 /* PizzaMapConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB872BC41FEB000A7F98 /* PizzaMapConfigurator.swift */; };
 		F410DB8A2BC41FFE000A7F98 /* PizzaMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB892BC41FFE000A7F98 /* PizzaMapPresenter.swift */; };
+		F410DB8C2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB8B2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift */; };
+		F410DB8E2BC56CD4000A7F98 /* DeliveryMapPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB8D2BC56CD4000A7F98 /* DeliveryMapPresenter.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -136,6 +138,8 @@
 		F410DB852BC03141000A7F98 /* FavouritesPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesPresenter.swift; sourceTree = "<group>"; };
 		F410DB872BC41FEB000A7F98 /* PizzaMapConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaMapConfigurator.swift; sourceTree = "<group>"; };
 		F410DB892BC41FFE000A7F98 /* PizzaMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaMapPresenter.swift; sourceTree = "<group>"; };
+		F410DB8B2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMapConfigurator.swift; sourceTree = "<group>"; };
+		F410DB8D2BC56CD4000A7F98 /* DeliveryMapPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryMapPresenter.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -419,7 +423,9 @@
 		F410DB782BB70039000A7F98 /* DeliveryMap */ = {
 			isa = PBXGroup;
 			children = (
+				F410DB8B2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift */,
 				F409E15C2B8CE8C800A88D2C /* DeliveryMapVC.swift */,
+				F410DB8D2BC56CD4000A7F98 /* DeliveryMapPresenter.swift */,
 			);
 			path = DeliveryMap;
 			sourceTree = "<group>";
@@ -551,6 +557,7 @@
 				F409E1E52B921CFA00A88D2C /* AccountSettingsVC.swift in Sources */,
 				F410DB842BC03132000A7F98 /* FavouritesConfigurator.swift in Sources */,
 				F4C731A42BA484E000393E83 /* SpecialsNetworkService.swift in Sources */,
+				F410DB8E2BC56CD4000A7F98 /* DeliveryMapPresenter.swift in Sources */,
 				F44B4D472B7D2C3200744632 /* Product.swift in Sources */,
 				F409E1F22B921D9D00A88D2C /* PersonalInfo.swift in Sources */,
 				F409E1492B8CBB2300A88D2C /* ProductImageCell.swift in Sources */,
@@ -567,6 +574,7 @@
 				F410DB822BBC4175000A7F98 /* ProductDetailPresenter.swift in Sources */,
 				F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */,
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
+				F410DB8C2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift in Sources */,
 				F4C731A62BA4868D00393E83 /* StoriesNetworkService.swift in Sources */,
 				F409E1EA2B921D3E00A88D2C /* PersonalCell.swift in Sources */,
 				F4C731C12BA9C3D500393E83 /* AccountDetails.swift in Sources */,
