@@ -8,7 +8,21 @@
 import UIKit
 import FirebaseAuth
 
-class VerificationVC: UIViewController {
+protocol VerificationVCProtocol: AnyObject {
+    
+    //Connections
+    var presenter: VerificationPresenterProtocol? { get set }
+    
+    //Update View
+    func showAlert(withTitle title: String, message: String)
+    
+    //Navigation
+    func navigateToAccountDetailVC()
+}
+
+class VerificationVC: UIViewController, VerificationVCProtocol {
+    
+    var presenter: VerificationPresenterProtocol?
     
     //MARK: - UI Elements
     lazy var sendButton: UIButton = {
@@ -40,37 +54,10 @@ class VerificationVC: UIViewController {
     
     //MARK: - Action
     @objc func sendButtonTapped() {
-        guard let verificationCode = verificationTextField.text, !verificationCode.isEmpty else {
-            showAlert(withTitle: "Ошибка", message: "Введите код подтверждения")
-            return
+        
+        if let verificationCode = verificationTextField.text {
+            presenter?.sendVerificationCode(verificationCode)
         }
-        guard let currentVerificationId = UserDefaults.standard.string(forKey: "authVerificationID") else {
-            showAlert(withTitle: "Ошибка", message: "Проблема с идентификатором верификации")
-            return
-        }
-
-        let credential = PhoneAuthProvider.provider().credential(withVerificationID: currentVerificationId, verificationCode: verificationCode)
-
-        Auth.auth().signIn(with: credential) { (authResult, error) in
-            if let error = error {
-                self.showAlert(withTitle: "Неверный код", message: "Введенный код подтверждения неверен. Пожалуйста, попробуйте еще раз.")
-                print(error.localizedDescription)
-                return
-            }
-
-            DispatchQueue.main.async {
-                let vc = AccountDetailVC()
-                vc.modalPresentationStyle = .fullScreen
-                self.present(vc, animated: true)
-            }
-        }
-    }
-    
-    func showAlert(withTitle title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default)
-        alertController.addAction(action)
-        present(alertController, animated: true)
     }
 }
 
@@ -97,5 +84,24 @@ extension VerificationVC {
             sendButton.widthAnchor.constraint(equalToConstant: 280),
             sendButton.heightAnchor.constraint(equalToConstant: 40),
         ])
+    }
+}
+
+//MARK: - Update View
+extension VerificationVC {
+    func showAlert(withTitle title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default)
+        alertController.addAction(action)
+        present(alertController, animated: true)
+    }
+}
+
+//MARK: - Navigation
+extension VerificationVC {
+    func navigateToAccountDetailVC() {
+        let vc = AccountDetailVC()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }

@@ -72,7 +72,7 @@ class AuthorizationVC: UIViewController {
             UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
 
             DispatchQueue.main.async {
-                let vc = VerificationVC()
+                let vc = VerificationConfigurator().configure()
                 self.present(vc, animated: true)
                 print("Код верификации отправлен")
             }
