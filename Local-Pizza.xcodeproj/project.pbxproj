@@ -59,6 +59,12 @@
 		F410DB922BC571B3000A7F98 /* CartPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB912BC571B3000A7F98 /* CartPresenter.swift */; };
 		F410DB992BC82FD6000A7F98 /* VerificationConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB982BC82FD6000A7F98 /* VerificationConfigurator.swift */; };
 		F410DB9B2BC82FE8000A7F98 /* VerificationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB9A2BC82FE8000A7F98 /* VerificationPresenter.swift */; };
+		F410DB9D2BC835BD000A7F98 /* AuthConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB9C2BC835BD000A7F98 /* AuthConfigurator.swift */; };
+		F410DB9F2BC835D0000A7F98 /* AuthPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DB9E2BC835D0000A7F98 /* AuthPresenter.swift */; };
+		F410DBA12BC83CC4000A7F98 /* AccountDetailConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA02BC83CC4000A7F98 /* AccountDetailConfigurator.swift */; };
+		F410DBA32BC83CD8000A7F98 /* AccountDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA22BC83CD8000A7F98 /* AccountDetailPresenter.swift */; };
+		F410DBA52BC84625000A7F98 /* AccountSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA42BC84625000A7F98 /* AccountSettingsConfigurator.swift */; };
+		F410DBA72BC84634000A7F98 /* AccountSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA62BC84634000A7F98 /* AccountSettingsPresenter.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -148,6 +154,12 @@
 		F410DB912BC571B3000A7F98 /* CartPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenter.swift; sourceTree = "<group>"; };
 		F410DB982BC82FD6000A7F98 /* VerificationConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationConfigurator.swift; sourceTree = "<group>"; };
 		F410DB9A2BC82FE8000A7F98 /* VerificationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationPresenter.swift; sourceTree = "<group>"; };
+		F410DB9C2BC835BD000A7F98 /* AuthConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthConfigurator.swift; sourceTree = "<group>"; };
+		F410DB9E2BC835D0000A7F98 /* AuthPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenter.swift; sourceTree = "<group>"; };
+		F410DBA02BC83CC4000A7F98 /* AccountDetailConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailConfigurator.swift; sourceTree = "<group>"; };
+		F410DBA22BC83CD8000A7F98 /* AccountDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPresenter.swift; sourceTree = "<group>"; };
+		F410DBA42BC84625000A7F98 /* AccountSettingsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsConfigurator.swift; sourceTree = "<group>"; };
+		F410DBA62BC84634000A7F98 /* AccountSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsPresenter.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -451,7 +463,9 @@
 		F410DB932BC82F08000A7F98 /* Authorization */ = {
 			isa = PBXGroup;
 			children = (
+				F410DB9C2BC835BD000A7F98 /* AuthConfigurator.swift */,
 				F43D65722B836F73008C9811 /* AuthorizationVC.swift */,
+				F410DB9E2BC835D0000A7F98 /* AuthPresenter.swift */,
 			);
 			path = Authorization;
 			sourceTree = "<group>";
@@ -469,7 +483,9 @@
 		F410DB952BC82F2E000A7F98 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
+				F410DBA02BC83CC4000A7F98 /* AccountDetailConfigurator.swift */,
 				F43D65742B8372D6008C9811 /* AccountDetailVC.swift */,
+				F410DBA22BC83CD8000A7F98 /* AccountDetailPresenter.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -477,7 +493,9 @@
 		F410DB962BC82F39000A7F98 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				F410DBA42BC84625000A7F98 /* AccountSettingsConfigurator.swift */,
 				F409E1E42B921CFA00A88D2C /* AccountSettingsVC.swift */,
+				F410DBA62BC84634000A7F98 /* AccountSettingsPresenter.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -588,6 +606,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F410DBA32BC83CD8000A7F98 /* AccountDetailPresenter.swift in Sources */,
+				F410DBA52BC84625000A7F98 /* AccountSettingsConfigurator.swift in Sources */,
 				F40458872B7A487300C36880 /* MenuVC.swift in Sources */,
 				F4C731B22BA8BA9700393E83 /* ConnectionCell.swift in Sources */,
 				F409E15D2B8CE8C800A88D2C /* DeliveryMapVC.swift in Sources */,
@@ -600,6 +620,7 @@
 				F409E2012B97543600A88D2C /* ProductsArchiver.swift in Sources */,
 				F44B4D392B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift in Sources */,
 				F4C731A02BA481B700393E83 /* ExtrasNetworkService.swift in Sources */,
+				F410DB9F2BC835D0000A7F98 /* AuthPresenter.swift in Sources */,
 				F409E14D2B8CBB5600A88D2C /* SizeCell.swift in Sources */,
 				F410DB8A2BC41FFE000A7F98 /* PizzaMapPresenter.swift in Sources */,
 				F404589D2B7A4D2500C36880 /* MainTabBarVC.swift in Sources */,
@@ -626,6 +647,7 @@
 				F409E1512B8CBB8000A88D2C /* IngredientsTVCell.swift in Sources */,
 				F4C7319E2BA47C1200393E83 /* ProductNetworkService.swift in Sources */,
 				F40458852B7A487300C36880 /* SceneDelegate.swift in Sources */,
+				F410DB9D2BC835BD000A7F98 /* AuthConfigurator.swift in Sources */,
 				F410DB822BBC4175000A7F98 /* ProductDetailPresenter.swift in Sources */,
 				F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */,
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
@@ -647,8 +669,10 @@
 				F4C731B02BA8BA3300393E83 /* Connection.swift in Sources */,
 				F4C731A22BA4823300393E83 /* NetworkErrors.swift in Sources */,
 				F4C731B42BA8E1A600393E83 /* OffersTVCell.swift in Sources */,
+				F410DBA12BC83CC4000A7F98 /* AccountDetailConfigurator.swift in Sources */,
 				F44B4D3F2B7D0FB000744632 /* Category.swift in Sources */,
 				F410DB882BC41FEB000A7F98 /* PizzaMapConfigurator.swift in Sources */,
+				F410DBA72BC84634000A7F98 /* AccountSettingsPresenter.swift in Sources */,
 				F410DB802BBC415F000A7F98 /* ProductDetailConfigurator.swift in Sources */,
 				F4C731B82BA8E1C500393E83 /* EntertainmentTVCell.swift in Sources */,
 				F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */,

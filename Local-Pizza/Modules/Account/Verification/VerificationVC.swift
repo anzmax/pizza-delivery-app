@@ -100,7 +100,7 @@ extension VerificationVC {
 //MARK: - Navigation
 extension VerificationVC {
     func navigateToAccountDetailVC() {
-        let vc = AccountDetailVC()
+        let vc = AccountDetailConfigurator().configure()
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true)
     }

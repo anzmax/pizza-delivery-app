@@ -70,5 +70,4 @@ class AccountStorageService {
         }
         Swift.print(value.joined(separator: ", "))
     }
-    
 }

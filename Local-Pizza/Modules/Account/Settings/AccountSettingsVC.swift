@@ -7,16 +7,19 @@
 
 import UIKit
 
-class AccountSettingsVC: UIViewController {
+protocol AccountSettingsVCProtocol: AnyObject {
     
-    private var accountStorageservice = AccountStorageService()
+    //Connections
+    var presenter: AccountSettingsPresenterProtocol? { get set }
+
+    //Navigation
+    func navigateToPreviousScreen()
+    func navigateToAuthScreen()
+}
+
+class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
     
-    var personalInfo: [PersonalInfo] = [
-        PersonalInfo(title: "Имя"),
-        PersonalInfo(title: "Телефон"),
-        PersonalInfo(title: "E-mail"),
-        PersonalInfo(title: "Дата рождения"),
-    ]
+    var presenter: AccountSettingsPresenterProtocol?
     
     //MARK: - UI Elements
     lazy var settingsLabel: UILabel = {
@@ -58,20 +61,19 @@ class AccountSettingsVC: UIViewController {
     
     //MARK: - Action
     @objc func doneButtonTapped() {
+        var settings: [AccountSettingItem] = []
         
-        for rowIndex in 0...3 {
-            guard let cell = tableView.cellForRow(at: IndexPath(row: rowIndex, section: 0)) as? PersonalCell else { return }
+        for row in 0..<4 {
+            let indexPath = IndexPath(row: row, section: 0)
+            guard let cell = tableView.cellForRow(at: indexPath) as? PersonalCell,
+                  let field = AccountField(rawValue: row),
+                  let value = cell.infoTextField.text else { continue }
             
-            guard let field = AccountField(rawValue: rowIndex) else { return }
-            
-            guard let value = cell.infoTextField.text else { return }
-            
-            accountStorageservice.save(field: field, value: value)
-            
+            let settingItem = AccountSettingItem(field: field, value: value)
+            settings.append(settingItem)
         }
-        accountStorageservice.print()
         
-        self.dismiss(animated: true)
+        presenter?.saveAccountSettings(with: settings)
     }
 }
 
@@ -102,11 +104,14 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: PersonalCell.id, for: indexPath) as! PersonalCell
             
-            if let field = AccountField(rawValue: indexPath.row) {
-                let value = accountStorageservice.fetch(field: field)
-                
-                cell.update(field, value)
-            }
+            let (field, value) = presenter?.fetchAccountField(indexPath.row) ?? (.name, "")
+                   cell.update(field, value)
+            
+//            if let field = AccountField(rawValue: indexPath.row) {
+//                let value = accountStorageservice.fetch(field: field)
+//                
+//                cell.update(field, value)
+//            }
 
             cell.selectionStyle = .none
             return cell
@@ -138,19 +143,9 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
      }
      
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        if indexPath.section == 2 {
-            print(indexPath.section)
-            accountStorageservice.deleteAll()
-            accountStorageservice.print()
-            self.dismiss(animated: true)
-            tableView.reloadData()
-        } else if indexPath.section == 3 {
-            accountStorageservice.deleteAll()
-            let vc = AuthorizationVC()
-            self.present(vc, animated: true)
-            tableView.reloadData()
-        }
+        
+        presenter?.rowSelected(indexPath)
+        tableView.reloadData()
     }
 }
 
@@ -177,5 +172,18 @@ extension AccountSettingsVC {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - Navigation
+extension AccountSettingsVC {
+    func navigateToPreviousScreen() {
+        self.dismiss(animated: true)
+    }
+    
+    func navigateToAuthScreen() {
+        let vc = AuthConfigurator().configure()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }

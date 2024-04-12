@@ -13,7 +13,26 @@ enum AccountSectionType: Int, CaseIterable {
     case entertainment
 }
 
-class AccountDetailVC: UIViewController {
+protocol AccountDetailVCProtocol: AnyObject {
+    
+    //Connections
+    var presenter: AccountDetailPresenter? { get set }
+    
+    //Update View
+    func tableViewHeightChanged()
+    
+    //Navigations
+    func navigateToSettingsScreen()
+    func navigateToMenuScreen()
+    func navigateToEntertainmentScreen(withURL url: URL)
+    func navigateToEmailScreen()
+    func navigateToTelegramScreen()
+    func navigateToPhoneCallScreen()
+}
+
+class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
+    
+    var presenter: AccountDetailPresenter?
     
     var isExpanded = false
     let maxTableHeight: CGFloat = 140
@@ -120,22 +139,15 @@ class AccountDetailVC: UIViewController {
 
     //MARK: - Action
     @objc func settingsButtonTapped() {
-        let vc = AccountSettingsVC()
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+        self.navigateToSettingsScreen()
     }
     
     @objc func closeButtonTapped() {
-        let vc = MenuVC()
-        present(vc, animated: true)
+        self.navigateToMenuScreen()
     }
     
     @objc func toggleTableView() {
-         tableViewHeightConstraint.constant = isExpanded ? 0 : maxTableHeight
-         UIView.animate(withDuration: 0.3) {
-             self.view.layoutIfNeeded()
-         }
-         isExpanded.toggle()
+        self.tableViewHeightChanged()
      }
 }
 
@@ -183,21 +195,8 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.onItemTapped = { [weak self] indexPath in
                         
-                        var videoURL: URL?
-                        
-                        switch indexPath.row {
-                        case 0:
-                            videoURL = URL(string: "https://youtu.be/ggqXttEhWlY?si=HIfSQC5LWHk3umXI")
-                        case 1:
-                            videoURL = URL(string: "https://youtu.be/sv3TXMSv6Lw?si=Zlffeyae8OyM5WEi")
-                        case 2:
-                            videoURL = URL(string: "https://youtu.be/Eim2GpHNQDg?si=983bbagAMCTqbetP")
-                        default:
-                            videoURL = URL(string: "https://youtu.be/Eim2GpHNQDg?si=983bbagAMCTqbetP")
-                        }
-                        
-                        let vc = EntertainmentVC(videoURL: videoURL)
-                        self?.present(vc, animated: true)
+                        self?.presenter?.entertainmentItemTapped(indexPath)
+
                     }
                     
                     return cell
@@ -210,23 +209,9 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.connectionTableView {
-            if indexPath.row == 0 {
-                let email = "pizzadelivery@test.com"
-                if let url = URL(string: "mailto:\(email)"), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            } else if indexPath.row == 1 {
-                let telegramUsername = "anzmax"
-                if let url = URL(string: "tg://resolve?domain=\(telegramUsername)"), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            } else if indexPath.row == 2 {
-                let phoneNumber = "+447347737347"
-                if let url = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(url) {
-                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                }
-            }
+            self.presenter?.didSelectConnectionItem(indexPath.row)
         }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -320,4 +305,56 @@ extension AccountDetailVC {
         ])
     }
     
+}
+
+//MARK: - Update View
+extension AccountDetailVC {
+    
+    func tableViewHeightChanged() {
+        tableViewHeightConstraint.constant = isExpanded ? 0 : maxTableHeight
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+        isExpanded.toggle()
+    }
+}
+
+//MARK: - Navigation
+extension AccountDetailVC {
+    func navigateToSettingsScreen() {
+        let vc = AccountSettingsConfigurator().configure()
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    func navigateToMenuScreen() {
+        let vc = MenuConfigurator().configure()
+        present(vc, animated: true)
+    }
+    
+    func navigateToEntertainmentScreen(withURL url: URL) {
+        let vc = EntertainmentVC(videoURL: url)
+        present(vc, animated: true)
+    }
+    
+    func navigateToEmailScreen() {
+        let email = "pizzadelivery@test.com"
+        if let url = URL(string: "mailto:\(email)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
+    func navigateToTelegramScreen() {
+        let telegramUsername = "anzmax"
+        if let url = URL(string: "tg://resolve?domain=\(telegramUsername)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
+    func navigateToPhoneCallScreen() {
+        let phoneNumber = "+447347737347"
+        if let url = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
 }

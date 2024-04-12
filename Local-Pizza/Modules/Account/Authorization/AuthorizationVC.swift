@@ -8,7 +8,21 @@
 import UIKit
 import FirebaseAuth
 
-class AuthorizationVC: UIViewController {
+protocol AuthorizationVCProtocol: AnyObject {
+    
+    //Connections
+    var presenter: AuthPresenter? { get set }
+    
+    //Update View
+    func showAlert(_ message: String)
+    
+    //Navigation
+    func navigateToVerificationScreen()
+}
+
+class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
+    
+    var presenter: AuthPresenter?
 
     //MARK: - UI Elelments
     lazy var titleLabel: UILabel = {
@@ -55,35 +69,11 @@ class AuthorizationVC: UIViewController {
     
     //MARK: - Action
     @objc func doneButtonAction() {
-        guard let phoneNumber = phoneTextField.text, !phoneNumber.isEmpty else {
-            showAlert("Пожалуйста, введите номер телефона")
-            return
-        }
         
-        let phoneWithCountryCode = "+44\(phoneNumber)"
-        
-        PhoneAuthProvider.provider().verifyPhoneNumber(phoneWithCountryCode, uiDelegate: nil) { verificationID, error in
-            
-            if let error = error {
-                print("Ошибка при отправке кода верификации: \(error.localizedDescription)")
-                return
-            }
-            
-            UserDefaults.standard.set(verificationID, forKey: "authVerificationID")
-
-            DispatchQueue.main.async {
-                let vc = VerificationConfigurator().configure()
-                self.present(vc, animated: true)
-                print("Код верификации отправлен")
-            }
+        if let phoneNumber = phoneTextField.text {
+            presenter?.sendVerificationCode(phoneNumber, phoneTextField)
         }
     }
-    
-    func showAlert(_ message: String) {
-         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
-         alert.addAction(UIAlertAction(title: "OK", style: .default))
-         present(alert, animated: true)
-     }
 }
 
 //MARK: - UITextFieldDelegate
@@ -152,5 +142,23 @@ extension AuthorizationVC {
         doneToolbar.sizeToFit()
         
         phoneTextField.inputAccessoryView = doneToolbar
+    }
+}
+
+//MARK: - Update View
+extension AuthorizationVC {
+    func showAlert(_ message: String) {
+         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+         alert.addAction(UIAlertAction(title: "OK", style: .default))
+         present(alert, animated: true)
+     }
+}
+
+//MARK: - Navigation
+extension AuthorizationVC {
+    func navigateToVerificationScreen() {
+        let vc = VerificationConfigurator().configure()
+        self.present(vc, animated: true)
+        print("Код верификации отправлен")
     }
 }

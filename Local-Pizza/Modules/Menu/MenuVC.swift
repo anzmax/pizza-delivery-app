@@ -281,7 +281,7 @@ extension MenuVC {
     }
     
     func navigateToPizzaMapScreen() {
-        let pizzaMapVC = PizzaMapConfigurator().configure() //PizzaMapVC()
+        let pizzaMapVC = PizzaMapConfigurator().configure() 
         pizzaMapVC.onAddressChanged = { addressText in
             self.addressText = addressText
         }
@@ -290,13 +290,14 @@ extension MenuVC {
     
     func navigateToProductDetailScreen(_ product: Product) {
         let vc = ProductDetailConfigurator().configure(product)
-        //vc.update(with: product)
         present(vc, animated: true)
     }
     
     func navigateToAuthorizationScreen() {
-        let vc = AuthorizationVC()
-//        //let vc = AccountDetailVC()
+        
+        //let vc = AccountSettingsConfigurator().configure()
+        
+        let vc = AuthConfigurator().configure()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
