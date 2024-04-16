@@ -16,6 +16,18 @@ final class MenuConfigurator {
         
         menuVC.presenter = menuPresenter
         menuPresenter.view = menuVC
+        
+        let productsService = ProductNetworkService()
+        let specialsService = SpecialsNetworkService()
+        let categoriesService = CategoriesNetworkService()
+        let storiesService = StoriesNetworkService()
+        let coreDataService = CoreDataService()
+        
+        menuPresenter.productsService = productsService
+        menuPresenter.specialsService = specialsService
+        menuPresenter.categoriesService = categoriesService
+        menuPresenter.storiesService = storiesService
+        menuPresenter.coreDataService = coreDataService
 
         return menuVC
     }

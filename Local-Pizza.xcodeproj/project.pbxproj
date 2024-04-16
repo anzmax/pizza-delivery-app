@@ -65,6 +65,10 @@
 		F410DBA32BC83CD8000A7F98 /* AccountDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA22BC83CD8000A7F98 /* AccountDetailPresenter.swift */; };
 		F410DBA52BC84625000A7F98 /* AccountSettingsConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA42BC84625000A7F98 /* AccountSettingsConfigurator.swift */; };
 		F410DBA72BC84634000A7F98 /* AccountSettingsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBA62BC84634000A7F98 /* AccountSettingsPresenter.swift */; };
+		F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */; };
+		F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBB82BCEB976000A7F98 /* MenuVCTests.swift */; };
+		F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBA2BCEB989000A7F98 /* MenuPresenterTests.swift */; };
+		F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -98,6 +102,16 @@
 		F4C93E792BACB867005B9C37 /* EntertainmentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C93E782BACB867005B9C37 /* EntertainmentVC.swift */; };
 		F4C93E7B2BADF2EB005B9C37 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F410DBB02BC96418000A7F98 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F40458772B7A487300C36880 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F404587E2B7A487300C36880;
+			remoteInfo = "Local-Pizza";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F404587F2B7A487300C36880 /* Local-Pizza.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Local-Pizza.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -160,6 +174,11 @@
 		F410DBA22BC83CD8000A7F98 /* AccountDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPresenter.swift; sourceTree = "<group>"; };
 		F410DBA42BC84625000A7F98 /* AccountSettingsConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsConfigurator.swift; sourceTree = "<group>"; };
 		F410DBA62BC84634000A7F98 /* AccountSettingsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsPresenter.swift; sourceTree = "<group>"; };
+		F410DBAC2BC96418000A7F98 /* Local-PizzaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Local-PizzaTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Local_PizzaTests.swift; sourceTree = "<group>"; };
+		F410DBB82BCEB976000A7F98 /* MenuVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTests.swift; sourceTree = "<group>"; };
+		F410DBBA2BCEB989000A7F98 /* MenuPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenterTests.swift; sourceTree = "<group>"; };
+		F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuServicesTests.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -202,6 +221,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F410DBA92BC96418000A7F98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -209,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				F40458812B7A487300C36880 /* Local-Pizza */,
+				F410DBAD2BC96418000A7F98 /* Local-PizzaTests */,
 				F40458802B7A487300C36880 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -217,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				F404587F2B7A487300C36880 /* Local-Pizza.app */,
+				F410DBAC2BC96418000A7F98 /* Local-PizzaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -508,6 +536,25 @@
 			path = Entertainment;
 			sourceTree = "<group>";
 		};
+		F410DBAD2BC96418000A7F98 /* Local-PizzaTests */ = {
+			isa = PBXGroup;
+			children = (
+				F410DBB52BC967C2000A7F98 /* Menu */,
+				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
+			);
+			path = "Local-PizzaTests";
+			sourceTree = "<group>";
+		};
+		F410DBB52BC967C2000A7F98 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				F410DBB82BCEB976000A7F98 /* MenuVCTests.swift */,
+				F410DBBA2BCEB989000A7F98 /* MenuPresenterTests.swift */,
+				F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */,
+			);
+			path = Menu;
+			sourceTree = "<group>";
+		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -549,6 +596,24 @@
 			productReference = F404587F2B7A487300C36880 /* Local-Pizza.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F410DBAB2BC96418000A7F98 /* Local-PizzaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F410DBB42BC96418000A7F98 /* Build configuration list for PBXNativeTarget "Local-PizzaTests" */;
+			buildPhases = (
+				F410DBA82BC96418000A7F98 /* Sources */,
+				F410DBA92BC96418000A7F98 /* Frameworks */,
+				F410DBAA2BC96418000A7F98 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F410DBB12BC96418000A7F98 /* PBXTargetDependency */,
+			);
+			name = "Local-PizzaTests";
+			productName = "Local-PizzaTests";
+			productReference = F410DBAC2BC96418000A7F98 /* Local-PizzaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -556,11 +621,15 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1520;
+				LastSwiftUpdateCheck = 1530;
 				LastUpgradeCheck = 1520;
 				TargetAttributes = {
 					F404587E2B7A487300C36880 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					F410DBAB2BC96418000A7F98 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = F404587E2B7A487300C36880;
 					};
 				};
 			};
@@ -582,6 +651,7 @@
 			projectRoot = "";
 			targets = (
 				F404587E2B7A487300C36880 /* Local-Pizza */,
+				F410DBAB2BC96418000A7F98 /* Local-PizzaTests */,
 			);
 		};
 /* End PBXProject section */
@@ -596,6 +666,13 @@
 				F404588A2B7A487300C36880 /* Main.storyboard in Resources */,
 				F409E1E32B921C5900A88D2C /* GoogleService-Info.plist in Resources */,
 				F4C7319C2BA47BA900393E83 /* Products.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F410DBAA2BC96418000A7F98 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,7 +769,26 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F410DBA82BC96418000A7F98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */,
+				F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */,
+				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
+				F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F410DBB12BC96418000A7F98 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F404587E2B7A487300C36880 /* Local-Pizza */;
+			targetProxy = F410DBB02BC96418000A7F98 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F40458882B7A487300C36880 /* Main.storyboard */ = {
@@ -901,6 +997,44 @@
 			};
 			name = Release;
 		};
+		F410DBB22BC96418000A7F98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LS5WY3DH94;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anzmax.Local-PizzaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Local-Pizza.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Local-Pizza";
+			};
+			name = Debug;
+		};
+		F410DBB32BC96418000A7F98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = LS5WY3DH94;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.anzmax.Local-PizzaTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Local-Pizza.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Local-Pizza";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -918,6 +1052,15 @@
 			buildConfigurations = (
 				F40458942B7A487400C36880 /* Debug */,
 				F40458952B7A487400C36880 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F410DBB42BC96418000A7F98 /* Build configuration list for PBXNativeTarget "Local-PizzaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F410DBB22BC96418000A7F98 /* Debug */,
+				F410DBB32BC96418000A7F98 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

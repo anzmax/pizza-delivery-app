@@ -7,7 +7,11 @@
 
 import UIKit
 
-class StoriesNetworkService {
+protocol StoriesNetworkServiceProtocol: AnyObject {
+    func fetchStory(completion: @escaping (Result<[Story], NetworkError>) -> Void)
+}
+
+class StoriesNetworkService: StoriesNetworkServiceProtocol {
     
     func fetchStory(completion: @escaping (Result<[Story], NetworkError>) -> Void) {
         

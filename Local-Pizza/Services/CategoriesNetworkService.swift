@@ -7,7 +7,11 @@
 
 import UIKit
 
-class CategoriesNetworkService {
+protocol CategoriesNetworkServiceProtocol: AnyObject {
+    func fetchCategory(completion: @escaping (Result<[Category], NetworkError>) -> Void)
+}
+
+class CategoriesNetworkService: CategoriesNetworkServiceProtocol {
     
     func fetchCategory(completion: @escaping (Result<[Category], NetworkError>) -> Void) {
         

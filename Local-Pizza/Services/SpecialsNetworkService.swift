@@ -7,7 +7,11 @@
 
 import UIKit
 
-class SpecialsNetworkService {
+protocol SpecialsNetworkServiceProtocol: AnyObject {
+    func fetchSpecials(completion: @escaping (Result<[Special], NetworkError>) -> Void)
+}
+
+class SpecialsNetworkService: SpecialsNetworkServiceProtocol {
     
     func fetchSpecials(completion: @escaping (Result<[Special], NetworkError>) -> Void) {
         

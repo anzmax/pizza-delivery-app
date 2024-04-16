@@ -5,7 +5,7 @@
 //  Created by Lika Maksimovic on 29.03.2024.
 //
 
-import Foundation
+import UIKit
 
 
 protocol MenuPresenterProtocol: AnyObject {
@@ -22,6 +22,7 @@ protocol MenuPresenterProtocol: AnyObject {
     func addressButtonTapped()
     func categoryCellSelected(_ index: Int, _ products: [Product])
     func favouriteButtonTapped(_ favouritesVC: FavouritesVC, _ product: Product)
+    func storyCellSelected(_ image: UIImage?)
     
     //Business Logic
     func fetchProducts()
@@ -39,10 +40,11 @@ final class MenuPresenter: MenuPresenterProtocol {
     
     //MARL: - Services
     var archiver = ProductsArchiver()
-    var productsService = ProductNetworkService()
-    var storiesService = StoriesNetworkService()
-    var specialsService = SpecialsNetworkService()
-    var categoriesService = CategoriesNetworkService()
+    var coreDataService: CoreDataServiceProtocol?
+    var productsService: ProductNetworkServiceProtocol?
+    var storiesService: StoriesNetworkServiceProtocol?
+    var specialsService: SpecialsNetworkServiceProtocol?
+    var categoriesService: CategoriesNetworkServiceProtocol?
 }
 
 //MARK: - View Event
@@ -87,21 +89,24 @@ extension MenuPresenter {
     }
     
     func addressSegmentChanged(_ deliveryType: DeliveryType) {
-
+        
         switch deliveryType {
-            
         case .takeAway:
-
             view?.navigateToPizzaMapScreen()
-     
+            
         case .address:
             view?.navigateToDeliveryMapScreen()
-         
+            
         }
     }
     
     func addressButtonTapped() {
         view?.navigateToDeliveryMapScreen()
+    }
+    
+    func storyCellSelected(_ image: UIImage?) {
+        guard let image = image else { return }
+        view?.navigateToStoryDetailScreen(image)
     }
 
 }
@@ -111,10 +116,10 @@ extension MenuPresenter {
     
     func addProductToFavorites(_ favouritesVC: FavouritesVC, _ product: Product) {
         
-        CoreDataService.shared.addProductToFavourites(product: product)
+        coreDataService?.addProductToFavourites(product: product)
         NotificationCenter.default.post(name: .favoritesDidUpdate, object: nil)
         
-        CoreDataService.shared.fetchFavouriteProducts { products in
+        coreDataService?.fetchFavouriteProducts { products in
             DispatchQueue.main.async {
                 favouritesVC.favouriteProducts = products
                 favouritesVC.tableView.reloadData()
@@ -125,7 +130,7 @@ extension MenuPresenter {
     
     //MARK: - Fetch Requests
     func fetchProducts() {
-        productsService.fetchProducts { result in
+        productsService?.fetchProducts { result in
             switch result {
             case .success(let products):
                 self.view?.showProducts(products)
@@ -136,7 +141,7 @@ extension MenuPresenter {
     }
 
     func fetchSpecials() {
-        specialsService.fetchSpecials { result in
+        specialsService?.fetchSpecials { result in
             switch result {
             case .success(let specials):
                 self.view?.showSpecials(specials)
@@ -147,7 +152,7 @@ extension MenuPresenter {
     }
 
     func fetchStories() {
-        storiesService.fetchStory { result in
+        storiesService?.fetchStory { result in
             switch result {
             case .success(let stories):
                 self.view?.showStories(stories)
@@ -158,7 +163,7 @@ extension MenuPresenter {
     }
 
     func fetchCategories() {
-        categoriesService.fetchCategory { result in
+        categoriesService?.fetchCategory { result in
             switch result {
             case .success(let categories):
                 self.view?.showCategories(categories)

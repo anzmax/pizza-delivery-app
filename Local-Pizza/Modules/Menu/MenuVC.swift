@@ -106,9 +106,8 @@ class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
     }
     
     func didSelectStoryImage(_ image: UIImage?) {
-        guard let image = image else { return }
         
-        navigateToStoryDetailScreen(image)
+        presenter?.storyCellSelected(image)
     }
 }
 
@@ -116,7 +115,6 @@ class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
 extension MenuVC {
     
     @objc func accountButtonTapped() {
-        
         presenter?.accountButtonTapped()
     }
 }
@@ -158,12 +156,11 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.onAddressSegmentChanged = { deliveryType in
                     
-                    self.presenter?.addressSegmentChanged(deliveryType)
+                    self.addressTypeSegmentChanged(deliveryType)
                 }
                 
                 cell.onAddressButtonTapped = {
-                    
-                    self.presenter?.addressButtonTapped()
+                    self.addressButtonSelected()
                 }
                 
                 return cell
@@ -182,12 +179,10 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTVCell.id, for: indexPath) as! CategoriesTVCell
                 cell.selectionStyle = .none
                 cell.update(with: categories)
-                
-               
-                
-                cell.onCategorySelected = {  index in
+ 
+                cell.onCategorySelected = { index in
                     
-                    self.presenter?.categoryCellSelected(index, self.products)
+                    self.categoryCellTapped(index)
                 }
                 
                 return cell
@@ -198,7 +193,8 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 cell.update(with: product)
                 
                 cell.onPriceButtonTapped = { product in
-                    self.presenter?.productPriceButtonTapped(product)
+                    
+                    self.productCellPriceButtonTapped(product)
                 }
                 
                 cell.onFavouriteButtonTapped = { product in
@@ -206,8 +202,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                     if let tabBarController = self.tabBarController,
                        let favouritesVC = tabBarController.viewControllers?[1] as? FavouritesVC {
                         
-                        self.presenter?.favouriteButtonTapped(favouritesVC, product)
-                        
+                        self.favouriteButtonSelected(favouritesVC, product)
                     }
                 }
                 
@@ -238,12 +233,11 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let product = products[indexPath.row]
-        presenter?.productCellSelected(product)
+        productCellSelected(product)
     }
 }
 
 //MARK: - Update View
-
 extension MenuVC {
     
     func scrollTableViewToIndexPath(_ indexPath: IndexPath, _ productIndex: Int) {
@@ -266,6 +260,34 @@ extension MenuVC {
     
     func showStories(_ stories: [Story]) {
         self.stories = stories
+    }
+}
+
+//MARK: - Event Handler
+extension MenuVC {
+    
+    func favouriteButtonSelected(_ favouritesVC: FavouritesVC,  _ product: Product) {
+        self.presenter?.favouriteButtonTapped(favouritesVC, product)
+    }
+    
+    func categoryCellTapped(_ index: Int) {
+        self.presenter?.categoryCellSelected(index, self.products)
+    }
+    
+    func addressTypeSegmentChanged(_ deliveryType: DeliveryType) {
+        self.presenter?.addressSegmentChanged(deliveryType)
+    }
+    
+    func productCellPriceButtonTapped(_ product: Product) {
+        self.presenter?.productPriceButtonTapped(product)
+    }
+    
+    func productCellSelected(_ product: Product) {
+        presenter?.productCellSelected(product)
+    }
+    
+    func addressButtonSelected() {
+        self.presenter?.addressButtonTapped()
     }
 }
 

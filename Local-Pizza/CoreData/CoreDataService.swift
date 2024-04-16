@@ -8,10 +8,15 @@
 import CoreData
 import UIKit
 
-class CoreDataService {
+protocol CoreDataServiceProtocol: AnyObject {
+    func addProductToFavourites(product: Product)
+    func fetchFavouriteProducts(completion: @escaping ([Product]) -> Void)
+}
+
+class CoreDataService: CoreDataServiceProtocol {
     
-    static let shared = CoreDataService()
-    private init() {}
+//    static let shared = CoreDataService()
+//    private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: .dataName)

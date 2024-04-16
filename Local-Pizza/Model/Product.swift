@@ -109,3 +109,9 @@ struct Product: Codable, Equatable {
     }
 
 }
+
+extension Product {
+    static var data: Product {
+        Product(image: "", title: "", description: "", price: "")
+    }
+}
