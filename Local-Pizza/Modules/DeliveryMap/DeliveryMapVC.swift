@@ -96,7 +96,7 @@ class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
     }
     
     //MARK:- Action
-    @objc private func saveButtonTapped() {
+    @objc func saveButtonTapped() {
         presenter?.saveButtonTapped()
     }
     
