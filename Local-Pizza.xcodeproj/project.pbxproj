@@ -69,6 +69,9 @@
 		F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBB82BCEB976000A7F98 /* MenuVCTests.swift */; };
 		F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBA2BCEB989000A7F98 /* MenuPresenterTests.swift */; };
 		F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */; };
+		F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBF2BCEC3CA000A7F98 /* ProductDetailVCTests.swift */; };
+		F410DBC32BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC22BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift */; };
+		F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -179,6 +182,9 @@
 		F410DBB82BCEB976000A7F98 /* MenuVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuVCTests.swift; sourceTree = "<group>"; };
 		F410DBBA2BCEB989000A7F98 /* MenuPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuPresenterTests.swift; sourceTree = "<group>"; };
 		F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuServicesTests.swift; sourceTree = "<group>"; };
+		F410DBBF2BCEC3CA000A7F98 /* ProductDetailVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCTests.swift; sourceTree = "<group>"; };
+		F410DBC22BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailPresenterTests.swift; sourceTree = "<group>"; };
+		F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailServicesTests.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -540,6 +546,7 @@
 			isa = PBXGroup;
 			children = (
 				F410DBB52BC967C2000A7F98 /* Menu */,
+				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
 				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
 			);
 			path = "Local-PizzaTests";
@@ -553,6 +560,16 @@
 				F410DBBC2BCEB99B000A7F98 /* MenuServicesTests.swift */,
 			);
 			path = Menu;
+			sourceTree = "<group>";
+		};
+		F410DBBE2BCEC397000A7F98 /* ProductDetail */ = {
+			isa = PBXGroup;
+			children = (
+				F410DBBF2BCEC3CA000A7F98 /* ProductDetailVCTests.swift */,
+				F410DBC22BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift */,
+				F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */,
+			);
+			path = ProductDetail;
 			sourceTree = "<group>";
 		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
@@ -773,9 +790,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */,
+				F410DBC32BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift in Sources */,
 				F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */,
 				F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */,
 				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
+				F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */,
 				F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

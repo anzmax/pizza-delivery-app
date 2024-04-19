@@ -311,6 +311,8 @@ extension MenuVC {
     }
     
     func navigateToProductDetailScreen(_ product: Product) {
+        
+        
         let vc = ProductDetailConfigurator().configure(product)
         present(vc, animated: true)
     }

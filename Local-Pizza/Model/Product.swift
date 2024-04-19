@@ -29,7 +29,7 @@ enum SizeType: Int, CaseIterable {
         case .small:
             return 50
         case .medium:
-            return 100
+            return 0
         case .big:
             return 200
         }
@@ -52,9 +52,9 @@ enum DoughType: Int, Equatable {
     func getPrice() -> Int {
         switch self {
         case .thin:
-            return 110
+            return 0
         case .thick:
-            return 55
+            return 100
         }
     }
 }

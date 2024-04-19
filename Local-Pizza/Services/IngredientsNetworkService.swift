@@ -7,7 +7,11 @@
 
 import UIKit
 
-class IngredientsNetworkService {
+protocol IngredientsNetworkServiceProtocol: AnyObject {
+    func fetchIngredients(completion: @escaping (Result<[Ingredient], NetworkError>) -> Void)
+}
+
+class IngredientsNetworkService: IngredientsNetworkServiceProtocol {
     
     func fetchIngredients(completion: @escaping (Result<[Ingredient], NetworkError>) -> Void) {
         

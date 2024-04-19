@@ -27,7 +27,7 @@ class ProductDetailPresenter: ProductDetailPresenterProtocol {
     weak var view: ProductDetailVCProtocol?
     
     var archiver = ProductsArchiver()
-    var ingredientsService = IngredientsNetworkService()
+    var ingredientsService: IngredientsNetworkServiceProtocol?
     
 }
 
@@ -40,7 +40,7 @@ extension ProductDetailPresenter {
     func cartButtonTapped(_ button: UIButton, _ product: Product?) {
         let originalColor = button.backgroundColor
         button.backgroundColor = .systemGray3
-
+        
         UIView.animate(withDuration: 1, animations: {
             button.backgroundColor = originalColor
         })
@@ -53,7 +53,6 @@ extension ProductDetailPresenter {
     }
 
     func doughCellSelected(_ index: Int, _ product: Product) {
-        
         view?.showProductDough(index)
     }
     
@@ -65,7 +64,7 @@ extension ProductDetailPresenter {
 //MARK: - Business Logic
 extension ProductDetailPresenter {
     func fetchIngredients() {
-        ingredientsService.fetchIngredients { result in
+        ingredientsService?.fetchIngredients { result in
             switch result {
             case .success(let ingredients):
                 self.view?.showIngredients(ingredients)
