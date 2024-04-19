@@ -152,7 +152,9 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 cell.onProductCountChanged = { changedProduct in
-                    self.presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
+                    self.productCellCountChanged(changedProduct)
+                    
+//                    self.presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
                 }
                 
                 cell.selectionStyle = .none
@@ -163,7 +165,8 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ExtrasTVCell.id, for: indexPath) as! ExtrasTVCell
                 
                 cell.onPriceButtonTapped = { product in
-                    self.presenter?.priceButtonTapped(product)
+                    self.priceButtonTapped(product)
+//                    self.presenter?.priceButtonTapped(product)
                 }
                 
                 print(dessertsAndDrinks)
@@ -370,5 +373,17 @@ extension CartVC {
     
     func navigateToMenu() {
         self.tabBarController?.selectedIndex = 0
+    }
+}
+
+//MARK: - Event Handler
+extension CartVC {
+    
+    func productCellCountChanged(_ changedProduct: Product) {
+        presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
+    }
+    
+    func priceButtonTapped(_ product: Product) {
+        presenter?.priceButtonTapped(product)
     }
 }

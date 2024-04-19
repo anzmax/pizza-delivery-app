@@ -72,6 +72,9 @@
 		F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBBF2BCEC3CA000A7F98 /* ProductDetailVCTests.swift */; };
 		F410DBC32BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC22BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift */; };
 		F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */; };
+		F410DBC82BD29EA0000A7F98 /* CartVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC72BD29EA0000A7F98 /* CartVCTests.swift */; };
+		F410DBCA2BD29EC1000A7F98 /* CartPresenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC92BD29EC1000A7F98 /* CartPresenerTests.swift */; };
+		F410DBCC2BD2A8E0000A7F98 /* CartServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBCB2BD2A8E0000A7F98 /* CartServicesTests.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -185,6 +188,9 @@
 		F410DBBF2BCEC3CA000A7F98 /* ProductDetailVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVCTests.swift; sourceTree = "<group>"; };
 		F410DBC22BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailPresenterTests.swift; sourceTree = "<group>"; };
 		F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailServicesTests.swift; sourceTree = "<group>"; };
+		F410DBC72BD29EA0000A7F98 /* CartVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVCTests.swift; sourceTree = "<group>"; };
+		F410DBC92BD29EC1000A7F98 /* CartPresenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenerTests.swift; sourceTree = "<group>"; };
+		F410DBCB2BD2A8E0000A7F98 /* CartServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartServicesTests.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -547,6 +553,7 @@
 			children = (
 				F410DBB52BC967C2000A7F98 /* Menu */,
 				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
+				F410DBC62BD29E73000A7F98 /* Cart */,
 				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
 			);
 			path = "Local-PizzaTests";
@@ -570,6 +577,16 @@
 				F410DBC42BCEC3F8000A7F98 /* ProductDetailServicesTests.swift */,
 			);
 			path = ProductDetail;
+			sourceTree = "<group>";
+		};
+		F410DBC62BD29E73000A7F98 /* Cart */ = {
+			isa = PBXGroup;
+			children = (
+				F410DBC72BD29EA0000A7F98 /* CartVCTests.swift */,
+				F410DBC92BD29EC1000A7F98 /* CartPresenerTests.swift */,
+				F410DBCB2BD2A8E0000A7F98 /* CartServicesTests.swift */,
+			);
+			path = Cart;
 			sourceTree = "<group>";
 		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
@@ -792,11 +809,14 @@
 			files = (
 				F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */,
 				F410DBC32BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift in Sources */,
+				F410DBC82BD29EA0000A7F98 /* CartVCTests.swift in Sources */,
 				F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */,
 				F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */,
 				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
 				F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */,
+				F410DBCA2BD29EC1000A7F98 /* CartPresenerTests.swift in Sources */,
 				F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */,
+				F410DBCC2BD2A8E0000A7F98 /* CartServicesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

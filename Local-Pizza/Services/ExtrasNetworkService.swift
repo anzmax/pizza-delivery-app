@@ -7,7 +7,11 @@
 
 import UIKit
 
-class ExtrasNetworkService {
+protocol ExtrasNetworkServiceProtocol: AnyObject {
+    func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void)
+}
+
+class ExtrasNetworkService: ExtrasNetworkServiceProtocol {
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
         

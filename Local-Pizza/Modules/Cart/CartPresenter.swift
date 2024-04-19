@@ -29,9 +29,8 @@ class CartPresenter: CartPresenterProtocol {
     
     weak var view: CartVCProtocol?
     
-    let archiver = ProductsArchiver()
-    //let productService = ProductService()
-    let extrasService = ExtrasNetworkService()
+    var archiver: ProductsArchiverProtocol?
+    var extrasService: ExtrasNetworkServiceProtocol?
 }
 
 //MARK: - View Event
@@ -73,26 +72,26 @@ extension CartPresenter {
 //MARK: - Business Logic
 extension CartPresenter {
     func removeProductFromArchiver(_ productToRemove: Product) {
-        self.archiver.remove(productToRemove)
+        self.archiver?.remove(productToRemove)
     }
     
     func appendProductToArchiver(_ product: Product) {
-        self.archiver.append(product)
+        self.archiver?.append(product)
     }
     
     func saveProductsInArchiver(_ itemsInCart: [Product]) {
-        self.archiver.save(itemsInCart)
+        self.archiver?.save(itemsInCart)
     }
     
     func fetchProducts() {
-        let products = archiver.fetch()
-        
-        view?.showItemsInCart(products)
+        if let products = archiver?.fetch() {
+            view?.showItemsInCart(products)
+        }
     }
     
     func fetchDessertsAndDrinks() {
 
-        extrasService.fetchProducts { result in
+        extrasService?.fetchProducts { result in
             switch result {
             case .success(let products):
                 
