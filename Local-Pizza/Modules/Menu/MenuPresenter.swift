@@ -40,7 +40,9 @@ final class MenuPresenter: MenuPresenterProtocol {
     
     //MARL: - Services
     var archiver = ProductsArchiver()
+    //var archiver: ProductsArchiverProtocol?
     var coreDataService: CoreDataServiceProtocol?
+    //var coreDataService = CoreDataService()
     var productsService: ProductNetworkServiceProtocol?
     var storiesService: StoriesNetworkServiceProtocol?
     var specialsService: SpecialsNetworkServiceProtocol?
@@ -58,7 +60,6 @@ extension MenuPresenter {
     }
     
     func favouriteButtonTapped(_ favouritesVC: FavouritesVC, _ product: Product) {
-        
         addProductToFavorites(favouritesVC, product)
     }
     

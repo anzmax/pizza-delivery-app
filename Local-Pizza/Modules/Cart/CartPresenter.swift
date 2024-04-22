@@ -30,6 +30,9 @@ class CartPresenter: CartPresenterProtocol {
     weak var view: CartVCProtocol?
     
     var archiver: ProductsArchiverProtocol?
+    //var archiver = ProductsArchiver()
+   // var extrasService = ExtrasNetworkService()
+    
     var extrasService: ExtrasNetworkServiceProtocol?
 }
 

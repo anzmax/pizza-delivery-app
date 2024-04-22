@@ -26,7 +26,9 @@ class ProductDetailPresenter: ProductDetailPresenterProtocol {
     
     weak var view: ProductDetailVCProtocol?
     
-    var archiver = ProductsArchiver()
+    //var archiver = ProductsArchiver()
+    //var ingredientsService = IngredientsNetworkService()
+    var archiver: ProductsArchiverProtocol?
     var ingredientsService: IngredientsNetworkServiceProtocol?
     
 }
@@ -46,7 +48,7 @@ extension ProductDetailPresenter {
         })
         
         if let product = product {
-            self.archiver.append(product)
+            self.archiver?.append(product)
         }
         
         self.view?.navigateToPreviousScreen()

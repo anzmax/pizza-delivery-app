@@ -33,7 +33,15 @@ enum AccountField: Int, CaseIterable {
     }
 }
 
-class AccountStorageService {
+protocol AccountStorageServiceProtocol: AnyObject {
+    func save(field: AccountField, value: String)
+    func fetch(field: AccountField) -> String
+    func delete(field: AccountField)
+    func deleteAll()
+    func print()
+}
+
+class AccountStorageService: AccountStorageServiceProtocol {
     
     private let keychainWrapper = KeychainWrapper.standard
     

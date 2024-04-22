@@ -25,7 +25,8 @@ protocol FavouritesPresenterProtocol: AnyObject {
 class FavouritesPresenter: FavouritesPresenterProtocol {
     
     weak var view: FavouritesVCProtocol?
-    var archiver = ProductsArchiver()
+    //var archiver = ProductsArchiver()
+    var archiver: ProductsArchiverProtocol?
     var coreDataService = CoreDataService()
 }
 
@@ -45,7 +46,7 @@ extension FavouritesPresenter {
     }
     
     func cellPriceButtonTapped(_ product: Product) {
-        self.archiver.append(product)
+        self.archiver?.append(product)
     }
     
     func productCellSwipeToDelete(_ indexPath: IndexPath, _ product: Product) {

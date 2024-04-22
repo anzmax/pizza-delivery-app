@@ -79,6 +79,16 @@
 		F43211B62BD2AFF600642E5B /* PizzaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B52BD2AFF600642E5B /* PizzaPresenterTests.swift */; };
 		F43211B82BD2B51C00642E5B /* DeliveryVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B72BD2B51C00642E5B /* DeliveryVCTests.swift */; };
 		F43211BA2BD2B52A00642E5B /* DeliveryPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B92BD2B52A00642E5B /* DeliveryPresenterTests.swift */; };
+		F43211C12BD2B80D00642E5B /* AuthVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211C02BD2B80D00642E5B /* AuthVCTests.swift */; };
+		F43211C32BD2B81C00642E5B /* AuthPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211C22BD2B81C00642E5B /* AuthPresenterTests.swift */; };
+		F43211C52BD2BCA900642E5B /* VerificationVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211C42BD2BCA900642E5B /* VerificationVCTests.swift */; };
+		F43211C72BD2BCB700642E5B /* VerificationPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211C62BD2BCB700642E5B /* VerificationPresenterTests.swift */; };
+		F43211C92BD2C47000642E5B /* AccountDetailVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211C82BD2C47000642E5B /* AccountDetailVCTests.swift */; };
+		F43211CB2BD2C47E00642E5B /* AccountDetailPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211CA2BD2C47E00642E5B /* AccountDetailPresenterTests.swift */; };
+		F43211CD2BD2CBFD00642E5B /* AccountSettingVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211CC2BD2CBFD00642E5B /* AccountSettingVCTests.swift */; };
+		F43211CF2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211CE2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift */; };
+		F43211D12BD2CD0500642E5B /* AccountSettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D02BD2CD0500642E5B /* AccountSettingItem.swift */; };
+		F43211D32BD696CE00642E5B /* AccountSettingsServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -199,6 +209,16 @@
 		F43211B52BD2AFF600642E5B /* PizzaPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPresenterTests.swift; sourceTree = "<group>"; };
 		F43211B72BD2B51C00642E5B /* DeliveryVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryVCTests.swift; sourceTree = "<group>"; };
 		F43211B92BD2B52A00642E5B /* DeliveryPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryPresenterTests.swift; sourceTree = "<group>"; };
+		F43211C02BD2B80D00642E5B /* AuthVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthVCTests.swift; sourceTree = "<group>"; };
+		F43211C22BD2B81C00642E5B /* AuthPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthPresenterTests.swift; sourceTree = "<group>"; };
+		F43211C42BD2BCA900642E5B /* VerificationVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationVCTests.swift; sourceTree = "<group>"; };
+		F43211C62BD2BCB700642E5B /* VerificationPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerificationPresenterTests.swift; sourceTree = "<group>"; };
+		F43211C82BD2C47000642E5B /* AccountDetailVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVCTests.swift; sourceTree = "<group>"; };
+		F43211CA2BD2C47E00642E5B /* AccountDetailPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailPresenterTests.swift; sourceTree = "<group>"; };
+		F43211CC2BD2CBFD00642E5B /* AccountSettingVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingVCTests.swift; sourceTree = "<group>"; };
+		F43211CE2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsPresenterTests.swift; sourceTree = "<group>"; };
+		F43211D02BD2CD0500642E5B /* AccountSettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingItem.swift; sourceTree = "<group>"; };
+		F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsServicesTests.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -338,6 +358,7 @@
 				F4C731B92BA8E42C00393E83 /* Offer.swift */,
 				F4C731C02BA9C3D500393E83 /* AccountDetails.swift */,
 				F4C731C22BA9F0E700393E83 /* Entertainment.swift */,
+				F43211D02BD2CD0500642E5B /* AccountSettingItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -563,6 +584,7 @@
 				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
 				F410DBC62BD29E73000A7F98 /* Cart */,
 				F43211B02BD2AFA800642E5B /* Map */,
+				F43211BB2BD2B78E00642E5B /* Account */,
 				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
 			);
 			path = "Local-PizzaTests";
@@ -623,6 +645,54 @@
 				F43211B92BD2B52A00642E5B /* DeliveryPresenterTests.swift */,
 			);
 			path = Delivery;
+			sourceTree = "<group>";
+		};
+		F43211BB2BD2B78E00642E5B /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				F43211BC2BD2B7A200642E5B /* Auth */,
+				F43211BD2BD2B7AA00642E5B /* Verification */,
+				F43211BE2BD2B7CE00642E5B /* Detail */,
+				F43211BF2BD2B7E700642E5B /* Settings */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		F43211BC2BD2B7A200642E5B /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				F43211C02BD2B80D00642E5B /* AuthVCTests.swift */,
+				F43211C22BD2B81C00642E5B /* AuthPresenterTests.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		F43211BD2BD2B7AA00642E5B /* Verification */ = {
+			isa = PBXGroup;
+			children = (
+				F43211C42BD2BCA900642E5B /* VerificationVCTests.swift */,
+				F43211C62BD2BCB700642E5B /* VerificationPresenterTests.swift */,
+			);
+			path = Verification;
+			sourceTree = "<group>";
+		};
+		F43211BE2BD2B7CE00642E5B /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				F43211C82BD2C47000642E5B /* AccountDetailVCTests.swift */,
+				F43211CA2BD2C47E00642E5B /* AccountDetailPresenterTests.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		F43211BF2BD2B7E700642E5B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				F43211CC2BD2CBFD00642E5B /* AccountSettingVCTests.swift */,
+				F43211CE2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift */,
+				F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
@@ -822,6 +892,7 @@
 				F410DBA72BC84634000A7F98 /* AccountSettingsPresenter.swift in Sources */,
 				F410DB802BBC415F000A7F98 /* ProductDetailConfigurator.swift in Sources */,
 				F4C731B82BA8E1C500393E83 /* EntertainmentTVCell.swift in Sources */,
+				F43211D12BD2CD0500642E5B /* AccountSettingItem.swift in Sources */,
 				F4C731A82BA4878100393E83 /* CategoriesNetworkService.swift in Sources */,
 				F410DB992BC82FD6000A7F98 /* VerificationConfigurator.swift in Sources */,
 				F409E1E72B921D1700A88D2C /* VerificationVC.swift in Sources */,
@@ -843,17 +914,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F43211C32BD2B81C00642E5B /* AuthPresenterTests.swift in Sources */,
+				F43211CD2BD2CBFD00642E5B /* AccountSettingVCTests.swift in Sources */,
+				F43211D32BD696CE00642E5B /* AccountSettingsServicesTests.swift in Sources */,
 				F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */,
+				F43211CF2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift in Sources */,
 				F410DBC32BCEC3E5000A7F98 /* ProductDetailPresenterTests.swift in Sources */,
+				F43211C92BD2C47000642E5B /* AccountDetailVCTests.swift in Sources */,
 				F43211BA2BD2B52A00642E5B /* DeliveryPresenterTests.swift in Sources */,
 				F410DBC82BD29EA0000A7F98 /* CartVCTests.swift in Sources */,
+				F43211C52BD2BCA900642E5B /* VerificationVCTests.swift in Sources */,
 				F410DBBD2BCEB99B000A7F98 /* MenuServicesTests.swift in Sources */,
 				F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */,
 				F43211B82BD2B51C00642E5B /* DeliveryVCTests.swift in Sources */,
 				F43211B62BD2AFF600642E5B /* PizzaPresenterTests.swift in Sources */,
 				F43211B42BD2AFE900642E5B /* PizzaVCTests.swift in Sources */,
 				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
+				F43211CB2BD2C47E00642E5B /* AccountDetailPresenterTests.swift in Sources */,
+				F43211C12BD2B80D00642E5B /* AuthVCTests.swift in Sources */,
 				F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */,
+				F43211C72BD2BCB700642E5B /* VerificationPresenterTests.swift in Sources */,
 				F410DBCA2BD29EC1000A7F98 /* CartPresenerTests.swift in Sources */,
 				F410DBBB2BCEB989000A7F98 /* MenuPresenterTests.swift in Sources */,
 				F410DBCC2BD2A8E0000A7F98 /* CartServicesTests.swift in Sources */,

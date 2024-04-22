@@ -7,6 +7,7 @@
 
 @testable import Local_Pizza
 import XCTest
+import CoreData
 
 //MARK: - Spy
 class ProductServiceSpy: ProductNetworkServiceProtocol {
@@ -46,17 +47,23 @@ class StoriesServiceSpy: StoriesNetworkServiceProtocol {
 }
 
 class CoreDataServiceSpy: CoreDataServiceProtocol {
-    
+
     var addProductToFavouritesCalled: Bool = false
-    var fetchFavouriteProducts: Bool = false
+    var fetchFavouriteProductsCalled: Bool = false
+    var deleteFavouriteProductCalled = false
     
     func addProductToFavourites(product: Local_Pizza.Product) {
         addProductToFavouritesCalled = true
     }
     
     func fetchFavouriteProducts(completion: @escaping ([Local_Pizza.Product]) -> Void) {
-        fetchFavouriteProducts = true
+        fetchFavouriteProductsCalled = true
     }
+    
+    func deleteFavouriteProduct(product: Local_Pizza.Product, context: NSManagedObjectContext) {
+        deleteFavouriteProductCalled = true
+    }
+    
 }
 
 //MARK: - Tests

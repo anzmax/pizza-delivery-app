@@ -14,8 +14,11 @@ class AccountSettingsConfigurator {
         let settingsVC = AccountSettingsVC()
         let settingsPresenter = AccountSettingsPresenter()
         
+        let storageService = AccountStorageService()
+        
         settingsVC.presenter = settingsPresenter
         settingsPresenter.view = settingsVC
+        settingsPresenter.accountStorageservice = storageService
         
         return settingsVC
     }

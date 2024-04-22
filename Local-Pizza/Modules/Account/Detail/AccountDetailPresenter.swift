@@ -16,6 +16,8 @@ protocol AccountDetailPresenterProtocol: AnyObject {
     func chevronButtonTapped()
     func didSelectConnectionItem(_ index: Int)
     func entertainmentItemTapped(_ indexPath: IndexPath)
+    func settingsButtonTapped()
+    func closeButtonTapped()
 }
 
 class AccountDetailPresenter: AccountDetailPresenterProtocol {
@@ -25,6 +27,14 @@ class AccountDetailPresenter: AccountDetailPresenterProtocol {
 
 //MARK: - View Event
 extension AccountDetailPresenter {
+    
+    func settingsButtonTapped() {
+        view?.navigateToSettingsScreen()
+    }
+    
+    func closeButtonTapped() {
+        view?.navigateToMenuScreen()
+    }
     
     func chevronButtonTapped() {
         view?.tableViewHeightChanged()

@@ -17,6 +17,13 @@ class ProductDetailConfigurator {
         productDetailVC.presenter = productDetailPresenter
         productDetailPresenter.view = productDetailVC
         
+        
+        let archiver = ProductsArchiver()
+        let ingredientsService = IngredientsNetworkService()
+        
+        productDetailPresenter.archiver = archiver
+        productDetailPresenter.ingredientsService = ingredientsService
+        
         productDetailVC.update(with: product)
         
         return productDetailVC

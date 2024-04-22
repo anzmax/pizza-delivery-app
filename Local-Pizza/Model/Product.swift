@@ -27,7 +27,7 @@ enum SizeType: Int, CaseIterable {
         
         switch self {
         case .small:
-            return 50
+            return -50
         case .medium:
             return 0
         case .big:

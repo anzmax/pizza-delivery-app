@@ -11,7 +11,7 @@ import FirebaseAuth
 protocol AuthorizationVCProtocol: AnyObject {
     
     //Connections
-    var presenter: AuthPresenter? { get set }
+    var presenter: AuthPresenterProtocol? { get set }
     
     //Update View
     func showAlert(_ message: String)
@@ -22,7 +22,7 @@ protocol AuthorizationVCProtocol: AnyObject {
 
 class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
     
-    var presenter: AuthPresenter?
+    var presenter: AuthPresenterProtocol?
 
     //MARK: - UI Elelments
     lazy var titleLabel: UILabel = {

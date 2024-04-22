@@ -184,7 +184,6 @@ extension ProductDetailVC: UITableViewDelegate, UITableViewDataSource {
                     if let index = self.ingredients.firstIndex(where: { $0.title == changedIngredient.title }) {
                         self.ingredients[index] = changedIngredient
                     }
-                    
                 }
                 
                 cell.selectionStyle = .none

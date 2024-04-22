@@ -17,6 +17,7 @@ final class MenuConfigurator {
         menuVC.presenter = menuPresenter
         menuPresenter.view = menuVC
         
+        //DI
         let productsService = ProductNetworkService()
         let specialsService = SpecialsNetworkService()
         let categoriesService = CategoriesNetworkService()

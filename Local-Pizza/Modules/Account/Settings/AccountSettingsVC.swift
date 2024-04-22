@@ -105,14 +105,14 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
             let cell = tableView.dequeueReusableCell(withIdentifier: PersonalCell.id, for: indexPath) as! PersonalCell
             
             let (field, value) = presenter?.fetchAccountField(indexPath.row) ?? (.name, "")
-                   cell.update(field, value)
+            cell.update(field, value)
             
-//            if let field = AccountField(rawValue: indexPath.row) {
-//                let value = accountStorageservice.fetch(field: field)
-//                
-//                cell.update(field, value)
-//            }
-
+            //            if let field = AccountField(rawValue: indexPath.row) {
+            //                let value = accountStorageservice.fetch(field: field)
+            //
+            //                cell.update(field, value)
+            //            }
+            
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -143,8 +143,10 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
      }
      
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        self.rowSelected(indexPath)
         
-        presenter?.rowSelected(indexPath)
+        
         tableView.reloadData()
     }
 }
@@ -172,6 +174,27 @@ extension AccountSettingsVC {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+    }
+}
+
+//MARK: - Event Handler
+extension AccountSettingsVC {
+    
+    func rowSelected(_ indexPath: IndexPath) {
+        //presenter?.rowSelected(indexPath)
+        
+        switch indexPath.section {
+        case 2:
+            
+            print(indexPath.row, indexPath.section)
+            print("Выход из аккаунта")
+            presenter?.logoutCellSelected()
+        case 3:
+            print("Удаление аккаунта")
+            presenter?.deleteAccountCellSelected()
+        default:
+            break
+        }
     }
 }
 

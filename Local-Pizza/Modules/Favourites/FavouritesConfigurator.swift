@@ -17,6 +17,8 @@ class FavouritesConfigurator {
         favouritesVC.presenter = favouritesPresenter
         favouritesPresenter.view = favouritesVC
         
+        let archiver = ProductsArchiver()
+        favouritesPresenter.archiver = archiver
         
         return favouritesVC
     }

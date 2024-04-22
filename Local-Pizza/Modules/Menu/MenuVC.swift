@@ -106,7 +106,6 @@ class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
     }
     
     func didSelectStoryImage(_ image: UIImage?) {
-        
         presenter?.storyCellSelected(image)
     }
 }
@@ -233,7 +232,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
         let product = products[indexPath.row]
-        productCellSelected(product)
+        self.productCellSelected(product)
     }
 }
 
@@ -267,19 +266,19 @@ extension MenuVC {
 extension MenuVC {
     
     func favouriteButtonSelected(_ favouritesVC: FavouritesVC,  _ product: Product) {
-        self.presenter?.favouriteButtonTapped(favouritesVC, product)
+        presenter?.favouriteButtonTapped(favouritesVC, product)
     }
     
     func categoryCellTapped(_ index: Int) {
-        self.presenter?.categoryCellSelected(index, self.products)
+        presenter?.categoryCellSelected(index, self.products)
     }
     
     func addressTypeSegmentChanged(_ deliveryType: DeliveryType) {
-        self.presenter?.addressSegmentChanged(deliveryType)
+        presenter?.addressSegmentChanged(deliveryType)
     }
     
     func productCellPriceButtonTapped(_ product: Product) {
-        self.presenter?.productPriceButtonTapped(product)
+        presenter?.productPriceButtonTapped(product)
     }
     
     func productCellSelected(_ product: Product) {
@@ -287,7 +286,7 @@ extension MenuVC {
     }
     
     func addressButtonSelected() {
-        self.presenter?.addressButtonTapped()
+        presenter?.addressButtonTapped()
     }
 }
 
@@ -311,7 +310,6 @@ extension MenuVC {
     }
     
     func navigateToProductDetailScreen(_ product: Product) {
-        
         
         let vc = ProductDetailConfigurator().configure(product)
         present(vc, animated: true)

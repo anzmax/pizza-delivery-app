@@ -11,12 +11,10 @@ import UIKit
 protocol CoreDataServiceProtocol: AnyObject {
     func addProductToFavourites(product: Product)
     func fetchFavouriteProducts(completion: @escaping ([Product]) -> Void)
+    func deleteFavouriteProduct(product: Product, context: NSManagedObjectContext)
 }
 
 class CoreDataService: CoreDataServiceProtocol {
-    
-//    static let shared = CoreDataService()
-//    private init() {}
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: .dataName)
@@ -97,10 +95,18 @@ class CoreDataService: CoreDataServiceProtocol {
         
         do {
             let productModels = try context.fetch(fetchRequest)
-            if let productModelToDelete = productModels.first {
-                context.delete(productModelToDelete)
-                saveContext(backgroundContext: context)
+            
+            for productCoreData in productModels {
+                if productCoreData.title == product.title {
+                    context.delete(productCoreData)
+                    saveContext(backgroundContext: context)
+                }
             }
+//            
+//            if let productModelToDelete = productModels.first {
+//                context.delete(productModelToDelete)
+//                saveContext(backgroundContext: context)
+//            }
         } catch {
             print("Ошибка при удалении избранного поста: \(error)")
         }

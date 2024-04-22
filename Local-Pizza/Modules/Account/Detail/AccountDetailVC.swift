@@ -16,7 +16,7 @@ enum AccountSectionType: Int, CaseIterable {
 protocol AccountDetailVCProtocol: AnyObject {
     
     //Connections
-    var presenter: AccountDetailPresenter? { get set }
+    var presenter: AccountDetailPresenterProtocol? { get set }
     
     //Update View
     func tableViewHeightChanged()
@@ -32,7 +32,7 @@ protocol AccountDetailVCProtocol: AnyObject {
 
 class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     
-    var presenter: AccountDetailPresenter?
+    var presenter: AccountDetailPresenterProtocol?
     
     var isExpanded = false
     let maxTableHeight: CGFloat = 140
@@ -139,15 +139,15 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
 
     //MARK: - Action
     @objc func settingsButtonTapped() {
-        self.navigateToSettingsScreen()
+        presenter?.settingsButtonTapped()
     }
     
     @objc func closeButtonTapped() {
-        self.navigateToMenuScreen()
+        presenter?.closeButtonTapped()
     }
     
     @objc func toggleTableView() {
-        self.tableViewHeightChanged()
+        presenter?.chevronButtonTapped()
      }
 }
 
@@ -195,7 +195,9 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
                     
                     cell.onItemTapped = { [weak self] indexPath in
                         
-                        self?.presenter?.entertainmentItemTapped(indexPath)
+                        self?.entertainmentCellTapped(indexPath)
+                        
+//                        self?.presenter?.entertainmentItemTapped(indexPath)
 
                     }
                     
@@ -209,7 +211,8 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.connectionTableView {
-            self.presenter?.didSelectConnectionItem(indexPath.row)
+            self.collectionItemSelected(indexPath)
+            //self.presenter?.didSelectConnectionItem(indexPath.row)
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
@@ -305,6 +308,18 @@ extension AccountDetailVC {
         ])
     }
     
+}
+
+//MARK: - Event handler
+extension AccountDetailVC {
+    
+    func entertainmentCellTapped(_ indexPath: IndexPath) {
+        presenter?.entertainmentItemTapped(indexPath)
+    }
+    
+    func collectionItemSelected(_ indexPath: IndexPath) {
+        presenter?.didSelectConnectionItem(indexPath.row)
+    }
 }
 
 //MARK: - Update View
