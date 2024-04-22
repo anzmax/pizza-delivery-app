@@ -11,12 +11,12 @@ import XCTest
 //MARK: - Spy
 class ProductDetailVCSpy: ProductDetailVCProtocol {
     
-    var presenter: (any Local_Pizza.ProductDetailPresenterProtocol)?
+    var presenter: ProductDetailPresenterProtocol?
     
-    var showIngredientsCalled: Bool = false
-    var showProductDoughCalled: Bool = false
-    var showProductSizeCalled: Bool = false
-    var navigateToPreviousScreenCalled: Bool = false
+    var showIngredientsCalled = false
+    var showProductDoughCalled = false
+    var showProductSizeCalled = false
+    var navigateToPreviousScreenCalled = false
     
     
     func showIngredients(_ ingredients: [Local_Pizza.Ingredient]) {
@@ -40,53 +40,41 @@ class ProductDetailVCSpy: ProductDetailVCProtocol {
 final class ProductDetailVCTests: XCTestCase {
     
     func testShowProductDough() {
-        
-        //given
         let vc = ProductDetailVCSpy()
         let presenter = ProductDetailPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         let index = 0
         presenter.doughCellSelected(index, product)
-        
-        //then
+ 
         XCTAssertTrue(vc.showProductDoughCalled)
     }
     
     func testShowProductSize() {
-        
-        //given
         let vc = ProductDetailVCSpy()
         let presenter = ProductDetailPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         let index = 0
         presenter.sizeCellSelected(index, product)
-        
-        //then
+
         XCTAssertTrue(vc.showProductSizeCalled)
     }
     
     func testNavigateToPreviousScreen() {
-        
-        //given
         let vc = ProductDetailVCSpy()
         let presenter = ProductDetailPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let button = UIButton()
         let product = Product.data
         presenter.cartButtonTapped(button, product)
-        
-        //then
+
         XCTAssertTrue(vc.navigateToPreviousScreenCalled)
     }
 }

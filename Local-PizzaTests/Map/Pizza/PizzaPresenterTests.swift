@@ -29,32 +29,24 @@ class PizzaPresenterSpy: PizzaMapPresenterProtocol {
 class PizzaPresenterTests: XCTestCase {
     
     func testCloseButtonTapped() {
-        
-        //given
         let vc = PizzaMapVC()
         let presenter = PizzaPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+ 
         vc.closeButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.closeButtonTappedCalled)
     }
     
     func testOrderButtonTapped() {
-        
-        //given
         let vc = PizzaMapVC()
         let presenter = PizzaPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.orderButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.orderButtonTappedCalled)
     }
 }

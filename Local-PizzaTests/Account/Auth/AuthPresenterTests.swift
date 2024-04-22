@@ -24,17 +24,13 @@ class AuthPresenterSpy: AuthPresenterProtocol {
 class AuthPresenterTests: XCTestCase {
     
     func testSendVerificationCode() {
-        
-        //given
         let vc = AuthorizationVC()
         let presenter = AuthPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.doneButtonAction()
-        
-        //then
+
         XCTAssertTrue(presenter.sendVerificationCodeCalled)
     }
 }

@@ -69,80 +69,60 @@ class CartPresenterSpy: CartPresenterProtocol {
 final class CartPresenterTests: XCTestCase {
     
     func testViewWillAppear() {
-        
-        //given
         let vc = CartVC()
         let presenter = CartPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.viewWillAppear(true)
-        
-        //then
+
         XCTAssertTrue(presenter.viewWillAppearCalled)
     }
     
     func testMenuButtonTapped() {
-        
-        //given
         let vc = CartVC()
         let presenter = CartPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.menuButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.menuButtonTappedCalled)
     }
     
     func testProductCountChangedInCart() {
-        
-        //given
         let vc = CartVC()
         let presenter = CartPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         vc.productCellCountChanged(product)
-        
-        //then
+
         XCTAssertTrue(presenter.productCountChangedInCartCalled)
     }
     
     func testPriceButtonTapped() {
-        
-        //given
         let vc = CartVC()
         let presenter = CartPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         vc.priceButtonTapped(product)
-        
-        //then
+
         XCTAssertTrue(presenter.priceButtonTappedCalled)
     }
     
     func testCalculateTotalAmountForProducts() {
-        
-        //given
         let vc = CartVC()
         let presenter = CartPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let products = [Product.data]
         vc.showItemsInCart(products)
-        
-        //then
+ 
         XCTAssertTrue(presenter.calculateTotalAmountForProductsCalled)
     }
 }

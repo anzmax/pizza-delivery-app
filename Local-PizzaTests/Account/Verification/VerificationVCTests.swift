@@ -28,35 +28,4 @@ class VerificationVCSpy: VerificationVCProtocol {
 //MARK: - Tests
 class VerificationVCTests: XCTestCase {
     
-//    func testShowAlert() {
-//        
-//        //given
-//        let vc = VerificationVCSpy()
-//        let presenter = VerificationPresenter()
-//        vc.presenter = presenter
-//        presenter.view = vc
-//        
-//        //when
-//        let code = "123456"
-//        presenter.sendVerificationCode(code)
-//        
-//        //then
-//        XCTAssertTrue(vc.showAlertCalled)
-//    }
-//    
-//    func testNavigateToAccountDetailVC() {
-//        
-//        //given
-//        let vc = VerificationVCSpy()
-//        let presenter = VerificationPresenter()
-//        vc.presenter = presenter
-//        presenter.view = vc
-//        
-//        //when
-//        let code = "123456"
-//        presenter.sendVerificationCode(code)
-//        
-//        //then
-//        XCTAssertTrue(vc.navigateToAccountDetailVCCalled)
-//    }
 }

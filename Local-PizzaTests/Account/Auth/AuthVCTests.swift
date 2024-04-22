@@ -29,19 +29,15 @@ class AuthVCSpy: AuthorizationVCProtocol {
 class AuthVCTests: XCTestCase {
     
     func testShowAlert() {
-        
-        //given
         let vc = AuthVCSpy()
         let presenter = AuthPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+ 
         let textField = UITextField()
         let number = "7342207015"
         presenter.sendVerificationCode(number, textField)
-        
-        //then
+
         XCTAssertTrue(vc.showAlertCalled)
     }
 }

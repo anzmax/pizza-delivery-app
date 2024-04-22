@@ -24,17 +24,13 @@ class VerificationPresenterSpy: VerificationPresenterProtocol {
 class VerificationPresenterTests: XCTestCase {
     
     func testSendVerificationCode() {
-        
-        //given
         let vc = VerificationVC()
-        let presenter = VerificationPresenterSpy() //
+        let presenter = VerificationPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.sendButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.sendVerificationCodeCalled)
     }
 }

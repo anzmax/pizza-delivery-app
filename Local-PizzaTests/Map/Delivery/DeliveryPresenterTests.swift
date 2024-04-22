@@ -29,32 +29,24 @@ class DeliveryPresenterSpy: DeliveryMapPresenterProtocol {
 class DeliveryPresenterTests: XCTestCase {
     
     func testCloseButtonTapped() {
-        
-        //given
         let vc = DeliveryMapVC()
         let presenter = DeliveryPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.closeButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.closeButtonTappedCalled)
     }
     
     func testSaveButtonTapped() {
-        
-        //given
         let vc = DeliveryMapVC()
         let presenter = DeliveryPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.saveButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.saveButtonTappedCalled)
     }
 }

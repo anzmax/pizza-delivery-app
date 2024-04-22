@@ -87,7 +87,8 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.onPriceButtonTapped = { product in
-            self.presenter?.cellPriceButtonTapped(product)
+            //self.presenter?.cellPriceButtonTapped(product)
+            self.cellPriceButtonTapped(product)
         }
         
         return cell
@@ -100,7 +101,8 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
                
                let productToDelete = favouriteProducts[indexPath.row]
                
-               self.presenter?.productCellSwipeToDelete(indexPath, productToDelete)
+               self.swipeToDeleteProduct(indexPath, productToDelete)
+//               self.presenter?.productCellSwipeToDelete(indexPath, productToDelete)
 
                completionHandler(true)
            }
@@ -169,8 +171,14 @@ extension FavouritesVC {
 }
 
 
-//MARK: - Navigation
+//MARK: - Event Handler
 extension FavouritesVC {
     
-
+    func cellPriceButtonTapped(_ product: Product) {
+        presenter?.cellPriceButtonTapped(product)
+    }
+    
+    func swipeToDeleteProduct(_ indexPath: IndexPath, _ productToDelete: Product) {
+        presenter?.productCellSwipeToDelete(indexPath, productToDelete)
+    }
 }

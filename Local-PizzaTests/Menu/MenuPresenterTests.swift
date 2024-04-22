@@ -11,26 +11,25 @@ import XCTest
 //MARK: - Spy
 class MenuPresenterSpy: MenuPresenterProtocol {
     
-    var view: Local_Pizza.MenuVCProtocol?
+    var view: MenuVCProtocol?
     
-    var viewDidLoadCalled: Bool = false
-    var accountButtonTappedCalled: Bool = false
-    var productPriceButtonTappedCalled: Bool = false
-    var productCellSelectedCalled: Bool = false
-    var addressSegmentChangedCalled: Bool = false
-    var addressButtonTappedCalled: Bool = false
-    var categoryCellSelectedCalled: Bool = false
-    var favouriteButtonTappedCalled: Bool = false
-    var fetchProductsCalled: Bool = false
-    var fetchSpecialsCalled: Bool = false
-    var fetchStoriesCalled: Bool = false
-    var fetchCategoriesCalled: Bool = false
-    var addProductToFavoritesCalled: Bool = false
-    var storyCellSelectedCalled: Bool = false
+    var viewDidLoadCalled = false
+    var accountButtonTappedCalled = false
+    var productPriceButtonTappedCalled = false
+    var productCellSelectedCalled = false
+    var addressSegmentChangedCalled = false
+    var addressButtonTappedCalled = false
+    var categoryCellSelectedCalled = false
+    var favouriteButtonTappedCalled = false
+    var fetchProductsCalled = false
+    var fetchSpecialsCalled = false
+    var fetchStoriesCalled = false
+    var fetchCategoriesCalled = false
+    var addProductToFavoritesCalled = false
+    var storyCellSelectedCalled = false
     
     
     func viewDidLoad() {
-        
         viewDidLoadCalled = true
         fetchProductsCalled = true
         fetchSpecialsCalled = true
@@ -95,128 +94,95 @@ class MenuPresenterSpy: MenuPresenterProtocol {
 final class MenuPresenterTests: XCTestCase {
     
     func testViewControllerCallsViewDidLoad() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         _ = vc.view
-        
-        //then
+
         XCTAssertTrue(presenter.viewDidLoadCalled)
     }
     
     func testAccountButtonTapped() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+  
         vc.accountButtonTapped()
-        
-        //then
+
         XCTAssertTrue(presenter.accountButtonTappedCalled)
     }
     
     func testProductPriceButtonTapped() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
-        
         vc.productCellPriceButtonTapped(product)
-        
-        //then
+
         XCTAssertTrue(presenter.productPriceButtonTappedCalled)
     }
     
     func testProductCellSelected() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         vc.productCellSelected(product)
-        
-        //then
+ 
         XCTAssertTrue(presenter.productCellSelectedCalled)
     }
     
     func testAddressSegmentChanged() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let deliveryType = DeliveryType.takeAway
         vc.addressTypeSegmentChanged(deliveryType)
-        
-        //then
+
         XCTAssertTrue(presenter.addressSegmentChangedCalled)
     }
     
     func testAddressButtonTapped() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.addressButtonSelected()
-        
-        //then
+
         XCTAssertTrue(presenter.addressButtonTappedCalled)
     }
     
     func testCategoryCellSelected() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         vc.categoryCellTapped(0)
-        
-        //then
+
         XCTAssertTrue(presenter.categoryCellSelectedCalled)
     }
     
     func testFavouriteButtonTapped() {
-        
-        //given
         let vc = MenuVC()
         let presenter = MenuPresenterSpy()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.data
         let favVC = FavouritesVC()
         vc.favouriteButtonSelected(favVC, product)
-        
-        //then
+
         XCTAssertTrue(presenter.favouriteButtonTappedCalled)
     }
 }

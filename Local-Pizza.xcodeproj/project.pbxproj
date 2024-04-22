@@ -89,6 +89,8 @@
 		F43211CF2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211CE2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift */; };
 		F43211D12BD2CD0500642E5B /* AccountSettingItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D02BD2CD0500642E5B /* AccountSettingItem.swift */; };
 		F43211D32BD696CE00642E5B /* AccountSettingsServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */; };
+		F43211D62BD69EC200642E5B /* FavouritesVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D52BD69EC200642E5B /* FavouritesVCTests.swift */; };
+		F43211D82BD69ED200642E5B /* FavouritesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D72BD69ED200642E5B /* FavouritesPresenterTests.swift */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -219,6 +221,8 @@
 		F43211CE2BD2CC0E00642E5B /* AccountSettingsPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsPresenterTests.swift; sourceTree = "<group>"; };
 		F43211D02BD2CD0500642E5B /* AccountSettingItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingItem.swift; sourceTree = "<group>"; };
 		F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsServicesTests.swift; sourceTree = "<group>"; };
+		F43211D52BD69EC200642E5B /* FavouritesVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVCTests.swift; sourceTree = "<group>"; };
+		F43211D72BD69ED200642E5B /* FavouritesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesPresenterTests.swift; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -581,10 +585,11 @@
 			isa = PBXGroup;
 			children = (
 				F410DBB52BC967C2000A7F98 /* Menu */,
-				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
-				F410DBC62BD29E73000A7F98 /* Cart */,
 				F43211B02BD2AFA800642E5B /* Map */,
 				F43211BB2BD2B78E00642E5B /* Account */,
+				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
+				F43211D42BD69E8F00642E5B /* Favourites */,
+				F410DBC62BD29E73000A7F98 /* Cart */,
 				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
 			);
 			path = "Local-PizzaTests";
@@ -693,6 +698,15 @@
 				F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */,
 			);
 			path = Settings;
+			sourceTree = "<group>";
+		};
+		F43211D42BD69E8F00642E5B /* Favourites */ = {
+			isa = PBXGroup;
+			children = (
+				F43211D52BD69EC200642E5B /* FavouritesVCTests.swift */,
+				F43211D72BD69ED200642E5B /* FavouritesPresenterTests.swift */,
+			);
+			path = Favourites;
 			sourceTree = "<group>";
 		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
@@ -928,6 +942,8 @@
 				F410DBAF2BC96418000A7F98 /* Local_PizzaTests.swift in Sources */,
 				F43211B82BD2B51C00642E5B /* DeliveryVCTests.swift in Sources */,
 				F43211B62BD2AFF600642E5B /* PizzaPresenterTests.swift in Sources */,
+				F43211D82BD69ED200642E5B /* FavouritesPresenterTests.swift in Sources */,
+				F43211D62BD69EC200642E5B /* FavouritesVCTests.swift in Sources */,
 				F43211B42BD2AFE900642E5B /* PizzaVCTests.swift in Sources */,
 				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
 				F43211CB2BD2C47E00642E5B /* AccountDetailPresenterTests.swift in Sources */,

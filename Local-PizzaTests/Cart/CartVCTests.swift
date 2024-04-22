@@ -13,9 +13,9 @@ class CartVCSpy: CartVCProtocol {
     
     var presenter: CartPresenterProtocol?
     
-    var showItemsInCartCalled: Bool = false
-    var showDessertsAndDrinksCalled: Bool = false
-    var navigateToMenuCalled: Bool = false
+    var showItemsInCartCalled = false
+    var showDessertsAndDrinksCalled = false
+    var navigateToMenuCalled = false
     
     func showItemsInCart(_ products: [Local_Pizza.Product]) {
         showItemsInCartCalled = true
@@ -34,17 +34,13 @@ class CartVCSpy: CartVCProtocol {
 final class CartVCTests: XCTestCase {
     
     func testNavigateToMenu() {
-        
-        //given
         let vc = CartVCSpy()
         let presenter = CartPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         presenter.menuButtonTapped()
-        
-        //then
+
         XCTAssertTrue(vc.navigateToMenuCalled)
     }
 }

@@ -9,12 +9,18 @@ import CoreData
 import UIKit
 
 protocol CoreDataServiceProtocol: AnyObject {
+    
+    var persistentContainer: NSPersistentContainer { get }
+    func saveContext(backgroundContext: NSManagedObjectContext?)
+    
     func addProductToFavourites(product: Product)
     func fetchFavouriteProducts(completion: @escaping ([Product]) -> Void)
     func deleteFavouriteProduct(product: Product, context: NSManagedObjectContext)
 }
 
 class CoreDataService: CoreDataServiceProtocol {
+    
+    
     
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: .dataName)

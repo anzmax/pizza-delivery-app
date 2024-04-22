@@ -12,7 +12,7 @@ import CoreData
 //MARK: - Spy
 class ProductServiceSpy: ProductNetworkServiceProtocol {
     
-    var fetchProductCalled: Bool = false
+    var fetchProductCalled = false
     
     func fetchProducts(completion: @escaping (Result<[Local_Pizza.Product], Local_Pizza.NetworkError>) -> Void) {
         fetchProductCalled = true
@@ -21,7 +21,7 @@ class ProductServiceSpy: ProductNetworkServiceProtocol {
 
 class SpecialsServiceSpy: SpecialsNetworkServiceProtocol {
     
-    var fetchSpecialsCalled: Bool = false
+    var fetchSpecialsCalled = false
     
     func fetchSpecials(completion: @escaping (Result<[Special], NetworkError>) -> Void) {
         fetchSpecialsCalled = true
@@ -30,7 +30,7 @@ class SpecialsServiceSpy: SpecialsNetworkServiceProtocol {
 
 class CategoriesServiceSpy: CategoriesNetworkServiceProtocol {
     
-    var fetchCategoriescalled: Bool = false
+    var fetchCategoriescalled = false
     
     func fetchCategory(completion: @escaping (Result<[Local_Pizza.Category], Local_Pizza.NetworkError>) -> Void) {
         fetchCategoriescalled = true
@@ -39,7 +39,7 @@ class CategoriesServiceSpy: CategoriesNetworkServiceProtocol {
 
 class StoriesServiceSpy: StoriesNetworkServiceProtocol {
     
-    var fetchStoriesCalled: Bool = false
+    var fetchStoriesCalled = false
     
     func fetchStory(completion: @escaping (Result<[Local_Pizza.Story], Local_Pizza.NetworkError>) -> Void) {
         fetchStoriesCalled = true
@@ -47,10 +47,15 @@ class StoriesServiceSpy: StoriesNetworkServiceProtocol {
 }
 
 class CoreDataServiceSpy: CoreDataServiceProtocol {
+    
+    var persistentContainer: NSPersistentContainer {
+        return NSPersistentContainer()
+    }
 
-    var addProductToFavouritesCalled: Bool = false
-    var fetchFavouriteProductsCalled: Bool = false
+    var addProductToFavouritesCalled = false
+    var fetchFavouriteProductsCalled = false
     var deleteFavouriteProductCalled = false
+    var saveContextCalled = false
     
     func addProductToFavourites(product: Local_Pizza.Product) {
         addProductToFavouritesCalled = true
@@ -64,32 +69,29 @@ class CoreDataServiceSpy: CoreDataServiceProtocol {
         deleteFavouriteProductCalled = true
     }
     
+    func saveContext(backgroundContext: NSManagedObjectContext?) {
+        saveContextCalled = true
+    }
+    
 }
 
 //MARK: - Tests
 final class MenuServicesTests: XCTestCase {
     
     func testAddProductToFavorites() {
-        
-        //given
         let presenter = MenuPresenter()
         let coreDataService = CoreDataServiceSpy()
-        
         let vc = FavouritesVC()
-        let product = Product.data
         
         presenter.coreDataService = coreDataService
-        
-        //when
+        let product = Product.data
+  
         presenter.addProductToFavorites(vc, product)
-        
-        //then
+
         XCTAssertTrue(coreDataService.addProductToFavouritesCalled)
-        
     }
     
     func testFetchProducts() {
-        
         let presenter = MenuPresenter()
         let productService = ProductServiceSpy()
         
@@ -100,7 +102,6 @@ final class MenuServicesTests: XCTestCase {
     }
     
     func testFetchSpecials() {
-        
         let presenter = MenuPresenter()
         let specialsService = SpecialsServiceSpy()
         
@@ -111,7 +112,6 @@ final class MenuServicesTests: XCTestCase {
     }
     
     func testFetchCategories() {
-        
         let presenter = MenuPresenter()
         let categoriesService = CategoriesServiceSpy()
         
@@ -122,7 +122,6 @@ final class MenuServicesTests: XCTestCase {
     }
     
     func testFetchStories() {
-        
         let presenter = MenuPresenter()
         let storiesService = StoriesServiceSpy()
         

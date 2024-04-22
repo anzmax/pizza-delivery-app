@@ -29,32 +29,24 @@ class DeliveryMapVCSpy: DeliveryMapVCProtocol {
 class DeliveryMapVCTests: XCTestCase {
     
     func testNavigateToPreviousScreen() {
-        
-        //given
         let vc = DeliveryMapVCSpy()
         let presenter = DeliveryMapPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         presenter.closeButtonTapped()
-        
-        //then
+ 
         XCTAssertTrue(vc.navigateToPreviousScreenCalled)
     }
     
     func testPassAddressToMenuScreen() {
-        
-        //given
         let vc = DeliveryMapVCSpy()
         let presenter = DeliveryMapPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         presenter.saveButtonTapped()
-        
-        //then
+
         XCTAssertTrue(vc.passAddressToMenuScreenCalled)
     }
 }

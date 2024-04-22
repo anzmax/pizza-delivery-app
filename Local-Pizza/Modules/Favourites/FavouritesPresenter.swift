@@ -27,7 +27,8 @@ class FavouritesPresenter: FavouritesPresenterProtocol {
     weak var view: FavouritesVCProtocol?
     //var archiver = ProductsArchiver()
     var archiver: ProductsArchiverProtocol?
-    var coreDataService = CoreDataService()
+    //var coreDataService = CoreDataService()
+    var coreDataService: CoreDataServiceProtocol?
 }
 
 //MARK: - View Event
@@ -39,7 +40,7 @@ extension FavouritesPresenter {
     }
     
     func updateFavoritesInDataBase() {
-        coreDataService.fetchFavouriteProducts { [weak self] products in
+        coreDataService?.fetchFavouriteProducts { [weak self] products in
             
             self?.view?.showFavouriteProducts(products)
         }
@@ -51,9 +52,9 @@ extension FavouritesPresenter {
     
     func productCellSwipeToDelete(_ indexPath: IndexPath, _ product: Product) {
         
-        coreDataService.persistentContainer.performBackgroundTask { backgroundContext in
+        coreDataService?.persistentContainer.performBackgroundTask { backgroundContext in
             
-            self.coreDataService.deleteFavouriteProduct(product: product, context: backgroundContext)
+            self.coreDataService?.deleteFavouriteProduct(product: product, context: backgroundContext)
             
             DispatchQueue.main.async {
                 self.view?.deleteFavouriteInTable(indexPath, product)
@@ -66,7 +67,7 @@ extension FavouritesPresenter {
 extension FavouritesPresenter {
     
     func loadFavouriteProducts() {
-        coreDataService.fetchFavouriteProducts { [weak self] products in
+        coreDataService?.fetchFavouriteProducts { [weak self] products in
             self?.view?.showFavouriteProducts(products)
         }
     }

@@ -11,18 +11,18 @@ import XCTest
 //MARK: - Spy
 class MenuVCSpy: MenuVCProtocol {
     
-    var presenter: Local_Pizza.MenuPresenterProtocol?
+    var presenter: MenuPresenterProtocol?
     
-    var showProductsCalled: Bool = false
-    var showSpecialsCalled: Bool = false
-    var showCategoriesCalled: Bool = false
-    var showStoriesCalled: Bool = false
-    var scrollTableViewToIndexPathCalled: Bool = false
-    var navigateToProductDetailScreenCalled: Bool = false
-    var navigateToAuthorizationScreenCalled: Bool = false
-    var navigateToStoryDetailScreenCalled: Bool = false
-    var navigateToPizzaMapScreenCalled: Bool = false
-    var navigateToDeliveryMapScreenCalled: Bool = false
+    var showProductsCalled = false
+    var showSpecialsCalled = false
+    var showCategoriesCalled = false
+    var showStoriesCalled = false
+    var scrollTableViewToIndexPathCalled = false
+    var navigateToProductDetailScreenCalled = false
+    var navigateToAuthorizationScreenCalled = false
+    var navigateToStoryDetailScreenCalled = false
+    var navigateToPizzaMapScreenCalled = false
+    var navigateToDeliveryMapScreenCalled = false
     
     func showProducts(_ products: [Local_Pizza.Product]) {
         showProductsCalled = true
@@ -70,100 +70,76 @@ class MenuVCSpy: MenuVCProtocol {
 final class MenuVCTests: XCTestCase {
     
     func testScrollTableViewToIndexPath() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let product = Product.init(image: "pizza1", title: "", description: "", price: "")
         let products = [product]
 
         let index = 1
         presenter.categoryCellSelected(index, products)
-        
-        //then
+
         XCTAssertTrue(vc.scrollTableViewToIndexPathCalled)
     }
     
     func testNavigateToAuthorizationScreen() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         presenter.accountButtonTapped()
-        
-        //then
+
         XCTAssertTrue(vc.navigateToAuthorizationScreenCalled)
     }
     
     func testNavigateToProductDetailScreen() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
         
-        //when
         let product = Product.data
         presenter.productCellSelected(product)
-        
-        //then
+
         XCTAssertTrue(vc.navigateToProductDetailScreenCalled)
     }
     
     func testNavigateToStoryDetailScreen() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let image = UIImage()
         presenter.storyCellSelected(image)
-        
-        //then
+
         XCTAssertTrue(vc.navigateToStoryDetailScreenCalled)
     }
     
     func testNavigateToPizzaMapScreen() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let deliveryType = DeliveryType.takeAway
         presenter.addressSegmentChanged(deliveryType)
-        
-        //then
+
         XCTAssertTrue(vc.navigateToPizzaMapScreenCalled)
     }
     
     func testNavigateToDeliveryMapScreen() {
-        
-        //given
         let vc = MenuVCSpy()
         let presenter = MenuPresenter()
         vc.presenter = presenter
         presenter.view = vc
-        
-        //when
+
         let deliveryType = DeliveryType.address
         presenter.addressSegmentChanged(deliveryType)
-        
-        //then
+
         XCTAssertTrue(vc.navigateToDeliveryMapScreenCalled)
     }
 }

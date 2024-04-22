@@ -20,6 +20,10 @@ class FavouritesConfigurator {
         let archiver = ProductsArchiver()
         favouritesPresenter.archiver = archiver
         
+        //let persistentContainer = PersistentContainter()
+        let coreDataService = CoreDataService()
+        favouritesPresenter.coreDataService = coreDataService
+        
         return favouritesVC
     }
 }

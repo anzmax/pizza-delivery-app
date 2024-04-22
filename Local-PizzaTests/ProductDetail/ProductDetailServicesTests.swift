@@ -12,7 +12,7 @@ import XCTest
 
 class IngredientsNetworkServiceSpy: IngredientsNetworkServiceProtocol {
     
-    var fetchIngredientsCalled: Bool = false
+    var fetchIngredientsCalled = false
     
     func fetchIngredients(completion: @escaping (Result<[Local_Pizza.Ingredient], Local_Pizza.NetworkError>) -> Void) {
         fetchIngredientsCalled = true
