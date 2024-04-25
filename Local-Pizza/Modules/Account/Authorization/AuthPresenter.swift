@@ -26,7 +26,7 @@ class AuthPresenter: AuthPresenterProtocol {
 extension AuthPresenter {
     func sendVerificationCode(_ phoneNumber: String, _ textField: UITextField) {
         guard let phoneNumber = textField.text, !phoneNumber.isEmpty else {
-            view?.showAlert("Пожалуйста, введите номер телефона")
+            view?.showAlert("Пожалуйста, введите номер телефона".localized())
             return
         }
         

@@ -1,0 +1,191 @@
+/*
+ Localizable.strings
+ Local-Pizza
+ 
+ Created by Lika Maksimovic on 22.04.2024.
+ 
+ */
+
+"Меню" = "Menu";
+"Корзина" = "Basket";
+"Избранное" = "Favourites";
+"Доставка" = "Delivery";
+"В пиццерии" = "Take away";
+"Указать адрес доставки »" = "Enter delivery address »";
+"Выгодно и вкусно" = "Delicious and affordable";
+"Пицца" = "Pizza";
+"Донер" = "Doner";
+"3 Соуса" = "3 Sauces";
+"Трио" = "Trio";
+"Десерт" = "Dessert";
+"Завтрак" = "Breakfast";
+"Пиццы" = "Pizzas";
+"Закуски" = "Snacks";
+"Напитки" = "Drinks";
+"Десерты" = "Desserts";
+"Соусы" = "Sauces";
+"Сэндвич с ветчиной" = "Ham Sandwich";
+"Ветчина, хлеб, сыр, майонез, салатные листья, помидор, огурец" = "Ham, bread, cheese, mayonnaise, lettuce, tomato, cucumber";
+
+"Донер" = "Doner";
+"Лепёшка, фалафель, салат, помидоры, огурцы, красный лук, капуста, соус тахини" = "Flatbread, falafel, salad, tomatoes, cucumbers, red onion, cabbage, tahini sauce";
+
+"Скрэмбл" = "Scramble";
+"Яйца, молоко, соль, перец, масло, зелень, моцарелла" = "Eggs, milk, salt, pepper, butter, herbs, mozzarella";
+
+"Пепперони" = "Pepperoni";
+"Пикантная пепперони, увеличенная порция моцареллы, томаты, фирменный томатный соус" = "Spicy pepperoni, extra mozzarella, tomatoes, signature tomato sauce";
+
+"Итальянская" = "Italiano";
+"Моцарелла, томаты, свежий базилик, оливковое масло, чеснок, перец чили (опционально), фирменный томатный соус" = "Mozzarella, tomatoes, fresh basil, olive oil, garlic, chili pepper (optional), signature tomato sauce";
+
+"Грибы и колбаски" = "Maestro";
+"Колбаски, грибы, моцарелла, томатный соус, оливковое масло, кинза" = "Sausages, mushrooms, mozzarella, tomato sauce, olive oil, cilantro";
+
+"Вегетарианская" = "Green Wave";
+"Томаты, лук, перец, оливки, маслины, моцарелла, пармезан, томатный соус" = "Tomatoes, onions, peppers, olives, black olives, mozzarella, Parmesan, tomato sauce";
+
+"Мясная" = "Beast Feast";
+"Ветчина, пепперони, салями, бекон, шпинат, лук, моцарелла, сливочный или томатный соус" = "Ham, pepperoni, salami, bacon, spinach, onions, mozzarella, cream or tomato sauce";
+
+"Маргарита" = "Margherita";
+"Моцарелла, томаты, базилик, оливковое масло, фирменный томатный соус" = "Mozzarella, tomatoes, basil, olive oil, signature tomato sauce";
+
+"Сырная" = "Cheesus Christ";
+"Моцарелла, пармезан, гауда, чеддер, горгонзола, сливочный сыр, маслины, томатный соус" = "Mozzarella, Parmesan, Gouda, Cheddar, Gorgonzola, cream cheese, olives, tomato sauce";
+
+"Маслины и грибы" = "Mushroom Grove";
+"Шампиньоны, лисички, оливки, моцарелла, сливочный соус, чеснок, лук" = "Champignons, chanterelles, olives, mozzarella, cream sauce, garlic, onions";
+
+"Венецианская" = "Venetian";
+"Перец, моцарелла, шампиньоны, куриная грудка, томаты, фирменный томатный соус, маслины" = "Peppers, mozzarella, mushrooms, chicken breast, tomatoes, signature tomato sauce, olives";
+
+"Греческая" = "Greek Euphoria";
+"Фета, оливки, помидоры, лук, оливковое масло, томатный соус, орегано" = "Feta, olives, tomatoes, onions, olive oil, tomato sauce, oregano";
+
+"Картофель фри" = "French Fries";
+"Запеченная картошечка с пряными специями" = "Baked potatoes with spicy spices";
+
+"Креветки в кляре" = "Shrimp in Batter";
+"Кляр изумительно хрустящий, креветки сочные и ароматные" = "Deliciously crispy batter, juicy and flavorful shrimp";
+
+"Наггетсы" = "Chicken Nuggets";
+"Хрустящие кусочки куриного мяса, обжаренные до золотистой корочки" = "Crispy pieces of chicken, fried to a golden crust";
+
+"Сырные палочки" = "Cheese Sticks";
+"Нежный сыр моцарелла, обволакивающийся хрустящей корочкой" = "Tender mozzarella cheese wrapped in a crispy crust";
+
+"Американо" = "Americano";
+"Классический напиток с простым, но насыщенным вкусом" = "Classic drink with a simple yet rich flavor";
+
+"Какао" = "Cocoa";
+"Согревающий в холодные дни и поднимающее настроение" = "Warming on cold days and mood-lifting";
+
+"Каппучино" = "Cappuccino";
+"Идеальное сочетание крепкого эспрессо и нежной молочной пенки" = "The perfect combination of strong espresso and delicate milk foam";
+
+"Чай черный" = "Black Tea";
+"Насыщенный и ароматный напиток придающий энергию" = "Rich and aromatic drink providing energy";
+
+"Чай зеленый" = "Green Tea";
+"Освежающий напиток наполненный антиоксидантами" = "Refreshing drink filled with antioxidants";
+
+"Пирог" = "Pie";
+"Изысканное сочетание нежного теста и аппетитной начинки" = "Exquisite combination of tender dough and appetizing filling";
+
+"Баноффи" = "Banoffee";
+"Нежность бисквита, кремовая текстура карамели и ароматный вкус спелых бананов" = "The tenderness of sponge cake, creamy texture of caramel, and the aromatic taste of ripe bananas";
+
+"Чизкейк" = "Cheesecake";
+"Сливочный десерт с основой из крошечного теста, покрытый сочным фруктовым топпингом" = "Creamy dessert with a crumbly base, topped with juicy fruit topping";
+
+"Печенье" = "Cookies";
+"Наслаждение в каждом кусочке" = "Delight in every bite";
+
+"Томатный соус" = "Tomato Sauce";
+"Насыщенный вкус и аромат, идеально подходящий к различным блюдам" = "Rich flavor and aroma, perfectly suited to various dishes";
+
+"Чесночный соус" = "Garlic Sauce";
+"Интенсивный вкус с нотками ароматного чеснока" = "Intense flavor with notes of aromatic garlic";
+
+"Горчичный соус" = "Mustard Sauce";
+"Жгучий и ароматный, придающий остроты вашему блюду." = "Fiery and aromatic, adding spiciness to your dish.";
+
+"Маленькая" = "Small";
+"Средняя" = "Medium";
+"Большая" = "Large";
+"Традиционное" = "Classic Crust";
+"Тонкое" = "Thin & Crispy";
+"Добавить по вкусу" = "Add Toppings";
+"Чеддер" = "Cheddar";
+"Огурчики" = "Pickles";
+"Ветчина" = "Ham";
+"Халапеньо" = "Jalapeno";
+"Моцарелла" = "Mozzarella";
+"Перчик" = "Pepper";
+"Шампиньоны" = "Mushrooms";
+"Ананас" = "Pineapple";
+
+"Пока ничего не добавлено" = "Nothing added yet";
+"Добавить" = "Add";
+"товара" = "items";
+"Доставка" = "Delivery";
+"Бесплатно" = "Free";
+"Применить промокод" = "Apply Promo Code";
+"Введите промокод" = "Enter Promo Code";
+"Применить" = "Apply";
+"Корзина" = "Basket";
+"Здесь пусто" = "It's empty here";
+"Перейти к меню" = "Go to Menu";
+"Оплатить на сумму %@" = "Pay the amount of %@";
+"%d товара на сумму %@" = "%d items for the amount of %@";
+"В корзину за %@" = "Add for %@";
+
+"Заказать отсюда" = "Order from here";
+"Пиццерия" = "Pizzeria";
+"Город, улица и дом" = "City, Street, and House Number";
+"Ваш адрес" = "Your Address";
+"Сохранить" = "Save";
+
+"Войдите в свой аккаунт" = "Log into your account";
+"ваш номер телефона" = "your phone number";
+"Готово" = "Done";
+"Внимание" = "Attention";
+"OK" = "OK";
+"Код верификации отправлен" = "Verification code sent";
+"Пожалуйста, введите номер телефона" = "Please enter your phone number";
+"Ошибка при отправке кода верификации" = "Error sending verification code";
+"Отправить" = "Send";
+"Введите код" = "Enter code";
+"Ошибка" = "Error";
+"Введите код подтверждения" = "Enter confirmation code";
+"Проблема с идентификатором верификации" = "Issue with verification identifier";
+"Неверный код" = "Invalid code";
+"Введенный код подтверждения неверен. Пожалуйста, попробуйте еще раз." = "The entered confirmation code is incorrect. Please try again.";
+
+"Написать на почту" = "Write an email";
+"Написать в телеграм" = "Write in Telegram";
+"Позвонить по телефону" = "Call by phone";
+"Скидка 25% в пиццерии от 799 р" = "25% discount at the pizzeria from 799 RUB";
+"до 16 июня" = "until June 16";
+"Скидка 20% при заказе от 1049 р" = "20% discount on orders from 1049 RUB";
+"до 16 августа" = "until August 16";
+"Аккаунт" = "Account";
+"Для связи с нами" = "Contact us";
+"  Мои предложения" = "My Offers";
+"  Последний заказ" = "Last Order";
+"  Время отдохнуть" = "Time to Relax";
+"Настройки" = "Settings";
+"Выход из аккаунта" = "Log out";
+"Удаление аккаунта" = "Delete account";
+"Некорректный индекс для AccountField" = "Incorrect index for AccountField";
+"Включить уведомления" = "Enable notifications";
+"Выйти из профиля" = "Log out";
+"Удалить профиль" = "Delete profile";
+"Имя" = "Name";
+"Телефон" = "Phone";
+"E-mail" = "E-mail";
+"Дата рождения" = "Date of birth";
+"Удалить" = "Delete";
+
+

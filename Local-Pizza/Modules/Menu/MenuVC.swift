@@ -317,9 +317,9 @@ extension MenuVC {
     
     func navigateToAuthorizationScreen() {
         
-        //let vc = AccountSettingsConfigurator().configure()
+        let vc = AccountDetailConfigurator().configure()
         
-        let vc = AuthConfigurator().configure()
+        //let vc = AuthConfigurator().configure()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

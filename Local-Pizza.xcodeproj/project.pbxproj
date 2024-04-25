@@ -91,6 +91,10 @@
 		F43211D32BD696CE00642E5B /* AccountSettingsServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */; };
 		F43211D62BD69EC200642E5B /* FavouritesVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D52BD69EC200642E5B /* FavouritesVCTests.swift */; };
 		F43211D82BD69ED200642E5B /* FavouritesPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211D72BD69ED200642E5B /* FavouritesPresenterTests.swift */; };
+		F43211DD2BD6C1CC00642E5B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F43211DB2BD6C1CC00642E5B /* Localizable.strings */; };
+		F43211DF2BD6C20800642E5B /* String+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211DE2BD6C20800642E5B /* String+Extension.swift */; };
+		F43211E32BD6CE5200642E5B /* LocalizedPrice.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211E22BD6CE5200642E5B /* LocalizedPrice.swift */; };
+		F43211E62BD6D58E00642E5B /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = F43211E42BD6D58E00642E5B /* Localizable.stringsdict */; };
 		F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65702B836B8F008C9811 /* ProductDetailVC.swift */; };
 		F43D65732B836F73008C9811 /* AuthorizationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65722B836F73008C9811 /* AuthorizationVC.swift */; };
 		F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43D65742B8372D6008C9811 /* AccountDetailVC.swift */; };
@@ -223,6 +227,13 @@
 		F43211D22BD696CE00642E5B /* AccountSettingsServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsServicesTests.swift; sourceTree = "<group>"; };
 		F43211D52BD69EC200642E5B /* FavouritesVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesVCTests.swift; sourceTree = "<group>"; };
 		F43211D72BD69ED200642E5B /* FavouritesPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouritesPresenterTests.swift; sourceTree = "<group>"; };
+		F43211D92BD6C14D00642E5B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Main.strings; sourceTree = "<group>"; };
+		F43211DA2BD6C14D00642E5B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		F43211DC2BD6C1CC00642E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F43211DE2BD6C20800642E5B /* String+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Extension.swift"; sourceTree = "<group>"; };
+		F43211E02BD6C34A00642E5B /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F43211E22BD6CE5200642E5B /* LocalizedPrice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizedPrice.swift; sourceTree = "<group>"; };
+		F43211E52BD6D58E00642E5B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.stringsdict; name = en; path = en.lproj/Localizable.stringsdict; sourceTree = "<group>"; };
 		F43D65702B836B8F008C9811 /* ProductDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailVC.swift; sourceTree = "<group>"; };
 		F43D65722B836F73008C9811 /* AuthorizationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationVC.swift; sourceTree = "<group>"; };
 		F43D65742B8372D6008C9811 /* AccountDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailVC.swift; sourceTree = "<group>"; };
@@ -304,6 +315,7 @@
 				F409E15E2B90BE4800A88D2C /* Services */,
 				F40458A52B7A640A00C36880 /* Extensions */,
 				F44B4D372B7BDA9F00744632 /* Custom */,
+				F43211E12BD6CE2D00642E5B /* Helper */,
 				F40458972B7A48A700C36880 /* Resources */,
 			);
 			path = "Local-Pizza";
@@ -321,6 +333,8 @@
 		F40458972B7A48A700C36880 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				F43211E42BD6D58E00642E5B /* Localizable.stringsdict */,
+				F43211DB2BD6C1CC00642E5B /* Localizable.strings */,
 				F40458882B7A487300C36880 /* Main.storyboard */,
 				F404588B2B7A487400C36880 /* Assets.xcassets */,
 				F404588D2B7A487400C36880 /* LaunchScreen.storyboard */,
@@ -344,6 +358,7 @@
 			isa = PBXGroup;
 			children = (
 				F40458A62B7A643A00C36880 /* UIViewColors.swift */,
+				F43211DE2BD6C20800642E5B /* String+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -709,6 +724,14 @@
 			path = Favourites;
 			sourceTree = "<group>";
 		};
+		F43211E12BD6CE2D00642E5B /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				F43211E22BD6CE5200642E5B /* LocalizedPrice.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
 		F44B4D372B7BDA9F00744632 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
@@ -794,6 +817,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = F40458762B7A487300C36880;
 			packageReferences = (
@@ -816,10 +840,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				F404588F2B7A487400C36880 /* LaunchScreen.storyboard in Resources */,
+				F43211DD2BD6C1CC00642E5B /* Localizable.strings in Resources */,
 				F404588C2B7A487400C36880 /* Assets.xcassets in Resources */,
 				F404588A2B7A487300C36880 /* Main.storyboard in Resources */,
 				F409E1E32B921C5900A88D2C /* GoogleService-Info.plist in Resources */,
 				F4C7319C2BA47BA900393E83 /* Products.json in Resources */,
+				F43211E62BD6D58E00642E5B /* Localizable.stringsdict in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -856,6 +882,7 @@
 				F410DB8A2BC41FFE000A7F98 /* PizzaMapPresenter.swift in Sources */,
 				F404589D2B7A4D2500C36880 /* MainTabBarVC.swift in Sources */,
 				F409E1FB2B9633C500A88D2C /* PromoCodeCell.swift in Sources */,
+				F43211E32BD6CE5200642E5B /* LocalizedPrice.swift in Sources */,
 				F43D65752B8372D6008C9811 /* AccountDetailVC.swift in Sources */,
 				F409E1FD2B9633D300A88D2C /* TotalCell.swift in Sources */,
 				F4C93E792BACB867005B9C37 /* EntertainmentVC.swift in Sources */,
@@ -881,6 +908,7 @@
 				F410DB9D2BC835BD000A7F98 /* AuthConfigurator.swift in Sources */,
 				F410DB822BBC4175000A7F98 /* ProductDetailPresenter.swift in Sources */,
 				F40458A92B7A671200C36880 /* StoriesTVCell.swift in Sources */,
+				F43211DF2BD6C20800642E5B /* String+Extension.swift in Sources */,
 				F44B4D3D2B7BDE7800744632 /* Special.swift in Sources */,
 				F410DB8C2BC56CBE000A7F98 /* DeliveryMapConfigurator.swift in Sources */,
 				F4C731A62BA4868D00393E83 /* StoriesNetworkService.swift in Sources */,
@@ -971,6 +999,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				F40458892B7A487300C36880 /* Base */,
+				F43211D92BD6C14D00642E5B /* ru */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -979,8 +1008,26 @@
 			isa = PBXVariantGroup;
 			children = (
 				F404588E2B7A487400C36880 /* Base */,
+				F43211DA2BD6C14D00642E5B /* ru */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		F43211DB2BD6C1CC00642E5B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43211DC2BD6C1CC00642E5B /* en */,
+				F43211E02BD6C34A00642E5B /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		F43211E42BD6D58E00642E5B /* Localizable.stringsdict */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F43211E52BD6D58E00642E5B /* en */,
+			);
+			name = Localizable.stringsdict;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -991,6 +1038,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -1055,6 +1103,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";

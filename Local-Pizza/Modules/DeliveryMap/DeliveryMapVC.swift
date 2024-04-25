@@ -32,14 +32,14 @@ class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
     
     private var discriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Город, улица и дом"
+        label.text = "Город, улица и дом".localized()
         label.font = UIFont.systemFont(ofSize: 13, weight: .thin)
         return label
     }()
     
     lazy var addressTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Ваш адрес"
+        textField.placeholder = "Ваш адрес".localized()
         textField.heightAnchor.constraint(equalToConstant: 24).isActive = true
         textField.delegate = self
         textField.addTarget(self, action: #selector(addressTextFieldChanged), for: .editingChanged)
@@ -61,7 +61,7 @@ class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
     
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Сохранить", for: .normal)
+        button.setTitle("Сохранить".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         button.backgroundColor = .systemGray5

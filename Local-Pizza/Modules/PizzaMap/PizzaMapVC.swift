@@ -86,7 +86,7 @@ extension PizzaMapVC: MKMapViewDelegate {
         orderButton.frame = CGRect(x: buttonX, y: 20, width: buttonWidth, height: 40)
         orderButton.backgroundColor = .systemGray5
         orderButton.layer.cornerRadius = 10
-        orderButton.setTitle("Заказать отсюда", for: .normal)
+        orderButton.setTitle("Заказать отсюда".localized(), for: .normal)
         orderButton.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         orderButton.setTitleColor(.black, for: .normal)
         orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
@@ -153,7 +153,7 @@ extension PizzaMapVC {
             if let placemark = placemarks?.first {
                 let annotation = MKPointAnnotation()
                 annotation.coordinate = placemark.location!.coordinate
-                annotation.title = "Пиццерия"
+                annotation.title = "Пиццерия".localized()
                 annotation.subtitle = address
                 self.mapView.addAnnotation(annotation)
             }

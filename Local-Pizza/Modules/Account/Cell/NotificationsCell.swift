@@ -13,7 +13,7 @@ class NotificationsCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Включить уведомления"
+        label.text = "Включить уведомления".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         label.textColor = .black
         return label

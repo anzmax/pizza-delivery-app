@@ -77,7 +77,7 @@ extension AccountSettingsPresenter {
     func fetchAccountField(_ row: Int) -> (AccountField, String) {
         
         guard let field = AccountField(rawValue: row) else {
-            fatalError("Некорректный индекс для AccountField")
+            fatalError("Некорректный индекс для AccountField".localized())
         }
         let value = accountStorageservice?.fetch(field: field)
         return (field, value ?? "")

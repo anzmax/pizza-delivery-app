@@ -21,7 +21,7 @@ class DeleteCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Удалить профиль"
+        label.text = "Удалить профиль".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.textColor = .red
         return label

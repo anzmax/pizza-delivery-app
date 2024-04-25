@@ -105,9 +105,8 @@ extension CartProductCell {
     func update(with product: Product) {
         self.product = product
         itemImageView.image = UIImage(named: product.image)
-        titleLabel.text = product.title
+        titleLabel.text = product.title.localized()
         
-        //let priceString = product.price.replacingOccurrences(of: " р", with: "")
         basePrice = product.totalPrice()
         
         count = product.count
@@ -116,7 +115,12 @@ extension CartProductCell {
     
     func updatePriceLabel() {
         let totalPrice = basePrice * Int(count)
-        priceLabel.text = "\(totalPrice) р"
+        let totalPriceString = "\(totalPrice) р"
+        //priceLabel.text = "\(totalPrice) р"
+        
+        convertAndLocalizePrice(rubles: totalPriceString, rate: 20) { localizedPrice in
+            self.priceLabel.text = localizedPrice
+        }
     }
     
     //MARK: - Actions

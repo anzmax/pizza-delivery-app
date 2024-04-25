@@ -63,7 +63,7 @@ class DescriptionCell: UITableViewCell {
 //MARK: - Update
 extension DescriptionCell {
     func update(with product: Product?) {
-        titleLabel.text = product?.title
-        descriptionLabel.text = product?.description
+        titleLabel.text = product?.title.localized()
+        descriptionLabel.text = product?.description.localized()
     }
 }

@@ -24,14 +24,14 @@ class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
     //MARK: - UI Elements
     lazy var settingsLabel: UILabel = {
         let label = UILabel()
-        label.text = "Настройки"
+        label.text = "Настройки".localized()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
     
     lazy var doneButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Готово", for: .normal)
+        button.setTitle("Готово".localized(), for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.addTarget(self, action: #selector(doneButtonTapped), for: .touchUpInside)
         return button
@@ -187,10 +187,10 @@ extension AccountSettingsVC {
         case 2:
             
             print(indexPath.row, indexPath.section)
-            print("Выход из аккаунта")
+            print("Выход из аккаунта".localized())
             presenter?.logoutCellSelected()
         case 3:
-            print("Удаление аккаунта")
+            print("Удаление аккаунта".localized())
             presenter?.deleteAccountCellSelected()
         default:
             break

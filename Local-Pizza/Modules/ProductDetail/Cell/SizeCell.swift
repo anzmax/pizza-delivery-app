@@ -14,7 +14,7 @@ class SizeCell: UITableViewCell {
     var onSizeChanged: ((Int) -> Void)?
     
     lazy var segmentedControl: UISegmentedControl = {
-        let items = ["Маленькая", "Средняя", "Большая"]
+        let items = ["Маленькая".localized(), "Средняя".localized(), "Большая".localized()]
         let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 1
         control.selectedSegmentTintColor = .white

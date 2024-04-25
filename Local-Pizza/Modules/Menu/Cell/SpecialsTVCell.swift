@@ -15,7 +15,7 @@ class SpecialsTVCell: UITableViewCell {
     
     private var specialLabel: UILabel = {
         let label = UILabel()
-        label.text = "Выгодно и вкусно"
+        label.text = "Выгодно и вкусно".localized()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
@@ -94,8 +94,12 @@ class SpecialCVCell: UICollectionViewCell {
     
     //MARK: - Update
     func update(with specials: Special) {
-        titleLabel.text = specials.title
-        priceButton.setTitle(specials.price, for: .normal)
+        titleLabel.text = specials.title.localized()
+        
+        convertAndLocalizePrice(rubles: specials.price, rate: 20) { localizedPrice in
+            self.priceButton.setTitle(localizedPrice, for: .normal)
+        }
+        //priceButton.setTitle(specials.price, for: .normal)
         specialImageView.image = UIImage(named: specials.image)
     }
 }

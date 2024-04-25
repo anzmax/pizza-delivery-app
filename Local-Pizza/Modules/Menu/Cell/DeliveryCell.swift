@@ -20,7 +20,7 @@ class DeliveryCell: UITableViewCell {
     var onAddressButtonTapped: (()->())?
     
     lazy var segmentedControl: UISegmentedControl = {
-        let items = ["Доставка", "В пиццерии"]
+        let items = ["Доставка".localized(), "В пиццерии".localized()]
         let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 0
         control.selectedSegmentTintColor = .white
@@ -32,7 +32,7 @@ class DeliveryCell: UITableViewCell {
     
     private lazy var addressButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Указать адрес доставки »", for: .normal)
+        button.setTitle("Указать адрес доставки »".localized(), for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
         button.addTarget(self, action: #selector(addressButtonTapped), for: .touchUpInside)

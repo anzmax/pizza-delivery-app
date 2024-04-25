@@ -71,7 +71,7 @@ class CategoryCVCell: UICollectionViewCell {
     
     //MARK: - Update
     func update(with categories: Category) {
-        titleLabel.text = categories.title
+        titleLabel.text = categories.title.localized()
     }
 }
 

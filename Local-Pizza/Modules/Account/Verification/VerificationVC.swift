@@ -27,7 +27,7 @@ class VerificationVC: UIViewController, VerificationVCProtocol {
     //MARK: - UI Elements
     lazy var sendButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Отправить", for: .normal)
+        button.setTitle("Отправить".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .systemGray3
         button.layer.cornerRadius = 5
@@ -39,7 +39,7 @@ class VerificationVC: UIViewController, VerificationVCProtocol {
     lazy var verificationTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.placeholder = "Введите код"
+        textField.placeholder = "Введите код".localized()
         textField.applyShadow(color: .lightGray)
         textField.textAlignment = .center
         textField.keyboardType = .phonePad
@@ -91,7 +91,7 @@ extension VerificationVC {
 extension VerificationVC {
     func showAlert(withTitle title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default)
+        let action = UIAlertAction(title: "OK".localized(), style: .default)
         alertController.addAction(action)
         present(alertController, animated: true)
     }

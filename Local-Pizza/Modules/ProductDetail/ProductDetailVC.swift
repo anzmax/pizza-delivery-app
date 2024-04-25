@@ -56,7 +56,7 @@ class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
     private lazy var cartButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray5
-        button.setTitle("В корзину за \(product?.price))", for: .normal)
+        button.setTitle("В корзину за \(String(describing: product?.price)))", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         button.layer.cornerRadius = 12
@@ -89,15 +89,30 @@ class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
     
     //MARK: - Action
     @objc func cartButtonTapped(_ button: UIButton) {
-        //if let product = product {
             presenter?.cartButtonTapped(cartButton, product)
-        //}x
     }
+    
+//    func updateCartButtonTitle() {
+//        let totalPrice = product?.totalPrice() ?? 0
+//        let newPrice = "\(totalPrice)"
+//        
+//        convertAndLocalizePrice(rubles: newPrice, rate: 20) { localizedPrice in
+//            let buttonTitle = String(format: "В корзину за %@ р".localized(), localizedPrice)
+//            self.cartButton.setTitle(buttonTitle, for: .normal)
+//        }
+//    }
     
     func updateCartButtonTitle() {
         let totalPrice = product?.totalPrice() ?? 0
-        
-        cartButton.setTitle("В корзину за \(totalPrice) р", for: .normal)
+        let newPrice = "\(totalPrice)"
+
+        convertAndLocalizePrice(rubles: newPrice, rate: 20) { localizedPrice in
+            let buttonTitleFormat = NSLocalizedString("В корзину за %@", comment: "Add to cart button title format")
+            let buttonTitle = String(format: buttonTitleFormat, localizedPrice)
+            DispatchQueue.main.async {
+                self.cartButton.setTitle(buttonTitle, for: .normal)
+            }
+        }
     }
 }
 

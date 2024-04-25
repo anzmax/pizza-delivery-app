@@ -27,12 +27,12 @@ class VerificationPresenter: VerificationPresenterProtocol {
 extension VerificationPresenter {
     func sendVerificationCode(_ code: String) {
         guard !code.isEmpty else {
-            view?.showAlert(withTitle: "Ошибка", message: "Введите код подтверждения")
+            view?.showAlert(withTitle: "Ошибка".localized(), message: "Введите код подтверждения".localized())
             return
         }
         
         guard let currentVerificationId = UserDefaults.standard.string(forKey: "authVerificationID") else {
-            view?.showAlert(withTitle: "Ошибка", message: "Проблема с идентификатором верификации")
+            view?.showAlert(withTitle: "Ошибка".localized(), message: "Проблема с идентификатором верификации".localized())
             return
         }
         
@@ -40,7 +40,7 @@ extension VerificationPresenter {
         
         Auth.auth().signIn(with: credential) { [weak self] (authResult, error) in
             if error != nil {
-                self?.view?.showAlert(withTitle: "Неверный код", message: "Введенный код подтверждения неверен. Пожалуйста, попробуйте еще раз.")
+                self?.view?.showAlert(withTitle: "Неверный код".localized(), message: "Введенный код подтверждения неверен. Пожалуйста, попробуйте еще раз.".localized())
                 return
             }
             

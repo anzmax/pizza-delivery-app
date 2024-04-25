@@ -29,13 +29,13 @@ class TotalCell: UITableViewCell {
     
     lazy var deliveryLabel: UILabel = {
         let label = UILabel()
-        label.text = "Доставка"
+        label.text = "Доставка".localized()
         return label
     }()
     
     lazy var deliveryPrice: UILabel = {
         let label = UILabel()
-        label.text = "Бесплатно"
+        label.text = "Бесплатно".localized()
         label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
@@ -67,13 +67,20 @@ extension TotalCell {
     func update(items: [Product]) {
         
         itemsInCart = items
-        
-        itemLabel.text = "\(String(items.count)) товара"
-        
+
+        itemLabel.text = "\(items.count) \(NSLocalizedString("товара", comment: ""))"
+
         
         let totalCount = calculateTotalAmountForProducts()
         print("->", totalCount)
-        itemPrice.text = "\(String(totalCount)) р"
+        //itemPrice.text = "\(String(totalCount)) р"
+        
+        let totalCountString = "\(totalCount) р"
+        convertAndLocalizePrice(rubles: totalCountString, rate: 20) { localizedPrice in
+            DispatchQueue.main.async {
+                self.itemPrice.text = localizedPrice
+            }
+        }
     }
 }
 

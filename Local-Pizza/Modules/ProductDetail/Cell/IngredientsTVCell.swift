@@ -16,7 +16,7 @@ class IngredientsTVCell: UITableViewCell {
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Добавить по вкусу"
+        label.text = "Добавить по вкусу".localized()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
         return label
@@ -38,14 +38,14 @@ class IngredientsTVCell: UITableViewCell {
         collection.backgroundColor = .white
         collection.showsVerticalScrollIndicator = false
         collection.allowsMultipleSelection = true
-
+        
         collection.contentInset = UIEdgeInsets(top: 5, left: edgeInsets, bottom: 10, right: edgeInsets)
         collection.delegate = self
         collection.dataSource = self
         collection.register(IngredientCVCell.self, forCellWithReuseIdentifier: IngredientCVCell.id)
         return collection
     }()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -66,8 +66,7 @@ class IngredientsTVCell: UITableViewCell {
     func setupConstraints() {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
-            descriptionLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -350),
+            descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             
             collectionView.topAnchor.constraint(equalTo: descriptionLabel.bottomAnchor, constant: 20),
             collectionView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -105,7 +104,7 @@ extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSourc
         let isSelected = ingredients[indexPath.item].isSelected ?? false
         
         ingredients[indexPath.item].isSelected = !isSelected
-
+        
         let ingredient = ingredients[indexPath.item]
         
         onSelectIngredientCell?(ingredient)
@@ -165,7 +164,7 @@ class IngredientCVCell: UICollectionViewCell {
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             imageView.widthAnchor.constraint(equalToConstant: 80),
             imageView.heightAnchor.constraint(equalToConstant: 80),
- 
+            
             titleLabel.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 5),
             titleLabel.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             
@@ -188,8 +187,13 @@ class IngredientCVCell: UICollectionViewCell {
         }
         
         imageView.image = UIImage(named: ingredient.image)
-        titleLabel.text = ingredient.title
-        priceLabel.text = ingredient.price
+        titleLabel.text = ingredient.title.localized()
+        
+        convertAndLocalizePrice(rubles: ingredient.price, rate: 20) { localizedPrice in
+            DispatchQueue.main.async {
+                self.priceLabel.text = localizedPrice
+            }
+        }
     }
 }
 

@@ -33,7 +33,16 @@ class CartVC: UIViewController, CartVCProtocol {
         didSet {
             tableView.reloadData()
             let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
-            paymentButton.setTitle("Оплатить на сумму \(totalAmount) рублей", for: .normal)
+            
+            let totalAmountString = "\(totalAmount)"
+                    
+            convertAndLocalizePrice(rubles: totalAmountString, rate: 20) { localizedPrice in
+                       DispatchQueue.main.async {
+                           let paymentTitle = String.localizedStringWithFormat(NSLocalizedString("Оплатить на сумму %@", comment: ""), localizedPrice)
+                           self.paymentButton.setTitle(paymentTitle, for: .normal)
+                       }
+                   }
+           // paymentButton.setTitle("Оплатить на сумму \(totalAmount) рублей", for: .normal)
         }
     }
     
@@ -46,7 +55,7 @@ class CartVC: UIViewController, CartVCProtocol {
     //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Корзина"
+        label.text = "Корзина".localized()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         return label
@@ -86,7 +95,7 @@ class CartVC: UIViewController, CartVCProtocol {
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Здесь пусто"
+        label.text = "Здесь пусто".localized()
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         label.textColor = .black
         return label
@@ -94,7 +103,7 @@ class CartVC: UIViewController, CartVCProtocol {
     
     lazy var menuButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Перейти к меню", for: .normal)
+        button.setTitle("Перейти к меню".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.backgroundColor = .systemGray5
         button.layer.cornerRadius = 12
@@ -196,7 +205,13 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 
                 let titleLabel = UILabel()
                 let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
-                titleLabel.text = "\(itemsInCart.count) товара на сумму \(totalAmount) рублей"
+                
+                convertAndLocalizePrice(rubles: "\(totalAmount)", rate: 20) { localizedPrice in
+                    DispatchQueue.main.async {
+                        titleLabel.text = String.localizedStringWithFormat(NSLocalizedString("%d товара на сумму %@", comment: ""), self.itemsInCart.count, localizedPrice)
+                    }
+                }
+//                titleLabel.text = "\(itemsInCart.count) товара на сумму \(totalAmount) рублей"
                 titleLabel.textColor = .black
                 titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
                 
@@ -214,7 +229,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 headerView.backgroundColor = .white
                 
                 let titleLabel = UILabel()
-                titleLabel.text = "Добавить"
+                titleLabel.text = "Добавить".localized()
                 titleLabel.textColor = .black
                 titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
                 
@@ -272,7 +287,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] action, view, completionHandler in
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить".localized(), comment: "")) { [weak self] action, view, completionHandler in
             guard let self = self else { return }
 
             tableView.beginUpdates()

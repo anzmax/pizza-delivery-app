@@ -39,14 +39,14 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     var tableViewHeightConstraint: NSLayoutConstraint!
     
     var connections: [Connection] = [
-        Connection(title: "Написать на почту", image: UIImage(systemName: "envelope")),
-        Connection(title: "Написать в телеграм", image: UIImage(systemName: "paperplane")),
-        Connection(title: "Позвонить по телефону", image: UIImage(systemName: "phone"))
+        Connection(title: "Написать на почту".localized(), image: UIImage(systemName: "envelope")),
+        Connection(title: "Написать в телеграм".localized(), image: UIImage(systemName: "paperplane")),
+        Connection(title: "Позвонить по телефону".localized(), image: UIImage(systemName: "phone"))
     ]
     
     var offers: [Offer] = [
-        Offer(title: "Скидка 25% в пиццерии от 799 р", subtitle: "до 16 июня"),
-        Offer(title: "Скидка 20% при заказе от 1049 р", subtitle: "до 16 августа"),
+        Offer(title: "Скидка 25% в пиццерии от 799 р".localized(), subtitle: "до 16 июня".localized()),
+        Offer(title: "Скидка 20% при заказе от 1049 р".localized(), subtitle: "до 16 августа".localized()),
     ]
     
     var entertainments: [Entertainment] = [
@@ -76,7 +76,7 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     
     lazy var accountLabel: UILabel = {
         let label = UILabel()
-        label.text = "Аккаунт"
+        label.text = "Аккаунт".localized()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         return label
     }()
@@ -118,7 +118,7 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     
     lazy var connectionLabel: UILabel = {
         let label = UILabel()
-        label.text = "Для связи с нами"
+        label.text = "Для связи с нами".localized()
         label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
         return label
     }()
@@ -228,11 +228,11 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
 
             switch AccountSectionType(rawValue: section) {
             case .offers:
-                headerLabel.text = "  Мои предложения"
+                headerLabel.text = "  Мои предложения".localized()
             case .history:
-                headerLabel.text = "  Последний заказ"
+                headerLabel.text = "  Последний заказ".localized()
             case .entertainment:
-                headerLabel.text = "  Время отдохнуть"
+                headerLabel.text = "  Время отдохнуть".localized()
             default:
                 headerLabel.text = "  "
             }

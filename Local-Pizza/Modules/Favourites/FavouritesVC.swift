@@ -25,7 +25,7 @@ class FavouritesVC: UIViewController, FavouritesVCProtocol {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Избранное"
+        label.text = "Избранное".localized()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         return label
@@ -33,7 +33,7 @@ class FavouritesVC: UIViewController, FavouritesVCProtocol {
     
     lazy var emptyLabel: UILabel = {
         let label = UILabel()
-        label.text = "Пока ничего не добавлено"
+        label.text = "Пока ничего не добавлено".localized()
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
         return label

@@ -14,7 +14,7 @@ class DoughCell: UITableViewCell {
     var onDoughChanged: ((Int)->Void)?
     
     lazy var segmentedControl: UISegmentedControl = {
-        let items = ["Традиционное", "Тонкое"]
+        let items = ["Традиционное".localized(), "Тонкое".localized()]
         let control = UISegmentedControl(items: items)
         control.selectedSegmentIndex = 0
         control.selectedSegmentTintColor = .white

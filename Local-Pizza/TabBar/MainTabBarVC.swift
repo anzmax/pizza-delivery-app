@@ -21,12 +21,12 @@ class MainTabVC: UITabBarController {
     private func setup() {
         tabBar.tintColor = .black
         viewControllers = [menuVC, favouritesVC, cartVC]
-
-                for (index, controller) in [menuVC, favouritesVC, cartVC].enumerated() {
-                        
-                    let page = TabBarPage.init(index: index)
-                    let tabItem = UITabBarItem.init(title: page?.makeTitle(), image: page?.makeIcon(), selectedImage: page?.makeIconSelected())
-                controller.tabBarItem = tabItem
-                }
+        
+        for (index, controller) in [menuVC, favouritesVC, cartVC].enumerated() {
+            
+            let page = TabBarPage.init(index: index)
+            let tabItem = UITabBarItem.init(title: page?.makeTitle(), image: page?.makeIcon(), selectedImage: page?.makeIconSelected())
+            controller.tabBarItem = tabItem
+        }
     }
 }

@@ -13,7 +13,7 @@ class LogoutCell: UITableViewCell {
     
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Выйти из профиля"
+        label.text = "Выйти из профиля".localized()
         label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
         label.textColor = .black
         return label

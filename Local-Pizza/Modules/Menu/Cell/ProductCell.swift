@@ -77,9 +77,13 @@ class ProductCell: UITableViewCell {
     func update(with product: Product) {
         self.product = product
         productImageView.image = UIImage(named: product.image)
-        titleLabel.text = product.title
-        descriptionLabel.text = product.description
-        priceButton.setTitle(product.price, for: .normal)
+        titleLabel.text = product.title.localized()
+        descriptionLabel.text = product.description.localized()
+        
+        convertAndLocalizePrice(rubles: product.price, rate: 20) { localizedPrice in
+            self.priceButton.setTitle(localizedPrice, for: .normal)
+        }
+        //priceButton.setTitle(product.price, for: .normal)
     }
     
 }

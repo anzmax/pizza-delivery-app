@@ -14,7 +14,7 @@ class PromoCodeCell: UITableViewCell {
     //MARK: - UI Elements
     lazy var promoButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Применить промокод", for: .normal)
+        button.setTitle("Применить промокод".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         button.backgroundColor = .systemGray6
@@ -84,11 +84,11 @@ extension PromoCodeCell {
         accessoryView.backgroundColor = .white
         
         let accessoryTextField = UITextField()
-        accessoryTextField.placeholder = "Введите промокод"
+        accessoryTextField.placeholder = "Введите промокод".localized()
         accessoryTextField.borderStyle = .roundedRect
         
         let applyButton = UIButton(type: .system)
-        applyButton.setTitle("Применить", for: .normal)
+        applyButton.setTitle("Применить".localized(), for: .normal)
         applyButton.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .semibold)
         applyButton.addTarget(self, action: #selector(applyPromoCode), for: .touchUpInside)
         applyButton.backgroundColor = .systemGray6

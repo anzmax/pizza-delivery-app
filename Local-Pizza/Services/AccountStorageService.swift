@@ -25,10 +25,10 @@ enum AccountField: Int, CaseIterable {
     
     func getPlaceholder() -> String {
         switch self {
-        case .name:  return "Имя"
-        case .phone: return "Телефон"
-        case .email:  return "E-mail"
-        case .dateOfBirth:  return "Дата рождения"
+        case .name:  return "Имя".localized()
+        case .phone: return "Телефон".localized()
+        case .email:  return "E-mail".localized()
+        case .dateOfBirth:  return "Дата рождения".localized()
         }
     }
 }

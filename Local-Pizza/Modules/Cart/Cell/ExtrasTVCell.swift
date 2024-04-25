@@ -142,9 +142,13 @@ class ExtrasCVCell: UICollectionViewCell {
 //MARK: - Update CV Cell
 extension ExtrasCVCell {
     func update(with product: Product) {
-        titleLabel.text = product.title
-        priceButton.setTitle(product.price, for: .normal)
+        titleLabel.text = product.title.localized()
+        //priceButton.setTitle(product.price, for: .normal)
         imageView.image = UIImage(named: product.image)
+        
+        convertAndLocalizePrice(rubles: product.price, rate: 20) { localizedPrice in
+            self.priceButton.setTitle(localizedPrice, for: .normal)
+        }
     }
 }
 

@@ -27,7 +27,7 @@ class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
     //MARK: - UI Elelments
     lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Войдите в свой аккаунт"
+        label.text = "Войдите в свой аккаунт".localized()
         label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
         label.textColor = .darkGray
         label.textAlignment = .center
@@ -37,7 +37,7 @@ class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
     lazy var phoneTextField: UITextField = {
         let textField = UITextField()
         textField.borderStyle = .roundedRect
-        textField.placeholder = "ваш номер телефона"
+        textField.placeholder = "ваш номер телефона".localized()
         textField.textColor = .darkGray
         textField.applyShadow(color: .lightGray)
         textField.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
@@ -134,7 +134,7 @@ extension AuthorizationVC {
         doneToolbar.barStyle = .default
         
         let flexSpaceLeft = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-        let done = UIBarButtonItem(title: "Готово", style: .done, target: self, action: #selector(doneButtonAction))
+        let done = UIBarButtonItem(title: "Готово".localized(), style: .done, target: self, action: #selector(doneButtonAction))
         done.tintColor = .black
         let flexSpaceRight = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
         
@@ -148,8 +148,8 @@ extension AuthorizationVC {
 //MARK: - Update View
 extension AuthorizationVC {
     func showAlert(_ message: String) {
-         let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
-         alert.addAction(UIAlertAction(title: "OK", style: .default))
+        let alert = UIAlertController(title: "Внимание".localized(), message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
          present(alert, animated: true)
      }
 }
@@ -159,6 +159,6 @@ extension AuthorizationVC {
     func navigateToVerificationScreen() {
         let vc = VerificationConfigurator().configure()
         self.present(vc, animated: true)
-        print("Код верификации отправлен")
+        print("Код верификации отправлен".localized())
     }
 }
