@@ -11,10 +11,10 @@ struct PersonalInfo {
     var title: String
 }
 
-var personalInfo: [PersonalInfo] = [
-    PersonalInfo(title: "Имя"),
-    PersonalInfo(title: "Телефон"),
-    PersonalInfo(title: "E-mail"),
-    PersonalInfo(title: "Дата рождения"),
-]
+//var personalInfo: [PersonalInfo] = [
+//    PersonalInfo(title: "Имя"),
+//    PersonalInfo(title: "Телефон"),
+//    PersonalInfo(title: "E-mail"),
+//    PersonalInfo(title: "Дата рождения"),
+//]
 
