@@ -17,6 +17,7 @@ class DeliveryCell: UITableViewCell {
     static let id = "DeliveryCell"
     
     var onAddressSegmentChanged: ((DeliveryType)->())?
+    var onAddressButtonTapped: (()->())?
     
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Доставка", "В пиццерии"]
@@ -34,6 +35,7 @@ class DeliveryCell: UITableViewCell {
         button.setTitle("Указать адрес доставки »", for: .normal)
         button.setTitleColor(.darkGray, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
+        button.addTarget(self, action: #selector(addressButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -62,6 +64,10 @@ class DeliveryCell: UITableViewCell {
         if let deliveryType = DeliveryType(rawValue: sender.selectedSegmentIndex) {
             onAddressSegmentChanged?(deliveryType)
         }
+    }
+    
+    @objc func addressButtonTapped() {
+        onAddressButtonTapped?()
     }
 }
 
