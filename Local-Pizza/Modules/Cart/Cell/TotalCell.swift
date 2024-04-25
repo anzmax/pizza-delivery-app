@@ -55,9 +55,10 @@ class TotalCell: UITableViewCell {
 extension TotalCell {
     
     func calculateTotalAmountForProducts() -> Int {
+        
         var sum = 0
         for item in itemsInCart {
-            let price = Int(item.price.replacingOccurrences(of: " р", with: "")) ?? 0
+            let price = item.totalPrice()
             sum += price * item.count
         }
         return sum
@@ -69,8 +70,9 @@ extension TotalCell {
         
         itemLabel.text = "\(String(items.count)) товара"
         
-        let totalCount = calculateTotalAmountForProducts()
         
+        let totalCount = calculateTotalAmountForProducts()
+        print("->", totalCount)
         itemPrice.text = "\(String(totalCount)) р"
     }
 }

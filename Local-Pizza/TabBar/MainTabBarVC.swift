@@ -9,9 +9,9 @@ import UIKit
 
 class MainTabVC: UITabBarController {
     
-    private var menuVC = MenuVC()
-        private var contactsVC = ContactsVC()
-        private var cartVC = CartVC()
+    private lazy var menuVC = MenuConfigurator().configure()
+    private var favouritesVC = FavouritesConfigurator().configure()
+    private var cartVC = CartConfigurator().configure()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,9 +20,9 @@ class MainTabVC: UITabBarController {
     
     private func setup() {
         tabBar.tintColor = .black
-        viewControllers = [menuVC, contactsVC, cartVC]
+        viewControllers = [menuVC, favouritesVC, cartVC]
 
-                for (index, controller) in [menuVC, contactsVC, cartVC].enumerated() {
+                for (index, controller) in [menuVC, favouritesVC, cartVC].enumerated() {
                         
                     let page = TabBarPage.init(index: index)
                     let tabItem = UITabBarItem.init(title: page?.makeTitle(), image: page?.makeIcon(), selectedImage: page?.makeIconSelected())
