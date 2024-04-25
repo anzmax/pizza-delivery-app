@@ -11,13 +11,16 @@ class DoughCell: UITableViewCell {
     
     static let id = "DoughCell"
     
+    var onDoughChanged: ((Int)->Void)?
+    
     lazy var segmentedControl: UISegmentedControl = {
         let items = ["Традиционное", "Тонкое"]
         let control = UISegmentedControl(items: items)
-        control.selectedSegmentIndex = 1
+        control.selectedSegmentIndex = 0
         control.selectedSegmentTintColor = .white
         control.layer.cornerRadius = 16
         control.layer.masksToBounds = true
+        control.addTarget(self, action: #selector(segmentedControlValueChanged(_:)), for: .valueChanged)
         return control
     }()
     
@@ -41,10 +44,14 @@ class DoughCell: UITableViewCell {
             segmentedControl.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             segmentedControl.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             segmentedControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-            segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -16),
-            segmentedControl.widthAnchor.constraint(equalToConstant: 340)
-        
+            segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
+            segmentedControl.widthAnchor.constraint(equalToConstant: 350)
         ])
+    }
+    
+    //MARK: - Action
+    @objc func segmentedControlValueChanged(_ sender: UISegmentedControl) {
+        onDoughChanged?(sender.selectedSegmentIndex)
     }
 }
 

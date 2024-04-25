@@ -11,11 +11,19 @@ class PersonalCell: UITableViewCell {
 
     static let id = "PersonalCell"
     
+    lazy var customView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        view.layer.cornerRadius = 12
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
         label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = .gray
+        label.textColor = .darkGray
         return label
     }()
     
@@ -39,7 +47,17 @@ class PersonalCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
+    //MARK: - Update
+    func update(_ field: AccountField, _ value: String) {
+        titleLabel.text = field.getPlaceholder()
+        infoTextField.text = value
+    }
+}
+
+//MARK: - Layout
+extension PersonalCell {
     func setupViews() {
+        self.backgroundColor = .clear
         contentView.addSubview(titleLabel)
         contentView.addSubview(infoTextField)
     }
@@ -57,9 +75,4 @@ class PersonalCell: UITableViewCell {
             infoTextField.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10)
         ])
     }
-    
-    func update(with info: PersonalInfo) {
-        titleLabel.text = info.title
-    }
 }
-

@@ -11,16 +11,8 @@ class IngredientsTVCell: UITableViewCell {
     
     static let id = "IngredientsTVCell"
     
-    var ingredients = [
-        Ingredient(title: "Чеддер", price: "79 р", image: "cheddar"),
-        Ingredient(title: "Огурчики", price: "59 р", image: "cucumber"),
-        Ingredient(title: "Ветчина", price: "79 р", image: "ham"),
-        Ingredient(title: "Халапеньо", price: "69 р", image: "jalapeno"),
-        Ingredient(title: "Моцарелла", price: "79 р", image: "mozzarella"),
-        Ingredient(title: "Перчик", price: "59 р", image: "pepper"),
-        Ingredient(title: "Шампиньоны", price: "69 р", image: "mushrooms"),
-        Ingredient(title: "Ананас", price: "59 р", image: "pineapple"),
-    ]
+    var ingredients: [Ingredient] = []
+    var onSelectIngredientCell: ((Ingredient)->())?
     
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
@@ -32,19 +24,28 @@ class IngredientsTVCell: UITableViewCell {
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: 100, height: 180)
+        let edgeInsets: CGFloat = 20
+        let interitemSpacing: CGFloat = 20
+        let totalSpacing = (2 * edgeInsets) + (2 * interitemSpacing)
+        let itemWidth = (UIScreen.main.bounds.width - totalSpacing) / 3
+        
+        layout.itemSize = CGSize(width: itemWidth, height: 180)
         layout.scrollDirection = .vertical
-        layout.minimumLineSpacing = 10
+        layout.minimumLineSpacing = 20
+        layout.minimumInteritemSpacing = interitemSpacing
+        
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collection.backgroundColor = .white
         collection.showsVerticalScrollIndicator = false
-        collection.contentInset = UIEdgeInsets(top: 5, left: 20, bottom: 10, right: 20)
+        collection.allowsMultipleSelection = true
+
+        collection.contentInset = UIEdgeInsets(top: 5, left: edgeInsets, bottom: 10, right: edgeInsets)
         collection.delegate = self
         collection.dataSource = self
         collection.register(IngredientCVCell.self, forCellWithReuseIdentifier: IngredientCVCell.id)
         return collection
     }()
-    
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -56,13 +57,13 @@ class IngredientsTVCell: UITableViewCell {
     }
     
     func setupViews() {
-        contentView.addSubview(descriptionLabel)
-        contentView.addSubview(collectionView)
+        [descriptionLabel, collectionView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             descriptionLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 12),
@@ -75,12 +76,14 @@ class IngredientsTVCell: UITableViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with ingredients: [Ingredient]) {
         self.ingredients = ingredients
         collectionView.reloadData()
     }
 }
 
+//MARK: - UICollectionViewDelegate, UICollectionViewDataSource
 extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         ingredients.count
@@ -97,6 +100,16 @@ extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSourc
         return UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let isSelected = ingredients[indexPath.item].isSelected ?? false
+        
+        ingredients[indexPath.item].isSelected = !isSelected
+
+        let ingredient = ingredients[indexPath.item]
+        
+        onSelectIngredientCell?(ingredient)
+    }
 }
 
 class IngredientCVCell: UICollectionViewCell {
@@ -139,19 +152,14 @@ class IngredientCVCell: UICollectionViewCell {
     func setupViews() {
         contentView.layer.cornerRadius = 12
         contentView.backgroundColor = .white
-        contentView.layer.shadowColor = UIColor.lightGray.cgColor
-        contentView.layer.shadowOffset = CGSize(width: 2, height: 2)
-        contentView.layer.shadowOpacity = 0.5
-        contentView.layer.shadowRadius = 3
-        contentView.addSubview(imageView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(priceLabel)
+        contentView.applyShadow(color: .lightGray)
+        [imageView, titleLabel, priceLabel].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             imageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -168,7 +176,17 @@ class IngredientCVCell: UICollectionViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with ingredient: Ingredient) {
+        
+        let isSelected = ingredient.isSelected ?? false
+        
+        if isSelected == true {
+            contentView.applyShadow(color: .black)
+        } else {
+            contentView.applyShadow(color: .lightGray)
+        }
+        
         imageView.image = UIImage(named: ingredient.image)
         titleLabel.text = ingredient.title
         priceLabel.text = ingredient.price

@@ -11,13 +11,7 @@ class SpecialsTVCell: UITableViewCell {
     
     static let id = "SpecialsTVCell"
     
-    var specials = [
-        Special(title: "Пицца", price: "250 p", image: "roundpizza"),
-        Special(title: "Донер", price: "117 p", image: "donerSpecial"),
-        Special(title: "3 Соуса", price: "85 p", image: "sauceSpecial"),
-        Special(title: "Трио", price: "789 p", image: "trioSpecial"),
-        Special(title: "Десерт", price: "187 p", image: "sweetSpecial")
-    ]
+    var specials: [Special] = []
     
     private var specialLabel: UILabel = {
         let label = UILabel()

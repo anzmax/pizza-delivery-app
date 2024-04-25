@@ -9,16 +9,11 @@ import UIKit
 
 class CategoriesTVCell: UITableViewCell {
     
-    var categories = [
-        Category(title: "Завтрак"),
-        Category(title: "Пиццы"),
-        Category(title: "Закуски"),
-        Category(title: "Напитки"),
-        Category(title: "Десерты"),
-        Category(title: "Соусы")
-    ]
-    
     static let id = "CategoriesTVCell"
+    
+    var categories: [Category] = []
+    
+    var onCategorySelected: ((Int) -> Void)?
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -58,8 +53,8 @@ class CategoryCVCell: UICollectionViewCell {
     lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.textColor = .black.withAlphaComponent(0.8)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
         return label
     }()
     
@@ -96,11 +91,16 @@ extension CategoriesTVCell: UICollectionViewDelegate, UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        onCategorySelected?(indexPath.item)
+    }
 }
 
 //MARK: - Layout
 extension CategoriesTVCell {
     func setupViews() {
+        contentView.applyShadow(color: .lightGray)
         contentView.addSubview(collectionView)
     }
     
