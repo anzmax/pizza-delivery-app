@@ -7,8 +7,6 @@
 
 import UIKit
 
-import UIKit
-
 extension UIView {
     func applyGradient(colors: [CGColor], locations: [NSNumber]? = nil) {
         let gradientLayer = CAGradientLayer()
@@ -16,14 +14,20 @@ extension UIView {
         gradientLayer.locations = locations
         gradientLayer.frame = self.bounds
 
-        // Настройка направления градиента
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0) // Верхний левый угол
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0) // Нижний правый угол
+        gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
 
-        // Удаление предыдущих градиентных слоев, если они есть
         self.layer.sublayers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
 
         self.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    func applyShadow(color: UIColor, opacity: Float = 0.5, offset: CGSize = CGSize(width: 0, height: 2), radius: CGFloat = 4) {
+        layer.shadowColor = color.cgColor
+        layer.shadowOffset = offset
+        layer.shadowRadius = radius
+        layer.shadowOpacity = opacity
+        layer.masksToBounds = false
     }
 }
 

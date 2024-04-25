@@ -7,20 +7,17 @@
 
 import UIKit
 
-struct Ingredient {
+struct Ingredient: Codable, Equatable {
     var title: String
     var price: String
     var image: String
+    
+    var isSelected: Bool? = false
+    
+    func formatPrice() -> Int {
+        let replacedPrice = self.price.dropLast(2)
+        let price = Int(replacedPrice) ?? 0
+        
+        return price
+    }
 }
-
-var ingredients = [
-    Ingredient(title: "Чеддер", price: "79", image: "cheddar"),
-    Ingredient(title: "Огурчики", price: "59", image: "cucumber"),
-    Ingredient(title: "Ветчина", price: "79", image: "ham"),
-    Ingredient(title: "Халапеньо", price: "69", image: "jalapeno"),
-    Ingredient(title: "Моцарелла", price: "79", image: "mozzarella"),
-    Ingredient(title: "Перчик", price: "59", image: "pepper"),
-    Ingredient(title: "Шампиньоны", price: "69", image: "mushrooms"),
-    Ingredient(title: "Ананас", price: "59", image: "pineapple"),
-]
-

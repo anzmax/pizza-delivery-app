@@ -14,7 +14,7 @@ class ProductImageCell: UITableViewCell {
     lazy var productImageView: UIImageView = {
         let productView = UIImageView()
         productView.image = UIImage(named: "")
-        productView.contentMode = .scaleAspectFill
+        productView.contentMode = .scaleAspectFit
         return productView
     }()
     
@@ -35,7 +35,6 @@ class ProductImageCell: UITableViewCell {
     func setupConstraints() {
         productImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-
             productImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             productImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             productImageView.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
@@ -43,7 +42,10 @@ class ProductImageCell: UITableViewCell {
             productImageView.heightAnchor.constraint(equalToConstant: 200)
         ])
     }
-    
+}
+
+//MARK: - Update
+extension ProductImageCell {
     func update(with product: Product?) {
         productImageView.image = UIImage(named: product!.image)
     }
