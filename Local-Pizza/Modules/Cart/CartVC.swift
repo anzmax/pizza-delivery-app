@@ -14,20 +14,34 @@ enum CartSectionType: Int, CaseIterable {
     case total
 }
 
-class CartVC: UIViewController {
+protocol CartVCProtocol: AnyObject {
+    var presenter: CartPresenterProtocol? { get set }
+    
+    //Update View
+    func showItemsInCart(_ products: [Product])
+    func showDessertsAndDrinks(_ products: [Product])
+    
+    //Navigation
+    func navigateToMenu()
+}
+
+class CartVC: UIViewController, CartVCProtocol {
+    
+    var presenter: CartPresenterProtocol?
     
     var itemsInCart: [Product] = [] {
         didSet {
             tableView.reloadData()
-            paymentButton.setTitle("Оплатить на сумму \(calculateTotalAmountForProducts()) рублей", for: .normal)
+            let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
+            paymentButton.setTitle("Оплатить на сумму \(totalAmount) рублей", for: .normal)
         }
     }
     
-    var dessertsAndDrinks = [Product]()
-    
-    //MARK: - Services
-    let archiver = ProductsArchiver()
-    let productService = ProductService()
+    var dessertsAndDrinks: [Product] = [] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
     
     //MARK: - UI Elements
     lazy var titleLabel: UILabel = {
@@ -41,7 +55,7 @@ class CartVC: UIViewController {
     lazy var paymentButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .systemGray6
-        let totalAmount = calculateTotalAmountForProducts()
+        let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
         button.setTitle("Оплатить на сумму \(totalAmount) рублей", for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
@@ -98,35 +112,13 @@ class CartVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchProducts()
-        fetchDessertsAndDrinks()
+        presenter?.viewWillAppear()
     }
     
-    //MARK: - Action
-    func calculateTotalAmountForProducts() -> Int {
-        var sum = 0
-        for item in itemsInCart {
-             
-            let price = Int(item.price.replacingOccurrences(of: " р", with: "")) ?? 0
-            sum += price * item.count
-        }
-        return sum
+    @objc func menuButtonTapped() {
+        presenter?.menuButtonTapped()
     }
 
-    @objc func menuButtonTapped() {
-        self.tabBarController?.selectedIndex = 0
-    }
-    
-    func fetchProducts() {
-        let products = archiver.fetch()
-        self.itemsInCart = products
-        updateCartUI()
-        tableView.reloadData()
-    }
-    
-    func fetchDessertsAndDrinks() {
-        self.dessertsAndDrinks = productService.fetchDessertsAndDrinks()
-    }
 }
 
 //MARK: - Delegate
@@ -160,19 +152,9 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 
                 
                 cell.onProductCountChanged = { changedProduct in
+                    self.productCellCountChanged(changedProduct)
                     
-                    if let index = self.itemsInCart.firstIndex(where: { $0.title == changedProduct.title}) {
-                        
-                        if changedProduct.count == 0 {
-                            self.itemsInCart.remove(at: index)
-                        } else {
-                            self.itemsInCart[index] = changedProduct
-                        }
-                        
-                        self.archiver.save(self.itemsInCart)
-                        self.fetchProducts()
-                        tableView.reloadData()
-                    }
+//                    self.presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
                 }
                 
                 cell.selectionStyle = .none
@@ -183,10 +165,8 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: ExtrasTVCell.id, for: indexPath) as! ExtrasTVCell
                 
                 cell.onPriceButtonTapped = { product in
-                    
-                    self.archiver.append(product)
-                    self.fetchProducts()
-                    tableView.reloadData()
+                    self.priceButtonTapped(product)
+//                    self.presenter?.priceButtonTapped(product)
                 }
                 
                 print(dessertsAndDrinks)
@@ -215,7 +195,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 headerView.backgroundColor = .white
                 
                 let titleLabel = UILabel()
-                let totalAmount = calculateTotalAmountForProducts()
+                let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
                 titleLabel.text = "\(itemsInCart.count) товара на сумму \(totalAmount) рублей"
                 titleLabel.textColor = .black
                 titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
@@ -291,20 +271,30 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         return indexPath.section == 0
     }
     
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete && indexPath.section == 0 {
-            
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] action, view, completionHandler in
+            guard let self = self else { return }
+
             tableView.beginUpdates()
-            
+        
             let productToRemove = itemsInCart[indexPath.row]
             itemsInCart.remove(at: indexPath.row)
-            archiver.remove(productToRemove)
+            
+            presenter?.removeProductFromArchiver(productToRemove)
+            //self.archiver.remove(productToRemove)
+
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             tableView.endUpdates()
             updateCartUI()
+            completionHandler(true)
         }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
     }
+
 }
 
 //MARK: Layout
@@ -360,5 +350,40 @@ extension CartVC {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: paymentButton.topAnchor, constant: -20)
         ])
+    }
+}
+
+//MARK: - Update View
+extension CartVC {
+    
+    func showItemsInCart(_ products: [Product]) {
+        self.itemsInCart = products
+        updateCartUI()
+        tableView.reloadData()
+    }
+    
+    func showDessertsAndDrinks(_ products: [Product]) {
+        self.dessertsAndDrinks = products
+    }
+    
+}
+
+//MARK: - Navigation
+extension CartVC {
+    
+    func navigateToMenu() {
+        self.tabBarController?.selectedIndex = 0
+    }
+}
+
+//MARK: - Event Handler
+extension CartVC {
+    
+    func productCellCountChanged(_ changedProduct: Product) {
+        presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
+    }
+    
+    func priceButtonTapped(_ product: Product) {
+        presenter?.priceButtonTapped(product)
     }
 }

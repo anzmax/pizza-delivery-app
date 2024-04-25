@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct Story {
+struct Story: Codable {
     var image: String
 }
 

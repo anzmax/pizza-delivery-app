@@ -7,7 +7,14 @@
 
 import UIKit
 
-final class ProductsArchiver {
+protocol ProductsArchiverProtocol: AnyObject {
+    func save(_ products: [Product])
+    func fetch() -> [Product]
+    func append(_ product: Product)
+    func remove(_ product: Product)
+}
+
+final class ProductsArchiver: ProductsArchiverProtocol {
     
     private let encoder = JSONEncoder()
     private let decoder = JSONDecoder()
