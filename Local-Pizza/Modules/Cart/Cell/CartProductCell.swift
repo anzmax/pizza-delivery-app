@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartProductCell: UITableViewCell {
+final class CartProductCell: UITableViewCell {
     
     static let id = "CartProductCell"
     
@@ -116,7 +116,6 @@ extension CartProductCell {
     func updatePriceLabel() {
         let totalPrice = basePrice * Int(count)
         let totalPriceString = "\(totalPrice) р"
-        //priceLabel.text = "\(totalPrice) р"
         
         convertAndLocalizePrice(rubles: totalPriceString, rate: 20) { localizedPrice in
             self.priceLabel.text = localizedPrice

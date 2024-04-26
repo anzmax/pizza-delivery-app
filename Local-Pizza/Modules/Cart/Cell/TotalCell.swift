@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TotalCell: UITableViewCell {
+final class TotalCell: UITableViewCell {
     
     static let id = "TotalCell"
     
@@ -55,7 +55,6 @@ class TotalCell: UITableViewCell {
 extension TotalCell {
     
     func calculateTotalAmountForProducts() -> Int {
-        
         var sum = 0
         for item in itemsInCart {
             let price = item.totalPrice()
@@ -65,17 +64,11 @@ extension TotalCell {
     }
     
     func update(items: [Product]) {
-        
         itemsInCart = items
-
         itemLabel.text = "\(items.count) \(NSLocalizedString("товара", comment: ""))"
-
-        
         let totalCount = calculateTotalAmountForProducts()
-        print("->", totalCount)
-        //itemPrice.text = "\(String(totalCount)) р"
-        
         let totalCountString = "\(totalCount) р"
+        
         convertAndLocalizePrice(rubles: totalCountString, rate: 20) { localizedPrice in
             DispatchQueue.main.async {
                 self.itemPrice.text = localizedPrice

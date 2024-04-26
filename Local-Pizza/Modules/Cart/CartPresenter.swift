@@ -8,15 +8,14 @@
 import UIKit
 
 protocol CartPresenterProtocol: AnyObject {
+    
     var view: CartVCProtocol? { get set }
     
-    //View Event
     func viewWillAppear()
     func menuButtonTapped()
     func productCountChangedInCart(_ changedProduct: Product, _ itemsInCart: [Product])
     func priceButtonTapped(_ product: Product)
     
-    //Business Logic
     func fetchProducts()
     func fetchDessertsAndDrinks()
     func calculateTotalAmountForProducts(_ itemsInCart: [Product]) -> Int
@@ -25,20 +24,17 @@ protocol CartPresenterProtocol: AnyObject {
     func removeProductFromArchiver(_ productToRemove: Product)
 }
 
-class CartPresenter: CartPresenterProtocol {
+final class CartPresenter: CartPresenterProtocol {
     
     weak var view: CartVCProtocol?
     
     var archiver: ProductsArchiverProtocol?
-    //var archiver = ProductsArchiver()
-   // var extrasService = ExtrasNetworkService()
-    
     var extrasService: ExtrasNetworkServiceProtocol?
 }
 
 //MARK: - View Event
 extension CartPresenter {
-
+    
     func viewWillAppear() {
         fetchProducts()
         fetchDessertsAndDrinks()
@@ -61,7 +57,7 @@ extension CartPresenter {
             }
             
             saveProductsInArchiver(items)
-
+            
             self.fetchProducts()
         }
     }
@@ -93,7 +89,7 @@ extension CartPresenter {
     }
     
     func fetchDessertsAndDrinks() {
-
+        
         extrasService?.fetchProducts { result in
             switch result {
             case .success(let products):

@@ -15,17 +15,16 @@ enum CartSectionType: Int, CaseIterable {
 }
 
 protocol CartVCProtocol: AnyObject {
+    
     var presenter: CartPresenterProtocol? { get set }
     
-    //Update View
     func showItemsInCart(_ products: [Product])
     func showDessertsAndDrinks(_ products: [Product])
     
-    //Navigation
     func navigateToMenu()
 }
 
-class CartVC: UIViewController, CartVCProtocol {
+final class CartVC: UIViewController, CartVCProtocol {
     
     var presenter: CartPresenterProtocol?
     
@@ -35,14 +34,13 @@ class CartVC: UIViewController, CartVCProtocol {
             let totalAmount = presenter?.calculateTotalAmountForProducts(itemsInCart) ?? 0
             
             let totalAmountString = "\(totalAmount)"
-                    
+            
             convertAndLocalizePrice(rubles: totalAmountString, rate: 20) { localizedPrice in
-                       DispatchQueue.main.async {
-                           let paymentTitle = String.localizedStringWithFormat(NSLocalizedString("Оплатить на сумму %@", comment: ""), localizedPrice)
-                           self.paymentButton.setTitle(paymentTitle, for: .normal)
-                       }
-                   }
-           // paymentButton.setTitle("Оплатить на сумму \(totalAmount) рублей", for: .normal)
+                DispatchQueue.main.async {
+                    let paymentTitle = String.localizedStringWithFormat(NSLocalizedString("Оплатить на сумму %@", comment: ""), localizedPrice)
+                    self.paymentButton.setTitle(paymentTitle, for: .normal)
+                }
+            }
         }
     }
     
@@ -110,7 +108,7 @@ class CartVC: UIViewController, CartVCProtocol {
         button.addTarget(self, action: #selector(menuButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     //MARK: - Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,7 +125,6 @@ class CartVC: UIViewController, CartVCProtocol {
     @objc func menuButtonTapped() {
         presenter?.menuButtonTapped()
     }
-
 }
 
 //MARK: - Delegate
@@ -159,11 +156,8 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
             case .products:
                 let cell = tableView.dequeueReusableCell(withIdentifier: CartProductCell.id, for: indexPath) as! CartProductCell
                 
-                
                 cell.onProductCountChanged = { changedProduct in
                     self.productCellCountChanged(changedProduct)
-                    
-//                    self.presenter?.productCountChangedInCart(changedProduct, self.itemsInCart)
                 }
                 
                 cell.selectionStyle = .none
@@ -175,7 +169,6 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.onPriceButtonTapped = { product in
                     self.priceButtonTapped(product)
-//                    self.presenter?.priceButtonTapped(product)
                 }
                 
                 print(dessertsAndDrinks)
@@ -211,7 +204,6 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
                         titleLabel.text = String.localizedStringWithFormat(NSLocalizedString("%d товара на сумму %@", comment: ""), self.itemsInCart.count, localizedPrice)
                     }
                 }
-//                titleLabel.text = "\(itemsInCart.count) товара на сумму \(totalAmount) рублей"
                 titleLabel.textColor = .black
                 titleLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
                 
@@ -289,15 +281,14 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить".localized(), comment: "")) { [weak self] action, view, completionHandler in
             guard let self = self else { return }
-
+            
             tableView.beginUpdates()
-        
+            
             let productToRemove = itemsInCart[indexPath.row]
             itemsInCart.remove(at: indexPath.row)
             
             presenter?.removeProductFromArchiver(productToRemove)
-            //self.archiver.remove(productToRemove)
-
+            
             tableView.deleteRows(at: [indexPath], with: .fade)
             
             tableView.endUpdates()
@@ -309,7 +300,7 @@ extension CartVC: UITableViewDelegate, UITableViewDataSource {
         configuration.performsFirstActionWithFullSwipe = true
         return configuration
     }
-
+    
 }
 
 //MARK: Layout
@@ -337,7 +328,7 @@ extension CartVC {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             pizzaImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 150),
@@ -380,12 +371,10 @@ extension CartVC {
     func showDessertsAndDrinks(_ products: [Product]) {
         self.dessertsAndDrinks = products
     }
-    
 }
 
 //MARK: - Navigation
 extension CartVC {
-    
     func navigateToMenu() {
         self.tabBarController?.selectedIndex = 0
     }

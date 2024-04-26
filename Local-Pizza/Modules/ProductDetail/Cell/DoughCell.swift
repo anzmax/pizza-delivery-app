@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DoughCell: UITableViewCell {
+final class DoughCell: UITableViewCell {
     
     static let id = "DoughCell"
     

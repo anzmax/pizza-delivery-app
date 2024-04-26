@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabVC: UITabBarController {
+final class MainTabVC: UITabBarController {
     
     private lazy var menuVC = MenuConfigurator().configure()
     private var favouritesVC = FavouritesConfigurator().configure()

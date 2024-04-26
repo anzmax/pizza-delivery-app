@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ExtrasTVCell: UITableViewCell {
+final class ExtrasTVCell: UITableViewCell {
     
     static let id = "ExtrasTVCell"
     
@@ -143,7 +143,6 @@ class ExtrasCVCell: UICollectionViewCell {
 extension ExtrasCVCell {
     func update(with product: Product) {
         titleLabel.text = product.title.localized()
-        //priceButton.setTitle(product.price, for: .normal)
         imageView.image = UIImage(named: product.image)
         
         convertAndLocalizePrice(rubles: product.price, rate: 20) { localizedPrice in
@@ -173,7 +172,7 @@ extension ExtrasCVCell {
         contentView.layer.shadowRadius = 4
     }
     
-
+    
     func setupConstraints() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),

@@ -99,7 +99,6 @@ class SpecialCVCell: UICollectionViewCell {
         convertAndLocalizePrice(rubles: specials.price, rate: 20) { localizedPrice in
             self.priceButton.setTitle(localizedPrice, for: .normal)
         }
-        //priceButton.setTitle(specials.price, for: .normal)
         specialImageView.image = UIImage(named: specials.image)
     }
 }

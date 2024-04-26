@@ -17,7 +17,6 @@ final class MenuConfigurator {
         menuVC.presenter = menuPresenter
         menuPresenter.view = menuVC
         
-        //DI
         let productsService = ProductNetworkService()
         let specialsService = SpecialsNetworkService()
         let categoriesService = CategoriesNetworkService()
@@ -29,7 +28,7 @@ final class MenuConfigurator {
         menuPresenter.categoriesService = categoriesService
         menuPresenter.storiesService = storiesService
         menuPresenter.coreDataService = coreDataService
-
+        
         return menuVC
     }
 }

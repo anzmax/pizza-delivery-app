@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EntertainmentTVCell: UITableViewCell {
+final class EntertainmentTVCell: UITableViewCell {
     
     static let id = "EntertainmentTVCell"
     
@@ -18,7 +18,7 @@ class EntertainmentTVCell: UITableViewCell {
         Entertainment(image: UIImage(named: "homemadepizza")),
         Entertainment(image: UIImage(named: "pizzarecipe"))
     ]
-
+    
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 190, height: 110)
@@ -65,6 +65,7 @@ class EntertainmentTVCell: UITableViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with entertainments: [Entertainment]) {
         self.entertainments = entertainments
     }
@@ -87,7 +88,7 @@ extension EntertainmentTVCell: UICollectionViewDelegate, UICollectionViewDataSou
     }
 }
 
-class EntertainmentCVCell: UICollectionViewCell {
+final class EntertainmentCVCell: UICollectionViewCell {
     
     static let id = "EntertainmentCVCell"
     
@@ -126,6 +127,7 @@ class EntertainmentCVCell: UICollectionViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with entertainment: Entertainment) {
         imageView.image = entertainment.image
     }

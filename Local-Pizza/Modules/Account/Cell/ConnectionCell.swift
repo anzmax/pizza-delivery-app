@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ConnectionCell: UITableViewCell {
+final class ConnectionCell: UITableViewCell {
     
     static let id = "ConnectionCell"
     
@@ -47,8 +47,7 @@ class ConnectionCell: UITableViewCell {
     func update(with connection: Connection) {
         connectionLabel.text = connection.title
         customImageView.image = connection.image
-    }
-    
+    } 
 }
 
 //MARK: - Layout
@@ -75,7 +74,7 @@ extension ConnectionCell {
             customImageView.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -10),
             customImageView.widthAnchor.constraint(equalToConstant: 20),
             customImageView.heightAnchor.constraint(equalToConstant: 20),
-
+            
             connectionLabel.topAnchor.constraint(equalTo: customView.topAnchor, constant: 10),
             connectionLabel.leadingAnchor.constraint(equalTo: customImageView.trailingAnchor, constant: 10),
             connectionLabel.bottomAnchor.constraint(equalTo: customView.bottomAnchor, constant: -10)

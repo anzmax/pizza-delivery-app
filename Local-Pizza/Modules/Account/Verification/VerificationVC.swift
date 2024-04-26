@@ -9,14 +9,11 @@ import UIKit
 import FirebaseAuth
 
 protocol VerificationVCProtocol: AnyObject {
-    
-    //Connections
+
     var presenter: VerificationPresenterProtocol? { get set }
-    
-    //Update View
+
     func showAlert(withTitle title: String, message: String)
-    
-    //Navigation
+
     func navigateToAccountDetailVC()
 }
 
@@ -45,7 +42,7 @@ class VerificationVC: UIViewController, VerificationVCProtocol {
         textField.keyboardType = .phonePad
         return textField
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -65,15 +62,14 @@ class VerificationVC: UIViewController, VerificationVCProtocol {
 extension VerificationVC {
     func setupViews() {
         view.applyGradient(colors: [UIColor.white.cgColor, UIColor.systemGray3.cgColor])
-        view.addSubview(verificationTextField)
-        view.addSubview(sendButton)
+        [verificationTextField, sendButton].forEach {
+            view.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        verificationTextField.translatesAutoresizingMaskIntoConstraints = false
-        sendButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
- 
             verificationTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             verificationTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             verificationTextField.widthAnchor.constraint(equalToConstant: 280),

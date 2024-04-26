@@ -10,10 +10,8 @@ import UIKit
 
 protocol MenuPresenterProtocol: AnyObject {
     
-    //Connections
     var view: MenuVCProtocol? { get set }
     
-    //View Event
     func viewDidLoad()
     func accountButtonTapped()
     func productPriceButtonTapped(_ product: Product)
@@ -24,7 +22,6 @@ protocol MenuPresenterProtocol: AnyObject {
     func favouriteButtonTapped(_ favouritesVC: FavouritesVC, _ product: Product)
     func storyCellSelected(_ image: UIImage?)
     
-    //Business Logic
     func fetchProducts()
     func fetchSpecials()
     func fetchStories()
@@ -40,9 +37,7 @@ final class MenuPresenter: MenuPresenterProtocol {
     
     //MARL: - Services
     var archiver = ProductsArchiver()
-    //var archiver: ProductsArchiverProtocol?
     var coreDataService: CoreDataServiceProtocol?
-    //var coreDataService = CoreDataService()
     var productsService: ProductNetworkServiceProtocol?
     var storiesService: StoriesNetworkServiceProtocol?
     var specialsService: SpecialsNetworkServiceProtocol?
@@ -72,7 +67,7 @@ extension MenuPresenter {
         if let productIndex = products.firstIndex(where: { $0.image.lowercased().contains(keyword) }) {
             
             let indexPath = IndexPath(row: productIndex, section: 4)
-        
+            
             self.view?.scrollTableViewToIndexPath(indexPath, productIndex)
         }
     }
@@ -109,7 +104,7 @@ extension MenuPresenter {
         guard let image = image else { return }
         view?.navigateToStoryDetailScreen(image)
     }
-
+    
 }
 
 //MARK: - Business Logic
@@ -126,7 +121,7 @@ extension MenuPresenter {
                 favouritesVC.tableView.reloadData()
             }
         }
-    
+        
     }
     
     //MARK: - Fetch Requests
@@ -140,7 +135,7 @@ extension MenuPresenter {
             }
         }
     }
-
+    
     func fetchSpecials() {
         specialsService?.fetchSpecials { result in
             switch result {
@@ -151,7 +146,7 @@ extension MenuPresenter {
             }
         }
     }
-
+    
     func fetchStories() {
         storiesService?.fetchStory { result in
             switch result {
@@ -162,7 +157,7 @@ extension MenuPresenter {
             }
         }
     }
-
+    
     func fetchCategories() {
         categoriesService?.fetchCategory { result in
             switch result {
@@ -173,5 +168,4 @@ extension MenuPresenter {
             }
         }
     }
-    
 }

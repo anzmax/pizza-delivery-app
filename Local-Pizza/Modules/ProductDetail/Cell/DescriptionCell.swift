@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DescriptionCell: UITableViewCell {
+final class DescriptionCell: UITableViewCell {
     
     static let id = "DescriptionCell"
     

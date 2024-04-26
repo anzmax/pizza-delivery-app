@@ -46,7 +46,7 @@ class SizeCell: UITableViewCell {
             segmentedControl.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             segmentedControl.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
             segmentedControl.widthAnchor.constraint(equalToConstant: 350)
-        
+            
         ])
     }
     

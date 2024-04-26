@@ -9,25 +9,21 @@ import UIKit
 
 protocol FavouritesPresenterProtocol: AnyObject {
     
-    //Connections
     var view: FavouritesVCProtocol? { get set }
     
-    //View Event
     func viewWillAppear()
     func updateFavoritesInDataBase()
     func cellPriceButtonTapped(_ product: Product)
     func productCellSwipeToDelete(_ index: IndexPath, _ product: Product)
-
-    //Business Logic
+    
     func loadFavouriteProducts()
 }
 
-class FavouritesPresenter: FavouritesPresenterProtocol {
+final class FavouritesPresenter: FavouritesPresenterProtocol {
     
     weak var view: FavouritesVCProtocol?
-    //var archiver = ProductsArchiver()
+    
     var archiver: ProductsArchiverProtocol?
-    //var coreDataService = CoreDataService()
     var coreDataService: CoreDataServiceProtocol?
 }
 

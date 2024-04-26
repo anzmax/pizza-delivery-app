@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductImageCell: UITableViewCell {
+final class ProductImageCell: UITableViewCell {
     
     static let id = "ProductImageCell"
     

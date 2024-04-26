@@ -15,14 +15,12 @@ class CategoriesNetworkService: CategoriesNetworkServiceProtocol {
     
     func fetchCategory(completion: @escaping (Result<[Category], NetworkError>) -> Void) {
         
-        //https://mocki.io/v1/e2fc9381-2fdc-42af-be2a-c966a8a80e36
-        
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "mocki.io"
-        urlComponents.path = "/v1/e2fc9381-2fdc-42af-be2a-c966a8a80e36"
+        urlComponents.path = "/v1/5f0614ce-71fb-445a-8640-6f84ed2bdf43"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

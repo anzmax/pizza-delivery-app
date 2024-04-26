@@ -7,8 +7,8 @@
 
 import UIKit
 
-class PersonalCell: UITableViewCell {
-
+final class PersonalCell: UITableViewCell {
+    
     static let id = "PersonalCell"
     
     lazy var customView: UIView = {
@@ -58,13 +58,13 @@ class PersonalCell: UITableViewCell {
 extension PersonalCell {
     func setupViews() {
         self.backgroundColor = .clear
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(infoTextField)
+        [titleLabel, infoTextField].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        infoTextField.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),

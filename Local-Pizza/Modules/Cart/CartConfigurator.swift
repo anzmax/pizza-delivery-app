@@ -15,8 +15,7 @@ class CartConfigurator {
         
         cartVC.presenter = cartPresenter
         cartPresenter.view = cartVC
-        
-        // Dependency inversion
+
         let extrasService = ExtrasNetworkService()
         cartPresenter.extrasService = extrasService
         let archiver = ProductsArchiver()

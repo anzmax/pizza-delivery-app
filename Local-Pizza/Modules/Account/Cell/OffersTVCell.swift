@@ -7,14 +7,14 @@
 
 import UIKit
 
-class OffersTVCell: UITableViewCell {
+final class OffersTVCell: UITableViewCell {
     
     static let id = "OffersTVCell"
     
     var offers: [Offer] = [
         Offer(title: "Скидка 25% в пиццерии от 799 р",
               subtitle: "до 16 июня"),
-        Offer(title: "Скидка 20% при заказе от 1049 р", 
+        Offer(title: "Скидка 20% при заказе от 1049 р",
               subtitle: "до 18 августа"),
     ]
     
@@ -50,7 +50,6 @@ class OffersTVCell: UITableViewCell {
         contentView.addSubview(collectionView)
     }
     
-    
     func setupConstraints() {
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -63,6 +62,7 @@ class OffersTVCell: UITableViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with offers: [Offer]) {
         self.offers = offers
         collectionView.reloadData()
@@ -87,7 +87,7 @@ extension OffersTVCell: UICollectionViewDelegate, UICollectionViewDataSource {
     }
 }
 
-class OffersCVCell: UICollectionViewCell {
+final class OffersCVCell: UICollectionViewCell {
     
     static let id = "OffersCVCell"
     
@@ -112,7 +112,7 @@ class OffersCVCell: UICollectionViewCell {
         label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         return label
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
@@ -138,13 +138,9 @@ class OffersCVCell: UICollectionViewCell {
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.systemGray4.cgColor]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-
+        
         contentView.layer.insertSublayer(gradientLayer, at: 0)
         contentView.applyShadow(color: .darkGray)
-//        contentView.layer.shadowColor = UIColor.black.cgColor
-//        contentView.layer.shadowOpacity = 0.2
-//        contentView.layer.shadowOffset = CGSize(width: 0, height: 2)
-//        contentView.layer.shadowRadius = 4
     }
     
     func setupConstraints() {
@@ -163,6 +159,7 @@ class OffersCVCell: UICollectionViewCell {
         ])
     }
     
+    //MARK: - Update
     func update(with offer: Offer) {
         titleLabel.text = offer.title
         subtitleLabel.text = offer.subtitle

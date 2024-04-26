@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductDetailConfigurator {
+final class ProductDetailConfigurator {
     
     func configure(_ product: Product) -> ProductDetailVC {
         

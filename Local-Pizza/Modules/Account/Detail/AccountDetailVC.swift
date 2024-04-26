@@ -15,13 +15,10 @@ enum AccountSectionType: Int, CaseIterable {
 
 protocol AccountDetailVCProtocol: AnyObject {
     
-    //Connections
     var presenter: AccountDetailPresenterProtocol? { get set }
     
-    //Update View
     func tableViewHeightChanged()
     
-    //Navigations
     func navigateToSettingsScreen()
     func navigateToMenuScreen()
     func navigateToEntertainmentScreen(withURL url: URL)
@@ -30,7 +27,7 @@ protocol AccountDetailVCProtocol: AnyObject {
     func navigateToPhoneCallScreen()
 }
 
-class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
+final class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     
     var presenter: AccountDetailPresenterProtocol?
     
@@ -130,13 +127,13 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
         button.addTarget(self, action: #selector(toggleTableView), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
         setupConstraints()
     }
-
+    
     //MARK: - Action
     @objc func settingsButtonTapped() {
         presenter?.settingsButtonTapped()
@@ -148,7 +145,7 @@ class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     
     @objc func toggleTableView() {
         presenter?.chevronButtonTapped()
-     }
+    }
 }
 
 //MARK: - Delegate
@@ -160,7 +157,7 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
         }
         return 1
     }
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.connectionTableView {
             return 3
@@ -196,28 +193,21 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
                     cell.onItemTapped = { [weak self] indexPath in
                         
                         self?.entertainmentCellTapped(indexPath)
-                        
-//                        self?.presenter?.entertainmentItemTapped(indexPath)
-
                     }
-                    
                     return cell
                 }
             }
         }
         return UITableViewCell()
     }
-
+    
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.connectionTableView {
             self.collectionItemSelected(indexPath)
-            //self.presenter?.didSelectConnectionItem(indexPath.row)
         }
-        
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == self.accountTableView {
@@ -225,7 +215,7 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
             headerLabel.backgroundColor = .clear
             headerLabel.textColor = .black
             headerLabel.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-
+            
             switch AccountSectionType(rawValue: section) {
             case .offers:
                 headerLabel.text = "  Мои предложения".localized()
@@ -236,14 +226,14 @@ extension AccountDetailVC: UITableViewDelegate, UITableViewDataSource {
             default:
                 headerLabel.text = "  "
             }
-
             return headerLabel
+            
         } else if tableView == self.connectionTableView {
             return UIView()
         }
         return nil
     }
-
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == self.accountTableView {
             return 32
@@ -271,7 +261,7 @@ extension AccountDetailVC {
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
     }
-
+    
     func setupConstraints() {
         tableViewHeightConstraint = connectionTableView.heightAnchor.constraint(equalToConstant: 0)
         
@@ -343,8 +333,9 @@ extension AccountDetailVC {
     }
     
     func navigateToMenuScreen() {
-        let vc = MenuConfigurator().configure()
-        present(vc, animated: true)
+        let tabBarVC = MainTabVC()
+        tabBarVC.modalPresentationStyle = .fullScreen
+        present(tabBarVC, animated: true)
     }
     
     func navigateToEntertainmentScreen(withURL url: URL) {
@@ -358,14 +349,14 @@ extension AccountDetailVC {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-
+    
     func navigateToTelegramScreen() {
         let telegramUsername = "anzmax"
         if let url = URL(string: "tg://resolve?domain=\(telegramUsername)"), UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
     }
-
+    
     func navigateToPhoneCallScreen() {
         let phoneNumber = "+447347737347"
         if let url = URL(string: "tel://\(phoneNumber)"), UIApplication.shared.canOpenURL(url) {

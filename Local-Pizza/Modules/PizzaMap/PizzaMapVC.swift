@@ -9,19 +9,17 @@ import UIKit
 import MapKit
 
 protocol PizzaMapVCProtocol: AnyObject {
-    //Connections
+    
     var presenter: PizzaMapPresenterProtocol? { get set }
     
-    //Update View
     func addAnnotationForAddress(_ address: String)
     func addAnnotationsForPizzaAddresses()
     
-    //Navigation
     func navigateToPreviousScreen()
     func passAnnotationAddressToMenu()
 }
 
-class PizzaMapVC: UIViewController, PizzaMapVCProtocol {
+final class PizzaMapVC: UIViewController, PizzaMapVCProtocol {
     
     var presenter: PizzaMapPresenterProtocol?
     
@@ -72,17 +70,17 @@ extension PizzaMapVC: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         guard view.annotation?.title != nil else { return }
-
+        
         let customView = UIView(frame: CGRect(x: 0, y: 0, width: mapView.frame.width, height: 100))
         customView.backgroundColor = .white
         customView.center.x = mapView.center.x
         customView.frame.origin.y = mapView.frame.maxY - customView.frame.height
         self.view.addSubview(customView)
-
+        
         let orderButton = UIButton(type: .system)
         let buttonX: CGFloat = 16
         let buttonWidth = customView.frame.width - (buttonX * 2)
-
+        
         orderButton.frame = CGRect(x: buttonX, y: 20, width: buttonWidth, height: 40)
         orderButton.backgroundColor = .systemGray5
         orderButton.layer.cornerRadius = 10
@@ -91,7 +89,7 @@ extension PizzaMapVC: MKMapViewDelegate {
         orderButton.setTitleColor(.black, for: .normal)
         orderButton.addTarget(self, action: #selector(orderButtonTapped), for: .touchUpInside)
         customView.addSubview(orderButton)
-
+        
         guard let addressText = view.annotation?.subtitle else { return }
         self.currentAddress = addressText ?? ""
     }

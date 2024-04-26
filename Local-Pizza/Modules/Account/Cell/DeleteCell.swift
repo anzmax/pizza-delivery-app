@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DeleteCell: UITableViewCell {
+final class DeleteCell: UITableViewCell {
     
     static let id = "DeleteCell"
     

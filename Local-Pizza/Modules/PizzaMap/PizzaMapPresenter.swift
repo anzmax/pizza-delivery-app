@@ -10,10 +10,8 @@ import MapKit
 
 protocol PizzaMapPresenterProtocol: AnyObject {
     
-    //Connections
     var view: PizzaMapVCProtocol? { get set }
     
-    //View Event
     func closeButtonTapped()
     func orderButtonTapped()
 }

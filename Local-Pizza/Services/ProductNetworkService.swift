@@ -14,15 +14,13 @@ protocol ProductNetworkServiceProtocol: AnyObject {
 class ProductNetworkService: ProductNetworkServiceProtocol {
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
-
-        //https://mocki.io/v1/cc2a8f8a-b52c-4dd0-bb4f-0e70416f25af
         
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "mocki.io"
-        urlComponents.path = "/v1/cc2a8f8a-b52c-4dd0-bb4f-0e70416f25af"
+        urlComponents.path = "/v1/d84430f5-5a0c-4cc6-b62c-345fd9de9e61"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

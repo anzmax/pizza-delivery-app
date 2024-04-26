@@ -11,11 +11,3 @@ struct Category: Codable {
     var title: String
 }
 
-var categories = [
-    Category(title: "Завтрак"),
-    Category(title: "Пиццы"),
-    Category(title: "Закуски"),
-    Category(title: "Напитки"),
-    Category(title: "Десерты"),
-    Category(title: "Соусы")
-]

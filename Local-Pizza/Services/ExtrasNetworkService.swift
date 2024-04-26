@@ -15,14 +15,12 @@ class ExtrasNetworkService: ExtrasNetworkServiceProtocol {
     
     func fetchProducts(completion: @escaping (Result<[Product], NetworkError>) -> Void) {
         
-        //https://mocki.io/v1/45f9617c-9d2e-4054-af67-2002ef530440
-        
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "mocki.io"
-        urlComponents.path = "/v1/45f9617c-9d2e-4054-af67-2002ef530440"
+        urlComponents.path = "/v1/be9d3685-4800-4f7c-95e0-1d70b38c603a"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

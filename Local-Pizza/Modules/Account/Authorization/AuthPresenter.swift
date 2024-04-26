@@ -10,14 +10,12 @@ import FirebaseAuth
 
 protocol AuthPresenterProtocol: AnyObject {
     
-    //Connections
     var view: AuthorizationVCProtocol? { get set }
     
-    //View Event
     func sendVerificationCode(_ phoneNumber: String, _ textField: UITextField)
 }
 
-class AuthPresenter: AuthPresenterProtocol {
+final class AuthPresenter: AuthPresenterProtocol {
     
     weak var view: AuthorizationVCProtocol?
 }

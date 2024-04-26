@@ -17,19 +17,16 @@ import UIKit
 
 protocol ProductDetailVCProtocol: AnyObject {
     
-    //Connections
     var presenter: ProductDetailPresenterProtocol? { get set }
     
-    //Update View
     func showIngredients(_ ingredients: [Ingredient])
     func showProductDough(_ index: Int)
     func showProductSize(_ index: Int)
     
-    //Navigation
     func navigateToPreviousScreen() 
 }
 
-class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
+final class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
     
     var presenter: ProductDetailPresenterProtocol?
     
@@ -89,23 +86,13 @@ class ProductDetailVC: UIViewController, ProductDetailVCProtocol {
     
     //MARK: - Action
     @objc func cartButtonTapped(_ button: UIButton) {
-            presenter?.cartButtonTapped(cartButton, product)
+        presenter?.cartButtonTapped(cartButton, product)
     }
-    
-//    func updateCartButtonTitle() {
-//        let totalPrice = product?.totalPrice() ?? 0
-//        let newPrice = "\(totalPrice)"
-//        
-//        convertAndLocalizePrice(rubles: newPrice, rate: 20) { localizedPrice in
-//            let buttonTitle = String(format: "В корзину за %@ р".localized(), localizedPrice)
-//            self.cartButton.setTitle(buttonTitle, for: .normal)
-//        }
-//    }
     
     func updateCartButtonTitle() {
         let totalPrice = product?.totalPrice() ?? 0
         let newPrice = "\(totalPrice)"
-
+        
         convertAndLocalizePrice(rubles: newPrice, rate: 20) { localizedPrice in
             let buttonTitleFormat = NSLocalizedString("В корзину за %@", comment: "Add to cart button title format")
             let buttonTitle = String(format: buttonTitleFormat, localizedPrice)

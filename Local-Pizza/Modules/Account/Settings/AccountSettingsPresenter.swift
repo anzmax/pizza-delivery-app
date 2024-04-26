@@ -7,33 +7,23 @@
 
 import UIKit
 
-//struct AccountSettingItem {
-//    var field: AccountField
-//    var value: String
-//}
-
 protocol AccountSettingsPresenterProtocol: AnyObject {
     
-    //Connections
     var view: AccountSettingsVCProtocol? { get set }
     
-    //View Event
-    //func rowSelected(_ indexPath: IndexPath)
     func logoutCellSelected()
     func deleteAccountCellSelected()
     
-    //Business Logic
     func saveAccountSettings(with settings: [AccountSettingItem])
     func fetchAccountField(_ row: Int) -> (AccountField, String)
     func logout()
     func deleteAccount()
 }
 
-class AccountSettingsPresenter: AccountSettingsPresenterProtocol {
+final class AccountSettingsPresenter: AccountSettingsPresenterProtocol {
     
     weak var view: AccountSettingsVCProtocol?
     
-    //var accountStorageservice = AccountStorageService()
     var accountStorageservice: AccountStorageServiceProtocol?
 }
 
@@ -47,19 +37,6 @@ extension AccountSettingsPresenter {
     func deleteAccountCellSelected() {
         deleteAccount()
     }
-    
-//    func rowSelected(_ indexPath: IndexPath) {
-//        switch indexPath.section {
-//        case 2:
-//            print("Выход из аккаунта")
-//            logout()
-//        case 3:
-//            print("Удаление аккаунта")
-//            deleteAccount()
-//        default:
-//            break
-//        }
-//    }
 }
 
 //MARK: - Business Logic
@@ -67,12 +44,12 @@ extension AccountSettingsPresenter {
     
     func saveAccountSettings(with settings: [AccountSettingItem]) {
         
-         for setting in settings {
-             accountStorageservice?.save(field: setting.field, value: setting.value)
-         }
+        for setting in settings {
+            accountStorageservice?.save(field: setting.field, value: setting.value)
+        }
         
         self.view?.navigateToPreviousScreen()
-     }
+    }
     
     func fetchAccountField(_ row: Int) -> (AccountField, String) {
         
@@ -84,12 +61,12 @@ extension AccountSettingsPresenter {
     }
     
     func logout() {
-         accountStorageservice?.deleteAll()
-         view?.navigateToAuthScreen()
-     }
-
-     func deleteAccount() {
-         accountStorageservice?.deleteAll()
-         view?.navigateToAuthScreen()
-     }
+        accountStorageservice?.deleteAll()
+        view?.navigateToAuthScreen()
+    }
+    
+    func deleteAccount() {
+        accountStorageservice?.deleteAll()
+        view?.navigateToAuthScreen()
+    }
 }

@@ -9,25 +9,20 @@ import UIKit
 
 protocol ProductDetailPresenterProtocol: AnyObject {
     
-    //Connections
     var view: ProductDetailVCProtocol? { get set }
     
-    //View Event
     func viewDidLoad()
     func cartButtonTapped(_ button: UIButton, _ product: Product?)
     func doughCellSelected(_ index: Int, _ product: Product)
     func sizeCellSelected(_ index: Int, _ product: Product)
     
-    //Business Logic
     func fetchIngredients()
 }
 
-class ProductDetailPresenter: ProductDetailPresenterProtocol {
+final class ProductDetailPresenter: ProductDetailPresenterProtocol {
     
     weak var view: ProductDetailVCProtocol?
     
-    //var archiver = ProductsArchiver()
-    //var ingredientsService = IngredientsNetworkService()
     var archiver: ProductsArchiverProtocol?
     var ingredientsService: IngredientsNetworkServiceProtocol?
     
@@ -53,7 +48,7 @@ extension ProductDetailPresenter {
         
         self.view?.navigateToPreviousScreen()
     }
-
+    
     func doughCellSelected(_ index: Int, _ product: Product) {
         view?.showProductDough(index)
     }

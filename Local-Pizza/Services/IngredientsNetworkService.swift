@@ -15,14 +15,12 @@ class IngredientsNetworkService: IngredientsNetworkServiceProtocol {
     
     func fetchIngredients(completion: @escaping (Result<[Ingredient], NetworkError>) -> Void) {
         
-        //https://mocki.io/v1/5cb1d662-39cf-4fe5-8b5a-ab7bf9ab7342
-        
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "mocki.io"
-        urlComponents.path = "/v1/5cb1d662-39cf-4fe5-8b5a-ab7bf9ab7342"
+        urlComponents.path = "/v1/94891cd2-f226-4c45-a410-4d4408e5dad6"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

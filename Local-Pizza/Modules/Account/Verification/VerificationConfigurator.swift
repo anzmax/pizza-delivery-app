@@ -7,7 +7,7 @@
 
 import UIKit
 
-class VerificationConfigurator {
+final class VerificationConfigurator {
     
     func configure() -> VerificationVC {
         let verificationVC = VerificationVC()

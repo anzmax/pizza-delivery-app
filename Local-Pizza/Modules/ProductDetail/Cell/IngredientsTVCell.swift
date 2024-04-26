@@ -7,7 +7,7 @@
 
 import UIKit
 
-class IngredientsTVCell: UITableViewCell {
+final class IngredientsTVCell: UITableViewCell {
     
     static let id = "IngredientsTVCell"
     
@@ -111,7 +111,7 @@ extension IngredientsTVCell: UICollectionViewDelegate, UICollectionViewDataSourc
     }
 }
 
-class IngredientCVCell: UICollectionViewCell {
+final class IngredientCVCell: UICollectionViewCell {
     
     static let id = "IngredientCVCell"
     

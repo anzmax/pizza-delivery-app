@@ -7,7 +7,7 @@
 
 import UIKit
 
-class NotificationsCell: UITableViewCell {
+final class NotificationsCell: UITableViewCell {
     
     static let id = "NotificationsCell"
     
@@ -51,7 +51,6 @@ class NotificationsCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
     
     //MARK: - Action
     @objc func switchControllTapped(_ switchControl: UISwitch) {

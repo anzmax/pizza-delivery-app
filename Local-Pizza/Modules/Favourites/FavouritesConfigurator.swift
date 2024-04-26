@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavouritesConfigurator {
+final class FavouritesConfigurator {
     
     func configure() -> FavouritesVC {
         
@@ -20,7 +20,6 @@ class FavouritesConfigurator {
         let archiver = ProductsArchiver()
         favouritesPresenter.archiver = archiver
         
-        //let persistentContainer = PersistentContainter()
         let coreDataService = CoreDataService()
         favouritesPresenter.coreDataService = coreDataService
         

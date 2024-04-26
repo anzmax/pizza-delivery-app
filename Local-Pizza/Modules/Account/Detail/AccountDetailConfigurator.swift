@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccountDetailConfigurator {
+final class AccountDetailConfigurator {
     
     func configure() -> AccountDetailVC {
         

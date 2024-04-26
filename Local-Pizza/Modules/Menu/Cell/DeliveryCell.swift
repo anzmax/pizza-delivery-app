@@ -12,7 +12,7 @@ enum DeliveryType: Int, CaseIterable {
     case takeAway
 }
 
-class DeliveryCell: UITableViewCell {
+final class DeliveryCell: UITableViewCell {
     
     static let id = "DeliveryCell"
     

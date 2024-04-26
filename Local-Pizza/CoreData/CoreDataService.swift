@@ -20,8 +20,6 @@ protocol CoreDataServiceProtocol: AnyObject {
 
 class CoreDataService: CoreDataServiceProtocol {
     
-    
-    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: .dataName)
         container.loadPersistentStores { description, error in
@@ -47,7 +45,7 @@ class CoreDataService: CoreDataServiceProtocol {
     //MARK: - Add
     func addProductToFavourites(product: Product) {
         let context = persistentContainer.viewContext
-
+        
         let fetchRequest: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "title == %@ AND mainDescription == %@", product.title, product.description)
         
@@ -58,7 +56,7 @@ class CoreDataService: CoreDataServiceProtocol {
                 print("Товар уже добавлен в избранное")
                 return
             }
-
+            
             let productModel = ProductModel(context: context)
             productModel.title = product.title
             productModel.price = product.price
@@ -76,7 +74,7 @@ class CoreDataService: CoreDataServiceProtocol {
     func fetchFavouriteProducts(completion: @escaping ([Product]) -> Void) {
         persistentContainer.performBackgroundTask { context in
             let fetchRequest: NSFetchRequest<ProductModel> = ProductModel.fetchRequest()
-
+            
             do {
                 let productModels = try context.fetch(fetchRequest)
                 let products = productModels.map { productModel in
@@ -108,11 +106,7 @@ class CoreDataService: CoreDataServiceProtocol {
                     saveContext(backgroundContext: context)
                 }
             }
-//            
-//            if let productModelToDelete = productModels.first {
-//                context.delete(productModelToDelete)
-//                saveContext(backgroundContext: context)
-//            }
+            
         } catch {
             print("Ошибка при удалении избранного поста: \(error)")
         }

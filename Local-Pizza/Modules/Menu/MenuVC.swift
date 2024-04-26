@@ -17,17 +17,14 @@ enum MenuSection: Int, CaseIterable {
 
 protocol MenuVCProtocol: AnyObject {
     
-    //Connections
     var presenter: MenuPresenterProtocol? { get set }
     
-    //Update View
     func showProducts(_ products: [Product])
     func showSpecials(_ specials: [Special])
     func showCategories(_ categories: [Category])
     func showStories(_ stories: [Story])
     func scrollTableViewToIndexPath(_ indexPath: IndexPath, _ productIndex: Int)
     
-    //Navigation
     func navigateToProductDetailScreen(_ product: Product)
     func navigateToAuthorizationScreen()
     func navigateToStoryDetailScreen(_ image: UIImage)
@@ -35,7 +32,7 @@ protocol MenuVCProtocol: AnyObject {
     func navigateToDeliveryMapScreen()
 }
 
-class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
+final class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
     
     var presenter: MenuPresenterProtocol?
     
@@ -104,10 +101,6 @@ class MenuVC: UIViewController, StoriesTVCellDelegate, MenuVCProtocol {
         
         presenter?.viewDidLoad()
     }
-    
-    func didSelectStoryImage(_ image: UIImage?) {
-        presenter?.storyCellSelected(image)
-    }
 }
 
 //MARK: - Event Pass
@@ -115,6 +108,10 @@ extension MenuVC {
     
     @objc func accountButtonTapped() {
         presenter?.accountButtonTapped()
+    }
+    
+    func didSelectStoryImage(_ image: UIImage?) {
+        presenter?.storyCellSelected(image)
     }
 }
 
@@ -178,7 +175,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
                 let cell = tableView.dequeueReusableCell(withIdentifier: CategoriesTVCell.id, for: indexPath) as! CategoriesTVCell
                 cell.selectionStyle = .none
                 cell.update(with: categories)
- 
+                
                 cell.onCategorySelected = { index in
                     
                     self.categoryCellTapped(index)
@@ -230,7 +227,7 @@ extension MenuVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
+        
         let product = products[indexPath.row]
         self.productCellSelected(product)
     }
@@ -302,7 +299,7 @@ extension MenuVC {
     }
     
     func navigateToPizzaMapScreen() {
-        let pizzaMapVC = PizzaMapConfigurator().configure() 
+        let pizzaMapVC = PizzaMapConfigurator().configure()
         pizzaMapVC.onAddressChanged = { addressText in
             self.addressText = addressText
         }
@@ -316,10 +313,7 @@ extension MenuVC {
     }
     
     func navigateToAuthorizationScreen() {
-        
-        let vc = AccountDetailConfigurator().configure()
-        
-        //let vc = AuthConfigurator().configure()
+        let vc = AuthConfigurator().configure()
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

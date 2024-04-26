@@ -8,7 +8,7 @@
 import UIKit
 import WebKit
 
-class EntertainmentVC: UIViewController {
+final class EntertainmentVC: UIViewController {
     
     var videoURL: URL?
     
@@ -21,7 +21,6 @@ class EntertainmentVC: UIViewController {
         self.videoURL = videoURL
         super.init(nibName: nil, bundle: nil)
     }
-    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -36,7 +35,7 @@ class EntertainmentVC: UIViewController {
     func setupViews() {
         view.backgroundColor = .white
         view.addSubview(webView)
-
+        
         if let videoURL = self.videoURL {
             webView.load(URLRequest(url: videoURL))
         }

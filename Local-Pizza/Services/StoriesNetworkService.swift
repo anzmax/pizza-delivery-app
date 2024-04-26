@@ -15,14 +15,12 @@ class StoriesNetworkService: StoriesNetworkServiceProtocol {
     
     func fetchStory(completion: @escaping (Result<[Story], NetworkError>) -> Void) {
         
-        //https://mocki.io/v1/5bb6cd50-fa07-4628-98cb-c70938493f9f
-        
         let session = URLSession.shared
         
         var urlComponents = URLComponents()
         urlComponents.scheme = "https"
         urlComponents.host = "mocki.io"
-        urlComponents.path = "/v1/5bb6cd50-fa07-4628-98cb-c70938493f9f"
+        urlComponents.path = "/v1/4f3f11bb-8c7d-4b3b-b0ab-3269ec03bf6d"
         
         guard let url = urlComponents.url else {
             completion(.failure(.emptyUrl))

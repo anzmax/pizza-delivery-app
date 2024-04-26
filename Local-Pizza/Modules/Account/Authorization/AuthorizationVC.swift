@@ -10,20 +10,17 @@ import FirebaseAuth
 
 protocol AuthorizationVCProtocol: AnyObject {
     
-    //Connections
     var presenter: AuthPresenterProtocol? { get set }
     
-    //Update View
     func showAlert(_ message: String)
     
-    //Navigation
     func navigateToVerificationScreen()
 }
 
-class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
+final class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
     
     var presenter: AuthPresenterProtocol?
-
+    
     //MARK: - UI Elelments
     lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -79,18 +76,18 @@ class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
 //MARK: - UITextFieldDelegate
 extension AuthorizationVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-
+        
         guard textField == phoneTextField else { return true }
-
+        
         let currentText = textField.text ?? ""
         guard let stringRange = Range(range, in: currentText) else { return false }
         let updatedText = currentText.replacingCharacters(in: stringRange, with: string)
-
+        
         let numberOnlyText = updatedText.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-
+        
         let maxLength = 11
         let formattedNumber = numberOnlyText.prefix(maxLength)
-
+        
         let formattedText = formattedNumber.enumerated().map { index, character -> String in
             switch index {
             case 3, 6, 8:
@@ -101,7 +98,7 @@ extension AuthorizationVC: UITextFieldDelegate {
         }.joined()
         
         textField.text = formattedText
-
+        
         return false
     }
 }
@@ -120,7 +117,7 @@ extension AuthorizationVC {
         NSLayoutConstraint.activate([
             titleLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             titleLabel.bottomAnchor.constraint(equalTo: phoneTextField.topAnchor, constant: -16),
-    
+            
             phoneTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             phoneTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             phoneTextField.widthAnchor.constraint(equalToConstant: 280),
@@ -150,8 +147,8 @@ extension AuthorizationVC {
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "Внимание".localized(), message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK".localized(), style: .default))
-         present(alert, animated: true)
-     }
+        present(alert, animated: true)
+    }
 }
 
 //MARK: - Navigation

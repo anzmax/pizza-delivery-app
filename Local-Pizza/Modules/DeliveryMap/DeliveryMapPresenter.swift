@@ -8,16 +8,15 @@
 import UIKit
 
 protocol DeliveryMapPresenterProtocol: AnyObject {
-    var view: DeliveryMapVCProtocol? { get set }
     
-    //View Event
+    var view: DeliveryMapVCProtocol? { get set }
+
     func closeButtonTapped()
     func saveButtonTapped()
 }
 
-class DeliveryMapPresenter: DeliveryMapPresenterProtocol {
+final class DeliveryMapPresenter: DeliveryMapPresenterProtocol {
     weak var view: DeliveryMapVCProtocol?
-    
 }
 
 //MARK: - View Event

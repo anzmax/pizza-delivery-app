@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AccountSettingsConfigurator {
+final class AccountSettingsConfigurator {
     
     func configure() -> AccountSettingsVC {
         

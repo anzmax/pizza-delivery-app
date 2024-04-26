@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HistoryCell: UITableViewCell {
+final class HistoryCell: UITableViewCell {
     
     static let id = "HistoryCell"
     
@@ -27,7 +27,7 @@ class HistoryCell: UITableViewCell {
     
     lazy var orderButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Повторить", for: .normal)
+        button.setTitle("Повторить".localized(), for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 15, weight: .medium)
         button.backgroundColor = .systemGray5
@@ -77,7 +77,7 @@ class HistoryCell: UITableViewCell {
     @objc func orderButtonTapped(_ button: UIButton) {
         let originalColor = button.backgroundColor
         button.backgroundColor = .systemGray3
-
+        
         UIView.animate(withDuration: 1, animations: {
             button.backgroundColor = originalColor
         })

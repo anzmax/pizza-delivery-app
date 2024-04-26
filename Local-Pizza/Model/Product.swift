@@ -107,7 +107,7 @@ struct Product: Codable, Equatable {
         }
         return total
     }
-
+    
 }
 
 extension Product {

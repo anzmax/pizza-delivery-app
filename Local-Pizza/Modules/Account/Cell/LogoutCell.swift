@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LogoutCell: UITableViewCell {
+final class LogoutCell: UITableViewCell {
     
     static let id = "LogoutCell"
     

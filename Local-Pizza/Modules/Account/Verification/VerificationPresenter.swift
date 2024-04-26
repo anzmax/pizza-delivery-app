@@ -10,14 +10,12 @@ import FirebaseAuth
 
 protocol VerificationPresenterProtocol: AnyObject {
     
-    //Connections
     var view: VerificationVCProtocol? { get set }
     
-    //View Event
     func sendVerificationCode(_ code: String)
 }
 
-class VerificationPresenter: VerificationPresenterProtocol {
+final class VerificationPresenter: VerificationPresenterProtocol {
     
     weak var view: VerificationVCProtocol?
     

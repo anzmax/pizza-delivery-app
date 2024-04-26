@@ -9,15 +9,13 @@ import UIKit
 
 protocol AccountSettingsVCProtocol: AnyObject {
     
-    //Connections
     var presenter: AccountSettingsPresenterProtocol? { get set }
-
-    //Navigation
+    
     func navigateToPreviousScreen()
     func navigateToAuthScreen()
 }
 
-class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
+final class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
     
     var presenter: AccountSettingsPresenterProtocol?
     
@@ -52,7 +50,7 @@ class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
         tableView.register(DeleteCell.self, forCellReuseIdentifier: DeleteCell.id)
         return tableView
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -107,12 +105,6 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
             let (field, value) = presenter?.fetchAccountField(indexPath.row) ?? (.name, "")
             cell.update(field, value)
             
-            //            if let field = AccountField(rawValue: indexPath.row) {
-            //                let value = accountStorageservice.fetch(field: field)
-            //
-            //                cell.update(field, value)
-            //            }
-            
             cell.selectionStyle = .none
             return cell
         case 1:
@@ -133,20 +125,17 @@ extension AccountSettingsVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-         return 14
-     }
-     
-     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-         let footerView = UIView()
-         footerView.backgroundColor = .clear        
-         return footerView
-     }
-     
+        return 14
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .clear        
+        return footerView
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
         self.rowSelected(indexPath)
-        
-        
         tableView.reloadData()
     }
 }
@@ -181,11 +170,8 @@ extension AccountSettingsVC {
 extension AccountSettingsVC {
     
     func rowSelected(_ indexPath: IndexPath) {
-        //presenter?.rowSelected(indexPath)
-        
         switch indexPath.section {
         case 2:
-            
             print(indexPath.row, indexPath.section)
             print("Выход из аккаунта".localized())
             presenter?.logoutCellSelected()

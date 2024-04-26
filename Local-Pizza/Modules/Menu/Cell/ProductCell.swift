@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductCell: UITableViewCell {
+final class ProductCell: UITableViewCell {
     
     static let id = "ProductCell"
     
@@ -17,7 +17,6 @@ class ProductCell: UITableViewCell {
     var product: Product?
     
     // MARK: - UI Elements
-    
     private let productImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -62,7 +61,6 @@ class ProductCell: UITableViewCell {
     }()
     
     // MARK: - Initialization
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()
@@ -83,9 +81,7 @@ class ProductCell: UITableViewCell {
         convertAndLocalizePrice(rubles: product.price, rate: 20) { localizedPrice in
             self.priceButton.setTitle(localizedPrice, for: .normal)
         }
-        //priceButton.setTitle(product.price, for: .normal)
     }
-    
 }
 
 //MARK: - Layout
@@ -127,7 +123,7 @@ extension ProductCell {
         
         let originalColor = button.backgroundColor
         button.backgroundColor = .systemGray3
-
+        
         UIView.animate(withDuration: 1, animations: {
             button.backgroundColor = originalColor
         })
@@ -140,7 +136,7 @@ extension ProductCell {
     @objc func favouriteButtonTapped(_ button: UIButton) {
         if let product = product {
             onFavouriteButtonTapped?(product)
-
+            
             let currentImage = button.image(for: .normal)
             let starImage = UIImage(systemName: "star")
             let starFillImage = UIImage(systemName: "star.fill")

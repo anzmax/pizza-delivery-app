@@ -7,7 +7,7 @@
 
 import UIKit
 
-class StoryDetailVC: UIViewController {
+final class StoryDetailVC: UIViewController {
     
     var imageView = UIImageView()
     var image: UIImage?

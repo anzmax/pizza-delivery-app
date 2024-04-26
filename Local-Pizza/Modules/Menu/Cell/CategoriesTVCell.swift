@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoriesTVCell: UITableViewCell {
+final class CategoriesTVCell: UITableViewCell {
     
     static let id = "CategoriesTVCell"
     
@@ -46,7 +46,7 @@ class CategoriesTVCell: UITableViewCell {
     }
 }
 
-class CategoryCVCell: UICollectionViewCell {
+final class CategoryCVCell: UICollectionViewCell {
     
     static let id = "CategoryCVCell"
     

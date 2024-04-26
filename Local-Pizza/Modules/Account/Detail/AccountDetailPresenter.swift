@@ -9,10 +9,8 @@ import UIKit
 
 protocol AccountDetailPresenterProtocol: AnyObject {
     
-    //Connections
     var view: AccountDetailVCProtocol? { get set}
     
-    //View Event
     func chevronButtonTapped()
     func didSelectConnectionItem(_ index: Int)
     func entertainmentItemTapped(_ indexPath: IndexPath)
@@ -20,7 +18,7 @@ protocol AccountDetailPresenterProtocol: AnyObject {
     func closeButtonTapped()
 }
 
-class AccountDetailPresenter: AccountDetailPresenterProtocol {
+final class AccountDetailPresenter: AccountDetailPresenterProtocol {
     
     weak var view: AccountDetailVCProtocol?
 }

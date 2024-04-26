@@ -11,14 +11,14 @@ protocol StoriesTVCellDelegate: AnyObject {
     func didSelectStoryImage(_ image: UIImage?)
 }
 
-class StoriesTVCell: UITableViewCell {
-
+final class StoriesTVCell: UITableViewCell {
+    
     static let id = "StoriesCell"
     
     weak var delegate: StoriesTVCellDelegate?
-
+    
     var stories: [Story] = []
-
+    
     private lazy var collectionView: UICollectionView = {
         let layout = CenterZoomCollectionViewLayout()
         layout.itemSize = CGSize(width: 85, height: 110)
@@ -59,7 +59,7 @@ class StoriesTVCell: UITableViewCell {
             collectionView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
-
+    
     //MARK: - Update
     func update(with stories: [Story]) {
         self.stories = stories
@@ -84,7 +84,7 @@ extension StoriesTVCell: UICollectionViewDelegate, UICollectionViewDataSource, U
         let story = stories[indexPath.row]
         delegate?.didSelectStoryImage(UIImage(named: story.image))
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     }

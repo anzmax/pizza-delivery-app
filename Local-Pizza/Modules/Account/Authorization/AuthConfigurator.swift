@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AuthConfigurator {
+final class AuthConfigurator {
     
     func configure() -> AuthorizationVC {
         let authVC = AuthorizationVC()

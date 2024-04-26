@@ -11,14 +11,13 @@ protocol FavouritesVCProtocol: AnyObject {
     
     var presenter: FavouritesPresenterProtocol? { get set }
     
-    //Update View
     func showFavouriteProducts(_ products: [Product])
     func updateFavouritesUI()
     func deleteFavouriteInTable(_ indexPath: IndexPath, _ product: Product)
 }
 
-class FavouritesVC: UIViewController, FavouritesVCProtocol {
-   
+final class FavouritesVC: UIViewController, FavouritesVCProtocol {
+    
     var presenter: FavouritesPresenterProtocol?
     
     var favouriteProducts = [Product]()
@@ -61,17 +60,17 @@ class FavouritesVC: UIViewController, FavouritesVCProtocol {
         super.viewWillAppear(animated)
         self.presenter?.viewWillAppear()
     }
-
+    
     @objc func updateFavorites() {
         
         self.presenter?.updateFavoritesInDataBase()
     }
-
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
-
+    
 }
 
 extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
@@ -87,7 +86,6 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         
         cell.onPriceButtonTapped = { product in
-            //self.presenter?.cellPriceButtonTapped(product)
             self.cellPriceButtonTapped(product)
         }
         
@@ -95,22 +93,21 @@ extension FavouritesVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-           
-           let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] (action, view, completionHandler) in
-               guard let self else { return }
-               
-               let productToDelete = favouriteProducts[indexPath.row]
-               
-               self.swipeToDeleteProduct(indexPath, productToDelete)
-//               self.presenter?.productCellSwipeToDelete(indexPath, productToDelete)
-
-               completionHandler(true)
-           }
-           
-           let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
-           configuration.performsFirstActionWithFullSwipe = true
-           return configuration
-       }
+        
+        let deleteAction = UIContextualAction(style: .destructive, title: NSLocalizedString("Удалить", comment: "")) { [weak self] (action, view, completionHandler) in
+            guard let self else { return }
+            
+            let productToDelete = favouriteProducts[indexPath.row]
+            
+            self.swipeToDeleteProduct(indexPath, productToDelete)
+            
+            completionHandler(true)
+        }
+        
+        let configuration = UISwipeActionsConfiguration(actions: [deleteAction])
+        configuration.performsFirstActionWithFullSwipe = true
+        return configuration
+    }
 }
 
 extension Notification.Name {
@@ -152,7 +149,7 @@ extension FavouritesVC {
         tableView.deleteRows(at: [indexPath], with: .fade)
         self.updateFavouritesUI()
     }
-
+    
     func showFavouriteProducts(_ products: [Product]) {
         self.favouriteProducts = products
         self.tableView.reloadData()

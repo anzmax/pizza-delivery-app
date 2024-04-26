@@ -9,14 +9,14 @@ import UIKit
 import MapKit
 
 protocol DeliveryMapVCProtocol: AnyObject {
+    
     var presenter: DeliveryMapPresenterProtocol? { get set }
-
-    //Navigation
+    
     func navigateToPreviousScreen()
     func passAddressToMenuScreen()
 }
 
-class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
+final class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
     
     var presenter: DeliveryMapPresenterProtocol?
     
@@ -82,7 +82,7 @@ class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
     }()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -107,12 +107,12 @@ class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
 
 //MARK: - Delegate
 extension DeliveryMapVC: UITextFieldDelegate {
-
+    
     @objc func addressTextFieldChanged(_ textField: UITextField) {
         guard let address = textField.text else { return }
         geocodeAddress(address)
     }
-
+    
     func geocodeAddress(_ address: String) {
         let geocoder = CLGeocoder()
         geocoder.geocodeAddressString(address) { [weak self] (placemarks, error) in
@@ -120,7 +120,7 @@ extension DeliveryMapVC: UITextFieldDelegate {
             strongSelf.centerMapOnLocation(location)
         }
     }
-
+    
     func centerMapOnLocation(_ location: CLLocation) {
         let radius: CLLocationDistance = 50
         let coordinateRegion = MKCoordinateRegion(center: location.coordinate, latitudinalMeters: radius, longitudinalMeters: radius)
@@ -198,7 +198,7 @@ extension DeliveryMapVC {
             self.view.layoutIfNeeded()
         }
     }
-
+    
     @objc func keyboardWillHide(notification: NSNotification) {
         customViewBottomConstraint?.constant = 0
         UIView.animate(withDuration: 0.3) {
