@@ -50,13 +50,7 @@ final class CategoryCVCell: UICollectionViewCell {
     
     static let id = "CategoryCVCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black.withAlphaComponent(0.8)
-        label.font = UIFont.systemFont(ofSize: 16, weight: .medium)
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "", color: .black.withAlphaComponent(0.8), size: 16, fontWeight: .medium)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

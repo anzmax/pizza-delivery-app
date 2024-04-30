@@ -22,14 +22,8 @@ final class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
     var presenter: AuthPresenterProtocol?
     
     //MARK: - UI Elelments
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Войдите в свой аккаунт".localized()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .darkGray
-        label.textAlignment = .center
-        return label
-    }()
+    
+    lazy var titleLabel = CustomLabel(text: "Войдите в свой аккаунт".localized(), color: .darkGray, size: 24, fontWeight: .bold)
     
     lazy var phoneTextField: UITextField = {
         let textField = UITextField()

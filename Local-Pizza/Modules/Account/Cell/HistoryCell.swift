@@ -11,11 +11,7 @@ final class HistoryCell: UITableViewCell {
     
     static let id = "HistoryCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "20.03.2024"
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "20.03.2024", color: .black, size: 12, fontWeight: .regular)
     
     lazy var customView: UIView = {
         let view = UIView()

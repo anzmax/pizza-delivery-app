@@ -39,11 +39,9 @@ final class CartProductCell: UITableViewCell {
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Заголовок"
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .regular)
+  
+    lazy var priceLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .semibold)
     
     var horizontalStackView: UIStackView = {
         let stack = UIStackView()
@@ -78,13 +76,6 @@ final class CartProductCell: UITableViewCell {
         label.text = "1"
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 15)
-        return label
-    }()
-    
-    lazy var priceLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        label.text = "Цена"
         return label
     }()
     

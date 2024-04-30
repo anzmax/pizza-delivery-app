@@ -91,26 +91,14 @@ final class OffersCVCell: UICollectionViewCell {
     
     static let id = "OffersCVCell"
     
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .semibold)
+
+    lazy var subtitleLabel = CustomLabel(text: "", color: .darkGray, size: 15, fontWeight: .medium)
+    
     lazy var percentageImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "percentage")
         return imageView
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
-    
-    lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .darkGray
-        label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
-        return label
     }()
     
     override init(frame: CGRect) {

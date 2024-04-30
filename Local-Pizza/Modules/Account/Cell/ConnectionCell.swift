@@ -11,19 +11,15 @@ final class ConnectionCell: UITableViewCell {
     
     static let id = "ConnectionCell"
     
+    lazy var connectionLabel = CustomLabel(text: "", color: .black, size: 12, fontWeight: .regular)
+    
     lazy var customImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(systemName: "")
         imageView.tintColor = .gray
         return imageView
     }()
-    
-    lazy var connectionLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        return label
-    }()
-    
+
     lazy var customView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear

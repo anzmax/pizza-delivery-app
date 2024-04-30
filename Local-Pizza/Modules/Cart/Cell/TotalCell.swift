@@ -14,32 +14,14 @@ final class TotalCell: UITableViewCell {
     var itemsInCart: [Product] = []
     
     //MARK: - UI Elements
-    lazy var itemLabel: UILabel = {
-        let label = UILabel()
-        label.text = "2 товара"
-        return label
-    }()
+    lazy var itemLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .regular)
     
-    lazy var itemPrice: UILabel = {
-        let label = UILabel()
-        label.text = "1 098 р"
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
+    lazy var itemPrice = CustomLabel(text: "", color: .black, size: 16, fontWeight: .semibold)
+
+    lazy var deliveryLabel = CustomLabel(text: "Доставка".localized(), color: .black, size: 16, fontWeight: .regular)
     
-    lazy var deliveryLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Доставка".localized()
-        return label
-    }()
-    
-    lazy var deliveryPrice: UILabel = {
-        let label = UILabel()
-        label.text = "Бесплатно".localized()
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
-    
+    lazy var deliveryPrice = CustomLabel(text: "Бесплатно".localized(), color: .black, size: 16, fontWeight: .semibold)
+
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupViews()

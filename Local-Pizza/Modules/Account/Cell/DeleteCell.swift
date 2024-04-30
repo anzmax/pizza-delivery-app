@@ -11,20 +11,14 @@ final class DeleteCell: UITableViewCell {
     
     static let id = "DeleteCell"
     
+    lazy var titleLabel = CustomLabel(text: "Удалить профиль".localized(), color: .red, size: 18, fontWeight: .regular)
+    
     lazy var customView: UIView = {
         let view = UIView()
         view.backgroundColor = .white.withAlphaComponent(0.8)
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
         return view
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Удалить профиль".localized()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        label.textColor = .red
-        return label
     }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
