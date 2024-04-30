@@ -53,6 +53,11 @@ final class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
     ]
     
     //MARK: - UI Elements
+    
+    lazy var accountLabel = CustomLabel(text: "Аккаунт".localized(), color: .black, size: 24, fontWeight: .bold)
+    
+    lazy var connectionLabel = CustomLabel(text: "Для связи с нами".localized(), color: .black, size: 17, fontWeight: .medium)
+    
     lazy var settingsButton: UIButton = {
         let button = UIButton()
         button.setImage(UIImage(systemName: "gearshape"), for: .normal)
@@ -69,13 +74,6 @@ final class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
         button.contentMode = .scaleAspectFit
         button.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         return button
-    }()
-    
-    lazy var accountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Аккаунт".localized()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        return label
     }()
     
     lazy var connectionTableView: UITableView = {
@@ -111,13 +109,6 @@ final class AccountDetailVC: UIViewController, AccountDetailVCProtocol {
         view.applyShadow(color: .systemGray2)
         view.layer.cornerRadius = 12
         return view
-    }()
-    
-    lazy var connectionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Для связи с нами".localized()
-        label.font = UIFont.systemFont(ofSize: 17, weight: .medium)
-        return label
     }()
     
     lazy var chevronButton: UIButton = {

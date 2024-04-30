@@ -144,7 +144,7 @@
 "Заказать отсюда" = "Order from here";
 "Пиццерия" = "Pizzeria";
 "Город, улица и дом" = "City, Street, and House Number";
-"Ваш адрес" = "Your Address";
+"Ваш адрес" = "Enter your address";
 "Сохранить" = "Save";
 
 "Войдите в свой аккаунт" = "Log into your account";
@@ -166,9 +166,9 @@
 "Написать на почту" = "Write an email";
 "Написать в телеграм" = "Write in Telegram";
 "Позвонить по телефону" = "Call by phone";
-"Скидка 25% в пиццерии от 799 р" = "25% discount at the pizzeria from 799 RUB";
+"Скидка 25% в пиццерии от 799 р" = "25% discount at the pizzeria from 25£";
 "до 16 июня" = "until June 16";
-"Скидка 20% при заказе от 1049 р" = "20% discount on orders from 1049 RUB";
+"Скидка 20% при заказе от 1049 р" = "20% discount on orders from 30£";
 "до 16 августа" = "until August 16";
 "Аккаунт" = "Account";
 "Для связи с нами" = "Contact us";

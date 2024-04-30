@@ -30,13 +30,8 @@ final class DeliveryMapVC: UIViewController, DeliveryMapVCProtocol {
         return view
     }()
     
-    private var discriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Город, улица и дом".localized()
-        label.font = UIFont.systemFont(ofSize: 13, weight: .thin)
-        return label
-    }()
-    
+    private var discriptionLabel = CustomLabel(text: "Город, улица и дом".localized(), color: .darkGray, size: 13, fontWeight: .thin)
+
     lazy var addressTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Ваш адрес".localized()

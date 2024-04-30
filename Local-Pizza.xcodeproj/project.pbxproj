@@ -75,6 +75,7 @@
 		F410DBC82BD29EA0000A7F98 /* CartVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC72BD29EA0000A7F98 /* CartVCTests.swift */; };
 		F410DBCA2BD29EC1000A7F98 /* CartPresenerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBC92BD29EC1000A7F98 /* CartPresenerTests.swift */; };
 		F410DBCC2BD2A8E0000A7F98 /* CartServicesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F410DBCB2BD2A8E0000A7F98 /* CartServicesTests.swift */; };
+		F41A7DE82BE0073100EB211B /* CustomLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F41A7DE72BE0073100EB211B /* CustomLabel.swift */; };
 		F43211B42BD2AFE900642E5B /* PizzaVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B32BD2AFE900642E5B /* PizzaVCTests.swift */; };
 		F43211B62BD2AFF600642E5B /* PizzaPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B52BD2AFF600642E5B /* PizzaPresenterTests.swift */; };
 		F43211B82BD2B51C00642E5B /* DeliveryVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43211B72BD2B51C00642E5B /* DeliveryVCTests.swift */; };
@@ -211,6 +212,7 @@
 		F410DBC72BD29EA0000A7F98 /* CartVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartVCTests.swift; sourceTree = "<group>"; };
 		F410DBC92BD29EC1000A7F98 /* CartPresenerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartPresenerTests.swift; sourceTree = "<group>"; };
 		F410DBCB2BD2A8E0000A7F98 /* CartServicesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartServicesTests.swift; sourceTree = "<group>"; };
+		F41A7DE72BE0073100EB211B /* CustomLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabel.swift; sourceTree = "<group>"; };
 		F43211B32BD2AFE900642E5B /* PizzaVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaVCTests.swift; sourceTree = "<group>"; };
 		F43211B52BD2AFF600642E5B /* PizzaPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PizzaPresenterTests.swift; sourceTree = "<group>"; };
 		F43211B72BD2B51C00642E5B /* DeliveryVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeliveryVCTests.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				F40458A52B7A640A00C36880 /* Extensions */,
 				F44B4D372B7BDA9F00744632 /* Custom */,
 				F43211E12BD6CE2D00642E5B /* Helper */,
+				F41A7DE62BDFE9E100EB211B /* Custom Elements */,
 				F40458972B7A48A700C36880 /* Resources */,
 			);
 			path = "Local-Pizza";
@@ -640,6 +643,14 @@
 			path = Cart;
 			sourceTree = "<group>";
 		};
+		F41A7DE62BDFE9E100EB211B /* Custom Elements */ = {
+			isa = PBXGroup;
+			children = (
+				F41A7DE72BE0073100EB211B /* CustomLabel.swift */,
+			);
+			path = "Custom Elements";
+			sourceTree = "<group>";
+		};
 		F43211B02BD2AFA800642E5B /* Map */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,6 +935,7 @@
 				F409E1EE2B921D6B00A88D2C /* LogoutCell.swift in Sources */,
 				F4C731BA2BA8E42C00393E83 /* Offer.swift in Sources */,
 				F409E1EC2B921D5500A88D2C /* NotificationsCell.swift in Sources */,
+				F41A7DE82BE0073100EB211B /* CustomLabel.swift in Sources */,
 				F409E15B2B8CE21300A88D2C /* PizzaMapVC.swift in Sources */,
 				F4C731B02BA8BA3300393E83 /* Connection.swift in Sources */,
 				F4C731A22BA4823300393E83 /* NetworkErrors.swift in Sources */,

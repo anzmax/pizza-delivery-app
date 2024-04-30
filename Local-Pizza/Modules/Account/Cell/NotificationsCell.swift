@@ -11,21 +11,9 @@ final class NotificationsCell: UITableViewCell {
     
     static let id = "NotificationsCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Включить уведомления".localized()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
-        label.textColor = .black
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "Включить уведомления".localized(), color: .black, size: 18, fontWeight: .semibold)
     
-    lazy var subtitleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Push-notifications, e-mail, SMS"
-        label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
-        label.textColor = .gray
-        return label
-    }()
+    lazy var subtitleLabel = CustomLabel(text: "Push-notifications, e-mail, SMS", color: .gray, size: 14, fontWeight: .regular)
     
     lazy var switchControl: UISwitch = {
         let switchControl = UISwitch()

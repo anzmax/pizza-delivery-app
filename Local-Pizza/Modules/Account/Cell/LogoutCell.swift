@@ -11,13 +11,7 @@ final class LogoutCell: UITableViewCell {
     
     static let id = "LogoutCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Выйти из профиля".localized()
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
-        label.textColor = .black
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "Выйти из профиля".localized(), color: .black, size: 18, fontWeight: .regular)
     
     lazy var customView: UIView = {
         let view = UIView()

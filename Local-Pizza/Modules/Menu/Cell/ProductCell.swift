@@ -24,22 +24,9 @@ final class ProductCell: UITableViewCell {
         return imageView
     }()
     
-    private let titleLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.boldSystemFont(ofSize: 16)
-        label.textColor = .black
-        label.numberOfLines = 0
-        return label
-    }()
-    
-    private let descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 13)
-        label.textColor = .darkGray
-        label.numberOfLines = 0
-        return label
-    }()
-    
+    private let titleLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .semibold)
+    private let descriptionLabel = CustomLabel(text: "", color: .darkGray, size: 13, fontWeight: .regular)
+
     lazy var priceButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)

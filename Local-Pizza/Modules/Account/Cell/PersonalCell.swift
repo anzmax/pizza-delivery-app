@@ -11,20 +11,14 @@ final class PersonalCell: UITableViewCell {
     
     static let id = "PersonalCell"
     
+    lazy var titleLabel = CustomLabel(text: "", color: .darkGray, size: 15, fontWeight: .regular)
+    
     lazy var customView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 12
         view.layer.masksToBounds = true
         return view
-    }()
-    
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textColor = .darkGray
-        return label
     }()
     
     lazy var infoTextField: UITextField = {

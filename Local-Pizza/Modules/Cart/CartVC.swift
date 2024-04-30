@@ -51,13 +51,9 @@ final class CartVC: UIViewController, CartVCProtocol {
     }
     
     //MARK: - UI Elements
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Корзина".localized()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "Корзина".localized(), color: .black, size: 22, fontWeight: .semibold)
+    
+    lazy var descriptionLabel = CustomLabel(text: "Здесь пусто".localized(), color: .black, size: 22, fontWeight: .semibold)
     
     lazy var paymentButton: UIButton = {
         let button = UIButton()
@@ -89,14 +85,6 @@ final class CartVC: UIViewController, CartVCProtocol {
         imageView.image = UIImage(named: "sadpizza")
         imageView.contentMode = .scaleAspectFit
         return imageView
-    }()
-    
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Здесь пусто".localized()
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        label.textColor = .black
-        return label
     }()
     
     lazy var menuButton: UIButton = {

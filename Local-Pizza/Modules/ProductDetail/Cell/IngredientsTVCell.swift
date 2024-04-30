@@ -13,14 +13,8 @@ final class IngredientsTVCell: UITableViewCell {
     
     var ingredients: [Ingredient] = []
     var onSelectIngredientCell: ((Ingredient)->())?
-    
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Добавить по вкусу".localized()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 17, weight: .semibold)
-        return label
-    }()
+
+    lazy var descriptionLabel = CustomLabel(text: "Добавить по вкусу".localized(), color: .black, size: 17, fontWeight: .semibold)
     
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -122,21 +116,8 @@ final class IngredientCVCell: UICollectionViewCell {
         return imageView
     }()
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 12, weight: .light)
-        return label
-    }()
-    
-    lazy var priceLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 15, weight: .semibold)
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 12, fontWeight: .light)
+    lazy var priceLabel = CustomLabel(text: "", color: .black, size: 15, fontWeight: .semibold)
     
     override init(frame: CGRect) {
         super.init(frame: frame)

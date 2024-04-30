@@ -11,24 +11,8 @@ final class DescriptionCell: UITableViewCell {
     
     static let id = "DescriptionCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 19, weight: .semibold)
-        label.textAlignment = .left
-        return label
-    }()
-    
-    lazy var descriptionLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 15, weight: .regular)
-        label.textAlignment = .left
-        label.numberOfLines = 0
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 19, fontWeight: .semibold)
+    lazy var descriptionLabel = CustomLabel(text: "", color: .black, size: 15, fontWeight: .regular)
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)

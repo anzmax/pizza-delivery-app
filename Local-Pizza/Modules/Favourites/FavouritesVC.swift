@@ -22,21 +22,9 @@ final class FavouritesVC: UIViewController, FavouritesVCProtocol {
     
     var favouriteProducts = [Product]()
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Избранное".localized()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        return label
-    }()
-    
-    lazy var emptyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Пока ничего не добавлено".localized()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 22, weight: .semibold)
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "Избранное".localized(), color: .black, size: 22, fontWeight: .semibold)
+ 
+    lazy var emptyLabel = CustomLabel(text: "Пока ничего не добавлено".localized(), color: .black, size: 22, fontWeight: .semibold)
     
     lazy var tableView: UITableView = {
         let tableView = UITableView()

@@ -100,14 +100,7 @@ class ExtrasCVCell: UICollectionViewCell {
     static let id = "ExtrasCVCell"
     
     //MARK: - UI Elements
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Название"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        label.textAlignment = .center
-        return label
-    }()
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 14, fontWeight: .light)
     
     lazy var priceButton: UIButton = {
         let button = UIButton()

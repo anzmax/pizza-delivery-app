@@ -13,13 +13,7 @@ class SpecialsTVCell: UITableViewCell {
     
     var specials: [Special] = []
     
-    private var specialLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Выгодно и вкусно".localized()
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
-        return label
-    }()
+    private let specialLabel = CustomLabel(text: "Выгодно и вкусно".localized(), color: .black, size: 16, fontWeight: .semibold)
     
     private lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,14 +50,8 @@ class SpecialCVCell: UICollectionViewCell {
     
     static let id = "SpecialCVCell"
     
-    lazy var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = ""
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
-        return label
-    }()
-    
+    lazy var titleLabel = CustomLabel(text: "", color: .black, size: 14, fontWeight: .light)
+
     lazy var priceButton: UIButton = {
         let button = UIButton()
         button.setTitle("", for: .normal)
@@ -145,9 +133,10 @@ extension SpecialsTVCell {
 
 extension SpecialCVCell {
     func setupViews() {
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(priceButton)
-        contentView.addSubview(specialImageView)
+        [titleLabel, priceButton, specialImageView].forEach {
+            contentView.addSubview($0)
+            $0.translatesAutoresizingMaskIntoConstraints = false
+        }
     }
     
     func setupContentView() {
@@ -162,9 +151,6 @@ extension SpecialCVCell {
     }
     
     func setupConstraints() {
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        priceButton.translatesAutoresizingMaskIntoConstraints = false
-        specialImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             specialImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 16),
             specialImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16),

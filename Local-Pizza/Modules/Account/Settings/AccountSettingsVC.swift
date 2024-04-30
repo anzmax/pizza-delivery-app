@@ -20,12 +20,7 @@ final class AccountSettingsVC: UIViewController, AccountSettingsVCProtocol {
     var presenter: AccountSettingsPresenterProtocol?
     
     //MARK: - UI Elements
-    lazy var settingsLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Настройки".localized()
-        label.font = UIFont.systemFont(ofSize: 24, weight: .bold)
-        return label
-    }()
+    lazy var settingsLabel = CustomLabel(text: "Настройки".localized(), color: .black, size: 24, fontWeight: .bold)
     
     lazy var doneButton: UIButton = {
         let button = UIButton()
