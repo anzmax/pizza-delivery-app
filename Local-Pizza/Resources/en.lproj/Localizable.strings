@@ -188,4 +188,5 @@
 "Дата рождения" = "Date of birth";
 "Удалить" = "Delete";
 "Повторить" = "Repeat";
-
+"Введите корректный номер телефона" = "Enter a valid phone number";
+"Не удалось отправить код верификации. Проверьте номер и попробуйте снова" = "Failed to send verification code. Please check the number and try again";
