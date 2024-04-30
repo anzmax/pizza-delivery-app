@@ -106,6 +106,7 @@
 		F44B4D412B7D10C300744632 /* CategoriesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D402B7D10C300744632 /* CategoriesTVCell.swift */; };
 		F44B4D472B7D2C3200744632 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D462B7D2C3200744632 /* Product.swift */; };
 		F44B4D492B7D2C6F00744632 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D482B7D2C6F00744632 /* ProductCell.swift */; };
+		F4C0B98C2BE116AB00DB3A65 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */; };
 		F4C7319A2BA4773600393E83 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F4C731992BA4773600393E83 /* FirebaseAuth */; };
 		F4C7319C2BA47BA900393E83 /* Products.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C7319B2BA47BA900393E83 /* Products.json */; };
 		F4C7319E2BA47C1200393E83 /* ProductNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C7319D2BA47C1200393E83 /* ProductNetworkService.swift */; };
@@ -246,6 +247,7 @@
 		F44B4D402B7D10C300744632 /* CategoriesTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTVCell.swift; sourceTree = "<group>"; };
 		F44B4D462B7D2C3200744632 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F44B4D482B7D2C6F00744632 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		F4C7319B2BA47BA900393E83 /* Products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Products.json; sourceTree = "<group>"; };
 		F4C7319D2BA47C1200393E83 /* ProductNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNetworkService.swift; sourceTree = "<group>"; };
 		F4C7319F2BA481B700393E83 /* ExtrasNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasNetworkService.swift; sourceTree = "<group>"; };
@@ -493,6 +495,7 @@
 				F410DB752BB1E847000A7F98 /* IngredientsNetworkService.swift */,
 				F4C731BE2BA9BFD400393E83 /* AccountStorageService.swift */,
 				F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */,
+				F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -929,6 +932,7 @@
 				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
 				F4C93E7B2BADF2EB005B9C37 /* NotificationService.swift in Sources */,
+				F4C0B98C2BE116AB00DB3A65 /* LocalAuthorizationService.swift in Sources */,
 				F409E1F72B96332800A88D2C /* CartProductCell.swift in Sources */,
 				F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */,
 				F409E2072B9F5C3F00A88D2C /* StoryDetailVC.swift in Sources */,
@@ -1178,6 +1182,7 @@
 				DEVELOPMENT_TEAM = LS5WY3DH94;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Local-Pizza/Resources/Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This application uses Face ID for secure authentication and to provide access to your account.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1211,6 +1216,7 @@
 				DEVELOPMENT_TEAM = LS5WY3DH94;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Local-Pizza/Resources/Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This application uses Face ID for secure authentication and to provide access to your account.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

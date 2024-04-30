@@ -7,17 +7,22 @@
 
 import UIKit
 import FirebaseAuth
+import LocalAuthentication
 
 protocol AuthPresenterProtocol: AnyObject {
     
     var view: AuthorizationVCProtocol? { get set }
     
     func sendVerificationCode(_ phoneNumber: String, _ textField: UITextField)
+    func biometricButtonTapped()
+    func handleSuccessfulAuthorization()
+    func handleFailedAuthorization()
 }
 
 final class AuthPresenter: AuthPresenterProtocol {
     
     weak var view: AuthorizationVCProtocol?
+    var localAuthorizationService = LocalAuthorizationService()
 }
 
 //MARK: - View Event
@@ -42,6 +47,27 @@ extension AuthPresenter {
                 self?.view?.navigateToVerificationScreen()
             }
         }
+    }
+    
+    func biometricButtonTapped() {
+        localAuthorizationService.authorizeIfPossible { [weak self] success in
+            DispatchQueue.main.async {
+                if success {
+                    self?.handleSuccessfulAuthorization()
+                } else {
+                    self?.handleFailedAuthorization()
+                }
+            }
+        }
+    }
+
+    func handleSuccessfulAuthorization() {
+        print("Success authorization")
+        view?.navigateToAccountDetailScreen()
+    }
+
+    func handleFailedAuthorization() {
+        print("Failed authorization")
     }
 }
 

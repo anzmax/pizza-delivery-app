@@ -11,7 +11,7 @@ final class ConnectionCell: UITableViewCell {
     
     static let id = "ConnectionCell"
     
-    lazy var connectionLabel = CustomLabel(text: "", color: .black, size: 12, fontWeight: .regular)
+    lazy var connectionLabel = CustomLabel(text: "", color: .black, size: 16, fontWeight: .regular)
     
     lazy var customImageView: UIImageView = {
         let imageView = UIImageView()
