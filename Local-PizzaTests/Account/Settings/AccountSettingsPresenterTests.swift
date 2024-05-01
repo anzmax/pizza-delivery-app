@@ -13,17 +13,12 @@ class AccountSettingPresenterSpy: AccountSettingsPresenterProtocol {
     
     var view: AccountSettingsVCProtocol?
     
-    var rowSelectedCalled = false
     var saveAccountSettingsCalled = false
     var fetchAccountFieldCalled = false
     var logoutCalled = false
     var deleteAccountCalled = false
     var logoutCellSelectedCalled = false
     var deleteAccountCellSelectedCalled = false
-    
-    func rowSelected(_ indexPath: IndexPath) {
-        rowSelectedCalled = true
-    }
     
     func saveAccountSettings(with settings: [Local_Pizza.AccountSettingItem]) {
         saveAccountSettingsCalled = true
@@ -56,18 +51,6 @@ class AccountSettingPresenterSpy: AccountSettingsPresenterProtocol {
 
 //MARK: - Tests
 class AccountSettingsPresenterTests: XCTestCase {
-    
-    func testRowSelected() {
-        let vc = AccountSettingsVC()
-        let presenter = AccountSettingPresenterSpy()
-        vc.presenter = presenter
-        presenter.view = vc
-        
-        let indexPath = IndexPath(row: 1, section: 0)
-        vc.rowSelected(indexPath)
-        
-        XCTAssertTrue(presenter.rowSelectedCalled)
-    }
     
     func testSaveAccountSettings() {
         let vc = AccountSettingsVC()

@@ -15,8 +15,6 @@ protocol AuthPresenterProtocol: AnyObject {
     
     func sendVerificationCode(_ phoneNumber: String, _ textField: UITextField)
     func biometricButtonTapped()
-    func handleSuccessfulAuthorization()
-    func handleFailedAuthorization()
     func isValidPhoneNumber(_ number: String) -> Bool
 }
 
@@ -67,21 +65,12 @@ extension AuthPresenter {
         localAuthorizationService.authorizeIfPossible { [weak self] success in
             DispatchQueue.main.async {
                 if success {
-                    self?.handleSuccessfulAuthorization()
+                    self?.view?.navigateToAccountDetailScreen()
                 } else {
-                    self?.handleFailedAuthorization()
+                    print("Failed authorization")
                 }
             }
         }
-    }
-    
-    func handleSuccessfulAuthorization() {
-        print("Success authorization")
-        view?.navigateToAccountDetailScreen()
-    }
-    
-    func handleFailedAuthorization() {
-        print("Failed authorization")
     }
 }
 
