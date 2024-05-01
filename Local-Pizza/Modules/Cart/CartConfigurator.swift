@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CartConfigurator {
+final class CartConfigurator {
     
     func configure() -> CartVC {
         let cartVC = CartVC()

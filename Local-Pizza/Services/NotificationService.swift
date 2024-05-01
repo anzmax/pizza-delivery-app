@@ -17,17 +17,17 @@ class NotificationService {
         let center = UNUserNotificationCenter.current()
         center.requestAuthorization(options: [.alert, .badge, .sound]) { granted, _ in
             if granted {
-                print("Разрешение на отправку уведомлений получено")
+                print("Разрешение на отправку уведомлений получено".localized())
             } else {
-                print("Разрешение на отправку уведомлений отклонено")
+                print("Разрешение на отправку уведомлений отклонено".localized())
             }
         }
     }
     
     func scheduleDailyNotification(at hour: Int, minute: Int = 0) {
         let content = UNMutableNotificationContent()
-        content.title = "Не пропусти новые акции!"
-        content.body = "Только в приложении"
+        content.title = "Не пропусти новые акции!".localized()
+        content.body = "Только в приложении".localized()
         content.sound = UNNotificationSound.default
         
         var dataComponents = DateComponents()
@@ -40,15 +40,15 @@ class NotificationService {
         
         UNUserNotificationCenter.current().add(request) { error in
             if let error = error {
-                print("Ошибка при планировании уведомления: \(error)")
+                print("Error scheduling notification: \(error)")
             } else {
-                print("Ежедневное уведомление запланировано на \(hour):\(minute)")
+                print("Daily notification scheduled for \(hour):\(minute)")
             }
         }
     }
     
     func cancelDailyNotifications() {
         UNUserNotificationCenter.current().removePendingNotificationRequests(withIdentifiers: ["dailyNotification"])
-        print("Ежедневные уведомления отменены")
+        print("Ежедневные уведомления отменены".localized())
     }
 }

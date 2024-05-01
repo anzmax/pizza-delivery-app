@@ -22,6 +22,7 @@ protocol CartVCProtocol: AnyObject {
     func showDessertsAndDrinks(_ products: [Product])
     
     func navigateToMenu()
+    func navigateToPaymentScreen()
 }
 
 final class CartVC: UIViewController, CartVCProtocol {
@@ -63,6 +64,8 @@ final class CartVC: UIViewController, CartVCProtocol {
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .medium)
         button.layer.cornerRadius = 5
+        button.applyShadow(color: .lightGray)
+        button.addTarget(self, action: #selector(paymentButtonAction), for: .touchUpInside)
         return button
     }()
     
@@ -366,6 +369,11 @@ extension CartVC {
     func navigateToMenu() {
         self.tabBarController?.selectedIndex = 0
     }
+    
+    func navigateToPaymentScreen() {
+        let vc = PaymentConfigurator().configure()
+        present(vc, animated: true)
+    }
 }
 
 //MARK: - Event Handler
@@ -377,5 +385,9 @@ extension CartVC {
     
     func priceButtonTapped(_ product: Product) {
         presenter?.priceButtonTapped(product)
+    }
+    
+    @objc func paymentButtonAction() {
+        presenter?.paymentButtonTapped()
     }
 }
