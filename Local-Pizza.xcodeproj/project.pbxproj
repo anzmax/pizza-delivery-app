@@ -106,6 +106,13 @@
 		F44B4D412B7D10C300744632 /* CategoriesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D402B7D10C300744632 /* CategoriesTVCell.swift */; };
 		F44B4D472B7D2C3200744632 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D462B7D2C3200744632 /* Product.swift */; };
 		F44B4D492B7D2C6F00744632 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F44B4D482B7D2C6F00744632 /* ProductCell.swift */; };
+		F4C0B98C2BE116AB00DB3A65 /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */; };
+		F4C0B98F2BE146C200DB3A65 /* PaymentConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B98E2BE146C200DB3A65 /* PaymentConfigurator.swift */; };
+		F4C0B9912BE146D100DB3A65 /* PaymentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B9902BE146D100DB3A65 /* PaymentVC.swift */; };
+		F4C0B9932BE146E200DB3A65 /* PaymentPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B9922BE146E200DB3A65 /* PaymentPresenter.swift */; };
+		F4C0B9952BE2D31E00DB3A65 /* CustomPopupView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C0B9942BE2D31E00DB3A65 /* CustomPopupView.swift */; };
+		F4C350192BE2F8EA000C8EC1 /* PaymentVCTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C350182BE2F8EA000C8EC1 /* PaymentVCTests.swift */; };
+		F4C3501B2BE2F8FC000C8EC1 /* PaymentPresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C3501A2BE2F8FC000C8EC1 /* PaymentPresenterTests.swift */; };
 		F4C7319A2BA4773600393E83 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = F4C731992BA4773600393E83 /* FirebaseAuth */; };
 		F4C7319C2BA47BA900393E83 /* Products.json in Resources */ = {isa = PBXBuildFile; fileRef = F4C7319B2BA47BA900393E83 /* Products.json */; };
 		F4C7319E2BA47C1200393E83 /* ProductNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C7319D2BA47C1200393E83 /* ProductNetworkService.swift */; };
@@ -246,6 +253,13 @@
 		F44B4D402B7D10C300744632 /* CategoriesTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesTVCell.swift; sourceTree = "<group>"; };
 		F44B4D462B7D2C3200744632 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		F44B4D482B7D2C6F00744632 /* ProductCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
+		F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
+		F4C0B98E2BE146C200DB3A65 /* PaymentConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentConfigurator.swift; sourceTree = "<group>"; };
+		F4C0B9902BE146D100DB3A65 /* PaymentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVC.swift; sourceTree = "<group>"; };
+		F4C0B9922BE146E200DB3A65 /* PaymentPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPresenter.swift; sourceTree = "<group>"; };
+		F4C0B9942BE2D31E00DB3A65 /* CustomPopupView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomPopupView.swift; sourceTree = "<group>"; };
+		F4C350182BE2F8EA000C8EC1 /* PaymentVCTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentVCTests.swift; sourceTree = "<group>"; };
+		F4C3501A2BE2F8FC000C8EC1 /* PaymentPresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentPresenterTests.swift; sourceTree = "<group>"; };
 		F4C7319B2BA47BA900393E83 /* Products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Products.json; sourceTree = "<group>"; };
 		F4C7319D2BA47C1200393E83 /* ProductNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductNetworkService.swift; sourceTree = "<group>"; };
 		F4C7319F2BA481B700393E83 /* ExtrasNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtrasNetworkService.swift; sourceTree = "<group>"; };
@@ -316,7 +330,6 @@
 				F4C731A92BA873E600393E83 /* CoreData */,
 				F409E15E2B90BE4800A88D2C /* Services */,
 				F40458A52B7A640A00C36880 /* Extensions */,
-				F44B4D372B7BDA9F00744632 /* Custom */,
 				F43211E12BD6CE2D00642E5B /* Helper */,
 				F41A7DE62BDFE9E100EB211B /* Custom Elements */,
 				F40458972B7A48A700C36880 /* Resources */,
@@ -396,6 +409,7 @@
 				F409E1542B8CBBB800A88D2C /* Account */,
 				F409E1522B8CBB9D00A88D2C /* Favourites */,
 				F409E1532B8CBBAD00A88D2C /* Cart */,
+				F4C0B98D2BE1469B00DB3A65 /* Payment */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -493,6 +507,7 @@
 				F410DB752BB1E847000A7F98 /* IngredientsNetworkService.swift */,
 				F4C731BE2BA9BFD400393E83 /* AccountStorageService.swift */,
 				F4C93E7A2BADF2EB005B9C37 /* NotificationService.swift */,
+				F4C0B98B2BE116AB00DB3A65 /* LocalAuthorizationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -608,6 +623,7 @@
 				F410DBBE2BCEC397000A7F98 /* ProductDetail */,
 				F43211D42BD69E8F00642E5B /* Favourites */,
 				F410DBC62BD29E73000A7F98 /* Cart */,
+				F4C350172BE2F8CF000C8EC1 /* Payment */,
 				F410DBAE2BC96418000A7F98 /* Local_PizzaTests.swift */,
 			);
 			path = "Local-PizzaTests";
@@ -646,6 +662,8 @@
 		F41A7DE62BDFE9E100EB211B /* Custom Elements */ = {
 			isa = PBXGroup;
 			children = (
+				F44B4D382B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift */,
+				F4C0B9942BE2D31E00DB3A65 /* CustomPopupView.swift */,
 				F41A7DE72BE0073100EB211B /* CustomLabel.swift */,
 			);
 			path = "Custom Elements";
@@ -743,12 +761,23 @@
 			path = Helper;
 			sourceTree = "<group>";
 		};
-		F44B4D372B7BDA9F00744632 /* Custom */ = {
+		F4C0B98D2BE1469B00DB3A65 /* Payment */ = {
 			isa = PBXGroup;
 			children = (
-				F44B4D382B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift */,
+				F4C0B98E2BE146C200DB3A65 /* PaymentConfigurator.swift */,
+				F4C0B9902BE146D100DB3A65 /* PaymentVC.swift */,
+				F4C0B9922BE146E200DB3A65 /* PaymentPresenter.swift */,
 			);
-			path = Custom;
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		F4C350172BE2F8CF000C8EC1 /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				F4C350182BE2F8EA000C8EC1 /* PaymentVCTests.swift */,
+				F4C3501A2BE2F8FC000C8EC1 /* PaymentPresenterTests.swift */,
+			);
+			path = Payment;
 			sourceTree = "<group>";
 		};
 		F4C731A92BA873E600393E83 /* CoreData */ = {
@@ -876,9 +905,11 @@
 			files = (
 				F410DBA32BC83CD8000A7F98 /* AccountDetailPresenter.swift in Sources */,
 				F410DBA52BC84625000A7F98 /* AccountSettingsConfigurator.swift in Sources */,
+				F4C0B9952BE2D31E00DB3A65 /* CustomPopupView.swift in Sources */,
 				F40458872B7A487300C36880 /* MenuVC.swift in Sources */,
 				F4C731B22BA8BA9700393E83 /* ConnectionCell.swift in Sources */,
 				F409E15D2B8CE8C800A88D2C /* DeliveryMapVC.swift in Sources */,
+				F4C0B98F2BE146C200DB3A65 /* PaymentConfigurator.swift in Sources */,
 				F410DB762BB1E847000A7F98 /* IngredientsNetworkService.swift in Sources */,
 				F44B4D412B7D10C300744632 /* CategoriesTVCell.swift in Sources */,
 				F409E1562B8CBBE400A88D2C /* Ingredient.swift in Sources */,
@@ -886,6 +917,7 @@
 				F40458A42B7A537600C36880 /* DeliveryCell.swift in Sources */,
 				F410DB9B2BC82FE8000A7F98 /* VerificationPresenter.swift in Sources */,
 				F409E2012B97543600A88D2C /* ProductsArchiver.swift in Sources */,
+				F4C0B9912BE146D100DB3A65 /* PaymentVC.swift in Sources */,
 				F44B4D392B7BDAC100744632 /* CenterZoomCollectionViewLayout.swift in Sources */,
 				F4C731A02BA481B700393E83 /* ExtrasNetworkService.swift in Sources */,
 				F410DB9F2BC835D0000A7F98 /* AuthPresenter.swift in Sources */,
@@ -929,6 +961,7 @@
 				F43D65712B836B8F008C9811 /* ProductDetailVC.swift in Sources */,
 				F40458A72B7A643A00C36880 /* UIViewColors.swift in Sources */,
 				F4C93E7B2BADF2EB005B9C37 /* NotificationService.swift in Sources */,
+				F4C0B98C2BE116AB00DB3A65 /* LocalAuthorizationService.swift in Sources */,
 				F409E1F72B96332800A88D2C /* CartProductCell.swift in Sources */,
 				F4C731AE2BA8752700393E83 /* CoreDataService.swift in Sources */,
 				F409E2072B9F5C3F00A88D2C /* StoryDetailVC.swift in Sources */,
@@ -959,6 +992,7 @@
 				F4C731C32BA9F0E700393E83 /* Entertainment.swift in Sources */,
 				F409E1F02B921D8100A88D2C /* DeleteCell.swift in Sources */,
 				F409E14F2B8CBB6B00A88D2C /* DoughCell.swift in Sources */,
+				F4C0B9932BE146E200DB3A65 /* PaymentPresenter.swift in Sources */,
 				F410DB7E2BB700D7000A7F98 /* MenuPresenter.swift in Sources */,
 				F44B4D3B2B7BDB6900744632 /* SpecialsTVCell.swift in Sources */,
 			);
@@ -969,6 +1003,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F43211C32BD2B81C00642E5B /* AuthPresenterTests.swift in Sources */,
+				F4C350192BE2F8EA000C8EC1 /* PaymentVCTests.swift in Sources */,
 				F43211CD2BD2CBFD00642E5B /* AccountSettingVCTests.swift in Sources */,
 				F43211D32BD696CE00642E5B /* AccountSettingsServicesTests.swift in Sources */,
 				F410DBC02BCEC3CA000A7F98 /* ProductDetailVCTests.swift in Sources */,
@@ -986,6 +1021,7 @@
 				F43211D62BD69EC200642E5B /* FavouritesVCTests.swift in Sources */,
 				F43211B42BD2AFE900642E5B /* PizzaVCTests.swift in Sources */,
 				F410DBB92BCEB976000A7F98 /* MenuVCTests.swift in Sources */,
+				F4C3501B2BE2F8FC000C8EC1 /* PaymentPresenterTests.swift in Sources */,
 				F43211CB2BD2C47E00642E5B /* AccountDetailPresenterTests.swift in Sources */,
 				F43211C12BD2B80D00642E5B /* AuthVCTests.swift in Sources */,
 				F410DBC52BCEC3F8000A7F98 /* ProductDetailServicesTests.swift in Sources */,
@@ -1178,6 +1214,7 @@
 				DEVELOPMENT_TEAM = LS5WY3DH94;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Local-Pizza/Resources/Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This application uses Face ID for secure authentication and to provide access to your account.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1211,6 +1248,7 @@
 				DEVELOPMENT_TEAM = LS5WY3DH94;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Local-Pizza/Resources/Info.plist";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "This application uses Face ID for secure authentication and to provide access to your account.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

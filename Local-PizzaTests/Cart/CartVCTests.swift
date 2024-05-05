@@ -10,12 +10,13 @@ import XCTest
 
 //MARK: - Spy
 class CartVCSpy: CartVCProtocol {
-    
+
     var presenter: CartPresenterProtocol?
     
     var showItemsInCartCalled = false
     var showDessertsAndDrinksCalled = false
     var navigateToMenuCalled = false
+    var navigateToPaymentScreenCalled = false
     
     func showItemsInCart(_ products: [Local_Pizza.Product]) {
         showItemsInCartCalled = true
@@ -27,6 +28,10 @@ class CartVCSpy: CartVCProtocol {
     
     func navigateToMenu() {
         navigateToMenuCalled = true
+    }
+    
+    func navigateToPaymentScreen() {
+        navigateToPaymentScreenCalled = true
     }
 }
 
@@ -42,5 +47,16 @@ final class CartVCTests: XCTestCase {
         presenter.menuButtonTapped()
 
         XCTAssertTrue(vc.navigateToMenuCalled)
+    }
+    
+    func testNavigateToPaymentScreen() {
+        let vc = CartVCSpy()
+        let presenter = CartPresenter()
+        vc.presenter = presenter
+        presenter.view = vc
+        
+        presenter.paymentButtonTapped()
+        
+        XCTAssertTrue(vc.navigateToPaymentScreenCalled)
     }
 }

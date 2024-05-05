@@ -15,6 +15,7 @@ protocol CartPresenterProtocol: AnyObject {
     func menuButtonTapped()
     func productCountChangedInCart(_ changedProduct: Product, _ itemsInCart: [Product])
     func priceButtonTapped(_ product: Product)
+    func paymentButtonTapped()
     
     func fetchProducts()
     func fetchDessertsAndDrinks()
@@ -65,6 +66,10 @@ extension CartPresenter {
     func priceButtonTapped(_ product: Product) {
         appendProductToArchiver(product)
         self.fetchProducts()
+    }
+    
+    func paymentButtonTapped() {
+        view?.navigateToPaymentScreen()
     }
 }
 

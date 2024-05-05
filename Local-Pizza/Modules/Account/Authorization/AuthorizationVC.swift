@@ -15,6 +15,7 @@ protocol AuthorizationVCProtocol: AnyObject {
     func showAlert(_ message: String)
     
     func navigateToVerificationScreen()
+    func navigateToAccountDetailScreen()
 }
 
 final class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
@@ -51,6 +52,17 @@ final class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
         return textField
     }()
     
+    lazy var biometricButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("Face ID", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.backgroundColor = .systemGray3
+        button.layer.cornerRadius = 5
+        button.applyShadow(color: .darkGray)
+        button.addTarget(self, action: #selector(biometricButtonAction), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
@@ -64,6 +76,10 @@ final class AuthorizationVC: UIViewController, AuthorizationVCProtocol {
         if let phoneNumber = phoneTextField.text {
             presenter?.sendVerificationCode(phoneNumber, phoneTextField)
         }
+    }
+    
+    @objc func biometricButtonAction() {
+        presenter?.biometricButtonTapped()
     }
 }
 
@@ -101,7 +117,7 @@ extension AuthorizationVC: UITextFieldDelegate {
 extension AuthorizationVC {
     func setupViews() {
         view.applyGradient(colors: [UIColor.white.cgColor, UIColor.systemGray3.cgColor])
-        [titleLabel, phoneTextField].forEach {
+        [titleLabel, phoneTextField, biometricButton].forEach {
             view.addSubview($0)
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
@@ -115,7 +131,12 @@ extension AuthorizationVC {
             phoneTextField.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             phoneTextField.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             phoneTextField.widthAnchor.constraint(equalToConstant: 280),
-            phoneTextField.heightAnchor.constraint(equalToConstant: 40)
+            phoneTextField.heightAnchor.constraint(equalToConstant: 40),
+            
+            biometricButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            biometricButton.topAnchor.constraint(equalTo: phoneTextField.bottomAnchor, constant: 16),
+            biometricButton.widthAnchor.constraint(equalToConstant: 280),
+            biometricButton.heightAnchor.constraint(equalToConstant: 40),
         ])
     }
     
@@ -151,5 +172,11 @@ extension AuthorizationVC {
         let vc = VerificationConfigurator().configure()
         self.present(vc, animated: true)
         print("Код верификации отправлен".localized())
+    }
+    
+    func navigateToAccountDetailScreen() {
+        let vc = AccountDetailConfigurator().configure()
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true)
     }
 }

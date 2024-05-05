@@ -8,8 +8,9 @@
 @testable import Local_Pizza
 import XCTest
 
+//MARK: - Spy
 class CartPresenterSpy: CartPresenterProtocol {
-    
+
     var view: CartVCProtocol?
     
     var viewWillAppearCalled = false
@@ -22,6 +23,7 @@ class CartPresenterSpy: CartPresenterProtocol {
     var saveProductsInArchiverCalled = false
     var appendProductToArchiverCalled = false
     var removeProductFromArchiverCalled = false
+    var paymentButtonTappedCalled = false
     
     func viewWillAppear() {
         viewWillAppearCalled = true
@@ -62,6 +64,10 @@ class CartPresenterSpy: CartPresenterProtocol {
     
     func removeProductFromArchiver(_ productToRemove: Local_Pizza.Product) {
         removeProductFromArchiverCalled = true
+    }
+    
+    func paymentButtonTapped() {
+        paymentButtonTappedCalled = true
     }
 }
 
@@ -124,5 +130,16 @@ final class CartPresenterTests: XCTestCase {
         vc.showItemsInCart(products)
  
         XCTAssertTrue(presenter.calculateTotalAmountForProductsCalled)
+    }
+    
+    func testPaymentButtonTapped() {
+        let vc = CartVC()
+        let presenter = CartPresenterSpy()
+        vc.presenter = presenter
+        presenter.view = vc
+        
+        vc.paymentButtonAction()
+        
+        XCTAssertTrue(presenter.paymentButtonTappedCalled)
     }
 }

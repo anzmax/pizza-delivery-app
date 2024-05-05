@@ -15,6 +15,7 @@ class AuthVCSpy: AuthorizationVCProtocol {
     
     var showAlertCalled = false
     var navigateToVerificationScreenCalled = false
+    var navigateToAccountDetailScreenCalled = false
     
     func showAlert(_ message: String) {
         showAlertCalled = true
@@ -22,6 +23,10 @@ class AuthVCSpy: AuthorizationVCProtocol {
     
     func navigateToVerificationScreen() {
         navigateToVerificationScreenCalled = true
+    }
+    
+    func navigateToAccountDetailScreen() {
+        navigateToAccountDetailScreenCalled = true
     }
 }
 

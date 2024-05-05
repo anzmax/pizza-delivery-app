@@ -67,7 +67,7 @@
 "Запеченная картошечка с пряными специями" = "Baked potatoes with spicy spices";
 
 "Креветки в кляре" = "Shrimp in Batter";
-"Кляр изумительно хрустящий, креветки сочные и ароматные" = "Deliciously crispy batter, juicy and flavorful shrimp";
+"Кляр изумительно хрустящий, креветки сочные и ароматные." = "Deliciously crispy batter, juicy and flavorful shrimp";
 
 "Наггетсы" = "Chicken Nuggets";
 "Хрустящие кусочки куриного мяса, обжаренные до золотистой корочки" = "Crispy pieces of chicken, fried to a golden crust";
@@ -188,4 +188,21 @@
 "Дата рождения" = "Date of birth";
 "Удалить" = "Delete";
 "Повторить" = "Repeat";
+"Введите корректный номер телефона" = "Enter a valid phone number";
+"Не удалось отправить код верификации. Проверьте номер и попробуйте снова" = "Failed to send verification code. Please check the number and try again";
+"Выберите способ оплаты" = "Choose Payment method";
+"Номер карты" = "Card number";
+"Имя на карте" = "Name on card";
+"Дата истечения срока" = "Expired date";
+"Оплатить" = "Pay";
+"Введите номер карты" = "Enter card number";
+"Введите имя" = "Enter your name";
+"Спасибо!\n" = "Thank you!\n";
+"Оплата прошла успешно" = "Payment Succeeded";
+"Оплата прошла успешно!" = "Payment Succeeded";
+"Разрешение на отправку уведомлений получено" = "Permission to send notifications received";
+"Разрешение на отправку уведомлений отклонено" = "Permission to send notifications denied";
+"Не пропусти новые акции!" = "Don't miss out on new deals!";
+"Только в приложении" = "App Exclusive";
+"Ежедневные уведомления отменены" = "Daily notifications have been cancelled";
 

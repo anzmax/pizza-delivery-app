@@ -19,6 +19,7 @@ class PromoCodeCell: UITableViewCell {
         button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .semibold)
         button.backgroundColor = .systemGray6
         button.layer.cornerRadius = 5
+        button.applyShadow(color: .lightGray)
         button.addTarget(self, action: #selector(promoButtonTapped), for: .touchUpInside)
         return button
     }()
