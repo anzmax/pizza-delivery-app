@@ -23,8 +23,11 @@
 
 # Demo 
 
-| <img src="https://github.com/anzmax/pizza-delivery-app/blob/feature/LPA-24-new-features/11.gif" width="250"> | <img src="https://github.com/anzmax/pizza-delivery-app/blob/feature/LPA-24-new-features/12.gif" width="250"> |
-|:---:|:---:|
+<div style="text-align: center;">
+    <img src="https://github.com/anzmax/pizza-delivery-app/blob/feature/LPA-24-new-features/11.gif" alt="GIF 1" style="width: 250px; margin: 10px;">
+    <img src="https://github.com/anzmax/pizza-delivery-app/blob/feature/LPA-24-new-features/12.gif" alt="GIF 2" style="width: 250px; margin: 10px;">
+</div>
+
 
 
 # Screenshots
