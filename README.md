@@ -20,7 +20,28 @@
 - **SwiftKeychainWrapper:** Used for secure storage of personal data.
 - **URLSession:** Employed for network communication.
 
+## Prerequisites
 
+Before you can run the app, you'll need:
+- Xcode 15.3 
+- iOS 17.0
+
+## Installation
+
+1. To install the application, you need to download the `dev` branch.
+2. Open `Local-Pizza.xcodeproj` in Xcode.
+4. Build and run the app on your iOS device or simulator.
+
+## Login Instructions
+
+To access your account, you have two options:
+
+1. **Use Your Current Phone Number**: Enter your current phone number to log in.
+2. **Use the Test Account**: For testing purposes, you can use the following credentials:
+   - **Phone Number**: 7777070707
+   - **Password**: 123456
+
+   
 # Demo 
 
 <div style="text-align: center;">
